@@ -1,0 +1,106 @@
+/** stylesheet for  Log In Widget **/
+/** inputs ***/
+@media (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+#user_login, #user_pass  {
+		//color: blue !important;
+		width: 110px;
+		height: 18px; 
+		font-family: Arial, Helvetica, Tahoma;
+		font-size: 1em;
+		margin-left: 5px;
+}
+
+#lost_pw  {
+		display: block;
+		width: 90%;
+		height: 24px; 
+		//padding: 5px;
+		font-family: Arial, Helvetica, Tahoma;
+		font-size: 1em;
+		 margin-left: 5%;
+		margin-right: 5%;
+	}
+#pw_submit {
+	float: auto;
+	vertical-align:middle;
+	width: 90%;
+	margin: 5%;
+	padding: 5 5 5 5px;
+	background-color: #005681 !important;
+	color: white !important;
+	border-radius: 5px;
+}
+/** ilogin button in its table cell***/
+#wp-submit {
+	float: auto;
+	vertical-align:middle;
+	margin: 4px;
+	padding: 5 5 5 5px;
+	background-color: #005681 !important;
+	color: white !important;
+	border-radius: 5px;
+}
+/** first row ***/
+#upper {
+	margin-top: 0px;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-bottom: 0px;
+	}
+/** isecond row ***/
+#lower {
+	margin-top: 0px;
+	padding-top: 2px;
+	padding-left: 10px;
+	padding-bottom: 0px;
+	}	
+#Rememberme {
+	margin-top: 0px;
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+#container {
+	font-size: 10px;
+	font-weight: bold;
+	//height: 80px;
+	float: left;
+	}
+
+#LostP {
+	margin-top: 0px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 0px;
+}
+#msg {
+	color: red;
+
+	margin-top: 0px;
+	padding-top: 1px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+#msg_grn {
+	color: green;
+	margin-top: 10px;
+	padding-top: 1px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+#container_forgot_pw {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  //background: red;
+}

@@ -1,0 +1,87 @@
+<?php
+//Admin Menu: WP-TNG Login
+//Admin Submenu: Set Plugin Paths
+//require_once (plugin_dir_url( __DIR__ )."/tng_wp_options.php");
+
+function set_plugin_paths() {
+$config = optionsConfig();
+$config_paths = ($config['paths']);
+$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
+    // check user capabilities
+    if ( ! current_user_can( 'manage_options' ) ) {
+        return;
+    }
+	if (isset($_POST['Update_Paths'])) {
+		$success = "";
+		update_paths();
+		$success = update_paths();
+		//return;
+	}
+
+	?>
+<head>
+<link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/newreg.css';?>">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<div class="wrap container"  style='width: auto'>
+
+	<form class="form-group" action=''  method="post">
+	<div class="regsubtitle">
+	Plugin Paths:-
+	</div>
+	<div style="color: red">
+	If any of the paths are blank, please check your TNG setup.<br /> On first activation, please save the options to let the plugin know about your TNG setup.
+	</div>
+	<!--
+	<style>
+	#wpfooter {
+	display: none;
+	}
+	</style>
+	-->
+	<div class="rowadjust regsections">	
+		<div class="row">
+			<div class='col-md-2' style="width: 155px">
+				TNG Root Path: 
+			</div>
+			<div  class='col-md-3'>	
+				<input type="text" class="form-control" name="tng_path" value= '<?php echo $config_paths['tng_path']; ?>'>
+			</div>
+			<div  class='col-md-5'>
+			TNG Root Path is absolute path to TNG. Derived from TNG setup.
+			</div>
+		</div>
+		<div class="row rowadjust">
+			<div class='col-md-2' style="width: 155px">
+			TNG URL:
+			</div>
+			<div  class='col-md-3'>	
+				<input type="text" class="form-control" name="tng_url" value= '<?php echo $config_paths['tng_url']; ?>'>
+			</div>
+			<div  class='col-md-4'>
+			TNG URL is path to TNG (www.mysite.com/tng). Derived from TNG setup.
+			</div>
+		</div>
+		<div class="row rowadjust">
+			<div class='col-md-2' style="width: 155px">
+			TNG Photo Folder:
+			</div>
+			<div  class='col-md-3'>	
+				<input type="text" class="form-control" name="tng_photo_folder" value= '<?php echo $config_paths['tng_photo_folder']; ?>'>
+			</div>
+			<div  class='col-md-5'>
+			Name of TNG Photo Folder. Derived from TNG setup.
+			</div>
+		</div>
+	</div>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
+	<p>
+	<input type="submit" name="Update_Paths" value="Update Paths">
+	</p>
+	
+	</form>
+</div>
+<?php
+
+}
