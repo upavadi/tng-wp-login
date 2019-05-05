@@ -12,6 +12,7 @@ function set_plugin_registration() {
 		$success = "";
 		update_registration();
 		$success = update_registration();
+		Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));
 	}
 	
 	//variables for registration template;

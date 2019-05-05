@@ -86,7 +86,6 @@ function update_profile() {
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	$path_json = (__DIR__. '/config.json');
 	file_put_contents($path_json, $json);
-	//$_SESSION['success'] = 'Changes Saved';
 	$success = 'Changes Saved';
 	return $success;
 }
