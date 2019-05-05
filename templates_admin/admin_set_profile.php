@@ -1,7 +1,5 @@
 <?php
-//Admin Menu: WP-TNG Login
-//Admin Submenu: Set Plugin Paths
-
+/** setup text for Profile Page */
 
 function set_plugin_profile() {
 	$config = optionsConfig();
@@ -13,9 +11,6 @@ function set_plugin_profile() {
 	if (isset($_POST['show_profile'])) {
 		$success = update_profile();
 		Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));
-	//	var_dump($_SESSION['success']);
-		$success = $_SESSION['success'];
-		//echo "<meta http-equiv='refresh' content=$success>";
 	}
 	
 	$section_count = 0;
