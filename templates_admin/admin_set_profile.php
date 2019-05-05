@@ -3,8 +3,6 @@
 
 function set_plugin_profile() {
 	$config = optionsConfig();
-	//$_SESSION['success'] = '';
-	var_dump($_SESSION);
 	$config_headers = ($config['show_profile']['sections']);
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 	
@@ -32,6 +30,7 @@ function set_plugin_profile() {
 	<div class="regsubtitle">
 	Profile Template
 	</div>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $_GET['success']. "</b><br />"; ?></p>
 	<!-- Section One -->	
 	<div>
 		<b>Section One</b>
@@ -244,9 +243,9 @@ function set_plugin_profile() {
 			</div>
 		</div>
 	</div>
-		<p style="color: green; display: inline-block"><?php echo "<b>". $_GET['success']. "</b><br />"; ?></p>
+		<p style="color: green; display: inline-block; padding-left: 25px"><?php echo "<b>". $_GET['success']. "</b><br />"; ?></p>
 	<p>
-	<input type="submit" name="update_profile" value="Update Profile Template">
+	<input type="submit" name="update_profile" value="Update Profile Template" style="width: auto">
 	</p>
 	</form>
 </div>

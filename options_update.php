@@ -18,8 +18,6 @@ function update_paths() {
 
 //update Text used for Profile form
 function update_profile() {
-	//$url = "config.json";
-	//$path_json = (__DIR__. '/config.json');
 	$config = optionsConfig();
 	$config_new = $config;
 	$section1 = $config_new['show_profile']['sections'][0];
@@ -169,8 +167,8 @@ function update_registration() {
 	}
 	
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
-	$path = "config.json";
-	file_put_contents($path, $json);
+	$path_json = (__DIR__. '/config.json');
+	file_put_contents($path_json, $json);
 	$suceess = "Changes Saved";
 	return $suceess;
 }

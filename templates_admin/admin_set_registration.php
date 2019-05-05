@@ -21,9 +21,7 @@ function set_plugin_registration() {
 	$section1_fields = $section[0]['fields'];
 	$section2_fields = $section[1]['fields'];
 	$section3_fields = $section[2]['fields'];
-	//Var_dump($config['reg_complete']['title']);
-	
-	//variables for messages
+
 	$regComplete = $config['reg_complete'];
 ?>
 <head>
@@ -38,7 +36,8 @@ function set_plugin_registration() {
 	<div class="regsubtitle">
 	Registration Form Template
 	</div>
-	<!-- Section One -->	
+	<!-- Section One -->
+	<p style="color: green; display: inline-block"><?php echo "<b>". $_GET['success']. "</b><br />"; ?></p>
 	<div>
 		<b>Section One</b>
 	</div>
@@ -218,7 +217,7 @@ function set_plugin_registration() {
 			</div>
 		</div>
 	</div>
-	<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
+	<p style="color: green; display: inline-block; padding-left: 25px"><?php echo "<b>". $_GET['success']. "</b><br />"; ?></p>
 	<p>
 	<input type="submit" name="update_Registration" value="Update Registration Template" style="width: auto">
 	</p>
