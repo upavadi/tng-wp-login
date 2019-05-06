@@ -184,10 +184,9 @@ function update_reg_complete() {
 	$config_new['reg_complete']['line2'] = $_POST['regcomplete_line2'];
 	$config_new['reg_complete']['line3'] = $_POST['regcomplete_line3'];
 	$config_new['reg_complete']['line4'] = $_POST['regcomplete_line4'];
-	var_dump($path_json); die;
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
-	//$path = "config.json";
-	file_put_contents($url, $json);
+	$path_json = (__DIR__. '/config.json');
+	file_put_contents($path_json, $json);
 	$suceess = "Changes Saved";
 	return $suceess;
 }
