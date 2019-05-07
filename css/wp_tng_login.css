@@ -6,6 +6,46 @@
         margin-top: 0;
     }
 }
+/** reg forms ***/
+.regsubtitle {
+	color: blue;
+	font-size: 1.5em;
+	font-weight: bold;
+	padding: 5px;
+	margin-top: 20px;
+	}
+	
+.regsections {
+	background-color: #e0e0ed;
+	display: block;
+	padding: 20px;
+	border-radius: 10px;
+	width: 100%;
+	max-width: 1000px;
+	}
+	
+
+	input {
+		//width: 100%; //careful. affects remeber checkbox
+		}
+		
+		input[type="submit"] {
+		position: relative;
+		color: blue !important;
+		background: #e0e0ed !important;
+		 box-sizing: border-box;
+		 margin-left: 20px;
+		 //margin-right: 20px;
+		padding: 10px;
+		width: 100px;
+		 -webkit-border-radius: 5px;
+				border-radius: 5px; 
+		}
+		
+		input[type="submit"]:hover {
+		background: #f5f5f5 !important;
+		color: black !important;
+		}
 
 #user_login, #user_pass  {
 		//color: blue !important;
@@ -72,7 +112,7 @@
 	vertical-align: middle;
 }
 #container {
-	display: flex;
+	display: inline-block;
 	font-size: 10px;
 	font-weight: bold;
 	//height: 80px;
