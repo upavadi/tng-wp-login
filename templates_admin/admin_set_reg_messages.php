@@ -2,18 +2,38 @@
 //Registration form template
 //Admin Menu: WP-TNG Login
 //Admin Submenu: Set Registration Messages
-
+ 
 function set_plugin_reg_messages() {
+	
 	$config = optionsConfig();
 	$config_headers = ($config['reg_form']['sections']);
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 	$regComplete = $config['reg_complete'];
 	$regEmail = $config['new_reg_email'];
-
+	$reg_success = $email_success = '';
+	 
 		if (isset($_POST['reg_message'])) {
-			$success = update_reg_complete();
-			Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));
+			var_dump($_GET);
+			$_GET['email_success'] = "";
+			var_dump($_GET);
+			$reg_success = update_reg_complete();
+			Header('Location: '.$_SERVER['REQUEST_URI'] . "&reg_success=" . urlencode($reg_success));
+			
+		
 		}
+
+		if (isset($_POST['email_message'])) {
+			var_dump($_GET);
+			$_GET['reg_success'] = "";
+			$email_success = update_reg_email();
+			
+			Header('Location: '.$_SERVER['REQUEST_URI'] . "&email_success=" . urlencode($email_success));
+			
+			
+			
+		}
+		
+		var_dump($_GET);
 ?>
 
 <head>
@@ -65,7 +85,7 @@ function set_plugin_reg_messages() {
 			</div> 
 		</div>
 	</div>
-	<p style="color: green; display: inline-block"><?php echo "<b>". $_GET['success']. "</b><br />"; ?></p>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $_GET['reg_success']. "</b><br />"; ?></p>
 	<p>
 	<input type="submit" name="update_Reg_success" value="Update Registration Success" style="width: auto">
 	</p>
@@ -74,8 +94,10 @@ function set_plugin_reg_messages() {
 </div>
 
 <!-- New Registration email ----->
+
 <div class="container">
 <form class="form-group" action=''  method="post">
+<input type="hidden" class="form-control" width="auto" name="email_message" id='email_message' value=true >
 	<div style="padding-top: 30px">
 		<b>New Registration email</b>
 	</div>
@@ -89,7 +111,7 @@ function set_plugin_reg_messages() {
 		<div class="form-group row col-md-12">
 			<label for="regemail_cc" class="col-md-1 col-form-label">CopyTo</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regemail_cc" id="regemail_cc" value="<?php echo $regEmail['CC']; ?>">
+			<input type="email" class="form-control" width="auto" name="regemail_cc" id="regemail_cc" placeholder="send email copy to" value="<?php echo $regEmail['CC']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
@@ -123,7 +145,7 @@ function set_plugin_reg_messages() {
 			</div> 
 		</div>	
 	</div>
-	<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $_GET['email_success']. "</b><br />"; ?></p>
 	<p>
 	<input type="submit" name="update_Reg_success" value="Update New Registration Email" style="width: auto">
 	</p>
@@ -137,4 +159,6 @@ function set_plugin_reg_messages() {
 display: none;
 }
 </style>
+<?php
+}
 ?>
