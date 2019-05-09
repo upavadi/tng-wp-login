@@ -113,7 +113,6 @@ input[type="submit"] {
 	display: inline-block;
 	font-size: 10px;
 	font-weight: bold;
-	//float: left;
 	}
 
 #LostP {
@@ -143,5 +142,4 @@ input[type="submit"] {
   display: block;
   margin: 0 auto;
 	width: 50%;
-}	
-	
+}		

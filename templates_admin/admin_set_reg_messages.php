@@ -2,7 +2,9 @@
 //Registration form template
 //Admin Menu: WP-TNG Login
 //Admin Submenu: Set Registration Messages
- 
+ if($_GET['success'] == '0') $reg = "Reg Template Changes Saved";
+ if($success==1) $reg_success = "Email Template Changes Saved";
+
 function set_plugin_reg_messages() {
 	
 	$config = optionsConfig();
@@ -13,27 +15,24 @@ function set_plugin_reg_messages() {
 	$reg_success = $email_success = '';
 	 
 		if (isset($_POST['reg_message'])) {
-			var_dump($_GET);
-			$_GET['email_success'] = "";
-			var_dump($_GET);
 			$reg_success = update_reg_complete();
-			Header('Location: '.$_SERVER['REQUEST_URI'] . "&reg_success=" . urlencode($reg_success));
-			
-		
+			Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode(0));
 		}
 
 		if (isset($_POST['email_message'])) {
-			var_dump($_GET);
-			$_GET['reg_success'] = "";
 			$email_success = update_reg_email();
-			
-			Header('Location: '.$_SERVER['REQUEST_URI'] . "&email_success=" . urlencode($email_success));
-			
-			
-			
+			Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode(1));
 		}
+
+		if($_GET['success'] == '0') {
+			$reg_success = "Reg Template Changes Saved";
+			$email_success = "";
+		}
+		if($_GET['success'] == '1') {
+			$reg_success = "";
+			$email_success = "Email Template Changes Saved";
+		}	
 		
-		var_dump($_GET);
 ?>
 
 <head>
@@ -85,7 +84,7 @@ function set_plugin_reg_messages() {
 			</div> 
 		</div>
 	</div>
-	<p style="color: green; display: inline-block"><?php echo "<b>". $_GET['reg_success']. "</b><br />"; ?></p>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $reg_success. "</b><br />"; ?></p>
 	<p>
 	<input type="submit" name="update_Reg_success" value="Update Registration Success" style="width: auto">
 	</p>
@@ -145,7 +144,7 @@ function set_plugin_reg_messages() {
 			</div> 
 		</div>	
 	</div>
-	<p style="color: green; display: inline-block"><?php echo "<b>". $_GET['email_success']. "</b><br />"; ?></p>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $email_success. "</b><br />"; ?></p>
 	<p>
 	<input type="submit" name="update_Reg_success" value="Update New Registration Email" style="width: auto">
 	</p>
