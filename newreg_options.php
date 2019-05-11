@@ -34,7 +34,7 @@ function newregCheck() {
 	$nameInTng = nameTng($loginName);
 	$emailInTng = emailTng($email);
 	$conditions = array($nameInWp, $emailInWp, $nameInTng, $emailInTng);
-	$conditions = array(true, true, true, true);
+	$conditions = array(false, false, false, false);
 	if ($_POST) {
 	switch ($conditions) {
 		case array(true, true, true, true):
@@ -72,16 +72,13 @@ function newregCheck() {
 			break;		
 		case array(false, false, false, false): 
 			$newreg_check = "09";
-			//registration complete.
-			//echo insertUserWP();
-			//insertUserTng();
 			$reg_message = $config['reg_complete'];
+			echo registration_complete($reg_message);
+			echo new_reg_mail();
+			
 			break;
 		}
-	//echo "hi from options = ". $reg_message;
-	//$newregComlete_token = ($_POST['loginname'], $_POST['email']);
-	echo registration_complete($reg_message);
-	echo new_reg_mail();
+
 	}
 	/** Set up functions here to respond to selections above */
 	//return $newreg_check;

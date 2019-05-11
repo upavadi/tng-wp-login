@@ -23,7 +23,6 @@ function newreg_complete() {
 	$newreg_entries = $newreg_entries['emailExists'];
 	
 	$newreg_complete = newregCheck($_POST['loginname'], $_POST['email']);
-	echo "<br />reg complete = ". $newreg_complete;
 	
 	$input = $_POST;
 	$newloginname = $_POST['loginname'];
@@ -32,7 +31,6 @@ function newreg_complete() {
 	$data['values'] = $_POST;
 	$data['errors'] = validate($_POST);
 	$newregComlete_token = newregCheck($_POST['loginname'], $_POST['email']);
-	echo "Options=". newregCheck();
 }
 
 //add user to WP
@@ -96,26 +94,15 @@ function insertUserTng() {
 //send email - registration request
 function new_reg_mail() {
 	$config = newRegConfig();
+	$to = sanitize_email($_POST['email']);
+	$bcc = get_option('admin_email');
+	$subject = $config['new_reg_email']['title'];
 	$message = new_reg_email_text();
-	$from = get_option('admin_email');
-	$cc = $config['new_reg_email']['CC'];
-	$args = array(
-		'to:' => $_POST['email'],
-		'from:' => get_option('admin_email'),
-		'subject' => $config['new_reg_email']['title'],
-		'message' => $message,
-		'headers' => array( 
-		'from: Administrator <'.$from. '>;',
-		'CC: Copy to <'. $cc. '>')
-);
-	$sanitised_args = reg_mail_filter($args);
-	$to = $sanitised_args['to'];
-	$to = $sanitised_args['subject'];
-	$to = $sanitised_args['message'];
-	$to = $sanitised_args['headers'];
-	echo "<pre>{($to, $subject, $message, $headers)}</pre>";
-	//wp_mail($to, $subject, $message, $headers);
-	return;
+	$cc = get_option('admin_email');
+	$headers[] = 'Bcc:'. $bcc;
+	//echo "<pre>{($to, $subject, $message)}</pre>";
+	wp_mail($to, $subject, $message, $headers);
+return;
 }
 
 //prepare body-text for new regisration email
@@ -128,22 +115,3 @@ function new_reg_email_text() {
 	$text = $reg_text1. $reg_text2. $reg_text3;
 	return $text;
 }
-
-//use filter to clean wp_mail data
-add_filter( 'wp_mail', 'reg_mail_filter' );
-function reg_mail_filter($args) {
-	$reg_wp_mail = array(
-		'to' => $args['to'],
-		'from' => $args['from'],
-		'subject' => $args['subject'],
-		'message' => $args['message'],
-		'headers' => $args['headers']
-	);
-	
-	return $reg_wp_mail;
-}
-/****
-hints:-
-wp_mail( $to, $subject, $message, $headers = '')
-}
-**/

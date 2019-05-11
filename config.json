@@ -25,7 +25,7 @@
     "reg_pw-reset": {
         "title": "Please Try Password Reset",
         "line1": "We have your details, ",
-        "line2": "Please click on <b>Lost Password <\/b> in the LogIn panel and enter your email to request password reset.",
+        "line2": "Please click on <b>Lost Password <\/b> in the LogIn panel and submit your email to request password reset.",
         "line3": "Best Regards",
         "line4": "Mahesh"
     },
