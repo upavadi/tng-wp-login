@@ -71,51 +71,44 @@ function getTngPath() {
 	return $tngPath . DIRECTORY_SEPARATOR;
 }
 
-function nameTng($tng_name_check) {
+function nameTng() {
 	//does user name in tng exist
 	$tng_name_check = ($_POST['loginname']);
 	$tng_path = getTngPath(). "config.php";
-	require_once ($tng_path); // absolute path!!!
+	include ($tng_path); 
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 	if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 	}
-
-	$sql = "SELECT username FROM tng_users WHERE username='$tng_name_check'";
+	$sql = "SELECT * FROM tng_users WHERE username='$tng_name_check'";
 	$result = $db->query($sql);
 	if ($result) {
 		$row = $result->fetch_assoc();
 		$tng_username = $row["username"];
+	return $row;
 	}
-	//echo "<br/>tng config username=".$_POST['loginname']. "TNG=". $tng_username; 
-	if ($tng_username) {
-		return true;
-	} else {
-		return false;
-	}
+	return false;
 }
 
-function emailTng($tng_email_check) {
+function emailTng() {
 	$tng_email_check = ($_POST['email']);
 	//does email in tng exist
 	$tngPath = getTngPath(). '/config.php';
-	include ($tngPath); // NEED TO USE __dir__!!!
+	include ($tngPath); 
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 	if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 	}
-	$sql = "SELECT email FROM tng_users WHERE email='$tng_email_check'";
+	$sql = "SELECT * FROM tng_users WHERE email='$tng_email_check'";
 	$result = $db->query($sql);
 	if ($result) {
 		$row = $result->fetch_assoc();
-		$tng_email = $row["email"];
-	}
-	//echo "<br/>tng config email=".$tng_email; 
-	if ($tng_email) {
-		return true;
+		$tng_email = $row['email'];
+		return $row;
 	}
 	return false;
 }
+
 /*** for login-to-tng ***/
 function getTngUserName($wp_user) {
 	$wp_user = wp_get_current_user() -> user_login;

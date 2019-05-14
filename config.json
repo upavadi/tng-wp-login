@@ -22,7 +22,7 @@
         "line4": "Best Regards",
         "line5": "Mahesh"
     },
-    "reg_pw-reset": {
+    "reg_pw_reset": {
         "title": "Please Try Password Reset",
         "line1": "We have your details, ",
         "line2": "Please click on <b>Lost Password <\/b> in the LogIn panel and submit your email to request password reset.",

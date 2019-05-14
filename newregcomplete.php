@@ -92,6 +92,17 @@ function insertUserTng() {
 }
 
 //send email - registration request
+function new_reg_pwreset__mail() {
+	$config = newRegConfig();
+	$to = get_option('admin_email');
+	$subject = "New Registration - Suggest Password Reset";
+	$message = new_reg_pwreset_email_text();
+	echo "<pre>{($to, $subject, $message)}</pre>";
+	//	wp_mail($to, $subject, $message, $headers);
+
+}
+
+//send email - registration request
 function new_reg_mail() {
 	$config = newRegConfig();
 	$to = sanitize_email($_POST['email']);
@@ -114,4 +125,73 @@ function new_reg_email_text() {
 	$reg_text3 = $line['line3']. "\r\n\r\n". $line['line4']. "\r\n\r\n". $line['line5'];
 	$text = $reg_text1. $reg_text2. $reg_text3;
 	return $text;
+}
+
+//prepare body-text for new regisration email
+function new_reg_pwreset_email_text() {
+	//wordpress id check
+	$wpUser = (get_user_by(login, $_POST['loginname'] ));
+	$nameInWp_id = $wpUser->ID;
+	$nameInWp_name = $wpUser->user_login;
+	$nameInWp_email = $wpUser->user_email;
+	$wpEmail = (get_user_by(email, $_POST['email'] ));
+	$emailInWp_id = $wpEmail->ID;
+	$emailInWp_name = $wpEmail->user_login;
+	$emailInWp_email = $wpEmail->user_email;
+	$nameInTng_id = nameTng()['userID'];
+	$nameInTng_name = nameTng()['username'];
+	$nameInTng_email = nameTng()['email'];
+	$emailInTng_id = emailTng()['userID'];
+	$emailInTng_name = emailTng()['username'];
+	$emailInTng_email = emailTng()['email'];
+	
+	$config = newRegConfig();
+	$line = $config['new_reg_email'];
+	$reg_text1 = "New Registration requested by ". $_POST['firstname']. " ". $_POST['lastname'];
+	$reg_text2 = "Submitted User Name  = ". $_POST['loginname']. ": Submitted email = ". $_POST['email'];
+	$reg_text3 = "Checking with User Name in Wordpress Database:";
+	$reg_text4 = "ID = ". $nameInWp_id. ", User Name = ". $nameInWp_name. ", Email = ". $nameInWp_email;   
+	$reg_text5 = "Checking with User Email in Wordpress Database:";
+	$reg_text6 = "ID = ". $emailInWp_id. ", User Name = ". $emailInWp_name. ", Email = ". $emailInWp_email;   
+	$reg_text7 = "Checking with User Name in TNG Database:";
+	$reg_text8 = "ID = ". $nameInTng_id. ", User Name = ". $nameInTng_name. ", Email = ". $nameInTng_email;   
+	$reg_text9 = "Checking with User Email in TNG Database:";
+	$reg_text10 = "ID = ". $emailInTng_id. ", User Name = ". $emailInTng_name. ", Email = ". $emailInTng_email;
+	
+
+	$text = "Hi Administrator,\r\n\r\n". $reg_text1. "\r\n". $reg_text2. "\r\n\r\n". $reg_text3. "\r\n". $reg_text4. "\r\n\r\n". $reg_text5. "\r\n". $reg_text6.  "\r\n\r\n". $reg_text7. "\r\n". $reg_text8. "\r\n\r\n". $reg_text9. "\r\n". $reg_text10. "\r\n\r\n". "Regards \r\n\r\n Wordpress";
+	return $text;
+}
+
+function check_credentials() {
+	$config = newRegConfig();
+	$newreg_check = "00";
+	$loginName = $_POST{'loginname'};
+	$email = $_POST{'email'};
+	if (username_exists($loginName)) {
+		$nameInWp = true;
+	} else {
+		$nameInWp =false;
+	}
+	if (email_exists($email)) { 
+		$emailInWp = true;
+		} else {
+		$emailInWp =false;
+	}	
+	$nameInTng = nameTng()['username'];
+	if ($nameInTng) { 
+		$nameInTng = true;
+		} else {
+		$nameInTng =false;
+	}
+	$emailInTng = emailTng()['email'];
+	echo ($emailInTng);
+	if ($emailInTng) { 
+		$emailInTng = true;
+		} else {
+		$emailInTng =false;
+	}
+	$conditions = array($nameInWp, $emailInWp, $nameInTng, $emailInTng);
+	return $conditions;
+
 }

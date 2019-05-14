@@ -17,23 +17,9 @@ Validation checks
 **************************************************************************************************/	
 
 function newregCheck() { 
+	$conditions = check_credentials();
 	$config = newRegConfig();
-	$newreg_check = "00";
-	$loginName = $_POST{'loginname'};
-	$email = $_POST{'email'};
-	if (username_exists($loginName)) {
-		$nameInWp = true;
-	} else {
-		$nameInWp =false;
-	}
-	if (email_exists($email)) { 
-		$emailInWp = true;
-		} else {
-		$emailInWp =false;
-	}	
-	$nameInTng = nameTng($loginName);
-	$emailInTng = emailTng($email);
-	$conditions = array($nameInWp, $emailInWp, $nameInTng, $emailInTng);
+		
 	$conditions = array(false, false, false, false);
 	if ($_POST) {
 	switch ($conditions) {
@@ -72,13 +58,15 @@ function newregCheck() {
 			break;		
 		case array(false, false, false, false): 
 			$newreg_check = "09";
-			$reg_message = $config['reg_complete'];
+			$reg_message = $config['reg_pw_reset'];
+			var_dump($reg_message);
 			echo registration_complete($reg_message);
-			echo new_reg_mail();
+			echo new_reg_pwreset__mail();
 			
 			break;
 		}
-
+		//var_dump(nameTng());		
+		//var_dump(emailTng());		
 	}
 	/** Set up functions here to respond to selections above */
 	//return $newreg_check;
