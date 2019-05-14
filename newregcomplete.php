@@ -97,8 +97,8 @@ function new_reg_pwreset__mail() {
 	$to = get_option('admin_email');
 	$subject = "New Registration - Suggest Password Reset";
 	$message = new_reg_pwreset_email_text();
-	echo "<pre>{($to, $subject, $message)}</pre>";
-	//	wp_mail($to, $subject, $message, $headers);
+	//echo "<pre>{($to, $subject, $message)}</pre>";
+	wp_mail($to, $subject, $message, $headers);
 
 }
 
@@ -149,13 +149,13 @@ function new_reg_pwreset_email_text() {
 	$line = $config['new_reg_email'];
 	$reg_text1 = "New Registration requested by ". $_POST['firstname']. " ". $_POST['lastname'];
 	$reg_text2 = "Submitted User Name  = ". $_POST['loginname']. ": Submitted email = ". $_POST['email'];
-	$reg_text3 = "Checking with User Name in Wordpress Database:";
+	$reg_text3 = "Checking for submitted User Name in Wordpress Database:";
 	$reg_text4 = "ID = ". $nameInWp_id. ", User Name = ". $nameInWp_name. ", Email = ". $nameInWp_email;   
-	$reg_text5 = "Checking with User Email in Wordpress Database:";
+	$reg_text5 = "Checking for submitted User Email in Wordpress Database:";
 	$reg_text6 = "ID = ". $emailInWp_id. ", User Name = ". $emailInWp_name. ", Email = ". $emailInWp_email;   
-	$reg_text7 = "Checking with User Name in TNG Database:";
+	$reg_text7 = "Checking for submitted User Name in TNG Database:";
 	$reg_text8 = "ID = ". $nameInTng_id. ", User Name = ". $nameInTng_name. ", Email = ". $nameInTng_email;   
-	$reg_text9 = "Checking with User Email in TNG Database:";
+	$reg_text9 = "Checking for submitted User Email in TNG Database:";
 	$reg_text10 = "ID = ". $emailInTng_id. ", User Name = ". $emailInTng_name. ", Email = ". $emailInTng_email;
 	
 

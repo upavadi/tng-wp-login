@@ -81,11 +81,11 @@ function tng_path_not_specified() {
 		echo $tngPromt;
 		?>
 		<div> 	
-			<input type="text" style="width: 250px" name="tng_url" value= '<?php echo $tngdomain; ?>' placeholder='TNG url:' disabled>
+			<input style="color: green; width: 250px" type="text"  name="tng_url" value= '<?php echo $tngdomain; ?>' placeholder='TNG url:' disabled>
 			TNG URL (www.mysite.com/tng) from TNG Admin Setup.
 		</div>
 		<div> 	
-			<input type="text"  name="tng_photo_folder" style="width: 250px" value= '<?php echo $photopath; ?>' placeholder='TNG photo folder:' disabled>
+			<input style="color: green" type="text"  name="tng_photo_folder" style="width: 250px" value= '<?php echo $photopath; ?>' placeholder='TNG photo folder:' disabled>
 			Name of TNG Photo Folder in TNG Setup.  If you want to use different folder for this plugin, change it in admin menu>WP-TNG Login>Plugin Paths.
 		</div>
 		<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
