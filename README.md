@@ -2,7 +2,7 @@
 ## work in progress. 
 ## Initially, developing for  TNG V10 and PHP 5.4.
 
-#Registrtion
+# Registrtion
 =======
 ## Login
 ### Logging in to Wordpress with user name or user email 
