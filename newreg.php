@@ -8,7 +8,7 @@
 *************************/
 require_once "newreg_config.php"; 
 require_once "templates/registration_form.html.php";
-include "newregcomplete.php";
+//include "newregcomplete.php";
 /** This function drives shortcode [user_registration] ***/
 $newreg_check = "00";
 
@@ -21,10 +21,12 @@ function new_reg() {
 	$data['values'] = $_POST;
 	$data['errors'] = validate($_POST);
 	echo registration_form($data, $config['reg_form'], $keys);
+
 }
 //checks are done in WP database
 function validate($form) {
 	$errors = array();
+	$nameInTng = nameTng()['username'];
 	
 	if (!isset($form['firstname']) || empty($form['firstname'])) {
 		$errors['firstname'] = 'Cannot be empty';
@@ -48,7 +50,7 @@ function validate($form) {
 		
 		$errors['password'] = 'Password must be atleast 8 characters';
 	}
-	if (username_exists($_POST['loginname']))
+	if (username_exists($_POST['loginname']) || isset($nameInTng))
 	{
 		$errors['loginname'] = 'User Name in use';
 	}

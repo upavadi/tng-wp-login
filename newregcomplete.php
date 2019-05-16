@@ -21,16 +21,15 @@ require_once "templates/registration_form.html.php";
 function newreg_complete() {
 	$newreg_entries = (validate($_POST));
 	$newreg_entries = $newreg_entries['emailExists'];
-	
-	$newreg_complete = newregCheck($_POST['loginname'], $_POST['email']);
-	
+//	$newreg_complete = newregCheck($_POST['loginname'], $_POST['email']);
 	$input = $_POST;
 	$newloginname = $_POST['loginname'];
 	$newemail = $_POST['newemail'];
 	$config = newRegConfig();
 	$data['values'] = $_POST;
 	$data['errors'] = validate($_POST);
-	$newregComlete_token = newregCheck($_POST['loginname'], $_POST['email']);
+	newregCheck(); 
+	exit;
 }
 
 //add user to WP
@@ -82,13 +81,11 @@ function insertUserTng() {
 
 	$sql = "INSERT INTO `tng_users` (`username`, `description`, `password`, `email`, `realname`, `notes`, `role`, `allow_living`, `website`, `dt_registered`) values('$userName', '$description', '$password', '$email', '$realname', '$notes', '$role', '$allow_living', '$website', '$date')";
 	mysqli_query($db, $sql);
-	if ($db->query($sql) === TRUE) {
-		echo "<div id='msg_grn'>". "<b>Your changes have been updated</b>"."</div>";
-	} else {
+	if ($db->error) {
 		echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
 	}
 	
-
+return;
 }
 
 //send email - registration request

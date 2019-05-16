@@ -68,7 +68,13 @@ function tng_path_not_specified() {
 	}
 	?>
 
-    <div class="notice notice-error">
+    
+	<?php if($success) {
+		echo "<div class='notice notice-success'>";
+	} else {
+		echo "<div class='notice notice-error'>";
+	}
+	?>
 		<div>
 			<h2>We need to know where TNG is installed:</h2>
 		</div>

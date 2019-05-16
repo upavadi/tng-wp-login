@@ -18,15 +18,14 @@ Validation checks
 
 function newregCheck() { 
 	$conditions = check_credentials();
-	$config = newRegConfig();
-		
 	$conditions = array(false, false, false, false);
-	if ($_POST) {
+	if ($_POST) 
+	{
 	switch ($conditions) {
 		case array(true, true, true, true):
 			$newreg_check = "00";
-			$reg_message = $config['reg_pw-reset'];
-			echo "name & email in both"; //suggest password reset
+		//	$reg_message = $config['reg_pw-reset'];
+		//	echo "name & email in both"; //suggest password reset
 			break;
 		case array(true, false, false, false): 
 			$newreg_check = "02";
@@ -56,18 +55,22 @@ function newregCheck() {
 			$newreg_check = "08";
 			echo "name in wp and tng - email in tng only"; // Suggest login with user name. Password reset if reqd. Email admin.
 			break;		
-		case array(false, false, false, false): 
+		default: 
 			$newreg_check = "09";
-			$reg_message = $config['reg_pw_reset'];
-			var_dump($reg_message);
-			echo registration_complete($reg_message);
-			echo new_reg_pwreset__mail();
-			
+			process_new_reg();
 			break;
-		}
-		//var_dump(nameTng());		
-		//var_dump(emailTng());		
 	}
-	/** Set up functions here to respond to selections above */
-	//return $newreg_check;
+}
+return;
+}
+
+
+function process_new_reg() {
+	$config = newRegConfig();
+	$reg_message = $config['reg_complete'];
+	echo registration_complete($reg_message);
+	//insertUserWP();
+	insertUserTng();  
+//	echo new_reg_mail();
+return;
 }
