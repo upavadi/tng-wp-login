@@ -6,5 +6,5 @@
 =======
 ## Login
 ### Logging in to Wordpress with user name or user email 
-
+### User Name is not accepted if it's in either WP or TNG database.
 

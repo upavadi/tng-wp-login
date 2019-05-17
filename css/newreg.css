@@ -3,6 +3,7 @@
 margin: 30px;
 margin-bottom: 5px;
 }
+/**
 .entrylabel {
 //text-align: right;
 width: 120px;
@@ -11,7 +12,7 @@ width: 120px;
 .rowadjust {
 margin-bottom: 5px;
 }
-
+**/
 .regsections {
 background-color: #e0e0ed;
 display: block;

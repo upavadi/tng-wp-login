@@ -7,6 +7,17 @@
         margin-top: 0;
     }
 }
+
+.entrylabel {
+	//text-align: right;
+	width: 120px;
+	}
+
+	**/
+.rowadjust {
+margin-bottom: 5px;
+}
+
 /** reg forms ***/
 .regsubtitle {
 	color: blue;

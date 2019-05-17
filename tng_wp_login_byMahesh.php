@@ -2,14 +2,14 @@
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set('display_errors', 1);
 /*
-Plugin Name: LAST tng-wordpress-login-WAMP TNG V10.1.3
-Plugin URI: https://github.com/upavadi/TngApi
-Description: CURRENT login to TNG 10.1.3 and Wordpress, allow new registrations and show user profiles
-Version:     1.0.2
+Plugin Name: TNG-Wordpress-login TNG V10.1.3
+Plugin URI: https://github.com/upavadi/tng-wp-login
+Description: Login to TNG 10.1.3 with Wordpress, allow new registrations, user profiles and Retrieve password
+Version:     1.0.3
 Author:      Mahesh Upadhyaya
-Author URI:  https://developer.wordpress.org/
+Author URI:  http://trial.upavadi.net
 License:     MIT
-License URI: Lhttp://opensource.org/licenses/MIT
+License URI: http://opensource.org/licenses/MIT
 *************************************************************
 * 'Password Reset' module based on tutorial, 
 * Build a Custom WordPress User Flow � Part 3, by Jarkko Laine.
@@ -137,8 +137,8 @@ add_action( 'wp_enqueue_scripts', 'add_tng_wp_login_stylesheets' );
 function add_tng_wp_login_stylesheets() {
 		wp_register_style( 'register-tng_wp_bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css');
 		wp_enqueue_style( 'register-tng_wp_bootstrap' );
-		wp_register_style( 'register-tng_wp_css', plugins_url('css/newreg.css', __FILE__) );
-		wp_enqueue_style( 'register-tng_wp_css' );
+		//wp_register_style( 'register-tng_wp_css', plugins_url('css/newreg.css', __FILE__) );
+	//	wp_enqueue_style( 'register-tng_wp_css' );
 		
 		wp_register_style( 'register-tng_wp_login_css', plugins_url('css/wp_tng_login.css', __FILE__) );
 		wp_enqueue_style( 'register-tng_wp_login_css' );
