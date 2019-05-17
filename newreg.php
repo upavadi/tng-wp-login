@@ -53,7 +53,9 @@ function validate($form) {
 	if (username_exists($_POST['loginname']) || isset($nameInTng))
 	{
 		$errors['loginname'] = 'User Name in use';
+		$errors['userExists'] = true;
 	}
+	
 	if (email_exists($_POST['email']))
 	{
 		$errors['email'] = 'Email is in use';
