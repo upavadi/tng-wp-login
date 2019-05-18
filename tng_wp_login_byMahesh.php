@@ -159,7 +159,7 @@ add_action( 'widgets_init', function(){
 register_activation_hook( __FILE__, 'do_insert_pages' ); 
 
 //Password-Reset Page
-add_action('lost_Password_form', 'redirect_for_lostpassword');
+add_action('login_form_lostpassword', 'redirect_for_lostpassword');
 add_action( 'login_form_lostpassword', 'do_password_lost' );
 add_action( 'login_form_rp', 'do_password_reset');
 add_action( 'login_form_resetpass', 'do_password_reset' );
@@ -172,7 +172,7 @@ add_filter( 'retrieve_password_message', 'replace_retrieve_password_message', 10
 add_shortcode('lost_Password_form', 'lostPassword'); 
 add_shortcode('reset_Password_form', 'resetPassword'); 
 
-/** get real path to wp-load.php
+/** get real path to wp-load.php 
     function find_wp_path() {
         $dir = dirname(__FILE__);
         do {

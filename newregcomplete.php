@@ -12,7 +12,7 @@ Validation checks
 09 - Save registration - Safe to register. Save registration. Go to 'Thank You Page'
 **************************************************************************************************/		
 //include "newreg_options.php";
-require_once "newreg_config.php"; 
+require_once (dirname(__FILE__). '/newreg_config.php'); 
 require_once "newreg.php";
 require_once "newreg_options.php"; 
 require_once "templates/registration_complete.html.php";
@@ -88,13 +88,13 @@ function insertUserTng() {
 return;
 }
 
-//send email - registration request
+//send email - registration request - suggest password reset
 function new_reg_pwreset__mail() {
 	$config = newRegConfig();
 	$to = get_option('admin_email');
 	$subject = "New Registration - Suggest Password Reset";
 	$message = new_reg_pwreset_email_text();
-	//echo "<pre>{($to, $subject, $message)}</pre>";
+	//echo "c{($to, $subject, $message)}</pre>";
 	wp_mail($to, $subject, $message, $headers);
 
 }
@@ -108,7 +108,7 @@ function new_reg_mail() {
 	$message = new_reg_email_text();
 	$cc = get_option('admin_email');
 	$headers[] = 'Bcc:'. $bcc;
-	//echo "<pre>{($to, $subject, $message)}</pre>";
+//	echo "<pre>{($to, $subject, $message)}</pre>";
 	wp_mail($to, $subject, $message, $headers);
 return;
 }

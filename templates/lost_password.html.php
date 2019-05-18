@@ -2,7 +2,10 @@
 //Lost password. 
 // generate email with key to reset
 
+$config = newRegConfig()['forgot_pw'];
+
 function lostPassword() {
+	$config = newRegConfig()['forgot_pw'];
 	$msg_loggedin = "You are already Logged in";
 	$error_key = $_GET['errors'];
 	$error = 'Please enter your email address';
@@ -13,23 +16,23 @@ function lostPassword() {
 	}
 
 	?>
-	
+
 <div class="container-fluid">
 	<div id='container_forgot_pw'>
-		<div class="regsubtitle col-lg-8 col-md-8 col-sm-12 col-xs-12" id='upper' style="text-align: center">
-		Forgot Your Password?
+		<div class="regsubtitle" id='upper' style="text-align: center">
+		<?php echo $config['title']; ?>
 		</div>
-		<div class="regsections col-lg-8 col-md-8 col-sm-12 col-xs-12">
+		<div class="regsections">
 			<div style="text-align: center">
-			If you forgot your password, no worries. <br />Enter your email address and <br />we will send you a link you can use to reset your password.
+			<?php 	echo $config['line1']. "<br />". $config['line2']. "<br />".$config['line3']. "<br />".$config['line4']. "<br />" ?>
 			</div>
 			<form  id="lostform" name="lostform" action="<?php echo wp_lostpassword_url(); ?>"  method="post">
 			<div id="lower">
 				<div class="form-group">
-					<label for="lost_pw" style="margin-left: 10px">Email</label>
-					<input class="form-control" type="text" name="user_login" id="lost_pw" placeholder="your email">
-					</div>
+					<label for="lost_pw" style="margin-left: 50px">Your Email</label>
+					<input class="form-control input" type="email" name="user_login" id="lost_pw" placeholder="your email">
 				</div>
+				
 				<div class="form-group">
 					<input class="form-control" type="submit" name="submit" id="pw_submit" Value= "Request Password">
 				</div>

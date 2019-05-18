@@ -7,7 +7,11 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 	
 	if (($_POST)) {
 		$newreg_entries = (validate($_POST));
-		if (!$newreg_entries) {	
+		//var_dump($newreg_entries); 
+		$userExists = $newreg_entries['userExists'];
+		$emailExists = $newreg_entries['emailExists'];
+
+		if (!$newreg_entries || $emailExists ) {	
 			echo newreg_complete(); return null;
 		}
 	}

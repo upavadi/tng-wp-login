@@ -51,7 +51,7 @@ class wp_tng_login_Widget2 extends WP_Widget {
 		if (is_user_logged_in()) {
 			//$_SESSION['currentuser'] = wp_get_current_user() -> user_login;
 			$adminurl = get_admin_url();
-			$status1 = "Welcome to Trial-TNG 10.1.3 ". is_logged_in() ->user_firstname; 
+			$status1 = "Welcome ". is_logged_in() ->user_firstname. " (Beta Version of wp-tng-login widget)"; 
 			if (current_user_can('administrator')) {
 				$status2 = "<a href=\"$adminurl\">Dashboard</a>". " - ". $loginout;
 			} else {
@@ -60,7 +60,7 @@ class wp_tng_login_Widget2 extends WP_Widget {
 			
 		} else {
 			
-			$status1 = ("<label for='log'>Trial-tng 10.1.3 Log In:</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
+			$status1 = ("<label for='log'>wp-tng-login Beta Version:</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
 
 			$status2 = ( $args['remember'] ? '<input name="rememberme" type="checkbox" id="' . esc_attr( $args['id_remember'] ) . '" value="forever"' . ( $args['value_remember'] ? ' checked="checked"' : '' ) . ' /> ' . esc_html( $args['label_remember'] ) . ' |</label>' : '' );
 

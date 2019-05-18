@@ -38,8 +38,8 @@ require_once(__DIR__. '/../lost_pw_settings.php');
 		</div>
 		<div class="regsections">
 		<form id="resetpasswordform" name="resetpasswordform" action="<?php echo site_url( 'wp-login.php?action=resetpass' ); ?>" method="post" autocomplete="off">
-		<input type="text" id="user_login" name="rp_login" value="<?php echo esc_attr( $attributes['login'] ); ?>" autocomplete="off" />
-		<input type="text" name="rp_key" value="<?php echo esc_attr( $attributes['key'] ); ?>" />
+		<input type="text" id="user_login" name="rp_login" value="<?php echo esc_attr( $attributes['login'] ); ?>" autocomplete="off" hidden />
+		<input type="text" name="rp_key" value="<?php echo esc_attr( $attributes['key'] ); ?>" hidden/>
 		<div id="lower">
 			<div class="form-group">
 				<label for="pass1" style="margin-left: 10px">New password</label>
