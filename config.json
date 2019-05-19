@@ -43,8 +43,8 @@
         "line2": "You asked us to reset your password for your account using the email address ",
         "line3": "If this was a mistake, or you didn't ask for a password reset, just ignore this email and nothing will happen.",
         "line4": "To reset your password, visit the following address:",
-        "line5": "Best Regards",
-        "line5": "Mahesh"
+        "line5": "Thanks",
+        "line6": "Administrator"
     },
     "reg_form": {
         "sections": [

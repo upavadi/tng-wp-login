@@ -4,6 +4,7 @@ require_once "templates_admin/admin_set_paths.php";
 require_once "templates_admin/admin_set_profile.php";
 require_once "templates_admin/admin_set_registration.php";
 require_once "templates_admin/admin_set_reg_messages.php";
+require_once "templates_admin/admin_set_pwReset_messages.php";
 add_action('admin_menu', 'plugin_admin_add_page');
 //add_action('admin_init', 'plugin_admin_add_page');
 
@@ -16,12 +17,6 @@ function optionsConfig() {
 	}
 	return $config;
 }
-
-/**
-    add_menu_page('My Page Title', 'My Menu Title', 'manage_options', 'my-menu', 'my_menu_output' );
-    add_submenu_page('my-menu', 'Submenu Page Title', 'Whatever You Want', 'manage_options', 'my-menu' );
-    add_submenu_page('my-menu', 'Submenu Page Title2', 'Whatever You Want2', 'manage_options', 'my-menu2' );
-**/
 
 function plugin_admin_add_page() {
 	add_menu_page(
@@ -63,5 +58,13 @@ function plugin_admin_add_page() {
 	'manage_options',
 	'wp-tng-reg_msg',
 	'set_plugin_reg_messages'
-    );
+	);
+	add_submenu_page(
+		'wp-tng-login',
+		'wp-tng Login',
+		'Password-Reset Messages',
+		'manage_options',
+		'wp-tng-pw_msg',
+		'set_plugin_pwreset_messages'
+		);
 }

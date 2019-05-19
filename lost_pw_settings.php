@@ -129,13 +129,32 @@ echo "to be done";
 	 * Called through the retrieve_password_message filter.
 **/	
 	function replace_retrieve_password_message( $message, $key, $user_login, $user_data ) {
-		// Create new message
+		// Create new message for password reset - email
+		$config = optionsConfig();
+		$config = $config['forgot_pw_email'];
+		$line1 = $config['line1'];
+		$line2 = $config['line2']. " ". $user_data->user_email;
+		$line3 = $config['line3'];
+		$line4 = $config['line4'];
+		$line5 = $config['line5'];
+		$line6 = $config['line6'];
+		$reset_address = site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' );
+		
+		$msg = $line1. "\r\n\r\n";
+		$msg = $msg. $line2. "\r\n";
+		$msg = $msg. $line3. "\r\n\r\n";
+		$msg = $msg. $line4. "\r\n\r\n";
+		$msg = $msg. $reset_address. "\r\n\r\n";
+		$msg = $msg. $line5. "\r\n\r\n";
+		$msg = $msg. $line6;
+		/***
 		$msg  = __( 'Hello!', 'personalize-login' ) . "\r\n\r\n";
-		$msg .= sprintf( __( 'You asked us to reset your password for your account using the email address %s.', 'personalize-login' ), $user_login ) . "\r\n\r\n";
+		$msg .= sprintf( __( 'You asked us to reset your password for your account using the email address %s.', 'personalize-login' ), $user_data->user_email) . "\r\n\r\n";
 		$msg .= __( "If this was a mistake, or you didn't ask for a password reset, just ignore this email and nothing will happen.", 'personalize-login' ) . "\r\n\r\n";
 		$msg .= __( 'To reset your password, visit the following address:', 'personalize-login' ) . "\r\n\r\n";
 		$msg .= site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . "\r\n\r\n";
 		$msg .= __( 'Thanks!', 'personalize-login' ) . "\r\n";
+		**/
 		return $msg;
 	}
 	

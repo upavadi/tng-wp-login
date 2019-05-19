@@ -1,12 +1,7 @@
 <?php
 //TNG WP Password
 // Reset password form.
-/****
-pass1=pass2="" - password_reset_empty 
-pass1 != pass2 password_reset_mismatch
-successs = changed
 
-***/
 require_once(__DIR__. '/../lost_pw_settings.php');
 	function resetPassword() {
 	$msg_success = 'Your password has been changed. You may Login Now';
