@@ -23,25 +23,26 @@
         "line5": "Mahesh"
     },
     "reg_pw_reset": {
+        "token": "reg_pw_reset",
         "title": "Please Try Password Reset",
-        "line1": "We have your details, ",
-        "line2": "Please click on <b>Lost Password <\/b> in the LogIn panel and submit your email to request password reset.",
-        "line3": "Best Regards",
-        "line4": "Mahesh"
+        "line1": "We have your details,",
+        "line2": "Please click on <b>Reset My Password <\/b> below and submit your email address to request password reset.",
+        "line3": "Best Regards ",
+        "line4": "Mahesh "
     },
     "forgot_pw": {
         "title": "Forgot Your Password? ",
         "line1": "If you forgot your password, no worries. ",
         "line2": "Enter your email address and",
         "line3": "we will send you a link you can use to reset your password.",
-        "line4": "xxx"
+        "line4": "Thank you xxx "
     },
     "forgot_pw_email": {
         "title": "Password Reset Request",
         "CC": "testPlugin@crestvideo.co.uk",
         "line1": "Hi",
         "line2": "You asked us to reset your password for your account using the email address ",
-        "line3": "If this was a mistake, or you didn't ask for a password reset, just ignore this email and nothing will happen.",
+        "line3": "If this was a mistake, or you did not ask for a password reset, just ignore this email and nothing will happen.",
         "line4": "To reset your password, visit the following address:",
         "line5": "Thanks",
         "line6": "Administrator"

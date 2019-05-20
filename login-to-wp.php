@@ -42,9 +42,11 @@ class wp_tng_login_Widget2 extends WP_Widget {
 			'value_remember' => true
 			
 		);
-		
-		//check_for_tng_cookie();
+		$plugin_dir_path = plugin_dir_url( __FILE__ );
+		$login_redirect = $plugin_dir_path. "/login-to-tng.php";
+		$login_url = esc_url(site_url( 'wp-login.php', $_SERVER['PHP_SELF'] ));
 		$loginout = wp_loginout($_SERVER['REQUEST_URI'], false );
+		
 		if (is_user_logged_in()) {
 			//$_SESSION['currentuser'] = wp_get_current_user() -> user_login;
 			$adminurl = get_admin_url();
@@ -61,15 +63,13 @@ class wp_tng_login_Widget2 extends WP_Widget {
 
 			$status2 = ( $args['remember'] ? '<input name="rememberme" type="checkbox" id="' . esc_attr( $args['id_remember'] ) . '" value="forever"' . ( $args['value_remember'] ? ' checked="checked"' : '' ) . ' /> ' . esc_html( $args['label_remember'] ) . ' |</label>' : '' );
 
-			$status3 = ("<a href='/wordpress/wp-login.php?action=lostpassword' title='Lost Password' id='LostP'>Lost Password |</a>");
+			$status3 = ("<a href='$login_url?action=lostpassword' title='Lost Password' id='LostP'>Lost Password |</a>");
 			$status4 = ("<a href=\"$register\"> Register </a>");
 			$status5 = ("<input type='submit' id='". $args['id_submit']. "' class='button-primary' value='Log In' name='wp-submit'>");
 			$status7 = "error message";
 			$status6 = ("<input type='hidden' value='". $args['redirect']. "' name='redirect_to'>");;
 		}
-		$plugin_dir_path = plugin_dir_url( __FILE__ );
-		$login_redirect = $plugin_dir_path. "/login-to-tng.php";
-		$login_url = esc_url(site_url( 'wp-login.php', $_SERVER['PHP_SELF'] ));
+
 	?>
 	<form id="<?php echo $args['form_id' ]; ?>" name="loginform" action="<?php echo $login_redirect; ?>" method="post">
 		<div id="container">

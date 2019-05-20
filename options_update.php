@@ -207,7 +207,62 @@ function update_reg_email() {
 	var_dump($config_new['new_reg_email']);
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	$path_json = (__DIR__. '/config.json');
-	//file_put_contents($path_json, $json);
+	file_put_contents($path_json, $json);
+	$success = "Email Changes Saved";
+	return $success;
+}
+
+//Update text for 'Suggest Password Reset to New Registration
+function update_pw_message() {
+	$path = (__DIR__. '/config.json');
+	$config = optionsConfig();
+	$config_new = $config;
+	//var_dump($_POST);
+	$config_new['reg_pw_reset']['title'] = $_POST['PWreset_title'];
+	$config_new['reg_pw_reset']['line1'] = $_POST['PWreset_line1'];
+	$config_new['reg_pw_reset']['line2'] = $_POST['PWreset_line2'];
+	$config_new['reg_pw_reset']['line3'] = $_POST['PWreset_line3'];
+	$config_new['reg_pw_reset']['line4'] = $_POST['PWreset_line4'];
+	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+	$path_json = (__DIR__. '/config.json');
+	file_put_contents($path_json, $json);
+	$success = "Password Reset Text Saved";
+	return $success;
+}
+
+function update_pwlost_message() {
+	$path = (__DIR__. '/config.json');
+	$config = optionsConfig();
+	$config_new = $config;
+	//var_dump($_POST);
+	$config_new['forgot_pw']['title'] = $_POST['PWreset_title'];
+	$config_new['forgot_pw']['line1'] = $_POST['PWreset_line1'];
+	$config_new['forgot_pw']['line2'] = $_POST['PWreset_line2'];
+	$config_new['forgot_pw']['line3'] = $_POST['PWreset_line3'];
+	$config_new['forgot_pw']['line4'] = $_POST['PWreset_line4'];
+	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+	$path_json = (__DIR__. '/config.json');
+	file_put_contents($path_json, $json);
+	$success = "Password Reset Text Saved";
+	return $success;
+}
+
+//Update text for Registration Email
+function update_lostPW_email() {
+	$path = (__DIR__. '/config.json');
+	$config = optionsConfig();
+	$config_new = $config;
+	$config_new['forgot_pw_email']['title'] = $_POST['pwemail_title'];
+	$config_new['forgot_pw_email']['CC'] = $_POST['pwemail_cc'];
+	$config_new['forgot_pw_email']['line1'] = $_POST['pwemail_line1'];
+	$config_new['forgot_pw_email']['line2'] = $_POST['pwemail_line2'];
+	$config_new['forgot_pw_email']['line3'] = $_POST['pwemail_line3'];
+	$config_new['forgot_pw_email']['line4'] = $_POST['pwemail_line4'];
+	$config_new['forgot_pw_email']['line5'] = $_POST['pwemail_line5'];
+	$config_new['forgot_pw_email']['line6'] = $_POST['pwemail_line6'];
+	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+	$path_json = (__DIR__. '/config.json');
+	file_put_contents($path_json, $json);
 	$success = "Email Changes Saved";
 	return $success;
 }

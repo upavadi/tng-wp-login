@@ -1,5 +1,10 @@
 <?php
 function registration_complete($config) {
+	if (isset($config['token'])) {
+		$login_url = esc_url(site_url( 'wp-login.php', $_SERVER['PHP_SELF'] ));
+		$Pw_reset_line = ("<a href='$login_url?action=lostpassword' title='Lost Password' id='LostP'><b>Reset My Password</b></a>");
+	}
+	
 ob_clean();
 ob_start();
 ?>
@@ -23,6 +28,9 @@ ob_start();
 			<?php
 				echo $config['line4'];
 			?>
+			<P>
+			<?php echo $Pw_reset_line; ?>
+			</p>	
 
 			</div>	
 		</div>
