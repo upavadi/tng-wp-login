@@ -1,9 +1,6 @@
 <?php
 require_once(ABSPATH. 'wp-load.php');
 require_once "newreg_config.php";
-//require_once "login-to-tng.php";
-//require_once "login-tng-trial.php";
-//require_once "login-tng-rmbr-trial.php";
 /********** Class   *******/
 class wp_tng_login_Widget2 extends WP_Widget {
 	public function __construct() {
@@ -71,7 +68,7 @@ class wp_tng_login_Widget2 extends WP_Widget {
 			$status6 = ("<input type='hidden' value='". $args['redirect']. "' name='redirect_to'>");;
 		}
 		$plugin_dir_path = plugin_dir_url( __FILE__ );
-		$login_redirect = $plugin_dir_path. "/login-tng-trial.php";
+		$login_redirect = $plugin_dir_path. "/login-to-tng.php";
 		$login_url = esc_url(site_url( 'wp-login.php', $_SERVER['PHP_SELF'] ));
 	?>
 	<form id="<?php echo $args['form_id' ]; ?>" name="loginform" action="<?php echo $login_redirect; ?>" method="post">

@@ -4,7 +4,7 @@
 $wp_path = find_wp_path(); // not sure why I have to find this
 require_once ($wp_path.'/wp-load.php');
 require_once "newreg_config.php";
-require_once "login-wp-trial.php";
+require_once "login-to-wp.php";
 //require_once("templates/lost_pw.html.php");
 
 add_action('init', 'StartSession', 1);
