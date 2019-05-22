@@ -8,6 +8,7 @@ function registration_complete($config) {
 ob_clean();
 ob_start();
 ?>
+
 	<div class="container">
 		<div class="regsubtitle">
 			<div class='row' style="margin-left: 10px">
@@ -29,7 +30,9 @@ ob_start();
 				echo $config['line4'];
 			?>
 			<P>
-			<?php echo $Pw_reset_line; ?>
+			<?php echo $Pw_reset_line; 
+			
+			?>
 			</p>	
 
 			</div>	

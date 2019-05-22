@@ -37,6 +37,11 @@ margin-bottom: 5px;
 	max-width: 1000px;
 	}
 	
+	#reg_submit {
+		width: 27em;
+		height: 5em;
+	}
+	
 input[type="submit"] {
 		position: relative;
 		color: blue !important;

@@ -26,6 +26,9 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 	}
 	**/
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<script src='https://www.google.com/recaptcha/api.js'></script>	
 <div class="row rowadjust <?php echo $errorClass; ?>">
 	<div class="col-md-2 entrylabel"><?php echo $label; ?></div>
 	<div class="col-md-4">
@@ -90,13 +93,30 @@ ob_start();
 	}
 
 ?>
-	
 <div id="alertText"><br /></div>
-<input type="submit" onclick="varified()" value="Submit Request">
+<div class="g-recaptcha" style="margin-left: 20px" data-sitekey="<?php echo $keys['key1']; ?>"></div>	
+
+<input id="reg_submit" style="margin-top: 10px" type="submit" onclick="varified()" value="Submit Request">
+
 </form>
 </div>
 </div><!--container-->
+</html>
 <?php
 	
 }
+?>
+<script>
+function varified(event) {
+console.log(event)
+console.log(grecaptcha.getResponse())
+if (grecaptcha.getResponse() == ""){
+    document.getElementById("alertText").innerHTML = "<b>Please verify that you are not a robot.";
+	document.getElementById("theForm").value="";
+	} else {
+    document.getElementById("theForm").submit();
+}
+return;
+}
+</script>
 
