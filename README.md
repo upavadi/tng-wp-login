@@ -7,6 +7,9 @@
 ### If sumbmitted email is in WP or TNG  database, user is requested to Try Password Reset.
 =======
 ## Login
-### Logging in to Wordpress with user name or user email 
+### Logging in to Wordpress with user name or user email
+### If login to Wordpress is successful, user is logged in to TNG
 
 
+# Profile
+### Just one field, 'tng_interest' is added by this plugin in 'wp_usermeta' table. This field is used in New Registration Submission. 

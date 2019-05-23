@@ -133,7 +133,7 @@ foreach ($config['sections'] as $section) {
 
 </div>
 
-<input type="submit" name="submitProfile" value="Update Your Profile">
+<input type="submit" name="submitProfile" id="profile_submit" value="Update Your Profile">
 </form>
 </div><!--container-->
 <?php

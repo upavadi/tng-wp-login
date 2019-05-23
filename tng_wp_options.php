@@ -1,6 +1,7 @@
 <?php
 require_once "options_update.php";
 require_once "templates_admin/admin_set_paths.php";
+require_once "templates_admin/admin_set_keys.php";
 require_once "templates_admin/admin_set_profile.php";
 require_once "templates_admin/admin_set_registration.php";
 require_once "templates_admin/admin_set_reg_messages.php";
@@ -33,7 +34,15 @@ function plugin_admin_add_page() {
 	'manage_options',
 	'wp-tng-login',
 	'set_plugin_paths'
-    );
+	);
+	add_submenu_page(
+		'wp-tng-login',
+		'WP-TNG Login Config',
+		'Captcha Keys',
+		'manage_options',
+		'wp-tng-keys',
+		'set_plugin_keys'
+		);
 	add_submenu_page(
     'wp-tng-login',
 	'WP-TNG Login Config',

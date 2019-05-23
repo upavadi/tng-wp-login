@@ -29,6 +29,9 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 <!DOCTYPE html>
 <html lang="en">
 <script src='https://www.google.com/recaptcha/api.js'></script>	
+
+
+
 <div class="row rowadjust <?php echo $errorClass; ?>">
 	<div class="col-md-2 entrylabel"><?php echo $label; ?></div>
 	<div class="col-md-4">
@@ -93,14 +96,15 @@ ob_start();
 	}
 
 ?>
-<div id="alertText"><br /></div>
+<div style="color: red" id="alertText"><br /></div>
 <div class="g-recaptcha" style="margin-left: 20px" data-sitekey="<?php echo $keys['key1']; ?>"></div>	
 
-<input id="reg_submit" style="margin-top: 10px" type="submit" onclick="varified()" value="Submit Request">
+<input style="margin-top: 10px" type="submit" onclick="varified()" id="reg_submit" value="Submit Request">
 
 </form>
 </div>
 </div><!--container-->
+
 </html>
 <?php
 	
@@ -119,4 +123,3 @@ if (grecaptcha.getResponse() == ""){
 return;
 }
 </script>
-
