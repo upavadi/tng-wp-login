@@ -8,6 +8,7 @@ require_once "templates_admin/admin_set_reg_messages.php";
 require_once "templates_admin/admin_set_pwReset_messages.php";
 add_action('admin_menu', 'plugin_admin_add_page');
 //add_action('admin_init', 'plugin_admin_add_page');
+//6LdACicUAAAAAJwHZ194fiKcwhxiX4EHbmttcTCq
 
 function optionsConfig() {
 	static $config;
@@ -18,6 +19,16 @@ function optionsConfig() {
 	}
 	return $config;
 }
+
+function optionsKeys() {
+	static $key_value;
+	if (!$key_value) {
+		$key_url = plugin_dir_url( __FILE__ ). "keyValue.json";
+		$key_value = json_decode(file_get_contents($key_url), true);
+	}
+	return $key_value;
+}
+
 
 function plugin_admin_add_page() {
 	add_menu_page(

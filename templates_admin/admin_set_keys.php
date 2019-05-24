@@ -8,26 +8,24 @@ if (!$_POST) {
     $keys = keyValues();
     $key1 = $keys['key1'];
     $key2 = $keys['key2'];
-	$_POST['tng_path'] = $config_paths['tng_path'];
-	$_POST['tng_url'] = $config_paths['tng_url'];
-	$_POST['tng_photo_folder'] = $config_paths['tng_photo_folder'];
-	
+	$_POST['key1'] = $key1;
+	$_POST['key2'] = $key2;
+		
 }
-var_dump($keys); die;
 $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
     // check user capabilities
     if ( ! current_user_can( 'manage_options' ) ) {
         return;
     }
-	if (isset($_POST['Update_Paths'])) {
+	if (isset($_POST['Update_Keys'])) {
 		$success = "";
-		update_paths();
-		$success = update_paths();
+		update_keys();
+		$success = update_keys();
 		echo "<meta http-equiv='refresh' content=$success>";
 		//return;
 	}
-
-	?>
+	var_dump($_POST);
+?>
 <head>
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/newreg.css';?>">
 
@@ -37,49 +35,47 @@ $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 
 	<form class="form-group" action=''  method="post">
 	<div class="regsubtitle">
-	Plugin Paths:-
+	ReCaptcha Keys:-
 	</div>
 	<div style="color: red">
-	These values would have been setup on first activation. Values mirror values in config.php, in TNG root
+	I have implemented Recaptcha Version 2. You will need to get Public and Private keys from http://www.google.com/recaptcha/admin#whyrecaptcha
 	</div>
 	<div class="rowadjust regsections">	
 		<div class="row">
 			<div class='col-md-2' style="width: 155px">
-				TNG Root Path: 
+				Public Key: 
 			</div>
 			<div  class='col-md-3'>	
-				<input type="text" class="form-control" name="tng_path" value= '<?php echo $_POST['tng_path']; ?>'>
+				<input type="text" class="form-control" name="key1" value= '<?php echo $_POST['key1']; ?>'>
 			</div>
 			<div  class='col-md-6'>
-			TNG Root Path is absolute path to TNG. You may look this up from TNG Admin Setup or config.php in TNG folder.
+			Enter Public Key  here to activate ReCaptcha.
 			</div>
 		</div>
 		<div class="row rowadjust">
 			<div class='col-md-2' style="width: 155px">
-			TNG URL:
+			Private Key:
 			</div>
 			<div  class='col-md-3'>	
-				<input type="text" class="form-control" name="tng_url" value= '<?php echo $_POST['tng_url']; ?>'>
+				<input type="text" class="form-control" name="key2" value= '<?php echo $_POST['key2']; ?>'>
 			</div>
 			<div  class='col-md-6'>
-			TNG URL is path to TNG (www.mysite.com/tng). You may look this up from TNG Admin Setup or config.php in TNG folder.
+			You may enter your Private key here if you think it is safe to do so.
 			</div>
 		</div>
 		<div class="row rowadjust">
 			<div class='col-md-2' style="width: 155px">
-			TNG Photo Folder:
+			Enable reCaptacha
 			</div>
 			<div  class='col-md-3'>	
-				<input type="text" class="form-control" name="tng_photo_folder" value= '<?php echo $_POST['tng_photo_folder']; ?>'>
-			</div>
-			<div  class='col-md-6'>
-			Name of TNG Photo Folder. Derived from TNG setup.
+			<input type="checkbox" class="form-check-input" name="enabled1a" id="enabled1a" checked='checked'>
 			</div>
 		</div>
+			
 	</div>
 	<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
 	<p>
-	<input type="submit" name="Update_Paths" value="Update Paths">
+	<input type="submit" name="Update_Keys" value="Update Keys">
 	</p>
 	
 	</form>

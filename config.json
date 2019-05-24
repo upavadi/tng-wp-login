@@ -54,7 +54,7 @@
                 "fields": [
                     {
                         "name": "firstname",
-                        "enabled": true,
+                        "enabled": false,
                         "textenabled": false,
                         "type": "text",
                         "label": "First Name*",
