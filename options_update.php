@@ -24,6 +24,7 @@ function update_keys() {
 	$path_json = (__DIR__. '/KeyValue.json');
 	$keys_new['key1'] = $_POST["key1"];
 	$keys_new['key2'] = $_POST['key2'];
+	$keys_new['enabled'] = $_POST['enabled'];
 	$json = (json_encode($keys_new, JSON_PRETTY_PRINT));
 	file_put_contents($path_json, $json);
 	$success = "Changes Saved";

@@ -15,16 +15,6 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 			echo newreg_complete(); return null;
 		}
 	}
-	
-	/**
-	if (isset($_POST['loginname'])) {
-		$newreg_entries = (validate($_POST));
-		$newreg_entries = $newreg_entries['emailExists'];
-		//var_dump(validate($_POST)); ///// work on this ***************************
-		//echo newreg_complete();
-		return "newreg";
-	}
-	**/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,10 +84,17 @@ ob_start();
 </div>
 <?php		
 	}
+if ($_POST && $error) {
+	echo "<div>Please check for errors</div>";
+}
 
+if ($keys['enabled'] == "true") {
 ?>
 <div style="color: red" id="alertText"><br /></div>
 <div class="g-recaptcha" style="margin-left: 20px" data-sitekey="<?php echo $keys['key1']; ?>"></div>	
+<?php
+}
+?>
 
 <input style="margin-top: 10px" type="submit" onclick="varified()" id="reg_submit" value="Submit Request">
 

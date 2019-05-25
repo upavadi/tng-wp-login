@@ -8,6 +8,11 @@
     }
 }
 
+.captcha {
+	margin: 30px;
+	margin-bottom: 5px;
+	}
+	
 .entrylabel {
 	//text-align: right;
 	width: 120px;

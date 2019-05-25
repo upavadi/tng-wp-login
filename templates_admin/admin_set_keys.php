@@ -1,17 +1,28 @@
 <?php
 //Captcha Keys.
+//trial
+//1 6LcJXKUUAAAAAFc4Gh5eOcwnoa_PzK7bCNWSpCT6
+//2 6LcJXKUUAAAAALfy7kZkrq16wCBfYhaml8ChC_z0
+//localhost
+//L 6LdACicUAAAAAJwHZ194fiKcwhxiX4EHbmttcTCq
+
 
 require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_keys() {
-if (!$_POST) {	
+
     $keys = keyValues();
     $key1 = $keys['key1'];
-    $key2 = $keys['key2'];
-	$_POST['key1'] = $key1;
-	$_POST['key2'] = $key2;
-		
+	$key2 = $keys['key2'];
+	$enabled = $keys['enabled'];
+
+	if (!$_POST) {	
+		$_POST['key1'] = $key1;	
+		$_POST['key2'] = $key2;	
+		$_POST['enabled'] = $enabled;	
 }
+
+
 $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
     // check user capabilities
     if ( ! current_user_can( 'manage_options' ) ) {
@@ -19,12 +30,17 @@ $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
     }
 	if (isset($_POST['Update_Keys'])) {
 		$success = "";
+		if($_POST['enabled']) {
+			$_POST['enabled'] = "true";
+		} else {
+			$_POST['enabled'] = "false";
+		}
 		update_keys();
 		$success = update_keys();
 		echo "<meta http-equiv='refresh' content=$success>";
 		//return;
 	}
-	var_dump($_POST);
+	
 ?>
 <head>
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/newreg.css';?>">
@@ -64,11 +80,12 @@ $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 			</div>
 		</div>
 		<div class="row rowadjust">
-			<div class='col-md-2' style="width: 155px">
+			<div class='col-md-2 form-check-label' style="width: 155px">
 			Enable reCaptacha
 			</div>
 			<div  class='col-md-3'>	
-			<input type="checkbox" class="form-check-input" name="enabled1a" id="enabled1a" checked='checked'>
+			<?php echo $enabled; ?>
+			<input type="checkbox" class="form-check-input" name="enabled" id="enabled" <?php if($enabled == "true") echo "checked='checked'"; ?>>
 			</div>
 		</div>
 			
