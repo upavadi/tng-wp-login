@@ -4,46 +4,42 @@
 //1 6LcJXKUUAAAAAFc4Gh5eOcwnoa_PzK7bCNWSpCT6
 //2 6LcJXKUUAAAAALfy7kZkrq16wCBfYhaml8ChC_z0
 //localhost
-//L 6LdACicUAAAAAJwHZ194fiKcwhxiX4EHbmttcTCq
+//L1 - 6LdACicUAAAAAJwHZ194fiKcwhxiX4EHbmttcTCq
+//L2 - 6LcTCCcUAAAAAKEFNnOPVjLN8GlLvKgGAVfqt6rZ
 
 
 require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_keys() {
-
     $keys = keyValues();
     $key1 = $keys['key1'];
 	$key2 = $keys['key2'];
 	$enabled = $keys['enabled'];
 
-	if (!$_POST) {	
-		$_POST['key1'] = $key1;	
-		$_POST['key2'] = $key2;	
-		$_POST['enabled'] = $enabled;	
-}
+	if ($_POST) {	
+		$key1 = $_POST['key1'];
+		$key2 = $_POST['key2'];
+		$enabled = $_POST['enabled'] === 'on';
+	}
 
-
-$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
+	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
     // check user capabilities
     if ( ! current_user_can( 'manage_options' ) ) {
         return;
-    }
+	}
+
 	if (isset($_POST['Update_Keys'])) {
 		$success = "";
-		if($_POST['enabled']) {
-			$_POST['enabled'] = "true";
-		} else {
-			$_POST['enabled'] = "false";
-		}
-		update_keys();
-		$success = update_keys();
-		echo "<meta http-equiv='refresh' content=$success>";
+
+		// update_keys();
+		$success = update_keys($key1, $key2, $enabled);
+		// echo "<meta http-equiv='refresh' content=$success>";
 		//return;
 	}
 	
 ?>
 <head>
-<link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/newreg.css';?>">
+<link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/wp_tng_login.css';?>">
 
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
@@ -62,7 +58,7 @@ $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 				Public Key: 
 			</div>
 			<div  class='col-md-3'>	
-				<input type="text" class="form-control" name="key1" value= '<?php echo $_POST['key1']; ?>'>
+				<input type="text" class="form-control" name="key1" value= '<?php echo $key1; ?>'>
 			</div>
 			<div  class='col-md-6'>
 			Enter Public Key  here to activate ReCaptcha.
@@ -73,7 +69,7 @@ $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 			Private Key:
 			</div>
 			<div  class='col-md-3'>	
-				<input type="text" class="form-control" name="key2" value= '<?php echo $_POST['key2']; ?>'>
+				<input type="text" class="form-control" name="key2" value= '<?php echo $key2; ?>'>
 			</div>
 			<div  class='col-md-6'>
 			You may enter your Private key here if you think it is safe to do so.
@@ -84,8 +80,7 @@ $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 			Enable reCaptacha
 			</div>
 			<div  class='col-md-3'>	
-			<?php echo $enabled; ?>
-			<input type="checkbox" class="form-check-input" name="enabled" id="enabled" <?php if($enabled == "true") echo "checked='checked'"; ?>>
+			<input type="checkbox" class="form-check-input" name="enabled" id="enabled" <?php if($enabled) echo "checked='checked'"; ?>>
 			</div>
 		</div>
 			

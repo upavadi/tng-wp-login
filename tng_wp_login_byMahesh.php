@@ -33,20 +33,17 @@ require_once 'templates_admin/admin_set_paths.php';
 //require_once "newreg_options.php";
 
 $tngPath = getTngPath(). 'config.php';
-
 if (!file_exists($tngPath)) {
 	$e = new Exception('TNG Path not found');
 	error_log($e->getMessage());
 	error_log($e->getTraceAsString());
 //  Display admin message if tng path not specified
 	add_action( 'admin_notices', 'tng_path_not_specified' );
-return;
 }
 
 function tng_path_not_specified() {
-	if(isset ($_POST)) 
-		{
-		$tngFileError = checkForTngPath();	
+	if(isset ($_POST)) {
+		$tngFileError = checkForTngPath();
 		$tngPromt = "";
 		if ($tngFileError[0] == true) {
 			$tngPromt = "<div style='color: red; font-size: 1.2em'>Cannot find TNG folder. Please check TNG setup.</div>";
@@ -61,7 +58,7 @@ function tng_path_not_specified() {
 			$config_new['paths']['tng_url'] = $tngdomain;
 			$config_new['paths']['tng_photo_folder'] = $photopath;
 			$json = (json_encode($config_new, JSON_PRETTY_PRINT));
-			$path = __DIR__. "/config.json";
+			$path = __DIR__ . "/config.json";
 			file_put_contents($path, $json);
 			$success = "Paths saved";
 		}
@@ -109,11 +106,12 @@ function tng_path_not_specified() {
 function checkForTngPath() {
 	$tng_path = $_POST['tng_path']. 'config.php';
 	$tngFileError = "";
-	if (!file_exists($tng_path)) {	
+	if (!file_exists($tng_path) || !is_readable($tng_path)) {	
 		//$tngFileError = "Cannot find TNG folder";
 		return array(true, "", "","");
 	} else {
-	require_once($tng_path);
+	include($tng_path);
+	var_dump(array(false, $rootpath, $tngdomain, $photopath));
 	return array(false, $rootpath, $tngdomain, $photopath);
 	}
 }
@@ -137,9 +135,6 @@ add_action( 'wp_enqueue_scripts', 'add_tng_wp_login_stylesheets' );
 function add_tng_wp_login_stylesheets() {
 		wp_register_style( 'register-tng_wp_bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css');
 		wp_enqueue_style( 'register-tng_wp_bootstrap' );
-		//wp_register_style( 'register-tng_wp_css', plugins_url('css/newreg.css', __FILE__) );
-	//	wp_enqueue_style( 'register-tng_wp_css' );
-		
 		wp_register_style( 'register-tng_wp_login_css', plugins_url('css/wp_tng_login.css', __FILE__) );
 		wp_enqueue_style( 'register-tng_wp_login_css' );
 } 

@@ -88,10 +88,23 @@ if ($_POST && $error) {
 	echo "<div>Please check for errors</div>";
 }
 
-if ($keys['enabled'] == "true") {
+if ($keys['enabled']) {
 ?>
 <div style="color: red" id="alertText"><br /></div>
-<div class="g-recaptcha" style="margin-left: 20px" data-sitekey="<?php echo $keys['key1']; ?>"></div>	
+<div class="g-recaptcha" style="margin-left: 20px" data-sitekey="<?php echo $keys['key1']; ?>"></div>
+<script>
+function varified(event) {
+console.log(event)
+console.log(grecaptcha.getResponse())
+if (grecaptcha.getResponse() == ""){
+    document.getElementById("alertText").innerHTML = "<b>Please verify that you are not a robot.";
+	document.getElementById("theForm").value="";
+	} else {
+    document.getElementById("theForm").submit();
+}
+return;
+}
+</script>
 <?php
 }
 ?>
@@ -106,17 +119,3 @@ if ($keys['enabled'] == "true") {
 <?php
 	
 }
-?>
-<script>
-function varified(event) {
-console.log(event)
-console.log(grecaptcha.getResponse())
-if (grecaptcha.getResponse() == ""){
-    document.getElementById("alertText").innerHTML = "<b>Please verify that you are not a robot.";
-	document.getElementById("theForm").value="";
-	} else {
-    document.getElementById("theForm").submit();
-}
-return;
-}
-</script>

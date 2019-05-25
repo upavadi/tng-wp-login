@@ -17,14 +17,17 @@ function update_paths() {
 }
 
 // update ReCaptcha V2 Keys
-function update_keys() {
-	$keys = optionsKeys();
-    $key1 = $keys['key1'];
-    $key2 = $keys['key2'];
-	$path_json = (__DIR__. '/KeyValue.json');
-	$keys_new['key1'] = $_POST["key1"];
-	$keys_new['key2'] = $_POST['key2'];
-	$keys_new['enabled'] = $_POST['enabled'];
+function update_keys($key1, $key2, $enabled) {
+	// $keys = optionsKeys();
+    // $key1 = $keys['key1'];
+    // $key2 = $keys['key2'];
+	$path_json = (__DIR__. '/keyValue.json');
+	$keys_new['key1'] = $key1;
+	$keys_new['key2'] = $key2;
+	$keys_new['enabled'] = $enabled;
+	// $keys_new['key1'] = $_POST["key1"];
+	// $keys_new['key2'] = $_POST['key2'];
+	// $keys_new['enabled'] = $_POST['enabled'];
 	$json = (json_encode($keys_new, JSON_PRETTY_PRINT));
 	file_put_contents($path_json, $json);
 	$success = "Changes Saved";
