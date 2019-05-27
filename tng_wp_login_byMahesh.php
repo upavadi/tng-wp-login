@@ -125,8 +125,8 @@ function update_init_paths() {
 		$config_new['paths']['tng_photo_folder'] = $_POST['tng_photo_folder'];
 		$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 		$path = "config.json";
-		//file_put_contents($path, $json);
-		$suceess = "Changes Saved";
+		file_put_contents($path, $json);
+		$success = "Changes Saved";
 		return $config_new;
 	}
 

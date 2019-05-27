@@ -113,6 +113,17 @@ input[type="submit"] {
 	color: white !important;
 	border-radius: 5px;
 }
+
+.btn {
+	float: auto;
+	vertical-align:middle;
+	width: 90%;
+	margin: 5%;
+	padding: 5 5 5 5px;
+	background-color: #005681 !important;
+	color: white !important;
+	border-radius: 5px;
+}
 /** first row ***/
 #upper {
 	margin-top: 0px;
