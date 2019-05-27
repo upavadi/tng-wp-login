@@ -6,16 +6,17 @@ function set_plugin_profile() {
 	$config_headers = ($config['show_profile']['sections']);
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 	
-	if (isset($_POST['show_profile'])) {
-		$success = update_profile();
-		Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));
-	}
-	
-	$section_count = 0;
 	$section = $config['show_profile']['sections'];
 	$section1_fields = $section[0]['fields'];
 	$section2_fields = $section[1]['fields'];
 	$section3_fields = $section[2]['fields'];
+	$enabled3a = $section3_fields[0]['enabled'];
+	$enabled3b = $section3_fields[1]['enabled'];
+
+	if (isset($_POST['show_profile'])) {
+		$success = update_profile();
+		Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));
+	}
 	
 ?>
 <head>
@@ -220,7 +221,7 @@ function set_plugin_profile() {
 			<input type="text" class="form-control" width="auto" name="placeholder3a" id='placeholder3a' value= '<?php echo $section3_fields[0]['placeholder']; ?>'>
 			</div>
 			<div  class='col-md-2'>
-			<input type="checkbox" class="form-check-input" name="enabled3a" id="enabled3a" checked='checked'>
+			<input type="checkbox" class="form-check-input" name="enabled3a" id="enabled3a"  <?php if($enabled3a) echo "checked='checked'"; ?>>
 			<label for="enabled3a">Enabled</label>
 			</div>
 		</div>
@@ -238,7 +239,7 @@ function set_plugin_profile() {
 			<input type="text" class="form-control" width="auto" name="placeholder3b" id='placeholder3b' value= '<?php echo $section3_fields[1]['placeholder']; ?>'>
 			</div>
 			<div  class='col-md-2'>
-			<input type="checkbox" class="form-check-input" name="enabled3b" id="enabled3b" checked='checked'>
+			<input type="checkbox" class="form-check-input" name="enabled3b" id="enabled3b"  <?php if($enabled3b) echo "checked='checked'"; ?>>
 			<label for="enabled3b">Enabled</label>
 			</div>
 		</div>

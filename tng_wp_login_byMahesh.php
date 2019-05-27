@@ -2,7 +2,7 @@
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set('display_errors', 1);
 /*
-Plugin Name: TNG-Wordpress-login TNG V10.1.3
+Plugin Name: TNG-Wordpress-login for TNG V10.1.3
 Plugin URI: https://github.com/upavadi/tng-wp-login
 Description: Login to TNG 10.1.3 with Wordpress, allow new registrations, user profiles and Retrieve password
 Version:     1.0.3
@@ -107,16 +107,17 @@ function checkForTngPath() {
 	$tng_path = $_POST['tng_path']. 'config.php';
 	$tngFileError = "";
 	if (!file_exists($tng_path) || !is_readable($tng_path)) {	
-		//$tngFileError = "Cannot find TNG folder";
 		return array(true, "", "","");
 	} else {
 	include($tng_path);
-	var_dump(array(false, $rootpath, $tngdomain, $photopath));
+	
 	return array(false, $rootpath, $tngdomain, $photopath);
 	}
 }
 
 function update_init_paths() {
+	$_POST['tng_url'] = checkForTngPath()[2];
+	$_POST['tng_photo_folder'] = checkForTngPath()[3];
 	$path_json = (__DIR__. '/config.json');
 		$config = optionsConfig();
 		$config_new = $config;

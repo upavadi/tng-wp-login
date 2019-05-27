@@ -18,16 +18,10 @@ function update_paths() {
 
 // update ReCaptcha V2 Keys
 function update_keys($key1, $key2, $enabled) {
-	// $keys = optionsKeys();
-    // $key1 = $keys['key1'];
-    // $key2 = $keys['key2'];
 	$path_json = (__DIR__. '/keyValue.json');
 	$keys_new['key1'] = $key1;
 	$keys_new['key2'] = $key2;
 	$keys_new['enabled'] = $enabled;
-	// $keys_new['key1'] = $_POST["key1"];
-	// $keys_new['key2'] = $_POST['key2'];
-	// $keys_new['enabled'] = $_POST['enabled'];
 	$json = (json_encode($keys_new, JSON_PRETTY_PRINT));
 	file_put_contents($path_json, $json);
 	$success = "Changes Saved";
@@ -41,49 +35,49 @@ function update_profile() {
 	$section1 = $config_new['show_profile']['sections'][0];
 	$config_new['show_profile']['sections'][0];
 	($config_new['show_profile']['sections'][0]);
-
+var_dump($_POST);
 	/****headers 1 ****/
 	$config_new['show_profile']['sections'][0]['label'] = $_POST[header1];
 	
-	$config_new['show_profile']['sections'][0]['fields'][0]['label'] = $_POST[label1a];
-	$config_new['show_profile']['sections'][0]['fields'][0]['description'] = $_POST[description1a];
-	$config_new['show_profile']['sections'][0]['fields'][0]['placeholder'] = $_POST[placeholder1a];
+	$config_new['show_profile']['sections'][0]['fields'][0]['label'] = $_POST['label1a'];
+	$config_new['show_profile']['sections'][0]['fields'][0]['description'] = $_POST['description1a'];
+	$config_new['show_profile']['sections'][0]['fields'][0]['placeholder'] = $_POST['placeholder1a'];
 	
 	$config_new['show_profile']['sections'][0]['fields'][1]['label'] = $_POST[label1b];
-	$config_new['show_profile']['sections'][0]['fields'][1]['description'] = $_POST[description1b];
-	$config_new['show_profile']['sections'][0]['fields'][1]['placeholder'] = $_POST[placeholder1b];
+	$config_new['show_profile']['sections'][0]['fields'][1]['description'] = $_POST['description1b'];
+	$config_new['show_profile']['sections'][0]['fields'][1]['placeholder'] = $_POST['placeholder1b'];
 	
 	$config_new['show_profile']['sections'][0]['fields'][2]['label'] = $_POST[label1c];
-	$config_new['show_profile']['sections'][0]['fields'][2]['description'] = $_POST[description1c];
-	$config_new['show_profile']['sections'][0]['fields'][2]['placeholder'] = $_POST[placeholder1c];
+	$config_new['show_profile']['sections'][0]['fields'][2]['description'] = $_POST['description1c'];
+	$config_new['show_profile']['sections'][0]['fields'][2]['placeholder'] = $_POST['placeholder1c'];
 	
 	$config_new['show_profile']['sections'][0]['fields'][3]['label'] = $_POST[label1d];
-	$config_new['show_profile']['sections'][0]['fields'][3]['description'] = $_POST[description1d];
-	$config_new['show_profile']['sections'][0]['fields'][3]['placeholder'] = $_POST[placeholder1d];
+	$config_new['show_profile']['sections'][0]['fields'][3]['description'] = $_POST['description1d'];
+	$config_new['show_profile']['sections'][0]['fields'][3]['placeholder'] = $_POST['placeholder1d'];
 	
 	/****headers 2 ****/
 	$config_new['show_profile']['sections'][1]['label'] = $_POST[header2];
 	
 	$config_new['show_profile']['sections'][1]['fields'][0]['label'] = $_POST[label2a];
-	$config_new['show_profile']['sections'][1]['fields'][0]['description'] = $_POST[description2a];
-	$config_new['show_profile']['sections'][1]['fields'][0]['placeholder'] = $_POST[placeholder2a];
+	$config_new['show_profile']['sections'][1]['fields'][0]['description'] = $_POST['description2a'];
+	$config_new['show_profile']['sections'][1]['fields'][0]['placeholder'] = $_POST['placeholder2a'];
 	
 	$config_new['show_profile']['sections'][1]['fields'][1]['label'] = $_POST[label2b];
-	$config_new['show_profile']['sections'][1]['fields'][1]['description'] = $_POST[description2b];
-	$config_new['show_profile']['sections'][1]['fields'][1]['placeholder'] = $_POST[placeholder2b];
+	$config_new['show_profile']['sections'][1]['fields'][1]['description'] = $_POST['description2b'];
+	$config_new['show_profile']['sections'][1]['fields'][1]['placeholder'] = $_POST['placeholder2b'];
 	$config_new['show_profile']['sections'][1]['fields'][2]['label'] = $_POST[label2c];
-	$config_new['show_profile']['sections'][1]['fields'][2]['description'] = $_POST[description2c];
-	$config_new['show_profile']['sections'][1]['fields'][2]['placeholder'] = $_POST[placeholder2c];
+	$config_new['show_profile']['sections'][1]['fields'][2]['description'] = $_POST['description2c'];
+	$config_new['show_profile']['sections'][1]['fields'][2]['placeholder'] = $_POST['placeholder2c'];
 	$config_new['show_profile']['sections'][1]['fields'][3]['label'] = $_POST[label2d];
-	$config_new['show_profile']['sections'][1]['fields'][3]['description'] = $_POST[description2d];
-	$config_new['show_profile']['sections'][1]['fields'][3]['placeholder'] = $_POST[placeholder2d];
+	$config_new['show_profile']['sections'][1]['fields'][3]['description'] = $_POST['description2d'];
+	$config_new['show_profile']['sections'][1]['fields'][3]['placeholder'] = $_POST['placeholder2d'];
 	
 	/****headers 3 ****/
 	$config_new['show_profile']['sections'][2]['label'] = $_POST[header3];
 	
-	$config_new['show_profile']['sections'][2]['fields'][0]['label'] = $_POST[label3a];
-	$config_new['show_profile']['sections'][2]['fields'][0]['description'] = $_POST[description3a];
-	$config_new['show_profile']['sections'][2]['fields'][0]['placeholder'] = $_POST[placeholder3a];
+	$config_new['show_profile']['sections'][2]['fields'][0]['label'] = $_POST['label3a'];
+	$config_new['show_profile']['sections'][2]['fields'][0]['description'] = $_POST['description3a'];
+	$config_new['show_profile']['sections'][2]['fields'][0]['placeholder'] = $_POST['placeholder3a'];
 	if (isset($_POST['enabled3a'])) {
 	$config_new['show_profile']['sections'][2]['fields'][0]['enabled'] = true;
 	} else {
@@ -91,14 +85,14 @@ function update_profile() {
 	}
 	
 	$config_new['show_profile']['sections'][2]['fields'][1]['label'] = $_POST[label3b];
-	$config_new['show_profile']['sections'][2]['fields'][1]['description'] = $_POST[description3b];
-	$config_new['show_profile']['sections'][2]['fields'][1]['placeholder'] = $_POST[placeholder3b];
+	$config_new['show_profile']['sections'][2]['fields'][1]['description'] = $_POST['description3b'];
+	$config_new['show_profile']['sections'][2]['fields'][1]['placeholder'] = $_POST['placeholder3b'];
 	if (isset($_POST['enabled3b'])) {
 	$config_new['show_profile']['sections'][2]['fields'][1]['enabled'] = true;
 	} else {
 	$config_new['show_profile']['sections'][2]['fields'][1]['enabled'] = false;
 	}
-	
+	var_dump($config_new['show_profile']['sections'][0]);
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	$path_json = (__DIR__. '/config.json');
 	file_put_contents($path_json, $json);

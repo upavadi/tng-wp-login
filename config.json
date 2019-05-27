@@ -141,7 +141,7 @@
     "show_profile": {
         "sections": [
             {
-                "label": "Your Details ",
+                "label": "Your Details mmmmmmmm",
                 "fields": [
                     {
                         "name": "first_name",
@@ -223,7 +223,7 @@
                 ]
             },
             {
-                "label": "About Yourself",
+                "label": "About Yourself1",
                 "fields": [
                     {
                         "name": "tng_interest",
@@ -239,7 +239,7 @@
                         "enabled": true,
                         "textenabled": true,
                         "type": "textarea",
-                        "label": "About You",
+                        "label": "About You and you",
                         "description": "About You",
                         "placeholder": "Something about you for your genealogy page"
                     }
