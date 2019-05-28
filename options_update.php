@@ -29,13 +29,55 @@ function update_keys($key1, $key2, $enabled) {
 }
 
 //update Text used for Profile form
+function read_profile() {
+	$config = optionsConfig();
+	$header1 = $config['show_profile']['sections'][0];
+	$header1a = $config['show_profile']['sections'][0]['fields'][0];
+	$header1b = $config['show_profile']['sections'][0]['fields'][1];
+	$header1c = $config['show_profile']['sections'][0]['fields'][2];
+	$header1d = $config['show_profile']['sections'][0]['fields'][3];
+	$post['header1'] = $header1['label'];
+	$post['label1a'] = $header1a['label'];
+	$post['description1a'] = $header1a['description'];
+	$post['placeholder1a'] = $header1a['placeholder'];
+	$post['label1b'] = $header1b['label'];
+	$post['description1b'] = $header1b['description'];
+	$post['placeholder1b'] = $header1b['placeholder'];
+	$post['label1c'] = $header1c['label'];
+	$post['description1c'] = $header1c['description'];
+	$post['placeholder1c'] = $header1c['placeholder'];
+	$post['label1d'] = $header1d['label'];
+	$post['description1d'] = $header1d['description'];
+	$post['placeholder1d'] = $header1d['placeholder'];
+
+	$header2 = $config['show_profile']['sections'][1];
+	$header2a = $config['show_profile']['sections'][1]['fields'][0];
+	$header2b = $config['show_profile']['sections'][1]['fields'][1];
+	$header2c = $config['show_profile']['sections'][1]['fields'][2];
+	$header2d = $config['show_profile']['sections'][1]['fields'][3];
+	$post['header2'] = $header2['label'];
+	$post['label2a'] = $header2a['label'];
+	$post['description2a'] = $header2a['description'];
+	$post['placeholder2a'] = $header2a['placeholder'];
+	$post['label2b'] = $header2b['label'];
+	$post['description2b'] = $header2b['description'];
+	$post['placeholder2b'] = $header2b['placeholder'];
+	$post['label2c'] = $header2c['label'];
+	$post['description2c'] = $header2c['description'];
+	$post['placeholder2c'] = $header2c['placeholder'];
+	$post['label2d'] = $header2d['label'];
+	$post['description2d'] = $header2d['description'];
+	$post['placeholder2d'] = $header2d['placeholder'];
+	return $post;
+
+}
 function update_profile() {
 	$config = optionsConfig();
 	$config_new = $config;
 	$section1 = $config_new['show_profile']['sections'][0];
 	$config_new['show_profile']['sections'][0];
 	($config_new['show_profile']['sections'][0]);
-var_dump($_POST);
+
 	/****headers 1 ****/
 	$config_new['show_profile']['sections'][0]['label'] = $_POST[header1];
 	
@@ -92,7 +134,6 @@ var_dump($_POST);
 	} else {
 	$config_new['show_profile']['sections'][2]['fields'][1]['enabled'] = false;
 	}
-	var_dump($config_new['show_profile']['sections'][0]);
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	$path_json = (__DIR__. '/config.json');
 	file_put_contents($path_json, $json);
@@ -152,11 +193,11 @@ function update_registration() {
 	$config_new['reg_form']['sections'][1]['fields'][2]['label'] = $_POST[label2c];
 	$config_new['reg_form']['sections'][1]['fields'][2]['description'] = $_POST[description2c];
 	$config_new['reg_form']['sections'][1]['fields'][2]['placeholder'] = $_POST[placeholder2c];
-	/**
+	
 	$config_new['reg_form']['sections'][1]['fields'][3]['label'] = $_POST[label2d];
 	$config_new['reg_form']['sections'][1]['fields'][3]['description'] = $_POST[description2d];
 	$config_new['reg_form']['sections'][1]['fields'][3]['placeholder'] = $_POST[placeholder2d];
-	**
+	
 	/****headers 3 ****/
 	$config_new['reg_form']['sections'][2]['label'] = $_POST[header3];
 	

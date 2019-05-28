@@ -1,23 +1,28 @@
 <?php
 /** setup text for Profile Page */
-
 function set_plugin_profile() {
 	$config = optionsConfig();
 	$config_headers = ($config['show_profile']['sections']);
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
-	
 	$section = $config['show_profile']['sections'];
 	$section1_fields = $section[0]['fields'];
 	$section2_fields = $section[1]['fields'];
 	$section3_fields = $section[2]['fields'];
 	$enabled3a = $section3_fields[0]['enabled'];
 	$enabled3b = $section3_fields[1]['enabled'];
-
-	if (isset($_POST['show_profile'])) {
-		$success = update_profile();
-		Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));
+	
+	if(!isset($_POST['show_profile'])) {
+		$post = read_profile();
+		var_dump($post);
 	}
 	
+	if (isset($_POST['show_profile'])) {
+		$post = $_POST;
+		var_dump($_POST);
+		$success = update_profile();
+		echo "<meta http-equiv='refresh' content=$success>";
+		//Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));
+	}
 ?>
 <head>
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/wp_tng_login.css';?>">
@@ -31,7 +36,7 @@ function set_plugin_profile() {
 	<div class="regsubtitle">
 	Profile Template
 	</div>
-	<p style="color: green; display: inline-block"><?php echo "<b>". $_GET['success']. "</b><br />"; ?></p>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
 	<!-- Section One -->	
 	<div>
 		<b>Section One</b>
@@ -40,22 +45,22 @@ function set_plugin_profile() {
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="header1">Header</label>
-			<input type="text" class="form-control" width="auto" name="header1" id='header1' value= '<?php echo $config_headers[0]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="header1" id='header1' value= '<?php echo $post['header1']; ?>'>
 			</div>
 		</div>
 		<!-- First Name -->
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label1a">First Name</label>
-			<input type="text" class="form-control" width="auto" name="label1a" id='label1a' value= '<?php echo $section1_fields[0]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="label1a" id='label1a' value= '<?php echo $post['label1a']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description1a">Description</label>
-			<input type="text" class="form-control" width="auto" name="description1a" id='description1a' value= '<?php echo $section1_fields[0]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description1a" id='description1a' value= '<?php echo $post['description1a']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder1a">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder1a" id='placeholder1a' value= '<?php echo $section1_fields[0]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder1a" id='placeholder1a' value= '<?php echo $post['placeholder1a']; ?>'>
 			</div>
 			<div  class='col-md-2 col-ms-2' style="color:red">
 			<br />Required
@@ -65,15 +70,15 @@ function set_plugin_profile() {
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label1b">Last Name</label>
-			<input type="text" class="form-control" width="auto" name="label1b" id='label1b' value= '<?php echo $section1_fields[1]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="label1b" id='label1b' value= '<?php echo $post['label1b']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description1b">Description</label>
-			<input type="text" class="form-control" width="auto" name="description1b" id='description1b' value= '<?php echo $section1_fields[1]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description1b" id='description1b' value= '<?php echo $post['description1b']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder1b">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder1b" id='placeholder1b' value= '<?php echo $section1_fields[1]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder1b" id='placeholder1b' value= '<?php echo $post['placeholder1b']; ?>'>
 			</div>
 			<div  class='col-md-2 col-ms-2' style="color:red">
 			<br />Required
@@ -83,15 +88,15 @@ function set_plugin_profile() {
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label1c">Nick Name</label>
-			<input type="text" class="form-control" width="auto" name="label1c" id='label1c' value= '<?php echo $section1_fields[2]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="label1c" id='label1c' value= '<?php echo $post['label1c']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description1c">Description</label>
-			<input type="text" class="form-control" width="auto" name="description1c" id='description1c' value= '<?php echo $section1_fields[2]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description1c" id='description1c' value= '<?php echo $post['description1c']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder1c">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder1c" id='placeholder1c' value= '<?php echo $section1_fields[2]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder1c" id='placeholder1c' value= '<?php echo $post['placeholder1c']; ?>'>
 			</div>
 			<div  class='col-md-2 col-ms-2' style="color:red">
 			<br />Required
@@ -101,15 +106,15 @@ function set_plugin_profile() {
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label1d">Display Name</label>
-			<input type="text" class="form-control" width="auto" name="label1d" id='label1d' value= '<?php echo $section1_fields[3]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="label1d" id='label1d' value= '<?php echo $post['label1d']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description1d">Description</label>
-			<input type="text" class="form-control" width="auto" name="description1d" id='description1d' value= '<?php echo $section1_fields[3]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description1d" id='description1d' value= '<?php echo $post['description1d']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder1d">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder1d" id='placeholder1d' value= '<?php echo $section1_fields[3]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder1d" id='placeholder1d' value= '<?php echo $post['placeholder1d']; ?>'>
 			</div>
 			<div  class='col-md-2 col-ms-2' style="color:red">
 			<br />Required
@@ -123,22 +128,22 @@ function set_plugin_profile() {
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="header2">Header</label>
-			<input type="text" class="form-control" width="auto" name="header2" id='header2' value= '<?php echo $config_headers[1]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="header2" id='header2' value= '<?php echo $post['header2']; ?>'>
 			</div>
 		</div>
 		<!-- Login Name -->
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label2a">Login Name*</label>
-			<input type="text" class="form-control" width="auto" name="label2a" id='label2a' value= '<?php echo $section2_fields[0]['label'];; ?>'>
+			<input type="text" class="form-control" width="auto" name="label2a" id='label2a' value= '<?php echo $post['label2a']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description2a">Description</label>
-			<input type="text" class="form-control" width="auto" name="description2a" id='description2a' value= '<?php echo $section2_fields[0]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description2a" id='description2a' value= '<?php echo $post['description2a']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder2a">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder2a" id='placeholder2a' value= '<?php echo $section2_fields[0]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder2a" id='placeholder2a' value= '<?php echo $post['placeholder2a']; ?>'>
 			</div>
 			<div  class='col-md-2 col-ms-2' style="color:red">
 			<br />Required
@@ -148,15 +153,15 @@ function set_plugin_profile() {
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label2b">Email</label>
-			<input type="text" class="form-control" width="auto" name="label2b" id='label2b' value= '<?php echo $section2_fields[1]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="label2b" id='label2b' value= '<?php echo $post['label2b'] ; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description2b">Description</label>
-			<input type="text" class="form-control" width="auto" name="description2b" id='description2b' value= '<?php echo $section2_fields[1]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description2b" id='description2b' value= '<?php echo $post['description2b']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder2b">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder2b" id='placeholder2b' value= '<?php echo $section2_fields[1]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder2b" id='placeholder2b' value= '<?php echo $post['placeholder2b']; ?>'>
 			</div>
 			<div  class='col-md-2 col-ms-2' style="color:red">
 			<br />Required
@@ -165,15 +170,15 @@ function set_plugin_profile() {
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label2c">User Password</label>
-			<input type="text" class="form-control" width="auto" name="label2c" id='label2c' value= '<?php echo $section2_fields[2]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="label2c" id='label2c' value= '<?php echo $post['label2c']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description2c">Description</label>
-			<input type="text" class="form-control" width="auto" name="description2c" id='description2c' value= '<?php echo $section2_fields[2]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description2c" id='description2c' value= '<?php echo $post['description2c']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder2c">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder2c" id='placeholder2c' value= '<?php echo $section2_fields[2]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder2c" id='placeholder2c' value= '<?php echo $post['placeholder2c']; ?>'>
 			</div>
 			<div  class='col-md-2 col-ms-2' style="color:red">
 			<br />Required
@@ -186,11 +191,11 @@ function set_plugin_profile() {
 			</div>
 			<div  class='col-md-3'>
 			<label for="description2d">Description</label>
-			<input type="text" class="form-control" width="auto" name="description2d" id='description2d' value= '<?php echo $section2_fields[3]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description2d" id='description2d' value= '<?php echo $post['description2d']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder2d">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder2d" id='placeholder2d' value= '<?php echo $section2_fields[3]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder2d" id='placeholder2d' value= '<?php echo $post['placeholder2d']; ?>'>
 			</div>
 			<div  class='col-md-2 col-ms-2' style="color:red">
 			<br />Required
@@ -203,7 +208,7 @@ function set_plugin_profile() {
 	<div class="regsections">	
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
-			<label for="header3">Header3</label>
+			<label for="header3">Header</label>
 			<input type="text" class="form-control" width="auto" name="header3" id='header1' value= '<?php echo $config_headers[2]['label']; ?>'>
 			</div>
 		</div>
@@ -244,7 +249,7 @@ function set_plugin_profile() {
 			</div>
 		</div>
 	</div>
-		<p style="color: green; display: inline-block; padding-left: 25px"><?php echo "<b>". $_GET['success']. "</b><br />"; ?></p>
+		<p style="color: green; display: inline-block; padding-left: 25px"><?php echo "<b>". $success. "<b><br />"; ?></p>
 	<p>
 	<input type="submit" name="update_profile" value="Update Profile Template" style="width: auto">
 	</p>

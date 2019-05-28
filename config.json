@@ -141,7 +141,7 @@
     "show_profile": {
         "sections": [
             {
-                "label": "Your Details mmmmmmmm",
+                "label": "Your Details",
                 "fields": [
                     {
                         "name": "first_name",
