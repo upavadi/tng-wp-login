@@ -13,14 +13,12 @@ function set_plugin_profile() {
 	
 	if(!isset($_POST['show_profile'])) {
 		$post = read_profile();
-		var_dump($post);
 	}
 	
 	if (isset($_POST['show_profile'])) {
 		$post = $_POST;
-		var_dump($_POST);
 		$success = update_profile();
-		echo "<meta http-equiv='refresh' content=$success>";
+	//	echo "<meta http-equiv='refresh' content=$success>";
 		//Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));
 	}
 ?>
@@ -209,42 +207,42 @@ function set_plugin_profile() {
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="header3">Header</label>
-			<input type="text" class="form-control" width="auto" name="header3" id='header1' value= '<?php echo $config_headers[2]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="header3" id='header3' value= '<?php echo $post['header3']; ?>'>
 			</div>
 		</div>
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label3a">Your Interest</label>
-			<input type="text" class="form-control" width="auto" name="label3a" id='label3' value= '<?php echo $section3_fields[0]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="label3a" id='label3' value= '<?php echo $post['label3a']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description3a">Description</label>
-			<input type="text" class="form-control" width="auto" name="description3a" id='description3a' value= '<?php echo $section3_fields[0]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description3a" id='description3a' value= '<?php echo $post['description3a']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder3a">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder3a" id='placeholder3a' value= '<?php echo $section3_fields[0]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder3a" id='placeholder3a' value= '<?php echo $post['placeholder3a']; ?>'>
 			</div>
 			<div  class='col-md-2'>
-			<input type="checkbox" class="form-check-input" name="enabled3a" id="enabled3a"  <?php if($enabled3a) echo "checked='checked'"; ?>>
+			<input type="checkbox" class="form-check-input" name="enabled3a" id="enabled3a"  <?php if($post['enabled3a']) echo "checked='checked'"; ?>>
 			<label for="enabled3a">Enabled</label>
 			</div>
 		</div>
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label3b">About You</label>
-			<input type="text" class="form-control" width="auto" name="label3b" id='label3b' value= '<?php echo $section3_fields[1]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="label3b" id='label3b' value= '<?php echo $post['label3b']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description3b">Description</label>
-			<input type="text" class="form-control" width="auto" name="description3b" id='description3b' value= '<?php echo $section3_fields[1]['description']; ?>'>
+			<input type="text" class="form-control" width="auto" name="description3b" id='description3b' value= '<?php echo $post['description3b']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="placeholder3b">Place Holder</label>
-			<input type="text" class="form-control" width="auto" name="placeholder3b" id='placeholder3b' value= '<?php echo $section3_fields[1]['placeholder']; ?>'>
+			<input type="text" class="form-control" width="auto" name="placeholder3b" id='placeholder3b' value= '<?php echo $post['placeholder3b']; ?>'>
 			</div>
 			<div  class='col-md-2'>
-			<input type="checkbox" class="form-check-input" name="enabled3b" id="enabled3b"  <?php if($enabled3b) echo "checked='checked'"; ?>>
+			<input type="checkbox" class="form-check-input" name="enabled3b" id="enabled3b"  <?php if($post['enabled3b']) echo "checked='checked'"; ?>>
 			<label for="enabled3b">Enabled</label>
 			</div>
 		</div>

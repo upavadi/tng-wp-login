@@ -22,7 +22,7 @@ $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 		$success = "";
 		update_paths();
 		$success = update_paths();
-		echo "<meta http-equiv='refresh' content=$success>";
+	//	echo "<meta http-equiv='refresh' content=$success>";
 		//return;
 	}
 

@@ -68,8 +68,20 @@ function read_profile() {
 	$post['label2d'] = $header2d['label'];
 	$post['description2d'] = $header2d['description'];
 	$post['placeholder2d'] = $header2d['placeholder'];
-	return $post;
 
+	$header3 = $config['show_profile']['sections'][2];
+	$header3a = $config['show_profile']['sections'][2]['fields'][0];
+	$header3b = $config['show_profile']['sections'][2]['fields'][1];
+	$post['header3'] = $header3['label'];
+	$post['label3a'] = $header3a['label'];
+	$post['description3a'] = $header3a['description'];
+	$post['placeholder3a'] = $header3a['placeholder'];
+	$post['enabled3a'] = $header3a['enabled'];
+	$post['label3b'] = $header3b['label'];
+	$post['description3b'] = $header3b['description'];
+	$post['placeholder3b'] = $header3b['placeholder'];
+	$post['enabled3b'] = $header3b['enabled'];
+	return $post;
 }
 function update_profile() {
 	$config = optionsConfig();

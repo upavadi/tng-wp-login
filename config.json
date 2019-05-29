@@ -223,7 +223,7 @@
                 ]
             },
             {
-                "label": "About Yourself1",
+                "label": "About Yourself",
                 "fields": [
                     {
                         "name": "tng_interest",
