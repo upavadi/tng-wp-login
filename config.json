@@ -141,7 +141,7 @@
     "show_profile": {
         "sections": [
             {
-                "label": "Your Details",
+                "label": "About You",
                 "fields": [
                     {
                         "name": "first_name",
@@ -175,9 +175,9 @@
                         "enabled": true,
                         "textenabled": false,
                         "type": "text",
-                        "label": "Display Name",
-                        "description": "Select Name to display",
-                        "placeholder": "any other name"
+                        "label": null,
+                        "description": null,
+                        "placeholder": null
                     }
                 ]
             },
@@ -208,22 +208,22 @@
                         "textenabled": false,
                         "type": "password",
                         "label": "password*",
-                        "description": "Password",
-                        "placeholder": "password you can remember"
+                        "description": " password you can remember",
+                        "placeholder": "8 or more is good"
                     },
                     {
                         "name": "new_pass",
                         "enabled": true,
                         "textenabled": false,
                         "type": "password",
-                        "label": "New password",
-                        "description": "To change password, type a new one. Otherwise leave blank",
-                        "placeholder": "New Password - 8 charac or more"
+                        "label": null,
+                        "description": null,
+                        "placeholder": null
                     }
                 ]
             },
             {
-                "label": "About Yourself",
+                "label": "Additional Information",
                 "fields": [
                     {
                         "name": "tng_interest",
@@ -239,8 +239,8 @@
                         "enabled": true,
                         "textenabled": true,
                         "type": "textarea",
-                        "label": "About You and you",
-                        "description": "About You",
+                        "label": "About You",
+                        "description": "Your interest in this family tree",
                         "placeholder": "Something about you for your genealogy page"
                     }
                 ]

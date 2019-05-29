@@ -153,6 +153,58 @@ function update_profile() {
 	return $success;
 }
 
+function read_reg_form() {
+	$config = optionsConfig();
+	$header1 = $config['reg_form']['sections'][0];
+	$header1a = $config['reg_form']['sections'][0]['fields'][0];
+	$header1b = $config['reg_form']['sections'][0]['fields'][1];
+	$header1c = $config['reg_form']['sections'][0]['fields'][2];
+	$header1d = $config['reg_form']['sections'][0]['fields'][3];
+	$post['header1'] = $header1['label'];
+	$post['label1a'] = $header1a['label'];
+	$post['description1a'] = $header1a['description'];
+	$post['placeholder1a'] = $header1a['placeholder'];
+	$post['label1b'] = $header1b['label'];
+	$post['description1b'] = $header1b['description'];
+	$post['placeholder1b'] = $header1b['placeholder'];
+	$post['label1c'] = $header1c['label'];
+	$post['description1c'] = $header1c['description'];
+	$post['placeholder1c'] = $header1c['placeholder'];
+
+	$header2 = $config['reg_form']['sections'][1];
+	$header2a = $config['reg_form']['sections'][1]['fields'][0];
+	$header2b = $config['reg_form']['sections'][1]['fields'][1];
+	$header2c = $config['reg_form']['sections'][1]['fields'][2];
+	$header2d = $config['reg_form']['sections'][1]['fields'][3];
+	$post['header2'] = $header2['label'];
+	$post['label2a'] = $header2a['label'];
+	$post['description2a'] = $header2a['description'];
+	$post['placeholder2a'] = $header2a['placeholder'];
+	$post['label2b'] = $header2b['label'];
+	$post['description2b'] = $header2b['description'];
+	$post['placeholder2b'] = $header2b['placeholder'];
+	$post['label2c'] = $header2c['label'];
+	$post['description2c'] = $header2c['description'];
+	$post['placeholder2c'] = $header2c['placeholder'];
+	$post['label2d'] = $header2d['label'];
+	$post['description2d'] = $header2d['description'];
+	$post['placeholder2d'] = $header2d['placeholder'];
+
+	$header3 = $config['reg_form']['sections'][2];
+	$header3a = $config['reg_form']['sections'][2]['fields'][0];
+	$header3b = $config['reg_form']['sections'][2]['fields'][1];
+	$post['header3'] = $header3['label'];
+	$post['label3a'] = $header3a['label'];
+	$post['description3a'] = $header3a['description'];
+	$post['placeholder3a'] = $header3a['placeholder'];
+	$post['enabled3a'] = $header3a['enabled'];
+	$post['label3b'] = $header3b['label'];
+	$post['description3b'] = $header3b['description'];
+	$post['placeholder3b'] = $header3b['placeholder'];
+	$post['enabled3b'] = $header3b['enabled'];
+	
+	return $post;
+}
 //update Text used for Registration form
 function update_registration() {
 	$url = "config.json";
