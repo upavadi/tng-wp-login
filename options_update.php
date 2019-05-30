@@ -348,6 +348,16 @@ function update_reg_email() {
 	return $success;
 }
 
+function read_pw_message() {
+	$config = optionsConfig();
+	$pw_post['PWreset_title'] = $config['reg_pw_reset']['title'];
+	$pw_post['PWreset_line1'] = $config['reg_pw_reset']['line1'];
+	$pw_post['PWreset_line2'] = $config['reg_pw_reset']['line2'];
+	$pw_post['PWreset_line3'] = $config['reg_pw_reset']['line3'];
+	$pw_post['PWreset_line4'] = $config['reg_pw_reset']['line4'];
+	return $pw_post;
+}
+
 //Update text for 'Suggest Password Reset to New Registration
 function update_pw_message() {
 	$path = (__DIR__. '/config.json');
@@ -365,22 +375,44 @@ function update_pw_message() {
 	return $success;
 }
 
+function read_pwlost_message() {
+	$config = optionsConfig();
+	$pwLost_post['pwLost_title'] = $config['forgot_pw']['title'];
+	$pwLost_post['pwLost_line1'] = $config['forgot_pw']['line1'];
+	$pwLost_post['pwLost_line2'] = $config['forgot_pw']['line2'];
+	$pwLost_post['pwLost_line3'] = $config['forgot_pw']['line3'];
+	$pwLost_post['pwLost_line4'] = $config['forgot_pw']['line4'];
+	return $pwLost_post;
+}
+
 function update_pwlost_message() {
 	$path = (__DIR__. '/config.json');
 	$config = optionsConfig();
 	$config_new = $config;
-	$config_new['forgot_pw']['title'] = $_POST['PWreset_title'];
-	$config_new['forgot_pw']['line1'] = $_POST['PWreset_line1'];
-	$config_new['forgot_pw']['line2'] = $_POST['PWreset_line2'];
-	$config_new['forgot_pw']['line3'] = $_POST['PWreset_line3'];
-	$config_new['forgot_pw']['line4'] = $_POST['PWreset_line4'];
+	$config_new['forgot_pw']['title'] = $_POST['pwLost_title'];
+	$config_new['forgot_pw']['line1'] = $_POST['pwLost_line1'];
+	$config_new['forgot_pw']['line2'] = $_POST['pwLost_line2'];
+	$config_new['forgot_pw']['line3'] = $_POST['pwLost_line3'];
+	$config_new['forgot_pw']['line4'] = $_POST['pwLost_line4'];
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	$path_json = (__DIR__. '/config.json');
 	file_put_contents($path_json, $json);
-	$success = "Password Reset Text Saved";
+	$success = "Password Lost Text Saved";
 	return $success;
 }
 
+function read_lostPW_email() {
+	$config = optionsConfig();
+	$emailLost_post['pwemail_title'] = $config['forgot_pw_email']['title'];
+	$emailLost_post['pwemail_cc'] = $config['forgot_pw_email']['CC'];
+	$emailLost_post['pwemail_line1'] = $config['forgot_pw_email']['line1'];
+	$emailLost_post['pwemail_line2'] = $config['forgot_pw_email']['line2'];
+	$emailLost_post['pwemail_line3'] = $config['forgot_pw_email']['line3'];
+	$emailLost_post['pwemail_line4'] = $config['forgot_pw_email']['line4'];
+	$emailLost_post['pwemail_line5'] = $config['forgot_pw_email']['line5'];
+	$emailLost_post['pwemail_line6'] = $config['forgot_pw_email']['line6'];
+	return $emailLost_post;
+}
 //Update text for Registration Email
 function update_lostPW_email() {
 	$path = (__DIR__. '/config.json');
