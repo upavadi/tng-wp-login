@@ -1,38 +1,27 @@
 <?php
 //Registration form template
-//Admin Menu: WP-TNG Login
-//Admin Submenu: Set Registration Messages
- if($_GET['success'] == '0') $reg = "Reg Template Changes Saved";
- if($success==1) $reg_success = "Email Template Changes Saved";
 
 function set_plugin_reg_messages() {
-	
 	$config = optionsConfig();
-	$config_headers = ($config['reg_form']['sections']);
-	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
-	$regComplete = $config['reg_complete'];
-	$regEmail = $config['new_reg_email'];
-	$reg_success = $email_success = '';
-	 
+		$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
+ 
+		if (!isset($_POST['reg_message'])) {
+			$reg_post = read_reg_complete();
+		}
+
 		if (isset($_POST['reg_message'])) {
+			$reg_post = $_POST;
 			$reg_success = update_reg_complete();
-			Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode(0));
+		}
+
+		if (!isset($_POST['email_message'])) {
+			$email_post = read_reg_email();
 		}
 
 		if (isset($_POST['email_message'])) {
+			$email_post = $_POST;
 			$email_success = update_reg_email();
-			Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode(1));
 		}
-
-		if($_GET['success'] == '0') {
-			$reg_success = "Reg Template Changes Saved";
-			$email_success = "";
-		}
-		if($_GET['success'] == '1') {
-			$reg_success = "";
-			$email_success = "Email Template Changes Saved";
-		}	
-		
 ?>
 
 <head>
@@ -55,31 +44,31 @@ function set_plugin_reg_messages() {
 		<div class="form-group row col-md-12">
 		<label for="regcomplete_title" class="col-md-1 col-form-label">Title</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regcomplete_title" id="regcomplete_title inputs" value="<?php echo $regComplete['title']; ?>">
+			<input type="text" class="form-control" width="auto" name="regcomplete_title" id="regcomplete_title inputs" value="<?php echo $reg_post['regcomplete_title']; ?>">
 			</div>
 		</div>
 		<div class="form-group row col-md-12">
 		<label for="regcomplete_line1" class="col-md-1 col-form-label">Line 1</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" name="regcomplete_line1" id="regcomplete_line1 inputs" value="<?php echo $regComplete['line1']; ?>">
+			<input type="text" class="form-control" name="regcomplete_line1" id="regcomplete_line1 inputs" value="<?php echo $reg_post['regcomplete_line1']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
 		<label for="regcomplete_line2" class="col-md-1 col-form-label">Line 2</label>
 		<div class="col-md-11">
-			<input type="text" class="form-control" name="regcomplete_line2" id="regcomplete_line2 inputs" value="<?php echo $regComplete['line2']; ?>">
+			<input type="text" class="form-control" name="regcomplete_line2" id="regcomplete_line2 inputs" value="<?php echo $reg_post['regcomplete_line2']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
 		<label for="regcomplete_line3" class="col-md-1 col-form-label">Line 3</label>
 		<div class="col-md-11">
-			<input type="text" class="form-control" name="regcomplete_line3" id="regcomplete_line3 inputs" value="<?php echo $regComplete['line3']; ?>">
+			<input type="text" class="form-control" name="regcomplete_line3" id="regcomplete_line3 inputs" value="<?php echo $reg_post['regcomplete_line3']; ?>">
 			</div>
 		</div>
 		<div class="form-group row col-md-12">
 		<label for="regcomplete_line4" class="col-md-1 col-form-label">Line 4</label>
 		<div class="col-md-11">
-			<input type="text" class="form-control" name="regcomplete_line4" id="regcomplete_line2 inputs" value="<?php echo $regComplete['line4']; ?>">
+			<input type="text" class="form-control" name="regcomplete_line4" id="regcomplete_line2 inputs" value="<?php echo $reg_post['regcomplete_line4']; ?>">
 			</div> 
 		</div>
 	</div>
@@ -103,43 +92,43 @@ function set_plugin_reg_messages() {
 		<div class="form-group row col-md-12">
 			<label for="regemail_title" class="col-md-1 col-form-label">Title</label>
 				<div class="col-md-11">
-				<input type="text" class="form-control" width="auto" name="regemail_title" id="regemail_title" value="<?php echo $regEmail['title']; ?>">
+				<input type="text" class="form-control" width="auto" name="regemail_title" id="regemail_title" value="<?php echo $email_post['regemail_title']; ?>">
 				</div>
 		</div>
 		<div class="form-group row col-md-12">
 			<label for="regemail_cc" class="col-md-1 col-form-label">CopyTo</label>
 			<div class="col-md-11">
-			<input type="email" class="form-control" width="auto" name="regemail_cc" id="regemail_cc" placeholder="send email copy to" value="<?php echo $regEmail['CC']; ?>">
+			<input type="email" class="form-control" width="auto" name="regemail_cc" id="regemail_cc" placeholder="send email copy to" value="<?php echo $email_post['regemail_cc']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
 			<label for="regemail_line1" class="col-md-1 col-form-label">Line 1</label>
 			<div class="col-md-11">
-		  	<input type="text" class="form-control" width="auto" name="regemail_line1" id="regemail_line1" value="<?php echo $regEmail['line1']; ?>">
+		  	<input type="text" class="form-control" width="auto" name="regemail_line1" id="regemail_line1" value="<?php echo $email_post['regemail_line1']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
 			<label for="regemail_line2" class="col-md-1 col-form-label">Line 2</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regemail_line2" id="regemail_line2" value="<?php echo $regEmail['line2']; ?>">
+			<input type="text" class="form-control" width="auto" name="regemail_line2" id="regemail_line2" value="<?php echo $email_post['regemail_line2']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
 			<label for="regemail_line3" class="col-md-1 col-form-label">Line 2</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regemail_line3" id="regemail_line3" value="<?php echo $regEmail['line3']; ?>">
+			<input type="text" class="form-control" width="auto" name="regemail_line3" id="regemail_line3" value="<?php echo $email_post['regemail_line3']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
 			<label for="regemail_line2" class="col-md-1 col-form-label">Line 4</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regemail_line4" id="regemail_line4" value="<?php echo $regEmail['line4']; ?>">
+			<input type="text" class="form-control" width="auto" name="regemail_line4" id="regemail_line4" value="<?php echo $email_post['regemail_line4']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
 			<label for="regemail_line2" class="col-md-1 col-form-label">Line 5</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regemail_line5" id="regemail_line5" value="<?php echo $regEmail['line5']; ?>">
+			<input type="text" class="form-control" width="auto" name="regemail_line5" id="regemail_line5" value="<?php echo $email_post['regemail_line5']; ?>">
 			</div> 
 		</div>	
 	</div>

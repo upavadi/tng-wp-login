@@ -14,7 +14,7 @@ function set_plugin_registration() {
 	
 	if (isset($_POST['reg_form'])) {
 		$post = $_POST;
-		$success = update_profile();
+		$success = update_registration();
 		
 	//	echo "<meta http-equiv='refresh' content=$success>";
 		//Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));

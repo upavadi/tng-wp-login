@@ -290,6 +290,16 @@ function update_registration() {
 	return $suceess;
 }
 
+function read_reg_complete() {
+	$config = optionsConfig();
+	$reg_post['regcomplete_title'] = $config['reg_complete']['title'];
+	$reg_post['regcomplete_line1'] = $config['reg_complete']['line1'];
+	$reg_post['regcomplete_line2'] = $config['reg_complete']['line2'];
+	$reg_post['regcomplete_line3'] = $config['reg_complete']['line3'];
+	$reg_post['regcomplete_line4'] = $config['reg_complete']['line4'];
+	return $reg_post;
+}
+
 //Update text for Registration Complete
 function update_reg_complete() {
 	$path = (__DIR__. '/config.json');
@@ -305,6 +315,18 @@ function update_reg_complete() {
 	file_put_contents($path_json, $json);
 	$success = "Reg Changes Saved";
 	return $success;
+}
+
+function read_reg_email() {
+	$config = optionsConfig();
+	$email_post['regemail_title'] = $config['new_reg_email']['title'];
+	$email_post['regemail_cc'] = $config['new_reg_email']['CC'];
+	$email_post['regemail_line1'] = $config['new_reg_email']['line1'];
+	$email_post['regemail_line2'] = $config['new_reg_email']['line2'];
+	$email_post['regemail_line3'] = $config['new_reg_email']['line3'];
+	$email_post['regemail_line4'] = $config['new_reg_email']['line4'];
+	$email_post['regemail_line5'] = $config['new_reg_email']['line5'];
+	return $email_post;
 }
 
 //Update text for Registration Email
