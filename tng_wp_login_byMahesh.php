@@ -125,8 +125,8 @@ function update_init_paths() {
 		$config_new['paths']['tng_url'] = $_POST['tng_url'];
 		$config_new['paths']['tng_photo_folder'] = $_POST['tng_photo_folder'];
 		$json = (json_encode($config_new, JSON_PRETTY_PRINT));
-		$path = "config.json";
-		file_put_contents($path, $json);
+		//$path = "config.json";
+		file_put_contents($path_json, $json);
 		$success = "Changes Saved";
 		return $config_new;
 	}
@@ -147,7 +147,7 @@ add_shortcode('user_registration', 'new_reg');
 
 //Register wP and TNG login Widget
 add_action( 'widgets_init', function(){
-	 register_widget( 'wp_tng_login_Widget2' );
+	 register_widget( 'wp_tng_login_Widget' );
 	// register_widget( 'wp_tng_login_Widget' );
 });
 

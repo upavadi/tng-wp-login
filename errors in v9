@@ -1,0 +1,8 @@
+Notice: 
+wp_enqueue_script was called incorrectly. Scripts and styles should not be registered or enqueued until the wp_enqueue_scripts, admin_enqueue_scripts, or login_enqueue_scripts hooks. Please see Debugging in WordPress for more information. (This message was added in version 3.3.0.) in /home/fzpavadinet/public_html/mainWp/wp-includes/functions.php on line 4196
+
+Notice: 
+register_sidebar_widget is deprecated since version 2.8.0! Use wp_register_sidebar_widget() instead. in /home/fzpavadinet/public_html/mainWp/wp-includes/functions.php on line 3888
+
+Notice:
+register_widget_control is deprecated since version 2.8.0! Use wp_register_widget_control() instead. in /home/fzpavadinet/public_html/mainWp/wp-includes/functions.php on line 3888

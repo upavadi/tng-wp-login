@@ -2,14 +2,14 @@
 require_once(ABSPATH. 'wp-load.php');
 require_once "newreg_config.php";
 /********** Class   *******/
-class wp_tng_login_Widget2 extends WP_Widget {
+class wp_tng_login_Widget extends WP_Widget {
 	public function __construct() {
 		
 		parent::__construct(
-            'wp_tng_login_Widget2',
-            __( 'WP and TNG Login Widget2', 'Log-in' ),
+            'wp_tng_login_Widget',
+            __( 'WP and TNG Login Widget', 'Log-in' ),
             array(
-                'classname'   => 'wp_tng_login_Widget2',
+                'classname'   => 'wp_tng_login_Widget',
                 'description' => __( 'A Logs in to Wordpress & TNG.', 'Log-in' )
                 )
         );
@@ -19,12 +19,20 @@ class wp_tng_login_Widget2 extends WP_Widget {
 	public function widget( $args, $instance ) {
 		global $wpdb, $currentUser, $wpCurrentUser, $args;
 		$config = newRegConfig();
-		$wp_profile_page = 'wp-tng-profile';
+		$wp_user_page = 'wp-tng-profile';
 		$wp_reg_page = 'wp-tng-registration';
-		$profile = home_url(). "/". $wp_profile_page;
+		$profile = home_url(). "/". $wp_user_page;
 		$register = site_url(). "/". $wp_reg_page;
 		$wp_url = site_url();
 		$wpCurrentUser = wp_get_current_user() -> user_login;
+		
+		/** from config.json */
+		$log_in_text = optionsConfig()['login_text'];
+		$identifier = $log_in_text['version_id'];
+		$user_page = 
+		/*** */
+
+		$user_redirect = 
 			$args = array(
 			'echo'           => false,
 			'remember'       => true,
@@ -48,9 +56,8 @@ class wp_tng_login_Widget2 extends WP_Widget {
 		$loginout = wp_loginout($_SERVER['REQUEST_URI'], false );
 		
 		if (is_user_logged_in()) {
-			//$_SESSION['currentuser'] = wp_get_current_user() -> user_login;
 			$adminurl = get_admin_url();
-			$status1 = "Welcome ". is_logged_in() ->user_firstname. " (TNG V10 Beta)"; 
+			$status1 = "Welcome ". is_logged_in() ->user_firstname. " ". $identifier; 
 			if (current_user_can('administrator')) {
 				$status2 = "<a href=\"$adminurl\">Dashboard</a>". " - ". $loginout;
 			} else {
@@ -92,6 +99,6 @@ class wp_tng_login_Widget2 extends WP_Widget {
 } //class
 
 
-function register_wp_tng_login_Widget2() {
-     register_widget( 'wp_tng_login_Widget2' );
+function register_wp_tng_login_Widget() {
+     register_widget( 'wp_tng_login_Widget' );
  }
