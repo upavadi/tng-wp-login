@@ -6,7 +6,9 @@ require_once "templates_admin/admin_set_profile.php";
 require_once "templates_admin/admin_set_registration.php";
 require_once "templates_admin/admin_set_reg_messages.php";
 require_once "templates_admin/admin_set_pwReset_messages.php";
+require_once "templates_admin/admin_set_login_text.php";
 add_action('admin_menu', 'plugin_admin_add_page');
+
 //add_action('admin_init', 'plugin_admin_add_page');
 //6LdACicUAAAAAJwHZ194fiKcwhxiX4EHbmttcTCq
 
@@ -49,6 +51,14 @@ function plugin_admin_add_page() {
 	add_submenu_page(
 		'wp-tng-login',
 		'WP-TNG Login Config',
+		'LogIn Text',
+		'manage_options',
+		'wp-tng-login-text',
+		'set_plugin_login_messages'
+	);
+	add_submenu_page(
+		'wp-tng-login',
+		'WP-TNG Login Config',
 		'Captcha Keys',
 		'manage_options',
 		'wp-tng-keys',
@@ -87,4 +97,5 @@ function plugin_admin_add_page() {
 		'wp-tng-pw_msg',
 		'set_plugin_pwreset_messages'
 		);
+	
 }

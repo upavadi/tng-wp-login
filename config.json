@@ -2,16 +2,17 @@
     "paths": {
         "tng_path": "c:\/wamp\/www\/tng1013\/",
         "tng_url": "http:\/\/localhost\/tng1013\/",
-        "wp_profile_page": "profile",
-        "wp_reg_page": "registration",
         "tng_photo_folder": "photos"
     },
     "login_text": {
+        "greeting": "Welcome",
         "version_id": "to V10.1.3 Beta",
         "user_page": "wp-tng-profile",
-        "user_page_name": "profile",
-        "wp_reg_page": "registration",
-        "tng_photo_folder": "photos"
+        "user_page_name": "Your Profile",
+        "reg_page": "wp-tng-registration",
+        "reg_page_name": "Registration",
+        "lost_password": "Lost Password",
+        "RememberMe": "Remember Me"
     },
     "reg_complete": {
         "title": "New Registration Success",

@@ -18,19 +18,21 @@ class wp_tng_login_Widget extends WP_Widget {
 	
 	public function widget( $args, $instance ) {
 		global $wpdb, $currentUser, $wpCurrentUser, $args;
-		$config = newRegConfig();
-		$wp_user_page = 'wp-tng-profile';
-		$wp_reg_page = 'wp-tng-registration';
-		$profile = home_url(). "/". $wp_user_page;
-		$register = site_url(). "/". $wp_reg_page;
+		
+		$log_in_text = optionsConfig()['login_text'];
+		$greeting = $log_in_text['greeting'];
+		$identifier = $log_in_text['version_id'];
+		$user_page = $log_in_text['user_page'];
+		$user_page_name = $log_in_text['user_page_name'];
+		$reg_page = $log_in_text['reg_page'];
+		$reg_page_name = $log_in_text['reg_page_name'];
+		$lost_password = $log_in_text['lost_password'];
+		$RememberMe = $log_in_text['RememberMe'];
+		
+		$user_page_url = home_url(). "/". $user_page;
+		$register_page_url = site_url(). "/". $reg_page;
 		$wp_url = site_url();
 		$wpCurrentUser = wp_get_current_user() -> user_login;
-		
-		/** from config.json */
-		$log_in_text = optionsConfig()['login_text'];
-		$identifier = $log_in_text['version_id'];
-		$user_page = 
-		/*** */
 
 		$user_redirect = 
 			$args = array(
@@ -44,7 +46,7 @@ class wp_tng_login_Widget extends WP_Widget {
 			'id_submit'      => 'wp-submit',
 			'label_username' => __( 'Username or Email Address' ),
 			'label_password' => __( 'Password' ),
-			'label_remember' => __( 'Remember Me' ),
+			'label_remember' => __( $RememberMe ),
 			'label_log_in'   => __( 'Log In' ),
 			'value_username' => '',
 			'value_remember' => true
@@ -57,26 +59,25 @@ class wp_tng_login_Widget extends WP_Widget {
 		
 		if (is_user_logged_in()) {
 			$adminurl = get_admin_url();
-			$status1 = "Welcome ". is_logged_in() ->user_firstname. " ". $identifier; 
+			$status1 = $greeting. " ". is_logged_in() ->user_firstname. " ". $identifier; 
 			if (current_user_can('administrator')) {
 				$status2 = "<a href=\"$adminurl\">Dashboard</a>". " - ". $loginout;
 			} else {
-				$status2 = "<a href=\"$profile\">Your Profile</a>". " - ". $loginout;
+				$status2 = "<a href=".$user_page_url. ">". $user_page_name. "</a>". " - ". $loginout;
 			}
-			
+		
 		} else {
 			
-			$status1 = ("<label for='log'>TNG V10 Beta</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
+			$status1 = ("<label for='log'>Login</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
 
 			$status2 = ( $args['remember'] ? '<input name="rememberme" type="checkbox" id="' . esc_attr( $args['id_remember'] ) . '" value="forever"' . ( $args['value_remember'] ? ' checked="checked"' : '' ) . ' /> ' . esc_html( $args['label_remember'] ) . ' |</label>' : '' );
-
-			$status3 = ("<a href='$login_url?action=lostpassword' title='Lost Password' id='LostP'>Lost Password |</a>");
-			$status4 = ("<a href=\"$register\"> Register </a>");
+			
+			$status3 =  ("<a href='$login_url?action=lostpassword' title='Lost Password' id='LostP'>". $lost_password. " |</a>");
+			$status4 = ("<a href=". $register_page_url. ">  ". $reg_page_name. " </a>");
 			$status5 = ("<input type='submit' id='". $args['id_submit']. "' class='button-primary' value='Log In' name='wp-submit'>");
 			$status7 = "error message";
-			$status6 = ("<input type='hidden' value='". $args['redirect']. "' name='redirect_to'>");;
+			$status6 = ("<input type='hidden' value='". $args['redirect']. "' name='redirect_to'>");
 		}
-
 	?>
 	<form id="<?php echo $args['form_id' ]; ?>" name="loginform" action="<?php echo $login_redirect; ?>" method="post">
 		<div id="container">

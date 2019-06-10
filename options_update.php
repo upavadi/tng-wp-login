@@ -290,6 +290,40 @@ function update_registration() {
 	return $suceess;
 }
 
+//read login text
+function read_login_message() {
+	$config = optionsConfig();
+	$login_post['greeting'] = $config['login_text']['greeting'];
+	$login_post['version_id'] = $config['login_text']['version_id'];
+	$login_post['user_page'] = $config['login_text']['user_page'];
+	$login_post['user_page_name'] = $config['login_text']['user_page_name'];
+	$login_post['reg_page'] = $config['login_text']['reg_page'];
+	$login_post['reg_page_name'] = $config['login_text']['reg_page_name'];
+	$login_post['lost_password'] = $config['login_text']['lost_password'];
+	$login_post['RememberMe'] = $config['login_text']['RememberMe'];
+	return $login_post;
+}
+
+//Update login text
+function update_login_message() {
+	$path = (__DIR__. '/config.json');
+	$config = optionsConfig();
+	$config_new = $config;
+	$config_new['login_text']['greeting'] = $_POST['greeting'];
+	$config_new['login_text']['version_id'] = $_POST['version_id'];
+	$config_new['login_text']['user_page'] = $_POST['user_page'];
+	$config_new['login_text']['user_page_name'] = $_POST['user_page_name'];
+	$config_new['login_text']['reg_page'] = $_POST['reg_page'];
+	$config_new['login_text']['reg_page_name'] = $_POST['reg_page_name'];
+	$config_new['login_text']['lost_password'] = $_POST['lost_password'];
+	$config_new['login_text']['RememberMe'] = $_POST['RememberMe'];
+	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+	$path_json = (__DIR__. '/config.json');
+	file_put_contents($path_json, $json);
+	$success = "Changes to LogIn Text Saved";
+	return $success;
+}
+
 function read_reg_complete() {
 	$config = optionsConfig();
 	$reg_post['regcomplete_title'] = $config['reg_complete']['title'];
