@@ -55,8 +55,8 @@ class wp_tng_login_Widget extends WP_Widget {
 		$plugin_dir_path = plugin_dir_url( __FILE__ );
 		$login_redirect = $plugin_dir_path. "/login-to-tng.php";
 		$login_url = esc_url(site_url( 'wp-login.php', $_SERVER['PHP_SELF'] ));
-		$loginout = wp_loginout($_SERVER['REQUEST_URI'], false );
-		
+		//$loginout = wp_loginout($_SERVER['REQUEST_URI'], false );
+		$loginout = wp_loginout(home_url(), false ); // changed this to avoid logout conflict with MB method.
 		if (is_user_logged_in()) {
 			$adminurl = get_admin_url();
 			$status1 = $greeting. " ". is_logged_in() ->user_firstname. " ". $identifier; 

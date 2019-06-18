@@ -65,9 +65,6 @@ if ($_POST['redirect_to'] && (!$_POST['log'] || !$_POST['pwd'])) {
 
 function mutng_login() {
     global $current_user, $rootpath, $users_table, $args;
-
-   // $_SESSION['mutng_logout'] = '';
-
 	$currentuser = wp_get_current_user() -> user_login;
     $tng_user_name = getTngUserName($tng_loginname);
     
@@ -76,7 +73,7 @@ function mutng_login() {
 		return;
 	}
     include($tng_folder.'config.php');
-    include($tng_folder."subroot.php");
+    //include($tng_folder."subroot.php");
     $session_language = $_SESSION['session_language'];
     $session_charset = $_SESSION['session_charset'];
     $username = $tng_user_name;
@@ -188,9 +185,6 @@ function set_cookie() {
 function mutng_logout() {
     reset_cookie();
     session_start();
-
-   // $_SESSION['mutng_login'] = '';
-    //$_SESSION['mutng_logout'] = 'start';
     $session_language = $_SESSION['session_language'];
     $session_charset = $_SESSION['session_charset'];
      
