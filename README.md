@@ -1,15 +1,51 @@
-# TNG Wordpress Login 
-## work in progress. 
-## Initially, developing for  TNG V10 and PHP 5.4.
+# **Wordpress-TNG Login Widget** # 
+
+## Download ##
+There is no download version. 
+(under Development)
+
+## License ## 
+The code is licenced under the [MIT licence](http://opensource.org/licenses/MIT)
+
+## Introduction
+This widget is designed to be used as
+replicates the Wordpress login / log out task and also logs into [TNG ( The Next Generation of Genealogy Sitebuilding )](http://www.tngsitebuilding.com/). 
+#### Integration ####
+
+
+
+
+#### The plugin has several useful features:
+ - Simple access to the TNG database from within Wordpress.
+ - A convenient collection of shortcodes and functions for integrating TNG data into your Wordpress site.
+ -	A convenient way for users to submit data-additions and data-changes
+ -	A convenient way, for the administrator, to check and update TNG database from within Wordpress.
+ - A convenient way, for the user, to upload default photo from the person page
+ -	A convenient way, for the user, to upload media and update media links
+ -	A custom shortcode directory, with a sample shortcode, to help you create and store your own custom shortcodes.
+
+
+
+
+
+
+
+### Developed on TNG V10.1.3 and Wordpress V 4.9 - 5.1 platform.
+### Tested PHP V 5.4 - 5.5, Wordpress 4.9 - 5.1 
 
 # Registrtion
 ### If submitted User Name User Name is in WP or TNG  database and  submitted email is not, error 'User Name in use' is generated.
 ### If sumbmitted email is in WP or TNG  database, user is requested to Try Password Reset.
 ### Just one field, 'tng_interest' is added by this plugin in 'wp_usermeta' table. This field is used in New Registration Submission. 
-=======
+
 ## Login
 ### Logging in to Wordpress with user name or user email
 ### If login to Wordpress is successful, user is logged in to TNG
 
 
-# Profile
+# Profile 
+
+## Profile
+### Profile
+### Profile
+##### Profile
