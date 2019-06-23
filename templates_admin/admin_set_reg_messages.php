@@ -95,12 +95,14 @@ function set_plugin_reg_messages() {
 				<input type="text" class="form-control" width="auto" name="regemail_title" id="regemail_title" value="<?php echo $email_post['regemail_title']; ?>">
 				</div>
 		</div>
+		<!--
 		<div class="form-group row col-md-12">
 			<label for="regemail_cc" class="col-md-1 col-form-label">CopyTo</label>
 			<div class="col-md-11">
 			<input type="email" class="form-control" width="auto" name="regemail_cc" id="regemail_cc" placeholder="send email copy to" value="<?php echo $email_post['regemail_cc']; ?>">
 			</div> 
 		</div>
+		-->
 		<div class="form-group row col-md-12">
 			<label for="regemail_line1" class="col-md-1 col-form-label">Line 1</label>
 			<div class="col-md-11">

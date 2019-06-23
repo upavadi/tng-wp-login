@@ -1,7 +1,7 @@
 {
     "paths": {
-        "tng_path": "c:\/wamp\/www\/tng_mb\/",
-        "tng_url": "http:\/\/localhost\/tng_mb\/",
+        "tng_path": "c:\/wamp\/www\/tng1013\/",
+        "tng_url": "http:\/\/localhost\/tng1013\/",
         "tng_photo_folder": "photos"
     },
     "login_text": {
@@ -23,8 +23,7 @@
     },
     "new_reg_email": {
         "title": "New Registration",
-        "CC": "testPlugin@crestvideo.co.uk",
-        "line1": "Hi",
+        "line1": "Hi  there",
         "line2": "Thank you for registering for the Genealogy site of Upadhyaya Family and Relatives.",
         "line3": "Your account will be confirmed by an administrator and you will be notified via email.",
         "line4": "Best Regards",
@@ -47,7 +46,6 @@
     },
     "forgot_pw_email": {
         "title": "Password Reset Request",
-        "CC": "testPlugin@crestvideo.co.uk",
         "line1": "Hi",
         "line2": "You asked us to reset your password for your account using the email address ",
         "line3": "If this was a mistake, or you did not ask for a password reset, just ignore this email and nothing will happen.",

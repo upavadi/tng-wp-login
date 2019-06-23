@@ -18,7 +18,7 @@ Validation checks
 
 function newregCheck() { 
 	$conditions = check_credentials();
-	var_dump($conditions); 
+	//var_dump($conditions); 
 	//$conditions = array(true, true, true, true);
 	if ($_POST) 
 	{
@@ -35,7 +35,7 @@ function newregCheck() {
 			break;
 		case array(true, true, false, false): 
 			$newreg_check = "03";
-			process_pw_reset(); "name & email in wp"; // password reset if reqd. (Details to admin - no tng details)
+			process_pw_reset(); //"name & email in wp"; // password reset if reqd. (Details to admin - no tng details)
 			break;
 		case array(true, false, true, false):
 			$newreg_check = "04";
@@ -59,8 +59,8 @@ function newregCheck() {
 			break;
 		case array(true, false, true, true): 
 			$newreg_check = "08";
-			process_pw_reset();
-			//echo "name in wp and tng - email in tng only"; // Suggest login with user name. Password reset if reqd. Email admin.
+			process_email_in_tng_only();
+			//echo "name in wp and tng - email in tng only"; // Suggest Admin deals with this. Password cannot be reset.
 			break;		
 			case array(false, false, false, false): 
 			$newreg_check = "09";
@@ -90,5 +90,10 @@ function process_pw_reset() {
 	$reg_message = $config['reg_pw_reset'];
 	echo registration_complete($reg_message);
 	echo new_reg_pwreset__mail();
+return;
+}
+
+function process_email_in_tng_only() {
+
 return;
 }

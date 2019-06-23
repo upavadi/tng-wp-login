@@ -8,14 +8,23 @@ There is no download version.
 The code is licenced under the [MIT licence](http://opensource.org/licenses/MIT)
 
 ## Introduction
-This widget is designed to be used as
-replicates the Wordpress login / log out task and also logs into [TNG ( The Next Generation of Genealogy Sitebuilding )](http://www.tngsitebuilding.com/). 
-#### Integration ####
+This widget is designed to replicate the Wordpress login / log out task and also logs into [TNG ( The Next Generation of Genealogy Sitebuilding )](http://www.tngsitebuilding.com/). 
+
+#### WP-TNG Integration ####
+Integration is achieved by displaying TNG content within Wordpress wrapper. There are 2 main methods of acheiving this.
+
+- CK Method: Replacing TNG Header and footers by Hard coding topmenu.php, footer.php and meta.php
+    -  The widget works very well with the CK method
+* MB Method: A plugin by Mark Barnes creates a Wordpress 'Post' to display TNG content within Worpress header.
+
+    * At the moment, I am having problem getting it work consistently with MB Method. The plugin uses pseudo wordpress page to display TNG. I am having issues of WP-TNG Login widget work consistently with these pseudo redirects. .
+ 
 
 
 
 
-#### The plugin has several useful features:
+
+#### The Widget has several useful features:
  - Simple access to the TNG database from within Wordpress.
  - A convenient collection of shortcodes and functions for integrating TNG data into your Wordpress site.
  -	A convenient way for users to submit data-additions and data-changes

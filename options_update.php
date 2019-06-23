@@ -369,7 +369,7 @@ function update_reg_email() {
 	$config = optionsConfig();
 	$config_new = $config;
 	$config_new['new_reg_email']['title'] = $_POST['regemail_title'];
-	$config_new['new_reg_email']['CC'] = $_POST['regemail_cc'];
+//	$config_new['new_reg_email']['CC'] = $_POST['regemail_cc'];
 	$config_new['new_reg_email']['line1'] = $_POST['regemail_line1'];
 	$config_new['new_reg_email']['line2'] = $_POST['regemail_line2'];
 	$config_new['new_reg_email']['line3'] = $_POST['regemail_line3'];
@@ -438,7 +438,7 @@ function update_pwlost_message() {
 function read_lostPW_email() {
 	$config = optionsConfig();
 	$emailLost_post['pwemail_title'] = $config['forgot_pw_email']['title'];
-	$emailLost_post['pwemail_cc'] = $config['forgot_pw_email']['CC'];
+	//$emailLost_post['pwemail_cc'] = $config['forgot_pw_email']['CC'];
 	$emailLost_post['pwemail_line1'] = $config['forgot_pw_email']['line1'];
 	$emailLost_post['pwemail_line2'] = $config['forgot_pw_email']['line2'];
 	$emailLost_post['pwemail_line3'] = $config['forgot_pw_email']['line3'];
@@ -453,7 +453,7 @@ function update_lostPW_email() {
 	$config = optionsConfig();
 	$config_new = $config;
 	$config_new['forgot_pw_email']['title'] = $_POST['pwemail_title'];
-	$config_new['forgot_pw_email']['CC'] = $_POST['pwemail_cc'];
+	//$config_new['forgot_pw_email']['CC'] = $_POST['pwemail_cc'];
 	$config_new['forgot_pw_email']['line1'] = $_POST['pwemail_line1'];
 	$config_new['forgot_pw_email']['line2'] = $_POST['pwemail_line2'];
 	$config_new['forgot_pw_email']['line3'] = $_POST['pwemail_line3'];
