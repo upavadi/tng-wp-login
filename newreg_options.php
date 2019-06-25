@@ -30,7 +30,7 @@ function newregCheck() {
 			break;
 		case array(true, false, false, false): 
 			$newreg_check = "02";
-			process_pw_reset();
+			//process_pw_reset();
 			//echo $newreg_check, "name in wp"; // Ignore. Let validate() sort it
 			break;
 		case array(true, true, false, false): 
@@ -39,9 +39,10 @@ function newregCheck() {
 			break;
 		case array(true, false, true, false):
 			$newreg_check = "04";
-			process_pw_reset();
+		//	process_pw_reset();
 			//echo "name in wp & tng";  // password reset if reqd. (Details to admin - suspect email change).
 			break;
+
 		case array(true, true, true, false):
 			$newreg_check = "05";
 			process_pw_reset();
@@ -61,16 +62,26 @@ function newregCheck() {
 			$newreg_check = "08";
 			process_email_in_tng_only();
 			//echo "name in wp and tng - email in tng only"; // Suggest Admin deals with this. Password cannot be reset.
-			break;		
-			case array(false, false, false, false): 
+			break;	
+		case array(false, false, false, true): 
+			process_email_in_tng_only();
+			//echo "email in tng only"; // Suggest Admin deals with this. Password cannot be reset.
+			break;	
+		case array(false, false, true, true): 
+			process_email_in_tng_only();
+			//echo "name and email in tng only"; // Suggest Admin deals with this. Password cannot be reset.
+			break;				
+		case array(false, false, false, false): 
 			$newreg_check = "09";
-			process_new_reg();
+			process_new_reg(); 
+			//New User. Enter details in wp and tng
 			break;
 			default:
-			process_pw_reset();
+			return;
 
 	}
 }
+
 return;
 }
 
@@ -94,6 +105,9 @@ return;
 }
 
 function process_email_in_tng_only() {
-
+	$config = newRegConfig();
+	$reg_message = $config['reg_email_tng_only'];
+	var_dump($config['reg_email_tng_only']);
+	echo registration_complete($reg_message);
 return;
 }

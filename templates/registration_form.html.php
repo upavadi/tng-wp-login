@@ -7,7 +7,6 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 	
 	if (($_POST)) {
 		$newreg_entries = (validate($_POST));
-		//var_dump($newreg_entries); 
 		$userExists = $newreg_entries['userExists'];
 		$emailExists = $newreg_entries['emailExists'];
 
