@@ -68,7 +68,7 @@ class wp_tng_login_Widget extends WP_Widget {
 		
 		} else {
 			
-			$status1 = ("<label for='log'>Login</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
+			$status1 = "WP TNG - ". ("<label for='log'>Login</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
 
 			$status2 = ( $args['remember'] ? '<input name="rememberme" type="checkbox" id="' . esc_attr( $args['id_remember'] ) . '" value="forever"' . ( $args['value_remember'] ? ' checked="checked"' : '' ) . ' /> ' . esc_html( $args['label_remember'] ) . ' |</label>' : '' );
 			
