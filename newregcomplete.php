@@ -94,9 +94,19 @@ function new_reg_pwreset__mail() {
 	$to = get_option('admin_email');
 	$subject = "New Registration - Suggest Password Reset";
 	$message = new_reg_pwreset_email_text();
-	//echo "c{($to, $subject, $message)}</pre>";
 	wp_mail($to, $subject, $message, $headers);
+}
 
+
+//send email - registration request - Email in TNG only
+function new_reg_tng_only_mail() {
+	$config = newRegConfig();
+	$to = get_option('admin_email');
+	$subject = "New Registration - Email in TNG Only";
+	$message = new_reg_pwreset_email_text();
+	echo "<pre>{($to, $subject, $message)}</pre>";
+	wp_mail($to, $subject, $message, $headers);
+var_dump($message);
 }
 
 //send email - registration request

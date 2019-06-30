@@ -109,5 +109,6 @@ function process_email_in_tng_only() {
 	$reg_message = $config['reg_email_tng_only'];
 	var_dump($config['reg_email_tng_only']);
 	echo registration_complete($reg_message);
+	echo new_reg_tng_only_mail();
 return;
 }
