@@ -69,7 +69,7 @@ function insertUserTng() {
 	$firstName = $_POST['firstname'];
 	$lastName = $_POST['lastname'];
 	$userName = $_POST['loginname'];
-	$description = $_POST['NickName'];
+	$description = $_POST['firstname']. " ". $_POST['lastname'];
 	$password = $_POST['password'];
 	$realname = $_POST['firstname']. " ". $_POST['lastname'];
 	$email = $_POST['email'];
@@ -78,8 +78,9 @@ function insertUserTng() {
 	$allow_living = -1;
 	$website = 'http://';
 	$date = date('c');
+	$gedcom = $branch = $address = $city = $state = $zip = $country = $no_email = '';
 
-	$sql = "INSERT INTO `tng_users` (`username`, `description`, `password`, `email`, `realname`, `notes`, `role`, `allow_living`, `website`, `dt_registered`) values('$userName', '$description', '$password', '$email', '$realname', '$notes', '$role', '$allow_living', '$website', '$date')";
+	$sql = "INSERT INTO `tng_users` (`username`, `description`, `password`, `email`, `realname`, `notes`, `role`, `allow_living`, `website`, `dt_registered`, `gedcom`, `branch`, `phone`, `address`, `city`, `state`, `zip`, `country`, `no_email`) values('$userName', '$description', '$password', '$email', '$realname', '$notes', '$role', '$allow_living', '$website', '$date', '$gedcom', '$branch', '$phone', '$address', '$city', '$state', '$zip', '$country', '$no_email')";
 	mysqli_query($db, $sql);
 	if ($db->error) {
 		echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
@@ -104,9 +105,9 @@ function new_reg_tng_only_mail() {
 	$to = get_option('admin_email');
 	$subject = "New Registration - Email in TNG Only";
 	$message = new_reg_pwreset_email_text();
-	echo "<pre>{($to, $subject, $message)}</pre>";
+	//echo "<pre>{($to, $subject, $message)}</pre>";
 	wp_mail($to, $subject, $message, $headers);
-var_dump($message);
+
 }
 
 //send email - registration request
@@ -123,7 +124,7 @@ function new_reg_mail() {
 return;
 }
 
-//prepare body-text for new regisration email
+//body-text for new regisration email
 function new_reg_email_text() {
 	$config = newRegConfig();
 	$line = $config['new_reg_email'];
