@@ -173,6 +173,11 @@ function set_cookie() {
     $newroot = preg_replace( "~/~", "", $rootpath );
 	$newroot = preg_replace( "~/~", "", $newroot );
     $newroot = preg_replace( "~/.~", "", $newroot );
+    
+   /** adding to avoide headers sent */
+    $tnguser_newroot = ("tnguser_".$newroot);
+    if ($_COOKIE[$tnguser_newroot]) return;
+    /** adding to avoide headers sent */
     setcookie("tnguser_$newroot", $row['username'], time()+31536000, "/", "",  false, true);
     setcookie("tngpass_$newroot", $row['password'], time()+31536000, "/", "",  false, true);
     setcookie("tngpasstype_$newroot", $row['password_type'], time()+31536000, "/", "", false, true);

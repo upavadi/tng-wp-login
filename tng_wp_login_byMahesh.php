@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 Plugin Name: TNG-Wordpress-login for TNG V10.1.3
 Plugin URI: https://github.com/upavadi/tng-wp-login
 Description: Login to TNG 10.1.3 with Wordpress, allow new registrations, user profiles and Retrieve password
-Version:     1.0.3
+Version:     1.0.3b
 Author:      Mahesh Upadhyaya
 Author URI:  http://trial.upavadi.net
 License:     MIT
@@ -131,7 +131,7 @@ function update_init_paths() {
 		return $config_new;
 	}
 
-add_action( 'wp_enqueue_scripts', 'add_tng_wp_login_stylesheets' );
+
 
 function add_tng_wp_login_stylesheets() {
 		wp_register_style( 'register-tng_wp_bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css');
@@ -139,6 +139,7 @@ function add_tng_wp_login_stylesheets() {
 		wp_register_style( 'register-tng_wp_login_css', plugins_url('css/wp_tng_login.css', __FILE__) );
 		wp_enqueue_style( 'register-tng_wp_login_css' );
 } 
+add_action( 'wp_enqueue_scripts', 'add_tng_wp_login_stylesheets' );
 
 /*******add shortcodes ************/
 // add shortcode for Profile Page
