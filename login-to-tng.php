@@ -5,8 +5,6 @@ $wp_path = find_wp_path(); // not sure why I have to find this
 require_once ($wp_path.'/wp-load.php');
 require_once "newreg_config.php";
 require_once "login-to-wp.php";
-//require_once("templates/lost_pw.html.php");
-
 add_action('init', 'StartSession', 1);
 add_action( 'wp_login', 'destroy_session' );
 add_action( 'wp_logout', 'destroy_session' );
@@ -48,12 +46,12 @@ function find_wp_path() {
 	return null;
 }
 
-$args['id_username'] = $_POST['log'];
-$args['id_password'] = $_POST['pwd'];
-$args['redirect'] = $_POST['redirect_to'];
-$args['rememberme'] = $_POST['rememberme'];
+if (isset($_POST['log'])) $args['id_username'] = $_POST['log'];
+if (isset($_POST['pwd'])) $args['id_password'] = $_POST['pwd'];
+if (isset($_POST['redirect_to'])) $args['redirect'] = $_POST['redirect_to'];
+if (isset($_POST['rememberme'])) $args['rememberme'] = $_POST['rememberme'];
 
-if ($_POST['log']) {
+if (isset($_POST['log'])) {
 	setcookie('tnguser_rememberme', $args['rememberme'], 0,  '/', "", false, true);
 	require_once ($wp_path. '/wp-login.php');// need actual url
 }
@@ -64,7 +62,7 @@ if ($_POST['redirect_to'] && (!$_POST['log'] || !$_POST['pwd'])) {
 }
 
 function mutng_login() {
-    global $current_user, $rootpath, $users_table, $args;
+    global $current_user, $tng_user_name, $tng_loginname, $rootpath, $users_table, $args;
 	$currentuser = wp_get_current_user() -> user_login;
     $tng_user_name = getTngUserName($tng_loginname);
     
@@ -115,11 +113,11 @@ function mutng_db_connect() {
     $tng_folder = getTngPath();
 	if (!file_exists($tng_folder)) {
 		return;
-	}
-    $currentuser = wp_get_current_user() -> user_login;
-    $newdate = date ("Y-m-d H:i:s", time() + ( 3600 * $time_offset ) );  
+    }
     include($tng_folder.'/config.php');
     include($tng_folder.'/customconfig.php');
+    $currentuser = wp_get_current_user() -> user_login;
+    $newdate = date ("Y-m-d H:i:s", time() + ( 3600 * $time_offset ) );  
     $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 	$sql = "SELECT * FROM tng_users WHERE username='$currentuser'";
     
@@ -130,6 +128,8 @@ function mutng_db_connect() {
 
 function mutng_db_update() { 
     $tng_folder = getTngPath();
+    include($tng_folder.'/config.php');
+    include($tng_folder.'/customconfig.php');
     $newdate = date ("Y-m-d H:i:s", time() + ( 3600 * $time_offset ) );   
     $currentuser = wp_get_current_user() -> user_login;
     include($tng_folder.'/config.php');
