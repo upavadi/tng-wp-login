@@ -20,6 +20,9 @@ Integration is achieved by displaying TNG content within Wordpress wrapper. Ther
     * At the moment, I am having problem getting it work consistently with MB Method. The plugin uses pseudo wordpress page to display TNG. I am having issues of WP-TNG Login widget work consistently with these pseudo redirects. .
  
 
+issue
+Tng page needs refrash to see login success.
+
 
 
 

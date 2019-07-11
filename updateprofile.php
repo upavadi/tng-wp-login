@@ -10,8 +10,6 @@ function profile_complete() {
 }
 $display_data = $data['values']->data;
 $NickName = $display_meta[nickname][0];
-
-
 function update_wp($post, $data) {
 $Id = $data['values']->data->ID;
 	global $wpdb;

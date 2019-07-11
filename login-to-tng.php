@@ -214,6 +214,8 @@ function mutng_logout() {
     $_SESSION['allow_lds'] = 0;
     $_SESSION['allow_profile'] = 0;
     $_SESSION['logged_in'] = 0;
-    return $_SESSION;
+   // return $_SESSION;
+   	header('Location: ' . $_POST['redirect_to']); // Let's see if this logsout TNG
+	exit;
     }
     
