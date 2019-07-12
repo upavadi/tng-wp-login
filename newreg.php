@@ -19,8 +19,8 @@ function new_reg() {
 	$newemail = $_POST['email'];
 	$config = newRegConfig();
 	$data['values'] = $_POST;
-	$data['errors'] = validate($_POST);
-	echo registration_form($data, $config['reg_form'], $keys);
+	$data['errors'] = validate($_POST); 
+		echo registration_form($data, $config['reg_form'], $config['reg_form_intro'], $keys);
 
 }
 //checks are done in WP database

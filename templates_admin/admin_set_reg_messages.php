@@ -22,11 +22,19 @@ function set_plugin_reg_messages() {
 			$email_post = $_POST;
 			$email_success = update_reg_email();
 		}
+
+		if (!isset($_POST['reg_intro'])) {
+			$intro_post = read_reg_intro();
+		}
+
+		if (isset($_POST['reg_intro'])) {
+			$intro_post = $_POST;
+			$intro_success = update_reg_intro();
+		}
 ?>
 
 <head>
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/wp_tng_login.css';?>">
-
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 
@@ -81,7 +89,6 @@ function set_plugin_reg_messages() {
 </div>
 
 <!-- New Registration email ----->
-
 <div class="container">
 <form class="form-group" action=''  method="post">
 <input type="hidden" class="form-control" width="auto" name="email_message" id='email_message' value=true >
@@ -95,14 +102,6 @@ function set_plugin_reg_messages() {
 				<input type="text" class="form-control" width="auto" name="regemail_title" id="regemail_title" value="<?php echo $email_post['regemail_title']; ?>">
 				</div>
 		</div>
-		<!--
-		<div class="form-group row col-md-12">
-			<label for="regemail_cc" class="col-md-1 col-form-label">CopyTo</label>
-			<div class="col-md-11">
-			<input type="email" class="form-control" width="auto" name="regemail_cc" id="regemail_cc" placeholder="send email copy to" value="<?php echo $email_post['regemail_cc']; ?>">
-			</div> 
-		</div>
-		-->
 		<div class="form-group row col-md-12">
 			<label for="regemail_line1" class="col-md-1 col-form-label">Line 1</label>
 			<div class="col-md-11">
@@ -143,7 +142,63 @@ function set_plugin_reg_messages() {
 	
 </form>
 </div>
-	<style>
+
+<!-- Intro Text for New Registration Page ----->
+<div class="container">
+<form class="form-group" action=''  method="post">
+<input type="hidden" class="form-control" width="auto" name="reg_intro" id='reg_intro' value=true >
+	<div style="padding-top: 30px">
+		<b>Intro Text for New Registration Page</b>
+	</div>
+	<div class="regsections">	
+		<div class="form-group row col-md-12">
+			<label for="regemail_title" class="col-md-1 col-form-label">Title</label>
+				<div class="col-md-11">
+				<input type="text" class="form-control" width="auto" name="regemail_title" id="regemail_title" value="<?php echo $email_post['regemail_title']; ?>">
+				</div>
+		</div>
+		<div class="form-group row col-md-12">
+			<label for="regemail_line1" class="col-md-1 col-form-label">Line 1</label>
+			<div class="col-md-11">
+		  	<input type="text" class="form-control" width="auto" name="regemail_line1" id="regemail_line1" value="<?php echo $email_post['regemail_line1']; ?>">
+			</div> 
+		</div>
+		<div class="form-group row col-md-12">
+			<label for="regemail_line2" class="col-md-1 col-form-label">Line 2</label>
+			<div class="col-md-11">
+			<input type="text" class="form-control" width="auto" name="regemail_line2" id="regemail_line2" value="<?php echo $email_post['regemail_line2']; ?>">
+			</div> 
+		</div>
+		<div class="form-group row col-md-12">
+			<label for="regemail_line3" class="col-md-1 col-form-label">Line 2</label>
+			<div class="col-md-11">
+			<input type="text" class="form-control" width="auto" name="regemail_line3" id="regemail_line3" value="<?php echo $email_post['regemail_line3']; ?>">
+			</div> 
+		</div>
+		<div class="form-group row col-md-12">
+			<label for="regemail_line2" class="col-md-1 col-form-label">Line 4</label>
+			<div class="col-md-11">
+			<input type="text" class="form-control" width="auto" name="regemail_line4" id="regemail_line4" value="<?php echo $email_post['regemail_line4']; ?>">
+			</div> 
+		</div>
+		<div class="form-group row col-md-12">
+			<label for="regemail_line2" class="col-md-1 col-form-label">Line 5</label>
+			<div class="col-md-11">
+			<input type="text" class="form-control" width="auto" name="regemail_line5" id="regemail_line5" value="<?php echo $email_post['regemail_line5']; ?>">
+			</div> 
+		</div>	
+	</div>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $email_success. "</b><br />"; ?></p>
+	<p>
+	<input type="submit" name="update_Reg_success" value="Update New Registration Intro Text" style="width: auto">
+	</p>
+	</div>
+	
+	
+</form>
+</div>
+
+<style>
 #wpfooter {
 display: none;
 }

@@ -42,13 +42,20 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 <?php endif; 
 }
 
-function registration_form($data, $config, $keys) {
+function registration_form($data, $config, $intro, $keys) {
 ob_start();
+$message = $intro['line1']. $intro['line2']. $intro['line3']. $intro['line4']. $intro['line5']. $intro['line6'];
 ?>
 
 <div class="container">
 <form action="" method="post">
 <?php
+if (($intro['enabled'])) {
+?>
+<div class="regsubtitle"><?php echo $intro['title']; ?></div>
+<div class="regsections"><?php echo $message; ?></div>
+<?php
+}
 	foreach ($config['sections'] as $section) {
 ?>
 	<div class="regsubtitle"><?php echo $section['label']; ?></div>
