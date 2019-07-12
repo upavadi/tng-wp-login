@@ -30,7 +30,7 @@ class wp_tng_login_Widget extends WP_Widget {
 		$RememberMe = $log_in_text['RememberMe'];
 		
 		$user_page_url = home_url(). "/". $user_page;
-		$register_page_url = site_url(). "/". $reg_page;
+		$register_page_url = home_url(). "/". $reg_page;
 		$wp_url = site_url();
 		$wpCurrentUser = wp_get_current_user() -> user_login;
 
