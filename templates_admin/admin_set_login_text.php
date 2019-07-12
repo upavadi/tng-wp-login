@@ -91,5 +91,10 @@ function set_plugin_login_messages() {
 </div>
 	</form>
 </div>
+<style>
+#wpfooter {
+display: none;
+}
+</style>
 <?php
 }
