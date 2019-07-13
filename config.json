@@ -67,7 +67,7 @@
         "line2": "To register as a member, either your name is already in the Family-Tree database ",
         "line3": "or you are related to a person who is already in the Family-Tree database.",
         "line4": "Use the notes section below to introduce yourself. We may be able to include your family in the family tree.",
-        "line5": "Please give as much information as possible.<br />",
+        "line5": "Please give as much information as possible.<br \/>",
         "line6": "Thank you for your understanding.",
         "enabled": true
     },

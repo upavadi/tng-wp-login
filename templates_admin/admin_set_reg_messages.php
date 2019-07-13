@@ -23,14 +23,15 @@ function set_plugin_reg_messages() {
 			$email_success = update_reg_email();
 		}
 
-		if (!isset($_POST['reg_intro'])) {
+		if (!isset($_POST['reg_intro_message'])) {
 			$intro_post = read_reg_intro();
+			
 		}
 
-		if (isset($_POST['reg_intro'])) {
+		if (isset($_POST['reg_intro_message'])) {
 			$intro_post = $_POST;
 			$intro_success = update_reg_intro();
-		}
+		} 
 ?>
 
 <head>
@@ -115,7 +116,7 @@ function set_plugin_reg_messages() {
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
-			<label for="regemail_line3" class="col-md-1 col-form-label">Line 2</label>
+			<label for="regemail_line3" class="col-md-1 col-form-label">Line 3</label>
 			<div class="col-md-11">
 			<input type="text" class="form-control" width="auto" name="regemail_line3" id="regemail_line3" value="<?php echo $email_post['regemail_line3']; ?>">
 			</div> 
@@ -146,49 +147,59 @@ function set_plugin_reg_messages() {
 <!-- Intro Text for New Registration Page ----->
 <div class="container">
 <form class="form-group" action=''  method="post">
-<input type="hidden" class="form-control" width="auto" name="reg_intro" id='reg_intro' value=true >
+<input type="hidden" class="form-control" width="auto" name="reg_intro_message" id='reg_intro_message' value=true >
 	<div style="padding-top: 30px">
 		<b>Intro Text for New Registration Page</b>
 	</div>
 	<div class="regsections">	
 		<div class="form-group row col-md-12">
-			<label for="regemail_title" class="col-md-1 col-form-label">Title</label>
+			<div class='form-check-label' style="width: 120px; verticla-align: middle">
+				Enable Intro Text
+			</div>
+		<div  class='col-md-8'>	
+				<input type="checkbox" class="form-check-input" style=" position: relative; verticla-align: bottom" name="enabled" id="enabled" <?php if($intro_post['enabled'] ) echo "checked='checked'"; ?>>
+			</div>
+
+		</div>
+
+		<div class="form-group row col-md-12">
+			<label for="intro_title" class="col-md-1 col-form-label">Title</label>
 				<div class="col-md-11">
-				<input type="text" class="form-control" width="auto" name="regemail_title" id="regemail_title" value="<?php echo $email_post['regemail_title']; ?>">
+				<input type="text" class="form-control" width="auto" name="intro_title" id="intro_title" value="<?php echo $intro_post['intro_title']; ?>">
 				</div>
 		</div>
 		<div class="form-group row col-md-12">
-			<label for="regemail_line1" class="col-md-1 col-form-label">Line 1</label>
+			<label for="intro_line1" class="col-md-1 col-form-label">Line 1</label>
 			<div class="col-md-11">
-		  	<input type="text" class="form-control" width="auto" name="regemail_line1" id="regemail_line1" value="<?php echo $email_post['regemail_line1']; ?>">
+		  	<input type="text" class="form-control" width="auto" name="intro_line1" id="intro_line1" value="<?php echo $intro_post['intro_line1']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
-			<label for="regemail_line2" class="col-md-1 col-form-label">Line 2</label>
+			<label for="intro_line2" class="col-md-1 col-form-label">Line 2</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regemail_line2" id="regemail_line2" value="<?php echo $email_post['regemail_line2']; ?>">
+			<input type="text" class="form-control" width="auto" name="intro_line2" id="intro_line2" value="<?php echo $intro_post['intro_line2']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
-			<label for="regemail_line3" class="col-md-1 col-form-label">Line 2</label>
+			<label for="intro_line3" class="col-md-1 col-form-label">Line 3</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regemail_line3" id="regemail_line3" value="<?php echo $email_post['regemail_line3']; ?>">
+			<input type="text" class="form-control" width="auto" name="intro_line3" id="intro_line3" value="<?php echo $intro_post['intro_line3']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
-			<label for="regemail_line2" class="col-md-1 col-form-label">Line 4</label>
+			<label for="intro_line4" class="col-md-1 col-form-label">Line 4</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regemail_line4" id="regemail_line4" value="<?php echo $email_post['regemail_line4']; ?>">
+			<input type="text" class="form-control" width="auto" name="intro_line4" id="intro_line4" value="<?php echo $intro_post['intro_line4']; ?>">
 			</div> 
 		</div>
 		<div class="form-group row col-md-12">
-			<label for="regemail_line2" class="col-md-1 col-form-label">Line 5</label>
+			<label for="intro_line5" class="col-md-1 col-form-label">Line 5</label>
 			<div class="col-md-11">
-			<input type="text" class="form-control" width="auto" name="regemail_line5" id="regemail_line5" value="<?php echo $email_post['regemail_line5']; ?>">
+			<input type="text" class="form-control" width="auto" name="intro_line5" id="intro_line5" value="<?php echo $intro_post['intro_line5']; ?>">
 			</div> 
 		</div>	
 	</div>
-	<p style="color: green; display: inline-block"><?php echo "<b>". $email_success. "</b><br />"; ?></p>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $intro_success. "</b><br />"; ?></p>
 	<p>
 	<input type="submit" name="update_Reg_success" value="Update New Registration Intro Text" style="width: auto">
 	</p>

@@ -324,6 +324,7 @@ function update_login_message() {
 	return $success;
 }
 
+//Read text for Registration Complete
 function read_reg_complete() {
 	$config = optionsConfig();
 	$reg_post['regcomplete_title'] = $config['reg_complete']['title'];
@@ -351,6 +352,7 @@ function update_reg_complete() {
 	return $success;
 }
 
+//Read text for Registration Email
 function read_reg_email() {
 	$config = optionsConfig();
 	$email_post['regemail_title'] = $config['new_reg_email']['title'];
@@ -382,6 +384,7 @@ function update_reg_email() {
 	return $success;
 }
 
+//Read text for 'Suggest Password Reset to New Registration
 function read_pw_message() {
 	$config = optionsConfig();
 	$pw_post['PWreset_title'] = $config['reg_pw_reset']['title'];
@@ -409,6 +412,7 @@ function update_pw_message() {
 	return $success;
 }
 
+//Read text for Password Lost
 function read_pwlost_message() {
 	$config = optionsConfig();
 	$pwLost_post['pwLost_title'] = $config['forgot_pw']['title'];
@@ -419,6 +423,7 @@ function read_pwlost_message() {
 	return $pwLost_post;
 }
 
+//Update text for Password Lost
 function update_pwlost_message() {
 	$path = (__DIR__. '/config.json');
 	$config = optionsConfig();
@@ -435,6 +440,7 @@ function update_pwlost_message() {
 	return $success;
 }
 
+//Read text for Password Lost Email
 function read_lostPW_email() {
 	$config = optionsConfig();
 	$emailLost_post['pwemail_title'] = $config['forgot_pw_email']['title'];
@@ -447,7 +453,8 @@ function read_lostPW_email() {
 	$emailLost_post['pwemail_line6'] = $config['forgot_pw_email']['line6'];
 	return $emailLost_post;
 }
-//Update text for Registration Email
+
+//Update text for Password Lost Email
 function update_lostPW_email() {
 	$path = (__DIR__. '/config.json');
 	$config = optionsConfig();
@@ -460,6 +467,45 @@ function update_lostPW_email() {
 	$config_new['forgot_pw_email']['line4'] = $_POST['pwemail_line4'];
 	$config_new['forgot_pw_email']['line5'] = $_POST['pwemail_line5'];
 	$config_new['forgot_pw_email']['line6'] = $_POST['pwemail_line6'];
+	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+	$path_json = (__DIR__. '/config.json');
+	file_put_contents($path_json, $json);
+	$success = "Email Changes Saved";
+	return $success;
+}
+
+//Read text for Reg Form Intro
+function read_reg_intro() {
+	$config = optionsConfig();
+	$intro_post['intro_title'] = $config['reg_form_intro']['title'];
+	$intro_post['intro_line1'] = $config['reg_form_intro']['line1'];
+	$intro_post['intro_line2'] = $config['reg_form_intro']['line2'];
+	$intro_post['intro_line3'] = $config['reg_form_intro']['line3'];
+	$intro_post['intro_line4'] = $config['reg_form_intro']['line4'];
+	$intro_post['intro_line5'] = $config['reg_form_intro']['line5'];
+	$intro_post['enabled'] = $config['reg_form_intro']['enabled'];
+
+	return $intro_post;
+}
+
+//Update text for Reg Form Intro
+function update_reg_intro() {
+	$path = (__DIR__. '/config.json');
+	$config = optionsConfig();
+	$config_new = $config;
+	$config_new['reg_form_intro']['title'] = $_POST['intro_title'];
+	$config_new['reg_form_intro']['line1'] = $_POST['intro_line1'];
+	$config_new['reg_form_intro']['line2'] = $_POST['intro_line2'];
+	$config_new['reg_form_intro']['line3'] = $_POST['intro_line3'];
+	$config_new['reg_form_intro']['line4'] = $_POST['intro_line4'];
+	$config_new['reg_form_intro']['line5'] = $_POST['intro_line5'];
+
+	if (isset($_POST['enabled'])) {
+		$config_new['reg_form_intro']['enabled'] = true;
+		} else {
+		$config_new['reg_form_intro']['enabled'] = false;
+		}
+
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	$path_json = (__DIR__. '/config.json');
 	file_put_contents($path_json, $json);
