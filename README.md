@@ -8,7 +8,11 @@ There is no download version.
 The code is licenced under the [MIT licence](http://opensource.org/licenses/MIT)
 
 ## Introduction
-This widget is designed to replicate the Wordpress login / log out task and also logs into [TNG ( The Next Generation of Genealogy Sitebuilding )](http://www.tngsitebuilding.com/). 
+This widget is designed to replicate the Wordpress login/log out task and also logs into TNG ( The Next Generation of Genealogy Sitebuilding )](http://www.tngsitebuilding.com/).
+
+Log In: User may login using UserName or User Email. If UserName exists in TNG database, user is also logged into TNG.
+
+Password Reset: Wordpress Password-Reset 
 
 #### WP-TNG Integration ####
 Integration is achieved by displaying TNG content within Wordpress wrapper. There are 2 main methods of acheiving this.

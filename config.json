@@ -19,7 +19,7 @@
         "line1": "Thank you for registering for the Genealogy site of Upadhyaya Family and Relatives, ",
         "line2": "Your account will be confirmed by an administrator and you will be notified via email.",
         "line3": "Best Regards",
-        "line4": "Mahesh"
+        "line4": "Administrator"
     },
     "new_reg_email": {
         "title": "New Registration",
@@ -27,7 +27,7 @@
         "line2": "Thank you for registering for the Genealogy site of Upadhyaya Family and Relatives.",
         "line3": "Your account will be confirmed by an administrator and you will be notified via email.",
         "line4": "Best Regards",
-        "line5": "Mahesh"
+        "line5": "Administrator"
     },
     "reg_pw_reset": {
         "token": "reg_pw_reset",
@@ -35,7 +35,7 @@
         "line1": "We have your details,",
         "line2": "Please click on <b>Reset My Password <\/b> below and submit your email address to request password reset.",
         "line3": "Best Regards ",
-        "line4": "Mahesh"
+        "line4": "Administrator"
     },
     "reg_email_tng_only": {
         "token": "reg_email_tng_only",
@@ -43,7 +43,7 @@
         "line1": "We seem to be missing Some of your details, ",
         "line2": "We will be contacting you, soon, to try and fix this as soon as we can.",
         "line3": "Best Regards ",
-        "line4": "Mahesh"
+        "line4": "Administrator"
     },
     "forgot_pw": {
         "title": "Forgot Your Password? ",
