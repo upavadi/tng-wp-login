@@ -37,16 +37,6 @@ Tng page needs refrash to see login success.
 
 
 #### The Widget has several useful features:
- - Simple access to the TNG database from within Wordpress.
- - A convenient collection of shortcodes and functions for integrating TNG data into your Wordpress site.
- -	A convenient way for users to submit data-additions and data-changes
- -	A convenient way, for the administrator, to check and update TNG database from within Wordpress.
- - A convenient way, for the user, to upload default photo from the person page
- -	A convenient way, for the user, to upload media and update media links
- -	A custom shortcode directory, with a sample shortcode, to help you create and store your own custom shortcodes.
-
-
-
 
 
 
