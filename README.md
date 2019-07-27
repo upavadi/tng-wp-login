@@ -1,7 +1,7 @@
 # **Wordpress-TNG Login Widget** # 
 
 ## Download ##
-There is no download version. 
+There is no download version released. 
 (under Development)
 
 ## License ## 
@@ -10,9 +10,14 @@ The code is licenced under the [MIT licence](http://opensource.org/licenses/MIT)
 ## Introduction
 This widget is designed to replicate the Wordpress login/log out task and also logs into TNG ( The Next Generation of Genealogy Sitebuilding )](http://www.tngsitebuilding.com/).
 
-Log In: User may login using UserName or User Email. If UserName exists in TNG database, user is also logged into TNG.
+- Log In: User may login using UserName or User Email. If UserName exists in TNG database, user is also logged into TNG.
 
-Password Reset: Wordpress Password-Reset 
+- Password Reset: Some Password-Reset routines are re-written. Password reset is only allowed if the submitted email is in Wordpress database. If the submitted email is in TNG database only, email is sent to administrator with credential details and submitter is requested to await a response from the administrator.
+
+- Registration Form: A registration form is included. New registrations are entered in Wordpress and TNG User tables. 
+    - In TNG,  user awaits Review.
+    - In Wordpress, user is allocated 'Subscriber' role.
+  For this to be effective, deselect Membership: Anyone can register in Wordpress Dashboard>Settings.
 
 #### WP-TNG Integration ####
 Integration is achieved by displaying TNG content within Wordpress wrapper. There are 2 main methods of acheiving this.
