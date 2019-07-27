@@ -2,10 +2,9 @@
 # Download
 There is no download version released. 
 (under Development)
-Beta version is under test
-http://trial.upavadi.net/ 
-and
-http://www.upavadi.net/
+ - Beta version is under test
+ - http://trial.upavadi.net/ 
+ - http://www.upavadi.net/
 
 # License
 The code is licenced under the [MIT licence](http://opensource.org/licenses/MIT)
