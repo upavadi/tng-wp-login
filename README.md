@@ -20,6 +20,7 @@ This widget replicates the Wordpress login/log out task and also logs into TNG (
 ## **Compatibility**
 - The plugin is under Beta Test and is tested on TNG 10.1.3
 - PHP version 5.4 - 5.6.40
+-  Wordpress V 4.9 - 5.1 platform
 - A Wordpress twenty Twelve child theme. (Not tested in any other theme)
 
 ## **Issues**
@@ -34,11 +35,16 @@ At the moment, this plugin has some conflicts with displaying TNG media and the 
 
 ## **Activation**
 
+Wordpress Page | Slug | Shortcode 
+---------------|------|----------
+Registration   | 'wp-tng-registration'| [user_registration] 
+Profile        |  'wp-tng-profile'    |[user_profile]
+Reset Password |'wp-tng-resetPassword'| [reset_Password_form]
+Lost Password  | 'wp-tng-lostPassword'| [lost_Password_form]
 
+	
 
-
-
-
+	
 
 
 
