@@ -39,10 +39,10 @@ On activation,
 
 Wordpress Page | Slug | Shortcode 
 ---------------|------|----------
-Registration   | 'wp-tng-registration'| [user_registration] 
+Registration   | 'wp-tng-registration'|[user_registration] 
 Profile        |  'wp-tng-profile'    |[user_profile]
-Password Reset |'wp-tng-resetPassword'| [reset_Password_form]
-Password Lost  | 'wp-tng-lostPassword'| [lost_Password_form]
+Password Reset |'wp-tng-resetPassword'|[reset_Password_form]
+Password Lost  | 'wp-tng-lostPassword'|[lost_Password_form]
 
 - Plugin checks for the path to TNG folder. If it cannot locate the folder, administrator is prompted to submit TNG Root (absolute) Path  and if tng folder found, plugin is activated. 
 
@@ -59,12 +59,21 @@ Password Lost  | 'wp-tng-lostPassword'| [lost_Password_form]
   - Email is sent to Administrator for new registrations, password reset alerts.
   - If there is an anamoly in data, email is sent to administrator with detail s of the data held.
 
+  - **Recaptcha V2** can be used by entering public & private keys and enabling recaptcha in admin panel>WP-TNG-Login> Captcha keys.
 
-
-## Password Reset: 
+## **Password Reset**
  - Some Wordpress Password-Reset routines are re-written. 
  -  Password reset is only allowed if the submitted email is in Wordpress database. 
  - If the submitted email is in TNG database only, email is sent to administrator with credential details and submitter is requested to await a response from the administrator.
+
+ ## **Profile Page**
+ Wordpress user page is not easily available so this profile page may come in useful. 
+ - On successful login, 
+   - if user is an administrator, link to Dashboard is shown
+   - otherwise a link to Profile page shown. Text for this can be edited in admin panel.
+ - Here user can  make changes to user data, including password, and data is saved in Wordpress and TNG database.
+ - If user has default phot specified in TNG, this will be shown here.  
+
 
 ## **Customized Text**
 **All text is held in config.json file and can be edited by going to admin panel and accessing via admin menu,**
