@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 Plugin Name: TNG-Wordpress-login for TNG V10.1.3
 Plugin URI: https://github.com/upavadi/tng-wp-login
 Description: Login to TNG 10.1.3 with Wordpress, allow new registrations, user profiles and Retrieve password
-Version:     1.0.3b
+Version:     1.0.3.beta
 Author:      Mahesh Upadhyaya
 Author URI:  http://trial.upavadi.net
 License:     MIT
