@@ -1,28 +1,28 @@
 # **Wordpress-TNG Login Widget** # 
-# Download
-There is no download version released. You may tryout download beta version 1.0.3.beta. 
+## **Download**
+There is no download version released. You may tryout beta version 1.0.3.beta. 
 
  - Beta version is under test
  - http://trial.upavadi.net/ 
  - http://www.upavadi.net/
 
-# License
+## **License**
 The code is licenced under the [MIT licence](http://opensource.org/licenses/MIT)
 
-# Introduction
+## **Introduction**
 This widget replicates the Wordpress login/log out task and also logs into TNG ( The Next Generation of Genealogy Sitebuilding )](http://www.tngsitebuilding.com/).
 - Adds a Registration Form which may replace the Wordpress registration form by deselecting 'Membership>Anyone can register' in Wordpress Dashboard>Settings.
 - Adds a User Profile page which saves the changes in Wordpress and TNG database
 - Adds an enhanced Password-Reset module which checks for the presence of email of registered user.
 - Almost all the text used in pages and emails is customisable by the administrator.
-- User may login using either registered user Name or email. On successful login, if User Name exists in WP database, the user is also logged in to TNG.
+- User may login using either registered user Name or email. On successful login, if User Name exists in TNG database, the user is also logged in to TNG.
 
-# Compatibility
+## **Compatibility**
 - The plugin is under Beta Test and is tested on TNG 10.1.3
 - PHP version 5.4 - 5.6.40
-- A Wordpress twenty Twelve child theme. 
+- A Wordpress twenty Twelve child theme. (Not tested in any other theme)
 
-# Issues
+## **Issues**
 **WP-TNG Integration** is achieved by displaying TNG content within Wordpress wrapper. 
 To my knowledge, there are 2 methods available for achieving this.
 
@@ -31,9 +31,16 @@ At the moment, this plugin has some conflicts with displaying TNG media and the 
 2. **Cees Kloosterman Method** (CK-Method) Uses customized Header and Footer files to replace TNG Header and Footer with WP ones. This is a very simple and effective method and I have now converted my live site (and Beta test site) from MB-Method to CK-Method. The plugin is tested using this integration method.
 3. **Page Refresh** may be required to see successful TNG login. 
 
-## Log In.
-####  User may login using UserName or User Email and password.
-  If UserName exists in TNG database, user is also logged into TNG.
+
+## **Activation**
+
+
+
+
+
+
+
+
 
 ## Password Reset: 
  - Some Wordpress Password-Reset routines are re-written. 
