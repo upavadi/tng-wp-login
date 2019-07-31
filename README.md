@@ -1,7 +1,7 @@
 # **Wordpress-TNG Login Widget** # 
 # Download
-There is no download version released. 
-(under Beta Test)
+There is no download version released. You may tryout download beta version 1.0.3.beta. 
+
  - Beta version is under test
  - http://trial.upavadi.net/ 
  - http://www.upavadi.net/
@@ -24,8 +24,9 @@ This widget replicates the Wordpress login/log out task and also logs into TNG (
 
 # Issues
 **WP-TNG Integration** is achieved by displaying TNG content within Wordpress wrapper. 
-To my knowledge, there are 2 methods available for achieving this..
-1. **Mike Barnes method** (MB-Method) uses a plugin to replace WP page with TNG content.
+To my knowledge, there are 2 methods available for achieving this.
+
+1. **Mark Barnes method** (MB-Method) uses a plugin to replace WP page with TNG content.
 At the moment, this plugin has some conflicts with displaying TNG media and the issue is not resolved.
 2. **Cees Kloosterman Method** (CK-Method) Uses customized Header and Footer files to replace TNG Header and Footer with WP ones. This is a very simple and effective method and I have now converted my live site (and Beta test site) from MB-Method to CK-Method. The plugin is tested using this integration method.
 3. **Page Refresh** may be required to see successful TNG login. 
