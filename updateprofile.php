@@ -8,7 +8,9 @@ function profile_complete() {
         update_wp($_POST, $data, $data_meta);
     }
 }
+if (isset($data))
 $display_data = $data['values']->data;
+if (isset($display_meta))
 $NickName = $display_meta[nickname][0];
 function update_wp($post, $data) {
 $Id = $data['values']->data->ID;
