@@ -1,6 +1,7 @@
 # **Wordpress-TNG Login Widget** # 
 ## **Download**
 There is no download version released. You may tryout beta version 1.0.3.beta. 
+[Named Link](https://github.com/upavadi/tng-wp-login/archive/master.zip"download Plugin")
 
  - Beta version is under test
  - http://trial.upavadi.net/ 
