@@ -1,7 +1,7 @@
 # **Wordpress-TNG Login Widget** # 
 ## **Download**
 There is no download version released. You may tryout beta version 1.0.3.beta. 
-[Named Link](https://github.com/upavadi/tng-wp-login/archive/master.zip"download Plugin")
+[Download current version](https://github.com/upavadi/tng-wp-login/archive/master.zip "download Plugin")
 
  - Beta version is under test
  - http://trial.upavadi.net/ 
@@ -49,6 +49,15 @@ Password Lost  | 'wp-tng-lostPassword'|[lost_Password_form]
 
 ## **New Registration Form**
   **A link to registration form is included in the login widget.**
+ - On submission, submitted user nmae and user email is checked against wordpress and TNG user details.
+
+ Submission  | Response | Action | Comment
+ ------------|----------|--------|---------
+ user name and email not in either database|Registration Messages>Registration success|enter user in both databases| New Reg email to new user and administrator
+user name in either database, email do not match|user name in use| new user name expected| assume new user
+submitted email in Wordpress|Suggest password reset|
+
+ 
  - If submitted User Name is in WP and/or TNG  database and  submitted email is not,  'User Name in use' error is generated. 
  - If sumbmitted email is in WP database, user is requested to Try Password Reset.
  - If submitted email is only in TNG, administrator is alerted via email.
@@ -61,6 +70,7 @@ Password Lost  | 'wp-tng-lostPassword'|[lost_Password_form]
   - If there is an anamoly in data, email is sent to administrator with detail s of the data held.
 
   - **Recaptcha V2** can be used by entering public & private keys and enabling recaptcha in admin panel>WP-TNG-Login> Captcha keys.
+  - If you have recaptcha V3 installed then there is no need to enable V2.
 
 ## **Password Reset**
  - Some Wordpress Password-Reset routines are re-written. 
