@@ -40,6 +40,10 @@ At the moment, this plugin has some conflicts with displaying TNG media and the 
 3. **Page Refresh** may be required to see successful TNG login. 
 --------------
 
+## **Change Log **
+ - Current version 1.0.3.beta
+ ------------
+
 ## **Activation**
 On activation, 
  - plugin inserts following pages if they do not exist. 
