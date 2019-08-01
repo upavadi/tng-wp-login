@@ -116,6 +116,7 @@ submitted email in TNG DB only|Alert Title: 'We Shall Contact You'| administrato
   - **Registration Messages** 
     - Registration Success Message 
     - New Registration email
+    - Email in TNg only - anamoly
     - Introduction text (Appears before Reg Form) 
       - Enable Intro Text
    - **Password-Reset Messages** New registration alert to suggest password reset, Text for Forgot Password message and  Email
