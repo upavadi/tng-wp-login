@@ -53,9 +53,10 @@ Password Lost  | 'wp-tng-lostPassword'|[lost_Password_form]
 
  Submission  | Response | Action | Comment
  ------------|----------|--------|---------
- user name and email not in either database|Registration Messages>Registration success|enter user in both databases| New Reg email to new user and administrator
-user name in either database, email do not match|user name in use| new user name expected| Check new credentials
+ user name and email not in either database|Registration Messages>Registration success|enter user in both databases| New Registration Success email to new user and copy to administrator
+ user name in either database, email do not match|Alert: user name in use| new user name expected| Check new credentials
 submitted email in Wordpress|Suggest password reset|Text:Suggest Password Reset to New Registration|email administrator with credentials in both databases
+
  
 
  
