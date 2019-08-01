@@ -39,8 +39,8 @@
     },
     "reg_email_tng_only": {
         "token": "reg_email_tng_only",
-        "title": "We Shall Contact You",
-        "line1": "We seem to be missing Some of your details, ",
+        "title": "We Shall Contact You ",
+        "line1": "We seem to be missing Some of your details,",
         "line2": "We will be contacting you, soon, to try and fix this as soon as we can.",
         "line3": "Best Regards ",
         "line4": "Administrator"
@@ -62,7 +62,7 @@
         "line6": "Administrator"
     },
     "reg_form_intro": {
-        "title": "Welcome to Upavadi Site.",
+        "title": "Welcome to My Site.",
         "line1": "To protect the privacy of our members, I have a very simple rule.",
         "line2": "To register as a member, either your name is already in the Family-Tree database ",
         "line3": "or you are related to a person who is already in the Family-Tree database.",

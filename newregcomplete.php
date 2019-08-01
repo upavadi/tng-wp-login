@@ -90,6 +90,7 @@ return;
 }
 
 //send email - registration request - suggest password reset
+// email to Admin only
 function new_reg_pwreset__mail() {
 	$config = newRegConfig();
 	$to = get_option('admin_email');

@@ -23,6 +23,15 @@ function set_plugin_reg_messages() {
 			$email_success = update_reg_email();
 		}
 
+		if (!isset($_POST['Tngemail_message'])) {
+			$Tngemail_post = read_tng_email();
+		}
+
+		if (isset($_POST['Tngemail_message'])) {
+			$Tngemail_post = $_POST;
+			$Tngemail_success = update_tng_email();
+		}
+
 		if (!isset($_POST['reg_intro_message'])) {
 			$intro_post = read_reg_intro();
 			
@@ -139,8 +148,53 @@ function set_plugin_reg_messages() {
 	<input type="submit" name="update_Reg_success" value="Update New Registration Email" style="width: auto">
 	</p>
 	</div>
-	
-	
+</form>
+</div>
+
+<!-- email In TNG Database Only ----->
+<div class="container">
+<form class="form-group" action=''  method="post">
+<input type="hidden" class="form-control" width="auto" name="Tngemail_message" id='Tngemail_message' value=true >
+	<div style="padding-top: 30px">
+		<b>Email In TNG Database Only</b>
+	</div>
+	<div class="regsections">	
+		<div class="form-group row col-md-12">
+			<label for="Tngemail_title" class="col-md-1 col-form-label">Title</label>
+				<div class="col-md-11">
+				<input type="text" class="form-control" width="auto" name="Tngemail_title" id="Tngemail_title" value="<?php echo $Tngemail_post['Tngemail_title']; ?>">
+				</div>
+		</div>
+		<div class="form-group row col-md-12">
+			<label for="Tngemail_line1" class="col-md-1 col-form-label">Line 1</label>
+			<div class="col-md-11">
+		  	<input type="text" class="form-control" width="auto" name="Tngemail_line1" id="Tngemail_line1" value="<?php echo $Tngemail_post['Tngemail_line1']; ?>">
+			</div> 
+		</div>
+		<div class="form-group row col-md-12">
+			<label for="Tngemail_line2" class="col-md-1 col-form-label">Line 2</label>
+			<div class="col-md-11">
+			<input type="text" class="form-control" width="auto" name="Tngemail_line2" id="Tngemail_line2" value="<?php echo $Tngemail_post['Tngemail_line2']; ?>">
+			</div> 
+		</div>
+		<div class="form-group row col-md-12">
+			<label for="Tngemail_line3" class="col-md-1 col-form-label">Line 3</label>
+			<div class="col-md-11">
+			<input type="text" class="form-control" width="auto" name="Tngemail_line3" id="Tngemail_line3" value="<?php echo $Tngemail_post['Tngemail_line3']; ?>">
+			</div> 
+		</div>
+		<div class="form-group row col-md-12">
+			<label for="Tngemail_line2" class="col-md-1 col-form-label">Line 4</label>
+			<div class="col-md-11">
+			<input type="text" class="form-control" width="auto" name="Tngemail_line4" id="Tngemail_line4" value="<?php echo $Tngemail_post['Tngemail_line4']; ?>">
+			</div> 
+		</div>
+	</div>
+	<p style="color: green; display: inline-block"><?php echo "<b>". $Tngemail_success. "</b><br />"; ?></p>
+	<p>
+	<input type="submit" name="update_Tng_success" value="Update Email In TNG Only" style="width: auto">
+	</p>
+	</div>
 </form>
 </div>
 

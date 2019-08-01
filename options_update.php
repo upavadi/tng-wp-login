@@ -352,6 +352,35 @@ function update_reg_complete() {
 	return $success;
 }
 
+//Read text for Email in TNG Only
+function read_tng_email() {
+	$config = optionsConfig();
+	$Tngemail_post['Tngemail_title'] = $config['reg_email_tng_only']['title'];
+	$Tngemail_post['Tngemail_line1'] = $config['reg_email_tng_only']['line1'];
+	$Tngemail_post['Tngemail_line2'] = $config['reg_email_tng_only']['line2'];
+	$Tngemail_post['Tngemail_line3'] = $config['reg_email_tng_only']['line3'];
+	$Tngemail_post['Tngemail_line4'] = $config['reg_email_tng_only']['line4'];
+	return $Tngemail_post;
+}
+
+//Update text for Email in TNG Only
+function update_tng_email() {
+	$path = (__DIR__. '/config.json');
+	$config = optionsConfig();
+	$config_new = $config;
+	$config_new['reg_email_tng_only']['title'] = $_POST['Tngemail_title'];
+	$config_new['reg_email_tng_only']['line1'] = $_POST['Tngemail_line1'];
+	$config_new['reg_email_tng_only']['line2'] = $_POST['Tngemail_line2'];
+	$config_new['reg_email_tng_only']['line3'] = $_POST['Tngemail_line3'];
+	$config_new['reg_email_tng_only']['line4'] = $_POST['Tngemail_line4'];
+	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+	$path_json = (__DIR__. '/config.json');
+	file_put_contents($path_json, $json);
+	$success = "TNG Email Notification Changes Saved";
+	return $success;
+}
+
+
 //Read text for Registration Email
 function read_reg_email() {
 	$config = optionsConfig();
