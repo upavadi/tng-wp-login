@@ -134,8 +134,9 @@ function update_init_paths() {
 
 
 function add_tng_wp_login_stylesheets() {
-		wp_register_style( 'register-tng_wp_bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css');
-		wp_enqueue_style( 'register-tng_wp_bootstrap' );
+	/** Remove bootstrap here and add to templates to avoid conflucts with other plugins **/
+		//wp_register_style( 'register-tng_wp_bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css');
+		//wp_enqueue_style( 'register-tng_wp_bootstrap' );
 		wp_register_style( 'register-tng_wp_login_css', plugins_url('css/wp_tng_login.css', __FILE__) );
 		wp_enqueue_style( 'register-tng_wp_login_css' );
 } 
