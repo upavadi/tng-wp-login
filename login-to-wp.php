@@ -17,7 +17,7 @@ class wp_tng_login_Widget extends WP_Widget {
 	} // end construct
 	
 	public function widget( $args, $instance ) {
-		global $wpdb, $currentUser, $wpCurrentUser, $args;
+		global $wpdb, $currentUser, $wpCurrentUser, $args, $status3, $status4, $status5, $status6;
 		
 		$log_in_text = optionsConfig()['login_text'];
 		$greeting = $log_in_text['greeting'];
@@ -85,7 +85,7 @@ class wp_tng_login_Widget extends WP_Widget {
 			<?php echo $status1; ?>
 			</div>
 			<div id="lower"class="row">
-			<?php echo $status2. $status3. $status4. $status5;	$status6; $status7?>
+			<?php echo $status2. $status3. $status4. $status5;	$status6; $status7; ?>
 			</div>
 			<div id="msg"class="row">
 			<?php echo $status6; ?>

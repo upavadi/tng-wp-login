@@ -20,7 +20,7 @@ function is_logged_in(){
 function keyValues() {
 	static $key_value;
 	if (!$key_value) {
-		$key_url = plugin_dir_url( __FILE__ ). "keyValue.json";
+		$key_url =  __DIR__ . "/keyValue.json";
 		$key_value = json_decode(file_get_contents($key_url), true);
 	}
 	return $key_value;
@@ -30,7 +30,7 @@ function newRegConfig() {
 	static $config;
 	
 	if (!$config) {
-		$url = plugin_dir_url( __FILE__ ). "config.json";
+		$url = __DIR__ . "/config.json";
 		$config = json_decode(file_get_contents($url), true);
 	}
 	return $config;

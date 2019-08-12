@@ -23,7 +23,7 @@ function StartSession() {
         }
 
 	   mutng_login();
-	   if ($_COOKIE['tnguser_rememberme'] === 'forever') {
+	   if (isset($_COOKIE['tnguser_rememberme']) && ($_COOKIE['tnguser_rememberme'] === 'forever')) {
 		set_cookie();
 	   }
 	   return;        
@@ -56,7 +56,7 @@ if (isset($_POST['log'])) {
 	require_once ($wp_path. '/wp-login.php');// need actual url
 }
 
-if ($_POST['redirect_to'] && (!$_POST['log'] || !$_POST['pwd'])) {
+if (isset($_POST['redirect_to']) && (!$_POST['log'] || !$_POST['pwd'])) {
 	header('Location: ' . $_POST['redirect_to']);
 	exit;
 }
@@ -72,7 +72,9 @@ function mutng_login() {
 	}
     include($tng_folder.'config.php');
     //include($tng_folder."subroot.php");
+    if (isset($_SESSION['session_language']))
     $session_language = $_SESSION['session_language'];
+    if (isset($_SESSION['session_charset']))
     $session_charset = $_SESSION['session_charset'];
     $username = $tng_user_name;
     $row = mutng_db_connect();
@@ -175,8 +177,12 @@ function set_cookie() {
     $newroot = preg_replace( "~/.~", "", $newroot );
     
    /** adding to avoide headers sent */
-    $tnguser_newroot = ("tnguser_".$newroot);
-    if ($_COOKIE[$tnguser_newroot]) return;
+    if (headers_sent($file, $line)) {
+        error_log("Headers already sent in $file:$line");
+        return;
+    }
+    // $tnguser_newroot = ("tnguser_".$newroot);
+    // if ($_COOKIE[$tnguser_newroot]) return;
     /** adding to avoide headers sent */
     setcookie("tnguser_$newroot", $row['username'], time()+31536000, "/", "",  false, true);
     setcookie("tngpass_$newroot", $row['password'], time()+31536000, "/", "",  false, true);
