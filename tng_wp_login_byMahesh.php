@@ -42,7 +42,7 @@ if (!file_exists($tngPath)) {
 }
 
 function tng_path_not_specified() {
-	if(isset ($_POST)) {
+	if(isset ($_POST['Update_Paths'])) {
 		$tngFileError = checkForTngPath();
 		$tngPromt = "";
 		if ($tngFileError[0] == true) {
@@ -54,7 +54,7 @@ function tng_path_not_specified() {
 			$tngdomain = $tngFileError[2];
 			$photopath = $tngFileError[3];
 			$config_new = optionsConfig();
-			$config_new["paths"]['tng_path'] = $_POST["tng_path"];
+			$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
 			$config_new['paths']['tng_url'] = $tngdomain;
 			$config_new['paths']['tng_photo_folder'] = $photopath;
 			$json = (json_encode($config_new, JSON_PRETTY_PRINT));
@@ -73,22 +73,22 @@ function tng_path_not_specified() {
 	}
 	?>
 		<div>
-			<h2>We need to know where TNG is installed:</h2>
+			<h2>wp-tng login: We need to know where TNG is installed:</h2>
 		</div>
 		<form action=''  method="post">	
 		<div> 	
-			<input type="text"  style="width: 250px" name="tng_path" value= '<?php echo $_POST['tng_path'] ?>' placeholder='TNG Root Path:'>
+			<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php echo $_POST['wp_tng_path'] ?>' placeholder='TNG Root Path:'>
 			TNG Root Path is absolute path to TNG. You may look this up from TNG Admin Setup or in config.php in TNG folder.
 		</div>
 		<?php
 		echo $tngPromt;
 		?>
 		<div> 	
-			<input style="color: green; width: 250px" type="text"  name="tng_url" value= '<?php echo $tngdomain; ?>' placeholder='TNG url:' disabled>
+			<input style="color: green; width: 250px" type="text"  name="wp_tng_url" value= '<?php echo $tngdomain; ?>' placeholder='TNG url:' disabled>
 			TNG URL (www.mysite.com/tng) from TNG Admin Setup.
 		</div>
 		<div> 	
-			<input style="color: green" type="text"  name="tng_photo_folder" style="width: 250px" value= '<?php echo $photopath; ?>' placeholder='TNG photo folder:' disabled>
+			<input style="color: green" type="text"  name="wp_tng_photo_folder" style="width: 250px" value= '<?php echo $photopath; ?>' placeholder='TNG photo folder:' disabled>
 			Name of TNG Photo Folder in TNG Setup.  If you want to use different folder for this plugin, change it in admin menu>WP-TNG Login>Plugin Paths.
 		</div>
 		<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
@@ -104,29 +104,30 @@ function tng_path_not_specified() {
 }
 
 function checkForTngPath() {
-	$tng_path = $_POST['tng_path']. 'config.php';
+	$wp_tng_path = $_POST['wp_tng_path']. 'config.php';
 	$tngFileError = "";
-	if (!file_exists($tng_path) || !is_readable($tng_path)) {	
+	if (!file_exists($wp_tng_path) || !is_readable($wp_tng_path)) {	
 		return array(true, "", "","");
 	} else {
-	include($tng_path);
+	include($wp_tng_path);
 	
 	return array(false, $rootpath, $tngdomain, $photopath);
 	}
 }
 
 function update_init_paths() {
-	$_POST['tng_url'] = checkForTngPath()[2];
-	$_POST['tng_photo_folder'] = checkForTngPath()[3];
-	$path_json = (__DIR__. '/config.json');
+	$_POST['wp_tng_url'] = checkForTngPath()[2];
+	$_POST['wp_tng_photo_folder'] = checkForTngPath()[3];
+	$wp_path_json = (__DIR__. '/config.json');
 		$config = optionsConfig();
 		$config_new = $config;
-		$config_new["paths"]['tng_path'] = $_POST["tng_path"];
-		$config_new['paths']['tng_url'] = $_POST['tng_url'];
-		$config_new['paths']['tng_photo_folder'] = $_POST['tng_photo_folder'];
+		$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
+		$config_new['paths']['tng_url'] = $_POST['wp_tng_url'];
+		$config_new['paths']['tng_photo_folder'] = $_POST['wp_tng_photo_folder'];
 		$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 		//$path = "config.json";
-		file_put_contents($path_json, $json);
+		var_dump($config_new["paths"], $wp_path_json);
+		file_put_contents($wp_path_json, $json);
 		$success = "Changes Saved";
 		return $config_new;
 	}
