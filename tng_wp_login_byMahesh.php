@@ -57,6 +57,7 @@ function tng_path_not_specified() {
 			$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
 			$config_new['paths']['tng_url'] = $tngdomain;
 			$config_new['paths']['tng_photo_folder'] = $photopath;
+			var_dump($config_new);
 			$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 			$path = __DIR__ . "/config.json";
 			file_put_contents($path, $json);
@@ -100,7 +101,7 @@ function tng_path_not_specified() {
 	</form>
 	
     <?php
-	$config_new = update_init_paths();
+//	$config_new = update_init_paths();
 }
 
 function checkForTngPath() {
@@ -114,7 +115,7 @@ function checkForTngPath() {
 	return array(false, $rootpath, $tngdomain, $photopath);
 	}
 }
-
+/**
 function update_init_paths() {
 	$_POST['wp_tng_url'] = checkForTngPath()[2];
 	$_POST['wp_tng_photo_folder'] = checkForTngPath()[3];
@@ -126,13 +127,13 @@ function update_init_paths() {
 		$config_new['paths']['tng_photo_folder'] = $_POST['wp_tng_photo_folder'];
 		$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 		//$path = "config.json";
-		var_dump($config_new["paths"], $wp_path_json);
+	//	var_dump($config_new, $wp_path_json);
 		file_put_contents($wp_path_json, $json);
 		$success = "Changes Saved";
 		return $config_new;
 	}
 
-
+**/
 
 function add_tng_wp_login_stylesheets() {
 	/** Remove bootstrap here and add to templates to avoid conflucts with other plugins **/
