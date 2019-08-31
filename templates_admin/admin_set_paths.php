@@ -4,6 +4,7 @@
 require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_paths() {
+	global $success;
 if (!$_POST) {	
 	$config = optionsConfig();
 	$config_paths = ($config['paths']);
