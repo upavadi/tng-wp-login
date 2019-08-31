@@ -42,7 +42,7 @@ if (!file_exists($tngPath)) {
 }
 
 function tng_path_not_specified() {
-	if(isset ($_POST['Update_Paths'])) {
+	if(isset ($_POST['Update_wp_tng_Paths'])) {
 		$tngFileError = checkForTngPath();
 		$tngPromt = "";
 		if ($tngFileError[0] == true) {
@@ -94,7 +94,7 @@ function tng_path_not_specified() {
 		<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
 		
 	<p>
-	<input type="submit" name="Update_Paths" value="Update Paths">
+	<input type="submit" name="Update_wp_tng_Paths" value="Update Paths">
 	</p>
 	</div>
 	</form>
