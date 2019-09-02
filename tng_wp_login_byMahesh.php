@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL & ~E_NOTICE);
-ini_set('display_errors', 1);
 /*
 Plugin Name: TNG-Wordpress-login for TNG V10.1.3beta
 Plugin URI: https://github.com/upavadi/tng-wp-login
@@ -153,7 +151,7 @@ add_filter( 'retrieve_password_message', 'replace_retrieve_password_message', 10
 add_shortcode('lost_Password_form', 'lostPassword'); 
 add_shortcode('reset_Password_form', 'resetPassword'); 
 
-/** get real path to wp-load.php 
+/** get real path to wp-load.php Useful to know
     function find_wp_path() {
         $dir = dirname(__FILE__);
         do {

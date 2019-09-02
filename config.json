@@ -1,12 +1,12 @@
 {
     "paths": {
-        "tng_path": "c:\\\\\/wamp64\\\\\/www\\\\\/tng1013\\\\\/",
+        "tng_path": "c:\/wamp64\/www\/tng1013\/",
         "tng_url": "http:\/\/localhost\/tng1013\/",
         "tng_photo_folder": "photos"
     },
     "login_text": {
         "greeting": "Welcome",
-        "version_id": "to our gealogy site",
+        "version_id": "to our genealogy site",
         "user_page": "wp-tng-profile",
         "user_page_name": "Your Profile",
         "reg_page": "wp-tng-registration",
