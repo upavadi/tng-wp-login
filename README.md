@@ -42,7 +42,7 @@ Not tested with this plugin.
 --------------
 
 ## **Change Log **
- - Current version 1.0.3.beta
+ - Current version 1.0.4
  ------------
 
 ## **Activation**
