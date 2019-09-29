@@ -29,9 +29,11 @@ function StartSession() {
 	   return;        
          
     }
-	if ($_SESSION['logged_in']) {
-		mutng_logout();
-	}
+    if (isset($_SESSION['logged_in'])) {    
+        if ($_SESSION['logged_in']) {
+            mutng_logout();
+        }
+    }
     return;
 }
 
