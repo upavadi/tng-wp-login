@@ -37,7 +37,7 @@ To my knowledge, there are 2 methods available for achieving this.
 ~~At the moment, this plugin has some conflicts with displaying TNG media and the issue is not resolved.
 Not tested with this plugin.~~
 It is possible that there may be some conflicts with the Theme in use.
-If using this method, delect "Integrate TNG/Wordpress logins: " option. 
+If using this method, deselect "Integrate TNG/Wordpress logins: " option. 
 2. **Cees Kloosterman Method** (CK-Method) uses customized Header and Footer files by replacing TNG Header and footer by Hard coding topmenu.php, footer.php and meta.php, in TNG folder. This is a very simple and effective method and I have now converted my live site (and Beta test site) from MB-Method to CK-Method. The plugin is tested using this integration method.
 3. **Page Refresh** ~~may be required~~ is required to see successful TNG login. 
 --------------
