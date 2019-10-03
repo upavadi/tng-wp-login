@@ -1,12 +1,12 @@
 {
     "paths": {
-        "tng_path": "",
-        "tng_url": "",
+        "tng_path": "c:\/wamp64\/www\/tng12mb\/",
+        "tng_url": "http:\/\/localhost\/tng12mb\/",
         "tng_photo_folder": "photos"
     },
     "login_text": {
         "greeting": "Welcome",
-        "version_id": "to our genealogy site",
+        "version_id": "to our genealogy site V12CK",
         "user_page": "wp-tng-profile",
         "user_page_name": "Your Profile",
         "reg_page": "wp-tng-registration",

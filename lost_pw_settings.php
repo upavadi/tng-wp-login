@@ -162,7 +162,7 @@ echo "to be done";
 	function reset_tng_pass($user) {
 	$user_name = $user -> user_login;
 		if ($_POST['pass1'] != $_POST['pass2']) return;
-		$tngPath = getTngPath(). "config.php";
+		$tngPath = getSubroot(). "config.php";
 		include ($tngPath);
 		$password = $_POST['pass2'];
 		$password_type = $tngconfig['password_type'];

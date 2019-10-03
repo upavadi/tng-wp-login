@@ -34,7 +34,7 @@ function newreg_complete() {
 
 //add user to WP
 function insertUserWP() {
-	global $wpdb;
+	global $wpdb; return;
 	$userdata = array(
     'user_login'  =>  $_POST['loginname'],
     'user_pass'   =>  $_POST['password'],
@@ -58,32 +58,41 @@ function insertUserWP() {
 
 //add user to TNG
 function insertUserTng() {
-	$tngPath = getTngPath(). "config.php";
+	$tngPath = getSubroot(). "config.php";
 	include ($tngPath);
 	//$password_type = $tngconfig['password_type'];
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 	if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 	}
-
+	/** select all columns and then click << **/
 	$firstName = $_POST['firstname'];
 	$lastName = $_POST['lastname'];
 	$userName = $_POST['loginname'];
 	$description = $_POST['firstname']. " ". $_POST['lastname'];
-	$password = $_POST['password'];
+	$password = $_POST['password'];    
+	$password_type = "";
 	$realname = $_POST['firstname']. " ". $_POST['lastname'];
 	$email = $_POST['email'];
 	$notes = $_POST['bioinfo'];
 	$role = 'guest';
 	$allow_living = -1;
 	$website = 'http://';
-	$date = date('c');
-	$gedcom = $branch = $address = $city = $state = $zip = $country = $no_email = '';
+	$lastlogin = 'NULL';
+	$dateregistered = date('Y-m-d h:i:s');
+	$dateactivated = null;
+	$dateconsented = date('Y-m-d h:i:s');
+	
+//var_dump(date('Y-m-d h:i:s \G\M\T')); die;
 
-	$sql = "INSERT INTO `tng_users` (`username`, `description`, `password`, `email`, `realname`, `notes`, `role`, `allow_living`, `website`, `dt_registered`, `gedcom`, `branch`, `phone`, `address`, `city`, `state`, `zip`, `country`, `no_email`) values('$userName', '$description', '$password', '$email', '$realname', '$notes', '$role', '$allow_living', '$website', '$date', '$gedcom', '$branch', '$phone', '$address', '$city', '$state', '$zip', '$country', '$no_email')";
+$sql = "INSERT INTO `tng_users` (`description`, `username`, `password`, `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `disabled`, `dt_registered`, `dt_consented`, `no_email`, `notes`) 
+values ('$description', '$userName', '$password', '', '', '', '', '$role', '0', '0', '0', '0', '0', '0', '0', '$allow_living', '0', '0', '', '$realname', '', '$email', '', '', '', '', '', '$website', '0', '0', '$dateregistered', '$dateconsented', '0', '$notes')";
+
 	mysqli_query($db, $sql);
+	$error = $db->error;
 	if ($db->error) {
 		echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
+		var_dump($error); die;
 	}
 	
 return;
@@ -204,3 +213,9 @@ function check_credentials() {
 	return $conditions;
 
 }
+
+
+/***
+	$sql = "INSERT INTO `tng_users` (`username`, `description`, `password`, `email`, `realname`, `notes`, `role`, `allow_living`, `website`, `dt_registered`, `gedcom`, `branch`, `phone`, `address`, `city`, `state`, `zip`, `country`, `no_email`, `password_type`, `mygedcom`) values('$userName', '$description', '$password', '$email', '$realname', '$notes', '$role', '$allow_living', '$website', '$date', '$gedcom', '$branch', '$phone', '$address', '$city', '$state', '$zip', '$country', '$no_email', '$password_type', '')";
+
+****/

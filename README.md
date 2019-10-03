@@ -43,7 +43,9 @@ If using this method, deselect "Integrate TNG/Wordpress logins: " option.
 --------------
 
 ## **Change Log **
- - Current version 1.0.4
+ - Current version 1.1.12
+  - Check to see if TNG configuration files have been moved
+  - Checks made for TNG Vesion 9, 10 and 12 to cater for DB changes
  ------------
 
 ## **Activation**
