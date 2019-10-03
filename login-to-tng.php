@@ -13,7 +13,7 @@ add_action( 'wp_logout', 'destroy_session' );
 function StartSession() {
    
     //check to see if tng path is specified
-    $tngPath = getTngPath(). 'config.php';
+    $tngPath = getSubroot(). 'config.php';
     if (!file_exists($tngPath)) return;
 
     //Check if current user is logged in WordPress

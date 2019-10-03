@@ -4,7 +4,7 @@ require_once "templates/view_profile.html.php";
 require_once "updateprofile.php";
 /** This function drives shortcode [user_registration] ***/
 function show_profile() {
-	$configPath = getTngPath() . "config.php";
+	$configPath = getSubroot() . "config.php";
 	include ($configPath); //require_once stopped working
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 		if ($db->connect_error) {

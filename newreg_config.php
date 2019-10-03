@@ -54,6 +54,7 @@ function getTngUrl() {
 }
 
 function getTngPath() {
+	
 	$config = newRegConfig();
 	$tngPath = $config['paths']['tng_path'];
 	$tngPath = preg_replace('/\\\\\"/',"\"", $tngPath); // this is for php 5.3 to remove escape characters.
@@ -71,10 +72,22 @@ function getTngPath() {
 	return $tngPath . DIRECTORY_SEPARATOR;
 }
 
+function getSubroot() {
+	//alternative place for configuration files
+	$subroot_path = getTngPath(). "subroot.php";
+	include($subroot_path);
+	$subrootPath = $tngconfig['subroot'];
+	if ($subrootPath) return $subrootPath;
+	$tngPath = getTngPath();
+	return $tngPath;
+	
+
+}
+
 function nameTng() {
 	//does user name in tng exist
 	$tng_name_check = ($_POST['loginname']);
-	$tng_path = getTngPath(). "config.php";
+	$tng_path = getSubroot(). "config.php";
 	include ($tng_path); 
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 	if ($db->connect_error) {
@@ -93,7 +106,7 @@ function nameTng() {
 function emailTng() {
 	$tng_email_check = ($_POST['email']);
 	//does email in tng exist
-	$tngPath = getTngPath(). '/config.php';
+	$tngPath = getSubroot(). "config.php";
 	include ($tngPath); 
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 	if ($db->connect_error) {
@@ -112,7 +125,7 @@ function emailTng() {
 /*** for login-to-tng ***/
 function getTngUserName($wp_user) {
 	$wp_user = wp_get_current_user() -> user_login;
-	$tngPath = getTngPath(). "config.php";
+	$tngPath = getSubroot(). "config.php";
 	$config = newRegConfig();
 	if (!file_exists($tngPath)) {
 		return;
@@ -131,4 +144,29 @@ function getTngUserName($wp_user) {
 	}
 	
 return $tng_loginname;
+}
+
+function guessTngVersion() {
+/** No checks for version 11. Developer not aware of any DB changes ****** */	
+	$tng_path = getSubroot(). "config.php";
+	include($tng_path);
+	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	$sql = 'describe '. 'tng_people';
+	$sql2 = 'describe '. 'tng_users';
+	$result = $db->query($sql);
+	$result2 = $db->query($sql2);
+	$version = 9;
+	while ($row = $result->fetch_assoc()) {
+		if ($row['Field'] == 'burialtype') {
+			$version = 10;
+			break;
+		}
+	}
+	while ($row = $result2->fetch_assoc()) {	
+		if ($row['Field'] == 'dt_consented') {
+			$version = 12;
+			break;
+		}
+	}
+return $version;
 }
