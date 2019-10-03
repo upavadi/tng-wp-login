@@ -37,7 +37,7 @@ $Id = $data['values']->data->ID;
 	}
 
 function update_tng($post, $data) {
-$tngPath = getTngPath(). "config.php";
+$tngPath = getSubroot(). "config.php";
 include ($tngPath);
 $password_type = $tngconfig['password_type'];
 $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
