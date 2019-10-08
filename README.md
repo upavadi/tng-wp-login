@@ -1,4 +1,5 @@
 # **Wordpress-TNG Login Widget** # 
+## (In current version, Registration  may fail with TNG V12.x because of Database changes. ) ##
 ## **Download**
 Download current release version 1.0.4 https://github.com/upavadi/tng-wp-login/releases/latest
 
