@@ -7,7 +7,7 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 	}
 	
 	if (($_POST)) {
-		$newreg_entries = (validate($_POST));
+		$newreg_entries = (validate($_POST)); 
 		$userExists = $newreg_entries['userExists'];
 		$emailExists = $newreg_entries['emailExists'];
 
@@ -45,8 +45,11 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 <?php endif; 
 }
 
-function registration_form($data, $config, $intro, $keys) {
+function registration_form($data, $config, $intro, $configPrivacy, $keys) {
 ob_start();
+$privacyText = $configPrivacy['line1'];
+$privacyConsent = $configPrivacy['enabled'];
+$privacyPage = $configPrivacy['privacyPage'];
 $message = $intro['line1']. $intro['line2']. $intro['line3']. $intro['line4']. $intro['line5']. $intro['line6'];
 ?>
 
@@ -92,9 +95,21 @@ if (($intro['enabled'])) {
 ?>
 </div>
 <?php		
+
+}
+
+if($privacyConsent) { 
+	?>
+	<div class="regsections">	
+	 <p>
+	 <input type="checkbox" name="consentGiven" id="consentGiven" <?php if($_POST['consentGiven']) echo "checked='checked'"; ?>> 
+	 <?php echo $privacyText. " "; ?> <a href="<?php echo "../". $privacyPage; ?>" target="_blank">Our Privacy Policy</a> </p>
+	 <div class="text-danger"><?php echo $data['errors']['consentGiven'] ?></div>
+	 </div>
+	 <?php
 	}
 if ($_POST && $error) {
-	echo "<div>Please check for errors</div>";
+	echo "<div class='text-danger'>Please check for errors</div>";
 }
 
 if ($keys['enabled']) {

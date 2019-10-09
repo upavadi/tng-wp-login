@@ -36,6 +36,17 @@ function newRegConfig() {
 	return $config;
 }
 
+function newRegPrivacy() {
+	static $configPrivacy;
+	
+	if (!$configPrivacy) {
+		$url = __DIR__ . "/config_privacy.json";
+		$configPrivacy = json_decode(file_get_contents($url), true);
+	}
+	return $configPrivacy;
+}	
+
+
 function getTng_photo_folder() {
 	$config = newRegConfig();
 	$tngPhotos = $config['paths']['tng_photo_folder'];

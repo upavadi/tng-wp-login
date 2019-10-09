@@ -18,16 +18,18 @@ function new_reg() {
 	$newloginname = $_POST['loginname'];
 	$newemail = $_POST['email'];
 	$config = newRegConfig();
+	$configPrivacy = newRegPrivacy();
 	$data['values'] = $_POST;
 	$data['errors'] = validate($_POST); 
-		echo registration_form($data, $config['reg_form'], $config['reg_form_intro'], $keys);
+	echo registration_form($data, $config['reg_form'], $config['reg_form_intro'], $configPrivacy['reg_form_consent'], $keys);
 
 }
 //checks are done in WP database
 function validate($form) {
 	$errors = array();
+	$consent = (newRegPrivacy()); 
 	$nameInTng = nameTng()['username'];
-	
+	if (($_POST)) {
 	if (!isset($form['firstname']) || empty($form['firstname'])) {
 		$errors['firstname'] = 'Cannot be empty';
 	}
@@ -63,5 +65,12 @@ function validate($form) {
 		// Return to email input
 	}
 	
+	if (!isset($_POST['consentGiven'])) 
+	{	
+		$errors['consentGiven'] = $consent['reg_form_consent']['prompt'];
+	}
+
+	}
 	return $errors;
+
 }

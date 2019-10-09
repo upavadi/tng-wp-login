@@ -28,13 +28,13 @@ function newreg_complete() {
 	$config = newRegConfig();
 	$data['values'] = $_POST;
 	$data['errors'] = validate($_POST);
-	newregCheck(); 
+	newregCheck();
 	exit;
 }
 
 //add user to WP
 function insertUserWP() {
-	global $wpdb; return;
+	global $wpdb;
 	$userdata = array(
     'user_login'  =>  $_POST['loginname'],
     'user_pass'   =>  $_POST['password'],
@@ -66,6 +66,8 @@ function insertUserTng() {
 		die("Connection failed: " . $db->connect_error);
 	}
 	/** select all columns and then click << **/
+	$passwordtype = $tngconfig['password_type'];
+	$tngVersion = guessTngVersion();
 	$firstName = $_POST['firstname'];
 	$lastName = $_POST['lastname'];
 	$userName = $_POST['loginname'];
@@ -78,24 +80,37 @@ function insertUserTng() {
 	$role = 'guest';
 	$allow_living = -1;
 	$website = 'http://';
-	$lastlogin = 'NULL';
+	$lastlogin = '0000-00-00 00:00:00';
 	$dateregistered = date('Y-m-d h:i:s');
-	$dateactivated = null;
-	$dateconsented = date('Y-m-d h:i:s');
-	
-//var_dump(date('Y-m-d h:i:s \G\M\T')); die;
+	$dateactivated = '0000-00-00 00:00:00';
+	$dateconsented = $dateregistered;
+	var_dump(tngVersion);
+	if ($tngVersion < 12) {
+		$sql = "INSERT IGNORE INTO `tng_users` (`description`, `username`, `password`, `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes`)
+		values ('{$description}', '{$userName}', '{$password}', '{$passwordtype}', '', '', '', '{$role}', '0', '0', '0', '0', '0', '0', '0', '{$allow_living}', '0', '0', '', '{$realname}', '', '{$email}', '', '', '', '', '', '{$website}', '{$lastlogin}', '0', '{$dateregistered}', '{$dateactivated}', '0', '{$notes}')";
+		mysqli_query($db, $sql);
+		$error = $db->error;
+		if ($db->error) {
+			echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
+			return false;	// there is error
+		}
 
-$sql = "INSERT INTO `tng_users` (`description`, `username`, `password`, `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `disabled`, `dt_registered`, `dt_consented`, `no_email`, `notes`) 
-values ('$description', '$userName', '$password', '', '', '', '', '$role', '0', '0', '0', '0', '0', '0', '0', '$allow_living', '0', '0', '', '$realname', '', '$email', '', '', '', '', '', '$website', '0', '0', '$dateregistered', '$dateconsented', '0', '$notes')";
-
-	mysqli_query($db, $sql);
-	$error = $db->error;
-	if ($db->error) {
-		echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
-		var_dump($error); die;
+		return true; // insert
 	}
-	
-return;
+
+
+	if ($tngVersion = 12) {
+		$sql = "INSERT IGNORE INTO `tng_users` (`description`, `username`, `password`, `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `dt_consented`, `no_email`, `notes`) 
+		values ('{$description}', '{$userName}', '{$password}', '{$passwordtype}', '', '', '', '{$role}', '0', '0', '0', '0', '0', '0', '0', '{$allow_living}', '0', '0', '', '{$realname}', '', '{$email}', '', '', '', '', '', '{$website}', '0', '{$lastlogin}', '0', '{$dateregistered}', '{$dateactivated}', '{$dateconsented}', '0', '{$notes}')";
+
+		mysqli_query($db, $sql);
+		$error = $db->error; var_dump($error);
+		if ($db->error) {
+			echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
+			return false; // there is error
+		}
+		return true; // insert
+	}
 }
 
 //send email - registration request - suggest password reset
@@ -105,7 +120,9 @@ function new_reg_pwreset__mail() {
 	$to = get_option('admin_email');
 	$subject = "New Registration - Suggest Password Reset";
 	$message = new_reg_pwreset_email_text();
-	wp_mail($to, $subject, $message, $headers);
+	//wp_mail($to, $subject, $message, $headers); //Restore
+//	echo "<pre>{($to, $subject, $message)}</pre>";
+	
 }
 
 
@@ -115,8 +132,8 @@ function new_reg_tng_only_mail() {
 	$to = get_option('admin_email');
 	$subject = "New Registration - Email in TNG Only";
 	$message = new_reg_pwreset_email_text();
-	//echo "<pre>{($to, $subject, $message)}</pre>";
-	wp_mail($to, $subject, $message, $headers);
+echo "<pre>{($to, $subject, $message)}</pre>";
+	//wp_mail($to, $subject, $message, $headers);
 
 }
 
@@ -129,8 +146,8 @@ function new_reg_mail() {
 	$message = new_reg_email_text();
 	$cc = get_option('admin_email');
 	$headers[] = 'Bcc:'. $bcc;
-//	echo "<pre>{($to, $subject, $message)}</pre>";
-	wp_mail($to, $subject, $message, $headers);
+	echo "<pre>{($to, $subject, $message)}</pre>";
+	//wp_mail($to, $subject, $message, $headers);
 return;
 }
 

@@ -1,0 +1,8 @@
+{
+    "reg_form_consent": {
+        "line1": "I give my consent to upavadi.net to store the personal information collected here. I understand that I may ask the site owner to remove this information at any time.",
+        "prompt": "May we have your consent for upavadi.net to store personal information? ",
+        "privacyPage": "privacy-policy",
+        "enabled": true
+    }
+}

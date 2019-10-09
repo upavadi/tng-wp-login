@@ -88,11 +88,15 @@ return;
 
 function process_new_reg() {
 	$config = newRegConfig();
+	$success = insertUserTng();
+	if($success == true) {
+	//	insertUserWP();	
 	$reg_message = $config['reg_complete'];
 	echo registration_complete($reg_message);
-	insertUserWP();
-	insertUserTng();  
+
 	echo new_reg_mail();
+	}
+
 return;
 }
 
@@ -107,7 +111,6 @@ return;
 function process_email_in_tng_only() {
 	$config = newRegConfig();
 	$reg_message = $config['reg_email_tng_only'];
-	var_dump($config['reg_email_tng_only']);
 	echo registration_complete($reg_message);
 	echo new_reg_tng_only_mail();
 return;
