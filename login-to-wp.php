@@ -78,14 +78,14 @@ class wp_tng_login_Widget extends WP_Widget {
 			$status5 = ("<input type='submit' id='". $args['id_submit']. "' class='button-primary' value='Log In' name='wp-submit'>");
 			$status7 = "error message";
 			$status6 = ("<input type='hidden' value='". $args['redirect']. "' name='redirect_to'>");
-		}
+			}
 	?>
 	<form id="<?php echo $args['form_id' ]; ?>" name="loginform" action="<?php echo $login_redirect; ?>" method="post">
 		<div id="container">
 			<div id="upper" class="row">
 			<?php echo $status1; ?>
 			</div>
-			<div id="lower"class="row">
+			<div id="lower">
 			<?php echo $status2. $status3. $status4. $status5;	$status6; $status7; ?>
 			</div>
 			<div id="msg"class="row">
