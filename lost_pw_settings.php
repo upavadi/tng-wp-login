@@ -146,7 +146,8 @@ echo "to be done";
 		$msg = $msg. $line4. "\r\n\r\n";
 		$msg = $msg. $reset_address. "\r\n\r\n";
 		$msg = $msg. $line5. "\r\n\r\n";
-		$msg = $msg. $line6;
+		$msg = $msg. $line6; 
+		var_dump($msg);
 		/***
 		$msg  = __( 'Hello!', 'personalize-login' ) . "\r\n\r\n";
 		$msg .= sprintf( __( 'You asked us to reset your password for your account using the email address %s.', 'personalize-login' ), $user_data->user_email) . "\r\n\r\n";
@@ -176,7 +177,4 @@ echo "to be done";
 			
 			return;
 			}
-		}
-		
-	
-	
+		}	
