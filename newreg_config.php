@@ -167,12 +167,21 @@ function guessTngVersion() {
 	$result = $db->query($sql);
 	$result2 = $db->query($sql2);
 	$version = 9;
+
 	while ($row = $result->fetch_assoc()) {
 		if ($row['Field'] == 'burialtype') {
 			$version = 10;
 			break;
 		}
 	}
+
+	while ($row = $result2->fetch_assoc()) {	
+		if ($row['Field'] == 'languageID') {
+			$version = 11;
+			break;
+		}
+	}
+
 	while ($row = $result2->fetch_assoc()) {	
 		if ($row['Field'] == 'dt_consented') {
 			$version = 12;

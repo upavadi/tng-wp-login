@@ -58,6 +58,7 @@ class wp_tng_login_Widget extends WP_Widget {
 		//$loginout = wp_loginout($_SERVER['REQUEST_URI'], false );
 		$loginout = wp_loginout(home_url(), false ); // changed this to avoid logout conflict with MB method.
 		if (is_user_logged_in()) {
+			// Do consent check & JS
 			$adminurl = get_admin_url();
 			$status1 = $greeting. " ". is_logged_in() ->user_firstname. " ". $identifier; 
 			if (current_user_can('administrator')) {

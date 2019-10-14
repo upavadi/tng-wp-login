@@ -27,7 +27,9 @@ function new_reg() {
 //checks are done in WP database
 function validate($form) {
 	$errors = array();
-	$consent = (newRegPrivacy()); 
+	$consent = (newRegPrivacy());
+	$consentPrompt = $consent['reg_form_consent']['prompt'];
+	$consentEnabled = $cosent['reg_form_consent']['enabled']; 
 	$nameInTng = nameTng()['username'];
 	if (($_POST)) {
 	if (!isset($form['firstname']) || empty($form['firstname'])) {
@@ -64,10 +66,11 @@ function validate($form) {
 		$errors['emailExists'] = true;
 		// Return to email input
 	}
-	
-	if (!isset($_POST['consentGiven'])) 
-	{	
-		$errors['consentGiven'] = $consent['reg_form_consent']['prompt'];
+	if ($consentEnabled) {
+		if (!isset($_POST['consentGiven'])) 
+		{	
+			$errors['consentGiven'] = $consent['reg_form_consent']['prompt'];
+		}
 	}
 
 	}

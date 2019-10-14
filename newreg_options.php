@@ -90,7 +90,7 @@ function process_new_reg() {
 	$config = newRegConfig();
 	$success = insertUserTng();
 	if($success == true) {
-	//	insertUserWP();	
+	insertUserWP();	
 	$reg_message = $config['reg_complete'];
 	echo registration_complete($reg_message);
 

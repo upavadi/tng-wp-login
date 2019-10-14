@@ -1,13 +1,4 @@
 <?php
-//Captcha Keys.
-//trial
-//1 6LcJXKUUAAAAAFc4Gh5eOcwnoa_PzK7bCNWSpCT6
-//2 6LcJXKUUAAAAALfy7kZkrq16wCBfYhaml8ChC_z0
-//localhost
-//L1 - 6LdACicUAAAAAJwHZ194fiKcwhxiX4EHbmttcTCq
-//L2 - 6LcTCCcUAAAAAKEFNnOPVjLN8GlLvKgGAVfqt6rZ
-
-
 require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_keys() {

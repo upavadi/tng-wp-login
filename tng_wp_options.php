@@ -7,6 +7,7 @@ require_once "templates_admin/admin_set_registration.php";
 require_once "templates_admin/admin_set_reg_messages.php";
 require_once "templates_admin/admin_set_pwReset_messages.php";
 require_once "templates_admin/admin_set_login_text.php";
+require_once "templates_admin/admin_consent.php";
 add_action('admin_menu', 'plugin_admin_add_page');
 
 //add_action('admin_init', 'plugin_admin_add_page');
@@ -95,6 +96,14 @@ function plugin_admin_add_page() {
 		'manage_options',
 		'wp-tng-pw_msg',
 		'set_plugin_pwreset_messages'
+		);
+	add_submenu_page(
+		'wp-tng-login',
+		'wp-tng Login',
+		'Privacy',
+		'manage_options',
+		'wp-tng-privacy',
+		'set_plugin_privacy'
 		);
 	
 }
