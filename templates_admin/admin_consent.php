@@ -96,11 +96,63 @@ function set_plugin_privacy() {
 			<textarea class="form-control" name=cookie_Text" placeholder="Text for cookie Approval"><?php echo $cookieText; ?></textarea>
 			</div>
 		</div>
-		
+		<div class="row rowadjust" style="padding-top: 1em;">
+			<div align="right" class='col-md-4'>
+			Seek Consent from existing User
+			</div>
+			<div class='col-md-6'>	
+			<input type="checkbox" class="form-check-input" name="cookieEnabled" id="cookieEnabled" <?php if($cookieApproval) echo "checked='checked'"; ?>>
+			(Ask on login, if consent not given already)
+			</div>
+		</div>
+		<div class="row rowadjust" style="padding-top: .3em;">
+			<div align="right" class='col-md-4'>
+			Prompt for Logged In User Consent
+			</div>
+			<div  class='col-md-6'>
+			<textarea class="form-control" name=cookieText" placeholder="Prompt for user consent agreement"><?php echo $consentPrompt; ?></textarea>
+			</div>
+		</div>
+
+		<div class="row rowadjust" style="padding-top: 1em;">
+			<div align="right" class='col-md-4'>
+			Use TNG Privacy Document
+			</div>
+			<div class='col-md-6'>	
+			<input type="checkbox" class="form-check-input" name="cookieEnabled" id="cookieEnabled" <?php if($cookieApproval) echo "checked='checked'"; ?>>
+			</div>
+		</div>
+		<div class="row rowadjust" style="padding-top: .3em;">
+			<div align="right" class='col-md-4'>
+			URL for Document Location
+			</div>
+			<div  class='col-md-6'>
+			<input type="text" class="form-control" name="tng_photo_folder" value= '<?php echo $_POST['tng_photo_folder']; ?>'>
+			</div>
+		</div>
+
+		<div class="row rowadjust" style="padding-top: 1em;">
+			<div align="right" class='col-md-4'>
+			Use Wordpress Page as Privacy Document
+			</div>
+			<div class='col-md-6'>	
+			<input type="checkbox" class="form-check-input" name="cookieEnabled" id="cookieEnabled" <?php if($cookieApproval) echo "checked='checked'"; ?>>
+			</div>
+		</div>
+		<div class="row rowadjust" style="padding-top: .3em;">
+			<div align="right" class='col-md-4'>
+			URL for Document Location
+			</div>
+			<div  class='col-md-6'>
+			<input type="text" class="form-control" name="tng_photo_folder" value= '<?php echo $_POST['tng_photo_folder']; ?>'>
+			</div>
+		</div>
+			
+		</div>
 	</div>	
 		<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
 		<p>
-		<input type="submit" name="Update_privacy" value="Update Settings">
+		<input type="submit" name="Update_privacy" style="width: auto" value="Update Settings">
 		</p>
 
 </form>
