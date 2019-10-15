@@ -157,8 +157,8 @@ function new_reg_tng_only_mail() {
 	$to = get_option('admin_email');
 	$subject = "New Registration - Email in TNG Only";
 	$message = new_reg_pwreset_email_text();
-echo "<pre>{($to, $subject, $message)}</pre>";
-	//wp_mail($to, $subject, $message, $headers);
+	//echo "<pre>{($to, $subject, $message)}</pre>";
+	wp_mail($to, $subject, $message, $headers);
 
 }
 
@@ -171,8 +171,8 @@ function new_reg_mail() {
 	$message = new_reg_email_text();
 	$cc = get_option('admin_email');
 	$headers[] = 'Bcc:'. $bcc;
-	echo "<pre>{($to, $subject, $message)}</pre>";
-	//wp_mail($to, $subject, $message, $headers);
+	//echo "<pre>{($to, $subject, $message)}</pre>";
+	wp_mail($to, $subject, $message, $headers);
 return;
 }
 
