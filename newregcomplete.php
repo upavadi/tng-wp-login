@@ -54,7 +54,6 @@ function insertUserWP() {
 	'show_admin_bar_front'   =>  false
 	
 	);
-	var_dump($userdata);
 	wp_insert_user($userdata);
 	
 	$newuser = get_user_by('login', $_POST['loginname']);
@@ -94,11 +93,11 @@ function insertUserTng() {
 	$dateactivated = '0000-00-00 00:00:00';
 	$dateconsented = '0000-00-00 00:00:00';
 	if ($configPrivacy) $dateconsented = $dateregistered;
-	if ($tngVersion < 12) {
+	if ($tngVersion < 11) {
 		$sql = "INSERT IGNORE INTO `tng_users` (`description`, `username`, `password`, `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes`)
 		values ('{$description}', '{$userName}', '{$password}', '{$passwordtype}', '', '', '', '{$role}', '0', '0', '0', '0', '0', '0', '0', '{$allow_living}', '0', '0', '', '{$realname}', '', '{$email}', '', '', '', '', '', '{$website}', '{$lastlogin}', '0', '{$dateregistered}', '{$dateactivated}', '0', '{$notes}')";
-		//mysqli_query($db, $sql);
-		//$error = $db->error;
+		mysqli_query($db, $sql);
+		$error = $db->error;
 		if ($db->error) {
 			echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
 			return false;	// there is error
@@ -111,7 +110,7 @@ function insertUserTng() {
 		values ('{$description}', '{$userName}', '{$password}', '{$passwordtype}', '', '', '', '{$role}', '0', '0', '0', '0', '0', '0', '0', '{$allow_living}', '0', '0', '', '{$realname}', '', '{$email}', '', '', '', '', '', '{$website}', '0', '{$lastlogin}', '0', '{$dateregistered}', '{$dateactivated}', '0', '{$notes}')";
 
 		mysqli_query($db, $sql);
-		$error = $db->error; var_dump($error);
+		$error = $db->error;
 		if ($db->error) {
 			echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
 			return false; // there is error

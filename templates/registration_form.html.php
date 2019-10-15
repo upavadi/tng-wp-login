@@ -15,6 +15,10 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 			echo newreg_complete(); return null;
 		}
 	}
+	
+	if ($_POST && $data['errors']) {
+		echo "<div class='text-danger'>Please check for errors</div>";
+	}
 ?>
 <!DOCTYPE html>
 <!-- add bootstrap here instead of primary file to avoid conflicts with other plugins -->
@@ -61,6 +65,9 @@ if (($intro['enabled'])) {
 <div class="regsubtitle"><?php echo $intro['title']; ?></div>
 <div class="regsections"><?php echo $message; ?></div>
 <?php
+if ($_POST && $data['errors']) {
+	echo "<div class='text-danger'><strong>Please check for errors</strong></div>";
+}
 }
 	foreach ($config['sections'] as $section) {
 ?>

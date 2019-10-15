@@ -88,7 +88,7 @@ return;
 
 function process_new_reg() {
 	$config = newRegConfig();
-	$success = insertUserTng();
+	$success = insertUserTng(); 
 	if($success == true) {
 	insertUserWP();	
 	$reg_message = $config['reg_complete'];

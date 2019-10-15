@@ -29,7 +29,7 @@ function validate($form) {
 	$errors = array();
 	$consent = (newRegPrivacy());
 	$consentPrompt = $consent['reg_form_consent']['prompt'];
-	$consentEnabled = $cosent['reg_form_consent']['enabled']; 
+	$consentEnabled = $consent['reg_form_consent']['enabled']; 
 	$nameInTng = nameTng()['username'];
 	if (($_POST)) {
 	if (!isset($form['firstname']) || empty($form['firstname'])) {
