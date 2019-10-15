@@ -23,8 +23,8 @@ This widget replicates the Wordpress login/log out task and also logs into TNG (
 - User may login using either registered user Name or email. On successful login, if User Name exists in TNG database, the user is also logged in to TNG.
 ---------------------
 ## **Compatibility**
-- The plugin is under Beta Test and is tested on TNG 10.1.3
-- PHP version 5.4 - 5.6.40
+- The plugin is under Beta Test and tested on TNG 9.1, 10.1.3 and 12.2.1
+- PHP version 5.4 - 7.3
 -  Wordpress V 4.9 - 5.2.2 platform
 - A Wordpress twenty Twelve child theme. (Not tested in any other theme).
 
@@ -35,9 +35,8 @@ This widget replicates the Wordpress login/log out task and also logs into TNG (
 To my knowledge, there are 2 methods available for achieving this.
 
 1. **Mark Barnes method** (MB-Method) uses a plugin to replace WP page with TNG content.
-~~At the moment, this plugin has some conflicts with displaying TNG media and the issue is not resolved.
-Not tested with this plugin.~~
-It is possible that there may be some conflicts with the Theme in use.
+~~Works well with TNG V 9 - 12 ~~
+Only known issue is that the WP-TNG integration plugin seems to deactivate TNG Login panel so that User cannot login to TNG using TNG Login Panel. Only way to login is by using WP_TNG Login. 
 If using this method, deselect "Integrate TNG/Wordpress logins: " option. 
 2. **Cees Kloosterman Method** (CK-Method) uses customized Header and Footer files by replacing TNG Header and footer by Hard coding topmenu.php, footer.php and meta.php, in TNG folder. This is a very simple and effective method and I have now converted my live site (and Beta test site) from MB-Method to CK-Method. The plugin is tested using this integration method.
 3. **Page Refresh** ~~may be required~~ is required to see successful TNG login. 
