@@ -44,9 +44,12 @@ If using this method, deselect "Integrate TNG/Wordpress logins: " option.
 --------------
 
 ## **Change Log **
- - Current version 1.1.12
+ - Current version 2.0.Development
   - Check to see if TNG configuration files have been moved
-  - Checks made for TNG Vesion 9, 10 and 12 to cater for DB changes
+  - Checks made for TNG Vesion 11 and 12 to cater for DB changes
+  - changes to cater for MYSQL 5.7 strict mode
+  - added Consent flag for new user - this will also apply to Wordpress
+  - work continues on Cookie Consent, Admin Privacy Menu and current user consent flag
  ------------
 
 ## **Activation**
