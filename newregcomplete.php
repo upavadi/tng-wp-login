@@ -145,8 +145,8 @@ function new_reg_pwreset__mail() {
 	$to = get_option('admin_email');
 	$subject = "New Registration - Suggest Password Reset";
 	$message = new_reg_pwreset_email_text();
-	//wp_mail($to, $subject, $message, $headers); //Restore
-	echo "<pre>{($to, $subject, $message)}</pre>";
+	wp_mail($to, $subject, $message, $headers); //Restore
+	//echo "<pre>{($to, $subject, $message)}</pre>";
 	
 }
 
