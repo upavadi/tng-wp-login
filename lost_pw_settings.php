@@ -147,7 +147,8 @@ echo "to be done";
 		$msg = $msg. $reset_address. "\r\n\r\n";
 		$msg = $msg. $line5. "\r\n\r\n";
 		$msg = $msg. $line6; 
-		//var_dump($msg);
+	//	var_dump($msg);
+
 		return $msg;
 	}
 	
