@@ -64,6 +64,22 @@ function getTngUrl() {
 	return $tngUrl . DIRECTORY_SEPARATOR;
 }
 
+function getTngConsent() {
+	$tng_path = getSubroot(). "config.php";
+	include ($tng_path); 
+	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	if ($db->connect_error) {
+		die("Connection failed: " . $db->connect_error);
+	}
+	$wpCurrentUser = wp_get_current_user() -> user_login;
+	$sql = "SELECT * FROM tng_users WHERE username='$wpCurrentUser'";
+	$result = $db->query($sql);
+	if ($result) {
+		$row = $result->fetch_assoc();
+		$tng_consent = $row["dt_consented"];
+	return $tng_consent;
+	}
+}
 function getTngPath() {
 	
 	$config = newRegConfig();

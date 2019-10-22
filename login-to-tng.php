@@ -3,12 +3,13 @@
 /** log in to tng if user exists and if logged in to Wordpress ***/
 $wp_path = find_wp_path(); // not sure why I have to find this
 require_once ($wp_path.'/wp-load.php');
-require_once "newreg_config.php";
+require_once "newreg_config.php";      
 require_once "login-to-wp.php";
+require_once "login-consent.php";
 add_action('init', 'StartSession', 1);
 add_action( 'wp_login', 'destroy_session' );
 add_action( 'wp_logout', 'destroy_session' );
-
+ 
 
 function StartSession() {
    

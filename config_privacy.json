@@ -7,8 +7,8 @@
         "enabled": true
     },
 
-    "cookieApproval": true,
+    "current_user_consent": true,
     "cookieText": "Note: This Site uses cookies",
     "privacyDoc": ""
-
+    
 }

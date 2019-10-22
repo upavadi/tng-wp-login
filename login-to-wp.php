@@ -28,7 +28,8 @@ class wp_tng_login_Widget extends WP_Widget {
 		$reg_page_name = $log_in_text['reg_page_name'];
 		$lost_password = $log_in_text['lost_password'];
 		$RememberMe = $log_in_text['RememberMe'];
-		
+		$ask_user_contest = newRegPrivacy();
+		$ask_user_contest = $ask_user_contest['current_user_consent'];
 		$user_page_url = home_url(). "/". $user_page;
 		$register_page_url = home_url(). "/". $reg_page;
 		$wp_url = site_url();
@@ -57,6 +58,20 @@ class wp_tng_login_Widget extends WP_Widget {
 		$login_url = esc_url(site_url( 'wp-login.php', $_SERVER['PHP_SELF'] ));
 		//$loginout = wp_loginout($_SERVER['REQUEST_URI'], false );
 		$loginout = wp_loginout(home_url(), false ); // changed this to avoid logout conflict with MB method.
+
+		$logoutUrl = (wp_logout_url(home_url()));
+		$logoutUrl = str_replace('&amp;', '&' ,$logoutUrl);
+
+		//check for user consent
+		if ($wpCurrentUser && ($ask_user_contest == true)) {
+			$consent = checkConsent();
+			
+			if ($consent == 'false') {
+			//LOGOUT if consent denied	
+			//echo '<script>window.location = "'.$logoutUrl.'";</script>'; 
+			}	
+		} 
+
 		if (is_user_logged_in()) {
 			// Do consent check & JS
 			$adminurl = get_admin_url();
@@ -66,7 +81,7 @@ class wp_tng_login_Widget extends WP_Widget {
 			} else {
 				$status2 = "<a href=".$user_page_url. ">". $user_page_name. "</a>". " - ". $loginout;
 			}
-		
+			
 		} else {
 			
 			$status1 = "WP TNG - ". ("<label for='log'>Login</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
