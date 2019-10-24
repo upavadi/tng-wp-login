@@ -65,11 +65,6 @@ class wp_tng_login_Widget extends WP_Widget {
 		//check for user consent
 		if ($wpCurrentUser && ($ask_user_contest == true)) {
 			$consent = checkConsent();
-			
-			if ($consent == 'false') {
-			//LOGOUT if consent denied	
-			//echo '<script>window.location = "'.$logoutUrl.'";</script>'; 
-			}	
 		} 
 
 		if (is_user_logged_in()) {
@@ -93,6 +88,7 @@ class wp_tng_login_Widget extends WP_Widget {
 			$status5 = ("<input type='submit' id='". $args['id_submit']. "' class='button-primary' value='Log In' name='wp-submit'>");
 			$status7 = "error message";
 			$status6 = ("<input type='hidden' value='". $args['redirect']. "' name='redirect_to'>");
+			$status8 = "Note: This site uses cookies";
 			}
 	?>
 	<form id="<?php echo $args['form_id' ]; ?>" name="loginform" action="<?php echo $login_redirect; ?>" method="post">
@@ -100,9 +96,10 @@ class wp_tng_login_Widget extends WP_Widget {
 			<div id="upper" class="row">
 			<?php echo $status1; ?>
 			</div>
-			<div id="lower">
+			<div id="lower_login">
 			<?php echo $status2. $status3. $status4. $status5;	$status6; $status7; ?>
 			</div>
+			<?php echo "<b>". $status8. "</b>"; ?>
 			<div id="msg"class="row">
 			<?php echo $status6; ?>
 			</div>

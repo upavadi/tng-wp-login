@@ -240,9 +240,9 @@
                         "enabled": true,
                         "textenabled": false,
                         "type": "password",
-                        "label": "",
-                        "description": "",
-                        "placeholder": ""
+                        "label": "New Password",
+                        "description": "You may Change password here",
+                        "placeholder": "8 characters or more please"
                     }
                 ]
             },

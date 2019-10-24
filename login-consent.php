@@ -5,64 +5,111 @@ require_once "newreg_config.php";
 require_once "login-to-wp.php";
 require_once "login-to-tng.php";
 //add_action( 'wp_login', 'checkConsent' );
+$current_user_consent = newRegPrivacy();
+$current_user_consent_text = $current_user_consent['current_user_consent_text'];
 
 function checkConsent() {
+  $wpConsent = "";
   $wpCurrentUser = wp_get_current_user() -> user_login;
   $wpUserId = get_current_user_id();
   $userMeta = get_user_meta($wpUserId);
   $tngUser = getTngUserName($wpCurrentUser);
-  $wpConsent = $userMeta['tng_dateconsented'];
+
+
+  if (isset($userMeta['tng_dateconsented'])) $wpConsent = $userMeta['tng_dateconsented'];
   $tngConsent = getTngConsent();
+  
+  if ($wpConsent > 0 && $tngConsent > 0)
+    {
+    // echo "consented";
+     return; //wp and tng consented
+    }
+
+ //consent in wp only
+  if ($wpConsent > 0 && $tngConsent == 0) {
+   // echo "consent in wp only";
+    $success = updateTngConsent();
+    var_dump($tngConsent, $wpConsent);
+  }
+
+  //consent in tng only
+  if (!$wpConsent && $tngConsent > 0) {
+  //  echo "consent in tng only";
+    update_user_meta($wpUserId, 'tng_dateconsented', date('Y-m-d h:i:s'));
+    var_dump($tngConsent, $wpConsent);
+  }
+  
   $logoutUrl = (wp_logout_url(home_url()));
   $logoutUrl = str_replace('&amp;', '&' ,$logoutUrl);
+  
   if (!$wpConsent && ($tngConsent == 0 || !$tngConsent)) {
-     $_GET['value'] == null;
-     if($_GET['value'] == null)
+     if(!$_GET['value']) {
         echo '<script type="text/javascript">',
           'getConfirmation();',
           '</script>';
-      }
-      $response =  $_GET['value'];
-
+    }
+     
+    if (!isset($_GET['value'])) return;
+     
+    $response =  $_GET['value'];
+    
+     /** user presses OK - udate consent flags in WP and TNG ***/
+    if ($response == "true") {
       
-      /** user presses OK - udate consent flags in WP and TNG ***/
-      if ($response == "true") {
-
-
-
-      }
-
+      update_user_meta($wpUserId, 'tng_dateconsented', date('Y-m-d h:i:s'));
+        return;
+    }
       /** user presses cancel - LogOut and return ***/
-      if ($response == "false") {
-        var_dump($logoutUrl);
+     if ($response == "false") {
         echo '<script>window.location = "'.$logoutUrl.'";</script>'; 
         return;
       }
-return;
+       
+  return;
+    }
 }
 
+function updateTngConsent() {
+  $tngPath = getSubroot(). "config.php"; 
+  include ($tngPath);
+  $wpCurrentUser = wp_get_current_user() -> user_login;
+  $dt_consented = date('Y-m-d h:i:s');
+  $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 
-function updateWpConsent() {
-
-
-
-  
+  $sql = "UPDATE tng_users SET dt_consented='$dt_consented' WHERE username='$wpCurrentUser' ";
+  $success = mysqli_query($db, $sql);
+  return $success;
 }
 
-
+//UPDATE IGNORE `tng_users` SET `dt_consented`='0000-00-00 00:00:00' WHERE `username` = 'gondal'
+function getTngConsent() {
+	$tng_path = getSubroot(). "config.php";
+	include ($tng_path); 
+	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	if ($db->connect_error) {
+		die("Connection failed: " . $db->connect_error);
+	}
+	$wpCurrentUser = wp_get_current_user() -> user_login;
+	$sql = "SELECT * FROM tng_users WHERE username='$wpCurrentUser'";
+	$result = $db->query($sql);
+	if ($result) {
+		$row = $result->fetch_assoc();
+		$tng_consent = $row["dt_consented"];
+	return $tng_consent;
+	}
+}
 ?>
+<input type="text" id="alerttext" value="<?php echo $current_user_consent_text; ?>" hidden>
 <script>
  function getConfirmation() {
-               var retVal = confirm("I give my consent to upavadi.net to store the personal information collected here. I understand that I may ask the site owner to remove this information at any time.");
-                if (retVal == true) {
-                  window.location.href = 'http://localhost/login-consent.php?value=true';
-               
-                } else {
-                  window.location.href = 'http://localhost/login-consent.php?value=false';
-                 }
-                
-
-
+   var consentText = document.getElementById("alerttext").value
+    var retVal = confirm(consentText);
+    if (retVal == true) {
+      window.location.href = 'http://localhost/login-consent.php?value=true';
+    
+    } else {
+      window.location.href = 'http://localhost/login-consent.php?value=false';
+    }
     return;   
   }
 </script>

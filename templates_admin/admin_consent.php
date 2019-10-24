@@ -2,24 +2,34 @@
 require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_privacy() {
+	$tng_path = getSubroot(). "config.php";
+	include ($tng_path);
+	$tngcookieapproval = $tngdataprotect = $tngaskconsent = "No";
+	if ($tngconfig['cookieapproval'] == 1) 
+	$tngcookieapproval = "Yes";
+	if ($tngconfig['dataprotect'] == 1) 
+	$tngdataprotect = "Yes";
+	if ($tngconfig['askconsent'] == 1) 
+	$tngaskconsent = "Yes";
+
+	
     $config = optionsConfig();
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
     $configPrivacy = newRegPrivacy(); 
-	$tngVersion = guessTngVersion();
+	$tngVersion = guessTngVersion().".xx";
 	$consentEnabled = $configPrivacy['reg_form_consent']['enabled'];
 	$consentText = $configPrivacy['reg_form_consent']['line1'];
 	$consentPrompt = $configPrivacy['reg_form_consent']['prompt'];
 	$cookieApproval = $configPrivacy['cookieApproval'];
 	$cookieText = $configPrivacy['cookieText'];
-	
-    $consenttrue = "";
+	$consenttrue = "";
     $consentfalse = "selected";
     if ($consent == true) {
         $consenttrue = "selected";
         $consentfalse = "";
     } 
 
-	var_dump($configPrivacy, $_POST);
+	//var_dump($configPrivacy, $_POST);
 	if ($_POST) {	
 		$key1 = $_POST['key1'];
 		$key2 = $_POST['key2'];
@@ -52,21 +62,47 @@ function set_plugin_privacy() {
 	<div class="regsubtitle">
 	<?php echo $configPrivacy['title']; ?>
 	</div>
-
 	<div class="rowadjust regsections">
-    <?php echo "TNG Version = ". $tngVersion; ?>	
+		<div style="font-weight: bold">
+		<?php echo "TNG Version is ". $tngVersion. ". "; ?>
+		You may still use Privacy for TNG Versions 9 - 11
+		</div>
 		<!-- consent -->
+		<div class="row rowadjust" style="padding-top: 1em;">
+			<div align="right" class='col-md-4'>
+			Show cookie approval message
+			</div>
+			<div class='col-md-6'>	
+			<?php echo $tngcookieapproval; ?>
+			</div>
+		</div>
+		<div class="row rowadjust" style="padding-top: 0em;">
+			<div align="right" class='col-md-4'>
+			Show link to data protection policy:
+			</div>
+			<div class='col-md-6'>	
+			<?php echo $tngdataprotect; ?>
+			</div>
+		</div>
+		<div class="row rowadjust" style="padding-top: 0em;">
+			<div align="right" class='col-md-4'>
+			Prompt for consent regarding personal info
+			</div>
+			<div class='col-md-6'>	
+			<?php echo $tngaskconsent; ?>
+			</div>
+		</div>
 		<div class="row rowadjust" style="padding-top: 1em;">
 			<div align="right" class='col-md-4'>
 			Enable User Consent regarding personal info: 
 			</div>
 			<div class='col-md-6'>	
-			<input type="checkbox" class="form-check-input" name="consentEnabled" id="consentEnabled" checke>
+			<input type="checkbox" class="form-check-input" name="consentEnabled" id="consentEnabled" checked>
 			</div>
 		</div>
 		<div class="row rowadjust" style="padding-top: .3em;">
 			<div style="text-align:right;" class='col-md-4'>
-			User consent agreement
+			User consent agreement Text
 			</div>
 			<div  class='col-md-6'>
 			<textarea class="form-control" name=consentText" placeholder="text for user consent agreement"><?php echo $consentText; ?></textarea></div>
