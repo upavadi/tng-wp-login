@@ -5,6 +5,8 @@
         "tng_photo_folder": "photos"
     },
     "login_text": {
+        "loggedout_greeting": "WP_TNG",
+        "cookie_notification": "Note: This site uses cookies",
         "greeting": "Welcome",
         "version_id": "to our genealogy site V12CK",
         "user_page": "wp-tng-profile",

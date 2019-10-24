@@ -293,6 +293,7 @@ function update_registration() {
 //read login text
 function read_login_message() {
 	$config = optionsConfig();
+	$login_post['loggedout_greeting'] = $config['login_text']['loggedout_greeting'];
 	$login_post['greeting'] = $config['login_text']['greeting'];
 	$login_post['version_id'] = $config['login_text']['version_id'];
 	$login_post['user_page'] = $config['login_text']['user_page'];
@@ -301,6 +302,7 @@ function read_login_message() {
 	$login_post['reg_page_name'] = $config['login_text']['reg_page_name'];
 	$login_post['lost_password'] = $config['login_text']['lost_password'];
 	$login_post['RememberMe'] = $config['login_text']['RememberMe'];
+	$login_post['cookie_notification'] = $config['login_text']['cookie_notification'];
 	return $login_post;
 }
 
@@ -309,6 +311,7 @@ function update_login_message() {
 	$path = (__DIR__. '/config.json');
 	$config = optionsConfig();
 	$config_new = $config;
+	$config_new['login_text']['loggedout_greeting'] = $_POST['loggedout_greeting'];
 	$config_new['login_text']['greeting'] = $_POST['greeting'];
 	$config_new['login_text']['version_id'] = $_POST['version_id'];
 	$config_new['login_text']['user_page'] = $_POST['user_page'];
@@ -317,11 +320,30 @@ function update_login_message() {
 	$config_new['login_text']['reg_page_name'] = $_POST['reg_page_name'];
 	$config_new['login_text']['lost_password'] = $_POST['lost_password'];
 	$config_new['login_text']['RememberMe'] = $_POST['RememberMe'];
+	$config_new['login_text']['cookie_notification'] = $_POST['cookie_notification'];
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	$path_json = (__DIR__. '/config.json');
 	file_put_contents($path_json, $json);
 	$success = "Changes to LogIn Text Saved";
 	return $success;
+}
+
+//read privacy
+function read_privacy() {
+	$configPrivacy = newRegPrivacy(); 
+	$privacy['title'] = $configPrivacy['title'];
+	$privacy['reg_form_privacy_line1'] = $configPrivacy['reg_form_consent']['line1'];
+	$privacy['reg_form_privacy_prompt'] = $configPrivacy['reg_form_consent']['prompt'];
+	$privacy['reg_form_privacy_page'] = $configPrivacy['reg_form_consent']['privacyPage'];
+	$privacy['reg_form_privacy_enabled'] = $configPrivacy['reg_form_consent']['enabled'];
+	$privacy['current_user_consent'] = $configPrivacy['current_user_consent'];
+	$privacy['current_user_consent_text'] = $configPrivacy['current_user_consent_text'];
+	$privacy['show_cookie_text'] = $configPrivacy['show_cookie_text'];
+	$privacy['cookieText'] = $configPrivacy['cookieText'];
+	$privacy['privacyDocLink'] = $configPrivacy['show_privacy_doc_link'];
+	$privacy['privacyDoc'] = $configPrivacy['current_user_consent'];
+	$privacy['current_user_consent'] = $configPrivacy['current_user_consent'];
+	return $privacy;
 }
 
 //Read text for Registration Complete

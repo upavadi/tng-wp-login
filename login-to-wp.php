@@ -20,7 +20,9 @@ class wp_tng_login_Widget extends WP_Widget {
 		global $wpdb, $currentUser, $wpCurrentUser, $args, $status3, $status4, $status5, $status6;
 		
 		$log_in_text = optionsConfig()['login_text'];
+		$loggedout_greeting = $log_in_text['loggedout_greeting'];
 		$greeting = $log_in_text['greeting'];
+		$cookie_notification = $log_in_text['cookie_notification'];
 		$identifier = $log_in_text['version_id'];
 		$user_page = $log_in_text['user_page'];
 		$user_page_name = $log_in_text['user_page_name'];
@@ -34,6 +36,7 @@ class wp_tng_login_Widget extends WP_Widget {
 		$register_page_url = home_url(). "/". $reg_page;
 		$wp_url = site_url();
 		$wpCurrentUser = wp_get_current_user() -> user_login;
+		$status8 = "";
 
 		$user_redirect = 
 			$args = array(
@@ -79,7 +82,7 @@ class wp_tng_login_Widget extends WP_Widget {
 			
 		} else {
 			
-			$status1 = "WP TNG - ". ("<label for='log'>Login</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
+			$status1 = $loggedout_greeting. " - ". ("<label for='log'>Login</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
 
 			$status2 = ( $args['remember'] ? '<input name="rememberme" type="checkbox" id="' . esc_attr( $args['id_remember'] ) . '" value="forever"' . ( $args['value_remember'] ? ' checked="checked"' : '' ) . ' /> ' . esc_html( $args['label_remember'] ) . ' |</label>' : '' );
 			
@@ -88,7 +91,7 @@ class wp_tng_login_Widget extends WP_Widget {
 			$status5 = ("<input type='submit' id='". $args['id_submit']. "' class='button-primary' value='Log In' name='wp-submit'>");
 			$status7 = "error message";
 			$status6 = ("<input type='hidden' value='". $args['redirect']. "' name='redirect_to'>");
-			$status8 = "Note: This site uses cookies";
+			$status8 = "<div id='cookie_alert'>". $cookie_notification. "</div>";
 			}
 	?>
 	<form id="<?php echo $args['form_id' ]; ?>" name="loginform" action="<?php echo $login_redirect; ?>" method="post">

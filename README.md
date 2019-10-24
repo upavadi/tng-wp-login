@@ -33,13 +33,13 @@ This widget replicates the Wordpress login/log out task and also logs into TNG (
 ## **Issues**
 **WP-TNG Integration** is achieved by displaying TNG content within Wordpress wrapper. 
 To my knowledge, there are 2 methods available for achieving this.
-
+~~ Works well with TNG V 9 - 10 and 12. Changes in V11 implemented but have not been tested ~~
 1. **Mark Barnes method** (MB-Method) uses a plugin to replace WP page with TNG content.
-~~Works well with TNG V 9 - 12 ~~
 Only known issue is that the WP-TNG integration plugin seems to deactivate TNG Login panel so that User cannot login to TNG using TNG Login Panel. Only way to login is by using WP_TNG Login. 
 If using this method, deselect "Integrate TNG/Wordpress logins: " option. 
 2. **Cees Kloosterman Method** (CK-Method) uses customized Header and Footer files by replacing TNG Header and footer by Hard coding topmenu.php, footer.php and meta.php, in TNG folder. This is a very simple and effective method and I have now converted my live site (and Beta test site) from MB-Method to CK-Method. The plugin is tested using this integration method.
 3. **Page Refresh** ~~may be required~~ is required to see successful TNG login. 
+4. **Send email** uses Worpress mail. It is possible that emails donot work if you have SMTP mail enabled in Wordpress. Please let me know if this is an issue.
 --------------
 
 ## **Change Log **
@@ -48,7 +48,10 @@ If using this method, deselect "Integrate TNG/Wordpress logins: " option.
   - Checks made for TNG Vesion 11 and 12 to cater for DB changes
   - changes to cater for MYSQL 5.7 strict mode
   - added Consent flag for new user - this will also apply to Wordpress
-  - work continues on Cookie Consent, Admin Privacy Menu and current user consent flag
+  - added ask-consent flag for existing users if not present
+  - Add consent flag in Wordpress to database
+  - Add optional generic cookie info under login banner. Text customisable
+  - Add privacy management menu in Admin WP_TNG Login
  ------------
 
 ## **Activation**
@@ -63,6 +66,8 @@ Password Reset |'wp-tng-resetPassword'|[reset_Password_form]
 Password Lost  | 'wp-tng-lostPassword'|[lost_Password_form]
 
 - Plugin checks for the path to TNG folder. If it cannot locate the folder, administrator is prompted to submit TNG Root (absolute) Path  and if tng folder is found, plugin is activated. 
+
+ - ***Please note that you will get PHP warnings, if debug is active,  complaining that it canno find subroot.php in TNG folder. Navigate to the bottom to see the prompt***
 ------------------------------
 ## **New Registration Form**
   A link to registration form is included in the login widget.

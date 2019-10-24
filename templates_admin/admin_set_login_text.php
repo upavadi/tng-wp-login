@@ -32,9 +32,15 @@ function set_plugin_login_messages() {
 	<div style="padding-top: 30px">
 	<b>Manage LogIn Text</b>
 	</div>
-	<div class="regsections">	
+	<div class="regsections">
 		<div class="form-group row col-md-12">
-		<label for="greetin" class="col-md-2 col-form-label">Greeting</label>
+		<label for="greetin" class="col-md-2 col-form-label">Logged Out</label>
+			<div class="col-md-10">
+			<input type="text" class="form-control" width="auto" name="loggedout_greeting" id="greeting inputs" value="<?php echo $login_post['loggedout_greeting']; ?>">
+			</div>
+		</div>			
+		<div class="form-group row col-md-12">
+		<label for="greetin" class="col-md-2 col-form-label">Logged In</label>
 			<div class="col-md-10">
 			<input type="text" class="form-control" width="auto" name="greeting" id="greeting inputs" value="<?php echo $login_post['greeting']; ?>">
 			</div>
@@ -80,6 +86,13 @@ function set_plugin_login_messages() {
 		<div class="col-md-10">
 			<input type="text" class="form-control" name="RememberMe" id="RememberMe inputs" value="<?php echo $login_post['RememberMe']; ?>">
 			</div> 
+		</div>
+		<div class="form-group row col-md-12">
+		<label for="greetin" class="col-md-2 col-form-label">Cookie Message</label>
+			<div class="col-md-10">
+			<input type="text" class="form-control" width="auto" name="cookie_notification" id="greeting inputs" value="<?php echo $login_post['cookie_notification']; ?>">
+			Leave blank for no cookie message
+			</div>
 		</div>
 	</div>
 	<p style="color: green; display: inline-block"><?php echo "<b>". $login_success. "</b><br />"; ?></p>

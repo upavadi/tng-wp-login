@@ -188,4 +188,16 @@ input[type="submit"] {
   display: block;
   margin: 0 auto;
 	width: 50%;
-}		
+}
+
+#cookie_alert {
+	background: #D1ECF1;
+	margin-top: 5px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	font-size: 1.2em;
+	height: 20px;
+
+}
