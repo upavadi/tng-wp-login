@@ -53,7 +53,10 @@ function registration_form($data, $config, $intro, $configPrivacy, $keys) {
 ob_start();
 $privacyText = $configPrivacy['line1'];
 $privacyConsent = $configPrivacy['enabled'];
-$privacyPage = $configPrivacy['privacyPage'];
+$showPrivacyDocLink =  $configPrivacy['show_privacy_doc_link'];    
+$privacyDoc = "";
+if ($showPrivacyDocLink)
+$privacyDoc = "<a href=" . $configPrivacy['privacyDoc']. ' target="_blank">Our Privacy Policy</a> '; 
 $message = $intro['line1']. $intro['line2']. $intro['line3']. $intro['line4']. $intro['line5']. $intro['line6'];
 ?>
 
@@ -110,7 +113,7 @@ if($privacyConsent) {
 	<div class="regsections">	
 	 <p>
 	 <input type="checkbox" name="consentGiven" id="consentGiven" <?php if($_POST['consentGiven']) echo "checked='checked'"; ?>> 
-	 <?php echo $privacyText. " "; ?> <a href="<?php echo "../". $privacyPage; ?>" target="_blank">Our Privacy Policy</a> </p>
+	 <?php echo $privacyText. " ". $privacyDoc; ?> </p>
 	 <div class="text-danger"><?php echo $data['errors']['consentGiven'] ?></div>
 	 </div>
 	 <?php

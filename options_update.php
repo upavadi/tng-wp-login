@@ -334,16 +334,35 @@ function read_privacy() {
 	$privacy['title'] = $configPrivacy['title'];
 	$privacy['reg_form_privacy_line1'] = $configPrivacy['reg_form_consent']['line1'];
 	$privacy['reg_form_privacy_prompt'] = $configPrivacy['reg_form_consent']['prompt'];
-	$privacy['reg_form_privacy_page'] = $configPrivacy['reg_form_consent']['privacyPage'];
+	$privacy['reg_form_privacy_page'] = $configPrivacy['reg_form_consent']['privacyDoc'];
 	$privacy['reg_form_privacy_enabled'] = $configPrivacy['reg_form_consent']['enabled'];
 	$privacy['current_user_consent'] = $configPrivacy['current_user_consent'];
 	$privacy['current_user_consent_text'] = $configPrivacy['current_user_consent_text'];
 	$privacy['show_cookie_text'] = $configPrivacy['show_cookie_text'];
 	$privacy['cookieText'] = $configPrivacy['cookieText'];
-	$privacy['privacyDocLink'] = $configPrivacy['show_privacy_doc_link'];
-	$privacy['privacyDoc'] = $configPrivacy['current_user_consent'];
-	$privacy['current_user_consent'] = $configPrivacy['current_user_consent'];
+	$privacy['privacyDocLink'] = $configPrivacy['reg_form_consent']['show_privacy_doc_link'];
+	//var_dump($configPrivacy);
 	return $privacy;
+}
+
+//update privacy
+function update_privacy() {
+	$path = (__DIR__. '/config_privacy.json');
+	$configPrivacy = newRegPrivacy(); 
+	$config_new = $configPrivacy; 
+	$config_new['reg_form_consent']['line1'] = $_POST['consentText'];
+	$config_new['reg_form_consent']['prompt'] = $_POST['consentPrompt'];
+	$config_new['reg_form_consent']['privacyDoc'] = $_POST['privacyDoc'];
+	$config_new['reg_form_consent']['show_privacy_doc_link'] = $_POST['show_data_protect'];
+	//$config_new['reg_form_consent']['enabled'] = $_POST[''];
+	$config_new['current_user_consent'] = $_POST['current_user_consent'];
+	$config_new['current_user_consent_text'] = $_POST['current_user_consent_text'];
+	$config_new['show_cookie_text'] = $_POST['cookieText'];
+	$config_new['reg_form_consent']['privacyDoc'] = $_POST['tng__protect_url'];
+	$config_new['cookieText'] = $_POST['cookieText'];
+	
+
+	return $config_new;
 }
 
 //Read text for Registration Complete

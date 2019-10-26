@@ -3,15 +3,14 @@
     "reg_form_consent": {
         "line1": "I give my consent to this site to store the personal information collected here. I understand that I may ask the site owner to keep this information private, at any time.Note: This Site uses cookies",
         "prompt": "May we have your consent for this site to store personal information? ",
-        "privacyPage": "privacy-policy",
+        "privacyDoc": "http://localhost/tng12mb/data_protection_policy.php",
+        "show_privacy_doc_link": true,
         "enabled": true
     },
 
     "current_user_consent": true,
     "current_user_consent_text": "May we have your consent for this site to store personal information? You may ask us to keep this information private, at any time.",
     "show_cookie_text": true,
-    "cookieText": "Note: This Site uses cookies",
-    "show_privacy_doc_link": true,
-    "privacyDoc": ""
-    
+    "cookieText": "Note: This Site uses cookies"
+        
 }
