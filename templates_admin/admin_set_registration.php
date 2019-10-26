@@ -4,6 +4,7 @@
 //Admin Submenu: Set Registration Page
 
 function set_plugin_registration() {
+	global $success;
 	$config = optionsConfig();
 	$config_headers = ($config['reg_form']['sections']);
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";

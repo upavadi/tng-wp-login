@@ -1,6 +1,7 @@
 <?php
 /** setup text for Profile Page */
 function set_plugin_profile() {
+	global $success;
 	$config = optionsConfig();
 	$config_headers = ($config['show_profile']['sections']);
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
@@ -35,6 +36,7 @@ function set_plugin_profile() {
 	Profile Template
 	</div>
 	<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
+
 	<!-- Section One -->	
 	<div>
 		<b>Section One</b>
@@ -185,7 +187,7 @@ function set_plugin_profile() {
 		<div class="row rowadjust">
 			<div  class='col-md-3'>
 			<label for="label2d">Re-enter Password</label>
-			<input type="text" class="form-control" width="auto" name="label2d" id='label2d' value= '<?php echo $section2_fields[3]['label']; ?>'>
+			<input type="text" class="form-control" width="auto" name="label2d" id='label2d' value= '<?php echo $post['label2d']; ?>'>
 			</div>
 			<div  class='col-md-3'>
 			<label for="description2d">Description</label>
@@ -200,6 +202,7 @@ function set_plugin_profile() {
 			</div>
 		</div>
 	</div>
+
 	<!-- Section Three -->	
 	<div style="margin-top: 10px">
 	<b>Section Three</b>

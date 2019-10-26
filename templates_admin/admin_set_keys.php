@@ -2,6 +2,7 @@
 require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_keys() {
+	global $success;
     $keys = keyValues();
     $key1 = $keys['key1'];
 	$key2 = $keys['key2'];

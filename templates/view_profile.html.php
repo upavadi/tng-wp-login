@@ -41,19 +41,20 @@ function inputProfile($field, $label, $description, $placeholder, $value, $error
 }
 
 function view_profile($data, $data_meta, $def_photo_path, $config) {
+global $nickname;
 
 /** array for display name dropdown **/
 $display_meta = ($data_meta['values']);
 $display_data = $data['values']->data;
-$NickName = $display_meta[nickname][0];
+$NickName = $data_meta['values']['nickname'][0];
 $userName = $display_data->user_login;
-$FirstName = $display_meta[first_name][0];
-$LastName = $display_meta[last_name][0];
+$FirstName = $data_meta['values']['first_name'][0];
+$LastName = $data_meta['values']['last_name'][0];
 $FirstLastName = $FirstName. " ". $LastName;
 $LastFirstName = $LastName. " ". $FirstName;
 $DisplayedName = $display_data->display_name;
 $DropDownArray = array($NickName, $userName, $FirstName, $LastName, $FirstLastName, $LastFirstName);
-/*********/
+
 ob_start();
 $tngUrl = getTngUrl();
 $tngPhotoFolder = getTng_photo_folder();
@@ -87,6 +88,7 @@ foreach ($config['sections'] as $section) {
 		$user_data = ($data['values']);
 		$value = ($user_data -> $data_value);
 		}
+		
 		$dataArray[$count] = ($value);
 		$count = $count + 1;
 			if ($spec['textenabled'] === false && $spec['name'] !== "display_name" ) {

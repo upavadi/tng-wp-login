@@ -21,12 +21,11 @@ function show_profile() {
 	$def_photo_path = get_tng_default_photo($db);
 	$data['errors'] = validate_profile($_POST);
 	//var_dump($data['errors']);
-	if (empty($data['errors']) && $_POST['submitProfile'])  {
+	if (empty($data['errors']) && isset($_POST['submitProfile']))  {
 		$post = $_POST;
 		update_wp($post, $data);
 		
 		}
-		
 	$data3 = (array_merge($data, $data_meta));
 	echo view_profile($data, $data_meta, $def_photo_path, $config['show_profile']);
 	//profile_complete($_POST, $data, $data_meta);

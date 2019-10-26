@@ -155,11 +155,13 @@ function update_profile() {
 
 function read_reg_form() {
 	$config = optionsConfig();
+	//var_dump($config['reg_form']['sections'][0]);
+	
 	$header1 = $config['reg_form']['sections'][0];
 	$header1a = $config['reg_form']['sections'][0]['fields'][0];
 	$header1b = $config['reg_form']['sections'][0]['fields'][1];
 	$header1c = $config['reg_form']['sections'][0]['fields'][2];
-	$header1d = $config['reg_form']['sections'][0]['fields'][3];
+	//$header1d = $config['reg_form']['sections'][0]['fields'][3];
 	$post['header1'] = $header1['label'];
 	$post['label1a'] = $header1a['label'];
 	$post['description1a'] = $header1a['description'];
@@ -175,7 +177,7 @@ function read_reg_form() {
 	$header2a = $config['reg_form']['sections'][1]['fields'][0];
 	$header2b = $config['reg_form']['sections'][1]['fields'][1];
 	$header2c = $config['reg_form']['sections'][1]['fields'][2];
-	$header2d = $config['reg_form']['sections'][1]['fields'][3];
+	//$header2d = $config['reg_form']['sections'][1]['fields'][3];
 	$post['header2'] = $header2['label'];
 	$post['label2a'] = $header2a['label'];
 	$post['description2a'] = $header2a['description'];
@@ -186,9 +188,9 @@ function read_reg_form() {
 	$post['label2c'] = $header2c['label'];
 	$post['description2c'] = $header2c['description'];
 	$post['placeholder2c'] = $header2c['placeholder'];
-	$post['label2d'] = $header2d['label'];
-	$post['description2d'] = $header2d['description'];
-	$post['placeholder2d'] = $header2d['placeholder'];
+	//$post['label2d'] = $header2d['label'];
+	//$post['description2d'] = $header2d['description'];
+	//$post['placeholder2d'] = $header2d['placeholder'];
 
 	$header3 = $config['reg_form']['sections'][2];
 	$header3a = $config['reg_form']['sections'][2]['fields'][0];
@@ -202,7 +204,6 @@ function read_reg_form() {
 	$post['description3b'] = $header3b['description'];
 	$post['placeholder3b'] = $header3b['placeholder'];
 	$post['enabled3b'] = $header3b['enabled'];
-	
 	return $post;
 }
 //update Text used for Registration form
@@ -332,15 +333,15 @@ function update_login_message() {
 function read_privacy() {
 	$configPrivacy = newRegPrivacy(); 
 	$privacy['title'] = $configPrivacy['title'];
-	$privacy['reg_form_privacy_line1'] = $configPrivacy['reg_form_consent']['line1'];
-	$privacy['reg_form_privacy_prompt'] = $configPrivacy['reg_form_consent']['prompt'];
-	$privacy['reg_form_privacy_page'] = $configPrivacy['reg_form_consent']['privacyDoc'];
-	$privacy['reg_form_privacy_enabled'] = $configPrivacy['reg_form_consent']['enabled'];
+	$privacy['consentText'] = $configPrivacy['reg_form_consent']['line1'];
+	$privacy['consentPrompt'] = $configPrivacy['reg_form_consent']['prompt'];
+	$privacy['tng_protect_url'] = $configPrivacy['reg_form_consent']['privacyDoc'];
+	$privacy['askConsent'] = $configPrivacy['reg_form_consent']['enabled'];
 	$privacy['current_user_consent'] = $configPrivacy['current_user_consent'];
 	$privacy['current_user_consent_text'] = $configPrivacy['current_user_consent_text'];
-	$privacy['show_cookie_text'] = $configPrivacy['show_cookie_text'];
+	$privacy['showCookie'] = $configPrivacy['show_cookie_text'];
 	$privacy['cookieText'] = $configPrivacy['cookieText'];
-	$privacy['privacyDocLink'] = $configPrivacy['reg_form_consent']['show_privacy_doc_link'];
+	$privacy['show_data_protect'] = $configPrivacy['reg_form_consent']['show_privacy_doc_link'];
 	//var_dump($configPrivacy);
 	return $privacy;
 }
@@ -350,19 +351,40 @@ function update_privacy() {
 	$path = (__DIR__. '/config_privacy.json');
 	$configPrivacy = newRegPrivacy(); 
 	$config_new = $configPrivacy; 
+	if ($_POST['showCookie'] == 'on') {
+		$config_new['show_cookie_text'] = true;
+	} else {
+		$config_new['show_cookie_text'] = false;	
+	}
+	$config_new['cookieText'] = $_POST['cookieText'];
+
+	if ($_POST['askConsent'] == 'on') {
+		$config_new['reg_form_consent']['enabled'] = true;
+	} else {
+		$config_new['reg_form_consent']['enabled'] = false;	
+	}
 	$config_new['reg_form_consent']['line1'] = $_POST['consentText'];
 	$config_new['reg_form_consent']['prompt'] = $_POST['consentPrompt'];
-	$config_new['reg_form_consent']['privacyDoc'] = $_POST['privacyDoc'];
-	$config_new['reg_form_consent']['show_privacy_doc_link'] = $_POST['show_data_protect'];
-	//$config_new['reg_form_consent']['enabled'] = $_POST[''];
-	$config_new['current_user_consent'] = $_POST['current_user_consent'];
-	$config_new['current_user_consent_text'] = $_POST['current_user_consent_text'];
-	$config_new['show_cookie_text'] = $_POST['cookieText'];
-	$config_new['reg_form_consent']['privacyDoc'] = $_POST['tng__protect_url'];
-	$config_new['cookieText'] = $_POST['cookieText'];
-	
 
-	return $config_new;
+	if ($_POST['current_user_consent'] == 'on') {
+		$config_new['current_user_consent'] = true;
+	} else {
+		$config_new['current_user_consent'] = false;	
+	}
+	$config_new['current_user_consent_text'] = $_POST['current_user_consent_text'];
+
+	if ($_POST['show_data_protect'] == 'on') {
+		$config_new['reg_form_consent']['show_privacy_doc_link'] = true;
+	} else {
+		$config_new['reg_form_consent']['show_privacy_doc_link'] = false;	
+	}
+	$config_new['reg_form_consent']['privacyDoc'] = $_POST['tng_protect_url'];
+	
+	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+	$path_json = (__DIR__. '/config_privacy.json');
+	file_put_contents($path_json, $json);
+	$success = 'Changes Saved';
+	return $success;
 }
 
 //Read text for Registration Complete

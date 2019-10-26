@@ -4,6 +4,7 @@
 require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_login_messages() {
+	global $login_success;
 	$config = optionsConfig();
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 

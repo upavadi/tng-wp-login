@@ -2,6 +2,7 @@
 //Text for Password Reset prompts and email
 
 function set_plugin_pwreset_messages() {
+	global $pw_reset_success, $pw_lost_success, $pw_email_success;
 	$config = optionsConfig();
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 // Password Reset Template 
@@ -159,7 +160,7 @@ if (isset($_POST['email_lost_message'])) {
 		<div class="form-group row col-md-12">
 			<label for="pwemail_cc" class="col-md-1 col-form-label">CopyTo</label>
 			<div class="col-md-11">
-			<input type="email" class="form-control" width="auto" name="pwemail_cc" id="pwemail_cc" placeholder="send email copy to" value="<?php echo $emailLost_post['pwemail_cc']; ?>">
+			<input type="email" class="form-control" width="auto" name="pwemail_cc" id="pwemail_cc" placeholder="send email copy to" value="<?php //echo $emailLost_post['pwemail_cc']; ?>">
 			</div> 
 		</div>
 		-->

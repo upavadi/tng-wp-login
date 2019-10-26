@@ -2,6 +2,7 @@
 //Registration form template
 
 function set_plugin_reg_messages() {
+	global $reg_success, $Tngemail_success, $email_success, $intro_success;
 	$config = optionsConfig();
 		$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
  
