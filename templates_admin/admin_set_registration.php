@@ -17,6 +17,7 @@ function set_plugin_registration() {
 		$post = $_POST;
 		$success = update_registration();
 	}
+
 ?>
 <head>
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/wp_tng_login.css';?>">

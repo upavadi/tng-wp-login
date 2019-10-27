@@ -41,25 +41,23 @@ function inputProfile($field, $label, $description, $placeholder, $value, $error
 }
 
 function view_profile($data, $data_meta, $def_photo_path, $config) {
-global $nickname;
-
+global $nickname, $count, $error;
 /** array for display name dropdown **/
 $display_meta = ($data_meta['values']);
-$display_data = $data['values']->data;
 $NickName = $data_meta['values']['nickname'][0];
-$userName = $display_data->user_login;
 $FirstName = $data_meta['values']['first_name'][0];
 $LastName = $data_meta['values']['last_name'][0];
+$display_data = $data['values']->data;
+$userName = $display_data->user_login;
 $FirstLastName = $FirstName. " ". $LastName;
 $LastFirstName = $LastName. " ". $FirstName;
 $DisplayedName = $display_data->display_name;
 $DropDownArray = array($NickName, $userName, $FirstName, $LastName, $FirstLastName, $LastFirstName);
-
+//var_dump($data['values']);
 ob_start();
 $tngUrl = getTngUrl();
 $tngPhotoFolder = getTng_photo_folder();
 $photopath = $tngUrl. $tngPhotoFolder. "/". $def_photo_path;
-
 ?>
 
 <div class="container-fluid">
@@ -82,7 +80,9 @@ foreach ($config['sections'] as $section) {
 		$field = $spec['name'];
 		$user_meta_values = ($data_meta['values']);
 		$data_value = $spec['name'];
+		if (isset($user_meta_values[$data_value][0]))
 		$value = $user_meta_values[$data_value][0];
+		if (isset($data['errors'][$field]))
 		$error = $data['errors'][$field] ?: '';
 		if (!$value) {
 		$user_data = ($data['values']);

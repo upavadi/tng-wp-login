@@ -50,6 +50,7 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 }
 
 function registration_form($data, $config, $intro, $configPrivacy, $keys) {
+	global $data;
 ob_start();
 $privacyText = $configPrivacy['line1'];
 $privacyConsent = $configPrivacy['enabled'];
@@ -112,7 +113,7 @@ if($privacyConsent) {
 	?>
 	<div class="regsections">	
 	 <p>
-	 <input type="checkbox" name="consentGiven" id="consentGiven" <?php if($_POST['consentGiven']) echo "checked='checked'"; ?>> 
+	 <input type="checkbox" name="consentGiven" id="consentGiven" <?php if(isset($_POST['consentGiven'])) echo "checked='checked'"; ?>> 
 	 <?php echo $privacyText. " ". $privacyDoc; ?> </p>
 	 <div class="text-danger"><?php echo $data['errors']['consentGiven'] ?></div>
 	 </div>

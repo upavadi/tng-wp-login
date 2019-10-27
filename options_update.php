@@ -190,7 +190,7 @@ function read_reg_form() {
 	$post['placeholder2c'] = $header2c['placeholder'];
 	//$post['label2d'] = $header2d['label'];
 	//$post['description2d'] = $header2d['description'];
-	//$post['placeholder2d'] = $header2d['placeholder'];
+//	$post['placeholder2d'] = $header2d['placeholder'];
 
 	$header3 = $config['reg_form']['sections'][2];
 	$header3a = $config['reg_form']['sections'][2]['fields'][0];
@@ -217,34 +217,15 @@ function update_registration() {
 	
 	/****headers 1 ****/
 	$config_new['reg_form']['sections'][0]['label'] = $_POST[header1];
-	
 	$config_new['reg_form']['sections'][0]['fields'][0]['label'] = $_POST[label1a];
 	$config_new['reg_form']['sections'][0]['fields'][0]['description'] = $_POST[description1a];
 	$config_new['reg_form']['sections'][0]['fields'][0]['placeholder'] = $_POST[placeholder1a];
-	if (isset($_POST['enabled1a'])) {
-	$config_new['reg_form']['sections'][0]['fields'][0]['enabled'] = true;
-	} else {
-	$config_new['reg_form']['sections'][0]['fields'][0]['enabled'] = false;
-	}
-	
 	$config_new['reg_form']['sections'][0]['fields'][1]['label'] = $_POST[label1b];
 	$config_new['reg_form']['sections'][0]['fields'][1]['description'] = $_POST[description1b];
 	$config_new['reg_form']['sections'][0]['fields'][1]['placeholder'] = $_POST[placeholder1b];
-	if (isset($_POST['enabled1b'])) {
-	$config_new['reg_form']['sections'][0]['fields'][1]['enabled'] = true;
-	} else {
-	$config_new['reg_form']['sections'][0]['fields'][1]['enabled'] = false;
-	}
-	
 	$config_new['reg_form']['sections'][0]['fields'][2]['label'] = $_POST[label1c];
 	$config_new['reg_form']['sections'][0]['fields'][2]['description'] = $_POST[description1c];
 	$config_new['reg_form']['sections'][0]['fields'][2]['placeholder'] = $_POST[placeholder1c];
-	if (isset($_POST['enabled1c'])) {
-	$config_new['reg_form']['sections'][0]['fields'][2]['enabled'] = true;
-	} else {
-	$config_new['reg_form']['sections'][0]['fields'][2]['enabled'] = false;
-	}
-	
 	/****headers 2 ****/
 	$config_new['reg_form']['sections'][1]['label'] = $_POST[header2];
 	$config_new['reg_form']['sections'][1]['fields'][0]['label'] = $_POST[label2a];
@@ -258,11 +239,11 @@ function update_registration() {
 	$config_new['reg_form']['sections'][1]['fields'][2]['label'] = $_POST[label2c];
 	$config_new['reg_form']['sections'][1]['fields'][2]['description'] = $_POST[description2c];
 	$config_new['reg_form']['sections'][1]['fields'][2]['placeholder'] = $_POST[placeholder2c];
-	
+	/**
 	$config_new['reg_form']['sections'][1]['fields'][3]['label'] = $_POST[label2d];
 	$config_new['reg_form']['sections'][1]['fields'][3]['description'] = $_POST[description2d];
 	$config_new['reg_form']['sections'][1]['fields'][3]['placeholder'] = $_POST[placeholder2d];
-	
+	**/
 	/****headers 3 ****/
 	$config_new['reg_form']['sections'][2]['label'] = $_POST[header3];
 	
@@ -283,7 +264,8 @@ function update_registration() {
 	} else {
 	$config_new['reg_form']['sections'][2]['fields'][1]['enabled'] = false;
 	}
-	
+	var_dump($config_new['reg_form']['sections'][1]['fields']);
+	var_dump($_POST);
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	$path_json = (__DIR__. '/config.json');
 	file_put_contents($path_json, $json);

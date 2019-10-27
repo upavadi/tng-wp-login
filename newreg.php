@@ -15,7 +15,9 @@ $newreg_check = "00";
 function new_reg() {
 	$keys = keyValues();
 	$input = $_POST;
+	if(isset($_POST['loginname']))
 	$newloginname = $_POST['loginname'];
+	if(isset($_POST['email']))
 	$newemail = $_POST['email'];
 	$config = newRegConfig();
 	$configPrivacy = newRegPrivacy();

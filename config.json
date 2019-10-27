@@ -80,7 +80,7 @@
                 "fields": [
                     {
                         "name": "firstname",
-                        "enabled": false,
+                        "enabled": true,
                         "textenabled": false,
                         "type": "text",
                         "label": "First Name*",
@@ -89,7 +89,7 @@
                     },
                     {
                         "name": "lastname",
-                        "enabled": false,
+                        "enabled": true,
                         "textenabled": false,
                         "type": "text",
                         "label": "Last Name*",
@@ -98,7 +98,7 @@
                     },
                     {
                         "name": "NickName",
-                        "enabled": false,
+                        "enabled": true,
                         "textenabled": false,
                         "type": "text",
                         "label": "Nick Name",
@@ -136,11 +136,6 @@
                         "label": "password*",
                         "description": " password you can remember",
                         "placeholder": "8 or more is good"
-                    },
-                    {
-                        "label": null,
-                        "description": null,
-                        "placeholder": null
                     }
                 ]
             },

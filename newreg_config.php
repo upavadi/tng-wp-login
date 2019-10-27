@@ -97,6 +97,8 @@ function getSubroot() {
 
 function nameTng() {
 	//does user name in tng exist
+	global $tng_name_check;
+	if(isset($_POST['loginname']))
 	$tng_name_check = ($_POST['loginname']);
 	$tng_path = getSubroot(). "config.php";
 	include ($tng_path); 
