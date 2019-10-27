@@ -255,9 +255,3 @@ function check_credentials() {
 	return $conditions;
 
 }
-
-
-/***
-	$sql = "INSERT INTO `tng_users` (`username`, `description`, `password`, `email`, `realname`, `notes`, `role`, `allow_living`, `website`, `dt_registered`, `gedcom`, `branch`, `phone`, `address`, `city`, `state`, `zip`, `country`, `no_email`, `password_type`, `mygedcom`) values('$userName', '$description', '$password', '$email', '$realname', '$notes', '$role', '$allow_living', '$website', '$date', '$gedcom', '$branch', '$phone', '$address', '$city', '$state', '$zip', '$country', '$no_email', '$password_type', '')";
-
-****/

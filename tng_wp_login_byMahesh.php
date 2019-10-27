@@ -29,7 +29,6 @@ require_once 'templates/lost_password.html.php';
 require_once 'templates/reset_password.html.php';
 require_once 'templates_admin/admin_set_paths.php';
 //require_once "newreg_options.php";
-var_dump($_COOKIE);
 $tngPath = getSubroot(). 'config.php';
 if (!file_exists($tngPath)) {
 	$e = new Exception('TNG Path not found');
