@@ -6,9 +6,10 @@ require_once "login-to-wp.php";
 require_once "login-to-tng.php";
 //UPDATE IGNORE `tng_users` SET `dt_consented`='0000-00-00 00:00:00' WHERE `username` = 'gondal'
 //add_action( 'wp_login', 'checkConsent' );
-
+ 
 $current_user_consent = newRegPrivacy();
 $current_user_consent_text = $current_user_consent['current_user_consent_text'];
+if(isset($current_user_consent['privacyDoc']))
 $privacy_doc_url = newRegPrivacy()['privacyDoc'];
 
 function checkConsent() {
