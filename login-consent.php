@@ -18,10 +18,11 @@ function checkConsent() {
   $wpUserId = get_current_user_id();
   $userMeta = get_user_meta($wpUserId);
   $tngUser = getTngUserName($wpCurrentUser);
-
+  $tngRole = roleTng();
+  $wpRole = current_user_can('administrator'); var_dump($wpRole);
   //if user is 'admin' ignore
-  if (roleTng() == 'admin') return;
-  
+  if ($tngRole == 'admin' || $wpRole == true) return;
+    
   if (isset($userMeta['tng_dateconsented'])) $wpConsent = $userMeta['tng_dateconsented'];
 
   $tngConsent = getTngConsent();
@@ -34,6 +35,7 @@ function checkConsent() {
  //consent in wp only
   if ($wpConsent > 0 && $tngConsent == 0) {
    // echo "consent in wp only";
+   if($tngVersion >= 12)
     $success = updateTngConsent();
   }
 
@@ -75,6 +77,8 @@ function checkConsent() {
 }
 
 function updateTngConsent() {
+  $tngVersion = guessTngVersion();
+  if($tngVersion < 12) return ''; 
   $tngPath = getSubroot(). "config.php"; 
   include ($tngPath);
   $wpCurrentUser = wp_get_current_user() -> user_login;
