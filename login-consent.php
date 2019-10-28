@@ -7,7 +7,7 @@ require_once "login-to-tng.php";
 //UPDATE IGNORE `tng_users` SET `dt_consented`='0000-00-00 00:00:00' WHERE `username` = 'gondal'
 //add_action( 'wp_login', 'checkConsent' );
 
-$current_user_consent['current_user_consent'] = newRegPrivacy();
+$current_user_consent = newRegPrivacy();
 $current_user_consent_text = $current_user_consent['current_user_consent_text'];
 $privacy_doc_url = newRegPrivacy()['privacyDoc'];
 
@@ -22,8 +22,8 @@ function checkConsent() {
   if (roleTng() == 'admin') return;
   
   if (isset($userMeta['tng_dateconsented'])) $wpConsent = $userMeta['tng_dateconsented'];
+
   $tngConsent = getTngConsent();
-  
   if ($wpConsent > 0 && $tngConsent > 0)
     {
     // echo "consented";
@@ -34,14 +34,13 @@ function checkConsent() {
   if ($wpConsent > 0 && $tngConsent == 0) {
    // echo "consent in wp only";
     $success = updateTngConsent();
-    var_dump($tngConsent, $wpConsent);
   }
 
   //consent in tng only
   if (!$wpConsent && $tngConsent > 0) {
   //  echo "consent in tng only";
     update_user_meta($wpUserId, 'tng_dateconsented', date('Y-m-d h:i:s'));
-    var_dump($tngConsent, $wpConsent);
+    
   }
   
   $logoutUrl = (wp_logout_url(home_url()));
