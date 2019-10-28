@@ -3,7 +3,7 @@
     "reg_form_consent": {
         "line1": "I give my consent to this site to store the personal information collected here. I understand that I may ask the site owner to keep this information private, at any time.Note: This Site uses cookies",
         "prompt": "May we have your consent for this site to store personal information? ",
-        "privacyDoc": "http:\/\/localhost\/your Wordpress page ",
+        "privacyDoc": "http:\/\/localhost\/privacy-policy",
         "show_privacy_doc_link": true,
         "enabled": true
     },

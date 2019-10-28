@@ -95,6 +95,26 @@ function getSubroot() {
 
 }
 
+function roleTng() {
+	//does user name in tng exist
+	global $tng_name_check;
+	$tng_user_name = wp_get_current_user() -> user_login;;
+	$tng_path = getSubroot(). "config.php";
+	include ($tng_path); 
+	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	if ($db->connect_error) {
+		die("Connection failed: " . $db->connect_error);
+	}
+	$sql = "SELECT * FROM tng_users WHERE username='$tng_user_name'";
+	$result = $db->query($sql);
+	if ($result) {
+		$row = $result->fetch_assoc();
+		$tng_user_role = $row["role"];
+	return $tng_user_role;
+	}
+	return false;
+}
+
 function nameTng() {
 	//does user name in tng exist
 	global $tng_name_check;
@@ -160,7 +180,6 @@ return $tng_loginname;
 }
 
 function guessTngVersion() {
-/** No checks for version 11. Developer not aware of any DB changes ****** */	
 	$tng_path = getSubroot(). "config.php";
 	include($tng_path);
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);

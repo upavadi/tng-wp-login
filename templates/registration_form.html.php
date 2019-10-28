@@ -1,5 +1,4 @@
 <?php
-
 function input($field, $label, $description, $placeholder, $value, $error, $type = 'text') {
 	$errorClass = '';
 	if ($error) {

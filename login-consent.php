@@ -4,9 +4,12 @@ require_once ($wp_path.'/wp-load.php');
 require_once "newreg_config.php";
 require_once "login-to-wp.php";
 require_once "login-to-tng.php";
+//UPDATE IGNORE `tng_users` SET `dt_consented`='0000-00-00 00:00:00' WHERE `username` = 'gondal'
 //add_action( 'wp_login', 'checkConsent' );
-$current_user_consent = newRegPrivacy();
+
+$current_user_consent['current_user_consent'] = newRegPrivacy();
 $current_user_consent_text = $current_user_consent['current_user_consent_text'];
+$privacy_doc_url = newRegPrivacy()['privacyDoc'];
 
 function checkConsent() {
   $wpConsent = "";
@@ -15,7 +18,9 @@ function checkConsent() {
   $userMeta = get_user_meta($wpUserId);
   $tngUser = getTngUserName($wpCurrentUser);
 
-
+  //if user is 'admin' ignore
+  if (roleTng() == 'admin') return;
+  
   if (isset($userMeta['tng_dateconsented'])) $wpConsent = $userMeta['tng_dateconsented'];
   $tngConsent = getTngConsent();
   
@@ -102,13 +107,14 @@ function getTngConsent() {
 <input type="text" id="alerttext" value="<?php echo $current_user_consent_text; ?>" hidden>
 <script>
  function getConfirmation() {
+   
    var consentText = document.getElementById("alerttext").value
     var retVal = confirm(consentText);
     if (retVal == true) {
-      window.location.href = 'http://localhost/login-consent.php?value=true';
+      window.location.href = '/login-consent.php?value=true';
     
     } else {
-      window.location.href = 'http://localhost/login-consent.php?value=false';
+      window.location.href = '/login-consent.php?value=false';
     }
     return;   
   }
