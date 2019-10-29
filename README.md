@@ -56,6 +56,7 @@ My Test site is using this method with TNG V10.
   - Add consent flag in Wordpress to database
   - Add optional generic cookie info under login banner. Text customisable
   - Add privacy management menu in Admin WP_TNG Login
+    - Exclude Admin from consent challange 
  ------------
 
 ## **Activation**
