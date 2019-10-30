@@ -85,6 +85,8 @@ function getTngPath() {
 
 function getSubroot() {
 	//alternative place for configuration files
+	$tngPath = getTngPath();
+	if ((!$tngPath)) return;
 	$subroot_path = getTngPath(). "subroot.php";
 	include($subroot_path);
 	$subrootPath = $tngconfig['subroot'];
@@ -97,6 +99,8 @@ function getSubroot() {
 
 function roleTng() {
 	//does user name in tng exist
+	$tngPath = getTngPath();
+	if ((!$tngPath)) return;
 	global $tng_name_check;
 	$tng_user_name = wp_get_current_user() -> user_login;;
 	$tng_path = getSubroot(). "config.php";
@@ -180,6 +184,8 @@ return $tng_loginname;
 }
 
 function guessTngVersion() {
+	$tngPath = getTngPath();
+	if ((!$tngPath)) return;
 	$tng_path = getSubroot(). "config.php";
 	include($tng_path);
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);

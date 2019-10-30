@@ -1,9 +1,9 @@
 # **Wordpress-TNG Login Widget** # 
 
 ## **Download**
-Download current release version 1.0.4 https://github.com/upavadi/tng-wp-login/releases/latest
+Release version 1.0.4 https://github.com/upavadi/tng-wp-login/releases/latest has been updated with V2.0.Beta
 
- - Current version is in use
+ - version 2.0.Beta is under going test in
  - ***Test Site:*** http://trial.upavadi.net/ site uses M Barnes plugin for wordpress / TNG integration
  - ***Live Site:*** http://www.upavadi.net/   site uses Kloosterman method for wordpress / TNG integration
 
@@ -57,6 +57,7 @@ My Test site is using this method with TNG V10.
   - Add optional generic cookie info under login banner. Text customisable
   - Add privacy management menu in Admin WP_TNG Login
     - Exclude Admin from consent challange 
+  - Trap Fatal PHP errors when it cannot find TNG folder 
  ------------
 
 ## **Activation**
