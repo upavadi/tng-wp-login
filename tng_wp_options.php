@@ -11,7 +11,6 @@ require_once "templates_admin/admin_consent.php";
 add_action('admin_menu', 'plugin_admin_add_page');
 
 //add_action('admin_init', 'plugin_admin_add_page');
-//6LdACicUAAAAAJwHZ194fiKcwhxiX4EHbmttcTCq
 
 function optionsConfig() {
 	static $config;

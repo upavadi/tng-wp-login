@@ -1,5 +1,4 @@
 <?php
-
 function input($field, $label, $description, $placeholder, $value, $error, $type = 'text') {
 	$errorClass = '';
 	if ($error) {
@@ -25,8 +24,6 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <html lang="en">
 <script src='https://www.google.com/recaptcha/api.js'></script>	
-
-
 
 <div class="row rowadjust <?php echo $errorClass; ?>">
 	<div class="col-md-2 entrylabel"><?php echo $label; ?></div>
@@ -152,5 +149,4 @@ return;
 
 </html>
 <?php
-	
 }

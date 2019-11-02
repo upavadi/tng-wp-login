@@ -1,13 +1,13 @@
 <?php
 require_once "templates/view_profile.html.php";
 require_once "showprofile.php";
-// function profile_complete($_POST) changed to
-function profile_complete() {
 
+function profile_complete() {
    if (isset($data['submitProfile'])) {
         update_wp($_POST, $data, $data_meta);
     }
 }
+
 if (isset($data))
 $display_data = $data['values']->data;
 if (isset($display_meta))

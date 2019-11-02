@@ -1,7 +1,6 @@
 <?php
 //Lost password. 
 // generate email with key to reset
-
 $config = newRegConfig()['forgot_pw'];
 
 function lostPassword() {
@@ -15,7 +14,7 @@ function lostPassword() {
 	return;
 	}
 
-	?>
+?>
 <!-- add bootstrap here instead of primary file to avoid conflucts with other plugins -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <div class="container-fluid">

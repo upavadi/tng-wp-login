@@ -60,10 +60,8 @@ function tng_path_not_specified() {
 			$success = "Paths saved";
 		}
 	}
-	?>
-
-    
-	<?php if($success) {
+	    
+	if($success) {
 		echo "<div class='notice notice-success'>";
 	} else {
 		echo "<div class='notice notice-error'>";
@@ -149,15 +147,3 @@ add_filter( 'retrieve_password_message', 'replace_retrieve_password_message', 10
 //add_shortcode( 'lost_Password_form', array( $this, 'render_login_form' ) );
 add_shortcode('lost_Password_form', 'lostPassword'); 
 add_shortcode('reset_Password_form', 'resetPassword'); 
-
-/** get real path to wp-load.php Useful to know
-    function find_wp_path() {
-        $dir = dirname(__FILE__);
-        do {
-            if( file_exists($dir."/wp-config.php") ) {
-                return $dir;
-            }
-        } while( $dir = realpath("$dir/..") );
-        return null;
-    }
-**/
