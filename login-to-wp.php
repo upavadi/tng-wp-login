@@ -1,6 +1,8 @@
 <?php
+/** Log-In Widget ****/
 require_once(ABSPATH. 'wp-load.php');
 require_once "newreg_config.php";
+
 /********** Class   *******/
 class wp_tng_login_Widget extends WP_Widget {
 	public function __construct() {
@@ -111,8 +113,6 @@ class wp_tng_login_Widget extends WP_Widget {
 <?php	
 
 }	//widget
-			
-
 } //class
 
 

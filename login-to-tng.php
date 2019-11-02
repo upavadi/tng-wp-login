@@ -7,17 +7,15 @@ require_once "newreg_config.php";
 require_once "login-to-wp.php";
 require_once "login-consent.php";
 add_action('init', 'StartSession', 1);
-add_action( 'wp_login', 'destroy_session' );
+//add_action( 'wp_login', 'destroy_session' );
 add_action( 'wp_logout', 'destroy_session' );
- 
 
 function StartSession() {
-   
-    //check to see if tng path is specified
+//check to see if tng path is specified
     $tngPath = getSubroot(). 'config.php';
     if (!file_exists($tngPath)) return;
 
-    //Check if current user is logged in WordPress
+//Check if current user is logged in WordPress
     if( is_user_logged_in() ) {
         if(!session_id()) {
             session_start();
@@ -30,6 +28,7 @@ function StartSession() {
 	   return;        
          
     }
+
     if (isset($_SESSION['logged_in'])) {    
         if ($_SESSION['logged_in']) {
             mutng_logout();
@@ -111,7 +110,6 @@ function mutng_login() {
     $tngrole = $_SESSION['tngrole'] = $row['role'];
     $newdate = mutng_db_update(); //check this !!
     return;
-       
 }
 
 function mutng_db_connect() {
@@ -184,9 +182,6 @@ function set_cookie() {
         error_log("Headers already sent in $file:$line");
         return;
     }
-    // $tnguser_newroot = ("tnguser_".$newroot);
-    // if ($_COOKIE[$tnguser_newroot]) return;
-    /** adding to avoide headers sent */
     setcookie("tnguser_$newroot", $row['username'], time()+31536000, "/", "",  false, true);
     setcookie("tngpass_$newroot", $row['password'], time()+31536000, "/", "",  false, true);
     setcookie("tngpasstype_$newroot", $row['password_type'], time()+31536000, "/", "", false, true);
@@ -226,5 +221,4 @@ function mutng_logout() {
    // return $_SESSION;
    	header('Location: ' . $_POST['redirect_to']); // Let's see if this logsout TNG
 	exit;
-    }
-    
+    }    
