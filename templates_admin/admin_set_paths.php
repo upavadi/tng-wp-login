@@ -1,6 +1,5 @@
 <?php
 //TNG Paths are derived from TNG config.php.
-
 require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_paths() {
@@ -11,7 +10,6 @@ if (!$_POST) {
 	$_POST['tng_path'] = $config_paths['tng_path'];
 	$_POST['tng_url'] = $config_paths['tng_url'];
 	$_POST['tng_photo_folder'] = $config_paths['tng_photo_folder'];
-	
 }
 $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
     // check user capabilities
@@ -23,11 +21,8 @@ $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 		$success = "";
 		update_paths();
 		$success = update_paths();
-	//	echo "<meta http-equiv='refresh' content=$success>";
-		//return;
 	}
-
-	?>
+?>
 <head>
 
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/wp_tng_login.css';?>">
@@ -63,7 +58,7 @@ $action_url = plugin_dir_url( __DIR__ ). "options_update.php";
 				<input type="text" class="form-control" name="tng_url" value= '<?php echo $_POST['tng_url']; ?>'>
 			</div>
 			<div  class='col-md-6'>
-			TNG URL is path to TNG (www.mysite.com/tng). You may look this up from TNG Admin Setup or config.php ($tngdomain) in TNG folder.
+			TNG URL is path to TNG (http://www.mysite.com/tng). You may look this up from TNG Admin Setup or config.php ($tngdomain) in TNG folder.
 			</div>
 		</div>
 		<div class="row rowadjust">

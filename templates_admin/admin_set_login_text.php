@@ -15,7 +15,6 @@ function set_plugin_login_messages() {
 		$login_post = $_POST;
 		$login_success = update_login_message();
 	}
-
 ?>
 
 <head>

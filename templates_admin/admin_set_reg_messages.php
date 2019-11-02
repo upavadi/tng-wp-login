@@ -148,7 +148,7 @@ function set_plugin_reg_messages() {
 	<p>
 	<input type="submit" name="update_Reg_success" value="Update New Registration Email" style="width: auto">
 	</p>
-	</div>
+	
 </form>
 </div>
 

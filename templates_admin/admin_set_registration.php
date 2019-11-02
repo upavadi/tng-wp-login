@@ -1,7 +1,5 @@
 <?php
 //Registration form template
-//Admin Menu: WP-TNG Login
-//Admin Submenu: Set Registration Page
 
 function set_plugin_registration() {
 	global $success;
@@ -17,13 +15,13 @@ function set_plugin_registration() {
 		$post = $_POST;
 		$success = update_registration();
 	}
-
 ?>
+
 <head>
 <link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url(__DIR__). '/css/wp_tng_login.css';?>">
-
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
+
 <div class="wrap">
 <div class="container" style='width: auto'>
 	<form class="form-group" action=''  method="post">

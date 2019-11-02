@@ -5,13 +5,7 @@ function set_plugin_profile() {
 	$config = optionsConfig();
 	$config_headers = ($config['show_profile']['sections']);
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
-	// $section = $config['show_profile']['sections'];
-	// $section1_fields = $section[0]['fields'];
-	// $section2_fields = $section[1]['fields'];
-	// $section3_fields = $section[2]['fields'];
-	// $enabled3a = $section3_fields[0]['enabled'];
-	// $enabled3b = $section3_fields[1]['enabled'];
-	
+
 	if(!isset($_POST['show_profile'])) {
 		$post = read_profile();
 	}
@@ -19,8 +13,6 @@ function set_plugin_profile() {
 	if (isset($_POST['show_profile'])) {
 		$post = $_POST;
 		$success = update_profile();
-	//	echo "<meta http-equiv='refresh' content=$success>";
-		//Header('Location: '.$_SERVER['REQUEST_URI'] . "&success=" . urlencode($success));
 	}
 ?>
 <head>

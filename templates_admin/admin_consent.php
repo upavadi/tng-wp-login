@@ -37,8 +37,6 @@ function set_plugin_privacy() {
 		$post['ask_consent'] = true;
 		}
 }
-	
-
 ?>
 
 <head>

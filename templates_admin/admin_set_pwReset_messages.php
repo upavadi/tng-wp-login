@@ -139,7 +139,6 @@ if (isset($_POST['email_lost_message'])) {
 </div>
 
 <!-- Lost Password email ----->
-
 <div class="container">
 <form class="form-group" action=''  method="post">
 <input type="hidden" class="form-control" width="auto" name="email_lost_message" id='email_lost_message' value=true >
@@ -156,14 +155,7 @@ if (isset($_POST['email_lost_message'])) {
 				<input type="text" class="form-control" width="auto" name="pwemail_title" id="pwemail_title" value="<?php echo $emailLost_post['pwemail_title']; ?>">
 				</div>
 		</div>
-		<!--
-		<div class="form-group row col-md-12">
-			<label for="pwemail_cc" class="col-md-1 col-form-label">CopyTo</label>
-			<div class="col-md-11">
-			<input type="email" class="form-control" width="auto" name="pwemail_cc" id="pwemail_cc" placeholder="send email copy to" value="<?php //echo $emailLost_post['pwemail_cc']; ?>">
-			</div> 
-		</div>
-		-->
+		
 		<div class="form-group row col-md-12">
 			<label for="pwemail_line1" class="col-md-1 col-form-label">Line 1</label>
 			<div class="col-md-11">
@@ -217,4 +209,3 @@ display: none;
 </style>
 <?php
 }
-?>
