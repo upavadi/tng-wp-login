@@ -2,7 +2,7 @@
 require_once "newreg_config.php"; 
 require_once "templates/view_profile.html.php";
 require_once "updateprofile.php";
-/** This function drives shortcode [user_registration] ***/
+/** This function drives shortcode [user_profile] ***/
 function show_profile() {
 	$configPath = getSubroot() . "config.php";
 	include ($configPath); //require_once stopped working

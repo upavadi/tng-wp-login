@@ -1,6 +1,5 @@
 <?php
 //updates config.json file
-
 require_once "tng_wp_options.php";
 // update tng real path, tng url and photos folder
 function update_paths() {

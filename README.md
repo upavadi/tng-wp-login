@@ -6,6 +6,7 @@ Release version 1.0.4 https://github.com/upavadi/tng-wp-login/releases/latest ha
  - version 2.0.Beta is under going test in
  - ***Test Site:*** http://trial.upavadi.net/ site uses M Barnes plugin for wordpress / TNG integration
  - ***Live Site:*** http://www.upavadi.net/   site uses Kloosterman method for wordpress / TNG integration
+ - On both sites, Wordpress and TNG are installed in their own folders.
 
 -----
 
@@ -15,7 +16,7 @@ The code is licenced under the [MIT licence](http://opensource.org/licenses/MIT)
 ------------
 
 ## **Introduction**
-This widget replicates the Wordpress login/log out task and also logs into TNG ( The Next Generation of Genealogy Sitebuilding )](http://www.tngsitebuilding.com/).
+This widget replicates the Wordpress login/log out task and also logs into TNG, [The Next Generation of Genealogy Sitebuilding](http://www.tngsitebuilding.com/).
 - Adds a Registration Form which may replace the Wordpress registration form by deselecting 'Membership>Anyone can register' in Wordpress Dashboard>Settings.
 - Adds a User Profile page which saves the changes in Wordpress and TNG database
 - Adds an enhanced Password-Reset module which checks for the presence of email of registered user.
@@ -24,8 +25,8 @@ This widget replicates the Wordpress login/log out task and also logs into TNG (
 - GDPR Privacy policy is implemented
 ---------------------
 ## **Compatibility**
-- The plugin is under Beta Test and tested on TNG 9.1, 10.1.3 and 12.2.1
-  - database changes made to TNG 11.x are allowed for
+- The plugin is under Final Beta Test and tested on TNG 9.1, 10.1.3 and 12.2.1
+  - database changes made to TNG 11.x are allowed for. My thanks to [Darrin](http://www.tngsitebuilding.com/) for supplying details.
 - PHP version 5.4 - 7.3
 -  Wordpress V 4.9 - 5.2.2 platform
 - A Wordpress twenty Twelve child theme. (Not tested in any other theme).
@@ -34,7 +35,7 @@ This widget replicates the Wordpress login/log out task and also logs into TNG (
 
 ## **Issues**
 **WP-TNG Integration** is achieved by displaying TNG content within Wordpress wrapper. 
-To my knowledge, there are 2 methods available for achieving this.
+To my knowledge, there are 2 main methods available for achieving this.
 Works well with TNG V 9 - 10 and 12. Changes in V11 implemented but have not been tested.
 1. **Mark Barnes method** (MB-Method) uses a plugin to replace WP page with TNG content.
 Only known issue is that the WP-TNG integration plugin seems to deactivate TNG Login panel so that User cannot login to TNG using TNG Login Panel. This should not be a problem because user may login by using WP_TNG Login.
