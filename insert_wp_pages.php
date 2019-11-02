@@ -1,13 +1,4 @@
 <?php
-/********************
-* NEEDS REFACTORING
-* Insert Pages:-
-	* Forgot your password
-	* Password Reset
-	* Registration
-	* Profile / Account
-*******************/
-
 	function insert_page($slug, $post_content, $autor_id, $title){
 		$page_array = array(
 			'post_content'   => $post_content,
