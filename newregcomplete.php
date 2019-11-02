@@ -21,7 +21,6 @@ require_once "templates/registration_form.html.php";
 function newreg_complete() {
 	$newreg_entries = (validate($_POST));
 	$newreg_entries = $newreg_entries['emailExists'];
-//	$newreg_complete = newregCheck($_POST['loginname'], $_POST['email']);
 	$input = $_POST;
 	$newloginname = $_POST['loginname'];
 	$newemail = $_POST['newemail'];
@@ -52,7 +51,6 @@ function insertUserWP() {
 	'tng_dateregistered' => date('Y-m-d h:i:s'),
 	'tng_dateconsented' => $dateconsented,
 	'show_admin_bar_front'   =>  false
-	
 	);
 	wp_insert_user($userdata);
 	
@@ -60,8 +58,7 @@ function insertUserWP() {
 	$Id = ($newuser->ID);
 	add_user_meta($Id, 'tng_interest', $userdata['tng_interest'], false);
 	add_user_meta($Id, 'tng_dateconsented', $userdata['tng_dateconsented'], false);
-	
-	return;
+		return;
 }
 
 //add user to TNG

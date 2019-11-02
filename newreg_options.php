@@ -4,7 +4,7 @@ require_once 'newreg.php';
 require_once 'newreg_config.php';
 require_once 'newregcomplete.php';
 /************************************************************************************************
-Validation checks
+Keep these Validation checks in case we need to change the algorithm
 01 - name & email in both - suggest password reset
 02 - name in wp. Let validate() sort it. email to admin
 03 - name & email in wp - password reset if reqd. (Details to admin - no tng details)
@@ -15,7 +15,6 @@ Validation checks
 08 - name in wp and tng - email in tng only - Suggest login with user name. Password reset if reqd. Email admin.
 09 - Save registration - Safe to register. Save registration. Go to 'Thank You Page'
 **************************************************************************************************/	
-
 function newregCheck() { 
 	$conditions = check_credentials();
 	//var_dump($conditions); 
@@ -78,13 +77,11 @@ function newregCheck() {
 			break;
 			default:
 			return;
-
 	}
 }
 
 return;
 }
-
 
 function process_new_reg() {
 	$config = newRegConfig();

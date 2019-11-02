@@ -1,16 +1,4 @@
 <?php
-/*
-* JSON file used is config.json.
-* Sections: "label": Title for each section
-* Fields: "name": Name of the field,
-*	"enabled": true to display false to hide
-*	"textenabled": true for text area else false ,
-*	"type": "text",
-*	"label": "Label for field",
-*	"description": "Field Description",
-*	"placeholder": "Text inside the field"
-*
-*/
 
 function is_logged_in(){
      $currentUser = wp_get_current_user();
@@ -65,9 +53,9 @@ function getTngUrl() {
 }
 
 function getTngPath() {
-	
 	$config = newRegConfig();
 	$tngPath = $config['paths']['tng_path'];
+	if ((!$tngPath)) return;
 	$tngPath = preg_replace('/\\\\\"/',"\"", $tngPath); // this is for php 5.3 to remove escape characters.
 	// if (!$tngPath) {
 	//    // Show an error and die

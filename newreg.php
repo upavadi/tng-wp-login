@@ -1,15 +1,6 @@
 <?php
-/*************************
-* tng_path and tng_url
-* can be obtained 
-* from config.php in tng folder
-* $rootpath for tng_path and
-* $tngdomain for tng_url
-*************************/
 require_once "newreg_config.php"; 
 require_once "templates/registration_form.html.php";
-//include "newregcomplete.php";
-/** This function drives shortcode [user_registration] ***/
 $newreg_check = "00";
 
 function new_reg() {
@@ -26,7 +17,7 @@ function new_reg() {
 	echo registration_form($data, $config['reg_form'], $config['reg_form_intro'], $configPrivacy['reg_form_consent'], $keys);
 
 }
-//checks are done in WP database
+
 function validate($form) {
 	$errors = array();
 	$consent = (newRegPrivacy());
