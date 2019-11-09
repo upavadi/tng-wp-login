@@ -134,4 +134,5 @@ function updateTngConsent() {
 $stmt->bind_param("ss", $dt_consented, $wpCurrentUser);
 $success = $stmt->execute();
 $stmt->close();
+return $success;
 }

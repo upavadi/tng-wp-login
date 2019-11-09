@@ -1,7 +1,7 @@
 {
     "paths": {
-        "tng_path": "c:\/wamp64\/www\/tng12mb\/",
-        "tng_url": "http:\/\/localhost\/tng12mb\/",
+        "tng_path": "c:\/wamp64\/www\/tng1013\/",
+        "tng_url": "http:\/\/localhost\/tng1013\/",
         "tng_photo_folder": "photos"
     },
     "login_text": {
@@ -64,7 +64,7 @@
         "line6": "Administrator"
     },
     "reg_form_intro": {
-        "title": "Welcome to My Site.",
+        "title": "New Registration",
         "line1": "To protect the privacy of our members, I have a very simple rule.",
         "line2": "To register as a member, either your name is already in the Family-Tree database ",
         "line3": "or you are related to a person who is already in the Family-Tree database.",

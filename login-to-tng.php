@@ -108,7 +108,7 @@ function mutng_login() {
 	$currentuserdesc = $_SESSION['currentuserdesc'] = $row['description'];
     $session_rp = $_SESSION['session_rp'] = $rootpath;
     $tngrole = $_SESSION['tngrole'] = $row['role'];
-    $newdate = mutng_db_update(); //check this !!
+    $newdate = mutng_db_update();
     return;
 }
 
@@ -138,13 +138,12 @@ function mutng_db_update() {
     include($tng_folder.'/config.php');
     include($tng_folder.'/customconfig.php');
     $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
-    $sql = "SELECT * FROM tng_users WHERE username='$currentuser'";
-    $result = $db->query($sql);
-    $row = $result->fetch_assoc();
-    $userID = $row['userID'];
-    $sql = "UPDATE tng_users SET lastlogin=\"$newdate\" WHERE userID=\"{$row['userID']}\"";
-    $result = $db->query($sql) or die ("{$admtext['cannotexecutequery']}: {$query}");
-    return $row['userID'];
+    
+    $stmt = $db->prepare("UPDATE tng_users SET lastlogin = ? WHERE username = ?");
+    $stmt->bind_param("ss", $newdate, $currentuser);
+    $success = $stmt->execute();
+    $stmt->close(); 
+    return $success;
 }
 
 
