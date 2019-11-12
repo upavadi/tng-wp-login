@@ -69,6 +69,7 @@ class wp_tng_login_Widget extends WP_Widget {
 
 		//check for user consent
 		if ($wpCurrentUser && ($ask_user_contest == true)) {
+			include "login-consent.php";
 			$consent = checkConsent();
 		} 
 
