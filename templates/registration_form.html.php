@@ -45,7 +45,7 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 </div>
 <?php endif; 
 }
-
+global $data;
 function registration_form($data, $config, $intro, $configPrivacy, $keys) {
 	//global $data;
 ob_start(); 
