@@ -39,9 +39,9 @@ function inputProfile($field, $label, $description, $placeholder, $value, $error
 <?php endif; ?>
 <?php
 }
-
+global $data, $data_meta;
 function view_profile($data, $data_meta, $def_photo_path, $config) {
-	global $nickname, $count, $error;
+	global $nickname, $count, $error, $user_meta_values;
 	/** array for display name dropdown **/
 	$display_meta = ($data_meta['values']);
 	$NickName = $data_meta['values']['nickname'][0];

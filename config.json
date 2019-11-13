@@ -1,7 +1,7 @@
 {
     "paths": {
-        "tng_path": "c:\/wamp64\/www\/tng1013\/",
-        "tng_url": "http:\/\/localhost\/tng1013\/",
+        "tng_path": "c:\/wamp64\/www\/tng12mb\/",
+        "tng_url": "http:\/\/localhost\/tng12mb\/",
         "tng_photo_folder": "photos"
     },
     "login_text": {
