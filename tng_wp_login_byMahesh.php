@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: TNG-Wordpress-login for TNG 9-12 Current
+Plugin Name: TNG-Wordpress-login for TNG 9-12 
 Plugin URI: https://github.com/upavadi/tng-wp-login
 Description: Login to TNG with Wordpress, GDPR complient, allow new registrations, edit user profile and Retrieve password
-Version:     2.0.Beta
+Version:     2.0.1
 Author:      Mahesh Upadhyaya
 Author URI:  http://trial.upavadi.net
 License:     MIT
