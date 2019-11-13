@@ -1,6 +1,5 @@
 <?php
 //Registration form template
-
 function set_plugin_registration() {
 	global $success;
 	$config = optionsConfig();

@@ -126,4 +126,3 @@ class ReCaptcha
         return $recaptchaResponse;
     }
 }
-?>

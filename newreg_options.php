@@ -80,7 +80,7 @@ function newregCheck() {
 	}
 }
 
-return;
+	return;
 }
 
 function process_new_reg() {
@@ -94,7 +94,7 @@ function process_new_reg() {
 	echo new_reg_mail();
 	}
 
-return;
+	return;
 }
 
 function process_pw_reset() {

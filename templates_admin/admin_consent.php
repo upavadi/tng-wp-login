@@ -1,6 +1,5 @@
 <?php
 require_once (__DIR__. '/../newreg_config.php');
-
 function set_plugin_privacy() {
 	global $success;
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
@@ -54,10 +53,10 @@ function set_plugin_privacy() {
 		<?php echo "TNG Version is ". $tngVersion. ". "; ?>
 		</div>
 
-	<?php
-	if ($tngVersion < 12) echo "You may use Privacy for TNG Versions 9 - 11";
-	if($tngVersion >= 12) {
-	?>
+<?php
+if ($tngVersion < 12) echo "You may use Privacy for TNG Versions 9 - 11";
+if($tngVersion >= 12) {
+?>
 		<div style="padding-top: 1em; font-weight: bold">
 		TNG Settings
 		</div>	

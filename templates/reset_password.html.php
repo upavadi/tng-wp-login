@@ -69,4 +69,4 @@ require_once(__DIR__. '/../lost_pw_settings.php');
 </div><!--container-fluid-->
 
 <?php
-}
+	}

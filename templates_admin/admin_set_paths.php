@@ -4,14 +4,14 @@ require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_paths() {
 	global $success;
-if (!$_POST) {	
-	$config = optionsConfig();
-	$config_paths = ($config['paths']);
-	$_POST['tng_path'] = $config_paths['tng_path'];
-	$_POST['tng_url'] = $config_paths['tng_url'];
-	$_POST['tng_photo_folder'] = $config_paths['tng_photo_folder'];
-}
-$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
+	if (!$_POST) {	
+		$config = optionsConfig();
+		$config_paths = ($config['paths']);
+		$_POST['tng_path'] = $config_paths['tng_path'];
+		$_POST['tng_url'] = $config_paths['tng_url'];
+		$_POST['tng_photo_folder'] = $config_paths['tng_photo_folder'];
+	}
+	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
     // check user capabilities
     if ( ! current_user_can( 'manage_options' ) ) {
         return;

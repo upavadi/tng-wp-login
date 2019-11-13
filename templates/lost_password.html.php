@@ -12,7 +12,7 @@ function lostPassword() {
 	if ( is_user_logged_in() ) {
 	echo "<div id='msg'>". $msg_loggedin. "'<br /><a href='" .$home. "'>Home</a></div>";
 	return;
-	}
+}
 
 ?>
 <!-- add bootstrap here instead of primary file to avoid conflucts with other plugins -->

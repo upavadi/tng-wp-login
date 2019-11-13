@@ -263,8 +263,6 @@ function update_registration() {
 	} else {
 	$config_new['reg_form']['sections'][2]['fields'][1]['enabled'] = false;
 	}
-	var_dump($config_new['reg_form']['sections'][1]['fields']);
-	var_dump($_POST);
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	$path_json = (__DIR__. '/config.json');
 	file_put_contents($path_json, $json);

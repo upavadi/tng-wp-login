@@ -6,7 +6,7 @@ require_once "templates/lost_password.html.php";
 
 /****** Outstanding *******/
 function redirect_logged_in_user( $redirect_to = null ) {
-echo "to be done";
+//echo "to be done";
 }
 /*********/ 
 
@@ -165,9 +165,10 @@ echo "to be done";
 		if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 		}
-		$sql = "UPDATE tng_users SET password='$hashed_pass' WHERE username='$user_name' ";
-		if ($db->query($sql) === TRUE) {
-			
-			return;
-			}
+		//$sql = "UPDATE tng_users SET password='$hashed_pass' WHERE username='$user_name' ";
+		$stmt = $db->prepare("UPDATE tng_users SET password= ? WHERE username = ?");
+		$stmt->bind_param("ss", $hashed_pass, $user_name);
+		$success = $stmt->execute();
+		$stmt->close();
+		return;
 		}	

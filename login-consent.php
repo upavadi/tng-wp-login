@@ -12,7 +12,6 @@ if(isset($current_user_consent['privacyDoc']))
 $privacy_doc_url = newRegPrivacy()['privacyDoc'];
 
 function checkConsent() { 
-
   $wpConsent = "";
   $wpCurrentUser = wp_get_current_user() -> user_login;
   $wpUserId = get_current_user_id();
@@ -64,9 +63,9 @@ function checkConsent() {
   $logoutUrl = str_replace('&amp;', '&' ,$logoutUrl);
   
  if(!$_GET['value']) {
-        echo '<script type="text/javascript">',
-          'getConfirmation();',
-          '</script>';
+    echo '<script type="text/javascript">',
+    'getConfirmation();',
+     '</script>';
   }   
      
   if (!isset($_GET['value'])) return;
@@ -77,7 +76,7 @@ function checkConsent() {
     if ($response == "true") {
       update_user_meta($wpUserId, 'tng_dateconsented', date('Y-m-d h:i:s'));
       $success = updateTngConsent();
-        return;
+      return;
     }
       /** user presses cancel - LogOut and return ***/
      if ($response == "false") {
@@ -86,7 +85,6 @@ function checkConsent() {
       }
   return;
 }
-
 ?>
 
 <input type="text" id="alerttext" value="<?php echo $current_user_consent_text; ?>" hidden>

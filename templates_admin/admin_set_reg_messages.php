@@ -1,47 +1,46 @@
 <?php
-//Registration form template
-
+//Registration form Messages template
 function set_plugin_reg_messages() {
 	global $reg_success, $Tngemail_success, $email_success, $intro_success;
 	$config = optionsConfig();
-		$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
+	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
  
-		if (!isset($_POST['reg_message'])) {
-			$reg_post = read_reg_complete();
-		}
+	if (!isset($_POST['reg_message'])) {
+		$reg_post = read_reg_complete();
+	}
 
-		if (isset($_POST['reg_message'])) {
-			$reg_post = $_POST;
-			$reg_success = update_reg_complete();
-		}
+	if (isset($_POST['reg_message'])) {
+		$reg_post = $_POST;
+		$reg_success = update_reg_complete();
+	}
 
-		if (!isset($_POST['email_message'])) {
-			$email_post = read_reg_email();
-		}
+	if (!isset($_POST['email_message'])) {
+		$email_post = read_reg_email();
+	}
 
-		if (isset($_POST['email_message'])) {
-			$email_post = $_POST;
-			$email_success = update_reg_email();
-		}
+	if (isset($_POST['email_message'])) {
+		$email_post = $_POST;
+		$email_success = update_reg_email();
+	}
 
-		if (!isset($_POST['Tngemail_message'])) {
-			$Tngemail_post = read_tng_email();
-		}
+	if (!isset($_POST['Tngemail_message'])) {
+		$Tngemail_post = read_tng_email();
+	}
 
-		if (isset($_POST['Tngemail_message'])) {
-			$Tngemail_post = $_POST;
-			$Tngemail_success = update_tng_email();
-		}
+	if (isset($_POST['Tngemail_message'])) {
+		$Tngemail_post = $_POST;
+		$Tngemail_success = update_tng_email();
+	}
 
-		if (!isset($_POST['reg_intro_message'])) {
-			$intro_post = read_reg_intro();
-			
-		}
+	if (!isset($_POST['reg_intro_message'])) {
+		$intro_post = read_reg_intro();
+		
+	}
 
-		if (isset($_POST['reg_intro_message'])) {
-			$intro_post = $_POST;
-			$intro_success = update_reg_intro();
-		} 
+	if (isset($_POST['reg_intro_message'])) {
+		$intro_post = $_POST;
+		$intro_success = update_reg_intro();
+	} 
 ?>
 
 <head>
@@ -271,4 +270,3 @@ display: none;
 </style>
 <?php
 }
-?>

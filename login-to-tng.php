@@ -1,11 +1,11 @@
 <?php
-
 /** log in to tng if user exists and if logged in to Wordpress ***/
-$wp_path = find_wp_path(); // not sure why I have to find this
+require_once "newreg_config.php";  
+$wp_path = find_wp_path(); 
 require_once ($wp_path.'/wp-load.php');
-require_once "newreg_config.php";      
+    
 require_once "login-to-wp.php";
-require_once "login-consent.php";
+//require_once "login-consent.php";
 add_action('init', 'StartSession', 1);
 //add_action( 'wp_login', 'destroy_session' );
 add_action( 'wp_logout', 'destroy_session' );
@@ -35,17 +35,6 @@ function StartSession() {
         }
     }
     return;
-}
-
-//get real path to wp-load.php
-function find_wp_path() {
-	$dir = dirname(__FILE__);
-	do {
-		if( file_exists($dir."/wp-config.php") ) {
-			return $dir;
-		}
-	} while( $dir = realpath("$dir/..") );
-	return null;
 }
 
 if (isset($_POST['log'])) $args['id_username'] = $_POST['log'];
@@ -148,10 +137,11 @@ function mutng_db_update() {
 
 
 function destroy_session() {
-   session_destroy();
-  // session_start();
-return;
+    session_destroy();
+    // session_start();
+    return;
 }
+
 function reset_cookie() {
     global $rootpath;
     //$_SESSION['reset_cookie'] = 'start';

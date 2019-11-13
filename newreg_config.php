@@ -1,10 +1,21 @@
 <?php
+//get real path to wp-load.php
+function find_wp_path() {
+	$dir = dirname(__FILE__);
+	do {
+		if( file_exists($dir."/wp-config.php") ) {
+			return $dir;
+		}
+	} while( $dir = realpath("$dir/..") );
+	return null;
+}
 
 function is_logged_in(){
      $currentUser = wp_get_current_user();
 		return $currentUser;
     
 }
+
 function keyValues() {
 	static $key_value;
 	if (!$key_value) {
@@ -40,6 +51,7 @@ function getTng_photo_folder() {
 	$tngPhotos = $config['paths']['tng_photo_folder'];
 	return $tngPhotos;
 }
+
 function getTngUrl() {
 	$config = newRegConfig();
 	$tngUrl = $config['paths']['tng_url'];
@@ -81,8 +93,6 @@ function getSubroot() {
 	if ($subrootPath) return $subrootPath;
 	$tngPath = getTngPath();
 	return $tngPath;
-	
-
 }
 
 function roleTng() {
@@ -168,7 +178,7 @@ function getTngUserName($wp_user) {
 		$tng_loginname = $row["username"];
 	}
 	
-return $tng_loginname;
+	return $tng_loginname;
 }
 
 function guessTngVersion() {

@@ -51,13 +51,19 @@ $notes = $_POST['description'];;
 $realname = $_POST['firstname']. " ". $_POST['lastname'];;
 $email = $_POST['email'];
 if ($_POST['new_pass']) {
-$sql = "UPDATE tng_users SET description='$description', email='$email',  realname='$realname', notes='$notes', password='$hashed_pass' WHERE username='$userName' ";
+$stmt = $db->prepare("UPDATE tng_users SET description=?, email=?, realname=?, notes=?, password=? WHERE username = ?");
+$stmt->bind_param("ssssss",$description,$email,$realname,$notes,$hashed_pass,$userName);
+//$sql = "UPDATE tng_users SET description='$description', email='$email',  realname='$realname', notes='$notes', password='$hashed_pass' WHERE username='$userName' ";
 } else {	
-$sql = "UPDATE tng_users SET description='$description', email='$email',  realname='$realname', notes='$notes' WHERE username='$userName' ";
+$stmt = $db->prepare("UPDATE tng_users SET description=?, email=?, realname=?, notes=? WHERE username = ?");
+$stmt->bind_param("sssss",$description,$email,$realname,$notes,$userName);	
+//$sql = "UPDATE tng_users SET description='$description', email='$email',  realname='$realname', notes='$notes' WHERE username='$userName' ";
 }
-if ($db->query($sql) === TRUE) {
+$success = $stmt->execute();
+if ($success === TRUE) {
     echo "<div id='msg_grn'>". "<b>Your changes have been updated</b>"."</div>";
 } else {
     echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
 }
+$stmt->close();
 }

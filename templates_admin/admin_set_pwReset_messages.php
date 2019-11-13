@@ -5,7 +5,7 @@ function set_plugin_pwreset_messages() {
 	global $pw_reset_success, $pw_lost_success, $pw_email_success;
 	$config = optionsConfig();
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
-// Password Reset Template 
+	// Password Reset Template 
 	if (!isset($_POST['pw_reset_message'])) {
 		$pw_post = read_pw_message();
 	}
@@ -14,7 +14,7 @@ function set_plugin_pwreset_messages() {
 		$pw_reset_success = update_pw_message();
 	}
 
-//Forgot Your Password Template 
+	//Forgot Your Password Template 
 	if (!isset($_POST['pw_lost_message'])) {
 		$pwLost_post = read_pwlost_message();
 	}
@@ -23,14 +23,14 @@ function set_plugin_pwreset_messages() {
 		$pw_lost_success = update_pwLost_message();
 	}
 
-//Forgot Your Password Email 	
-if (!isset($_POST['email_lost_message'])) {
-	$emailLost_post = read_lostPW_email();
-}
-if (isset($_POST['email_lost_message'])) {
-	$emailLost_post = $_POST;
-	$pw_email_success = update_lostPW_email();
-}	
+	//Forgot Your Password Email 	
+	if (!isset($_POST['email_lost_message'])) {
+		$emailLost_post = read_lostPW_email();
+	}
+	if (isset($_POST['email_lost_message'])) {
+		$emailLost_post = $_POST;
+		$pw_email_success = update_lostPW_email();
+	}	
 ?>
 
 <head>
