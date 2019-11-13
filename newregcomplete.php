@@ -89,39 +89,53 @@ function insertUserTng() {
 	$dateregistered = date('Y-m-d h:i:s');
 	$dateactivated = '0000-00-00 00:00:00';
 	$dateconsented = '0000-00-00 00:00:00';
+	$a = 0;
+	$b = "";
 	if ($configPrivacy) $dateconsented = $dateregistered;
 	if ($tngVersion < 11) {
-		$sql = "INSERT IGNORE INTO `tng_users` (`description`, `username`, `password`, `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes`)
-		values ('{$description}', '{$userName}', '{$password}', '{$passwordtype}', '', '', '', '{$role}', '0', '0', '0', '0', '0', '0', '0', '{$allow_living}', '0', '0', '', '{$realname}', '', '{$email}', '', '', '', '', '', '{$website}', '{$lastlogin}', '0', '{$dateregistered}', '{$dateactivated}', '0', '{$notes}')";
-		mysqli_query($db, $sql);
-		$error = $db->error;
-		if ($db->error) {
-			echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
-			return false;	// there is error
-		}
+		$stmt = $db->prepare("INSERT IGNORE INTO `tng_users`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt->bind_param("ssssssssiiiiiiisiisssssssssssissis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website,$lastlogin, $a, $dateregistered, $dateactivated, $a, $notes);
 
+		try {
+			$success = $stmt->execute();;
+			$stmt->close();
+			if (!$success) {
+				$error = mysqli_error($db);
+				echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $error;
+				return false; // there is error
+			}
+		} catch (Exception $e) {
+			echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $e->getMessage();
+			return false; // there is error
+		}
 		return true; // insert
 	}
 	if ($tngVersion == 11) {
-		$sql = "INSERT IGNORE INTO `tng_users` (`description`, `username`, `password`, `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes`) 
-		values ('{$description}', '{$userName}', '{$password}', '{$passwordtype}', '', '', '', '{$role}', '0', '0', '0', '0', '0', '0', '0', '{$allow_living}', '0', '0', '', '{$realname}', '', '{$email}', '', '', '', '', '', '{$website}', '0', '{$lastlogin}', '0', '{$dateregistered}', '{$dateactivated}', '0', '{$notes}')";
+		$stmt = $db->prepare("INSERT IGNORE INTO `tng_users`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt->bind_param("ssssssssiiiiiiisiissssssssssisissis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website, $a, $lastlogin, $a, $dateregistered, $dateactivated, $a, $notes);
 
-		mysqli_query($db, $sql);
-		$error = $db->error;
-		if ($db->error) {
-			echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $db->error;
+		try {
+			$success = $stmt->execute();;
+			$stmt->close();
+			if (!$success) {
+				$error = mysqli_error($db);
+				echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $error;
+				return false; // there is error
+			}
+		} catch (Exception $e) {
+			echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $e->getMessage();
 			return false; // there is error
 		}
 		return true; // insert
 	}
 
 	if ($tngVersion >= 12) {
-		$sql = "INSERT IGNORE INTO `tng_users` (`description`, `username`, `password`, `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `dt_consented`, `no_email`, `notes`) 
-		values ('{$description}', '{$userName}', '{$password}', '{$passwordtype}', '', '', '', '{$role}', '0', '0', '0', '0', '0', '0', '0', '{$allow_living}', '0', '0', '', '{$realname}', '', '{$email}', '', '', '', '', '', '{$website}', '0', '{$lastlogin}', '0', '{$dateregistered}', '{$dateactivated}', '{$dateconsented}', '0', '{$notes}')";
+		$stmt = $db->prepare("INSERT IGNORE INTO `tng_users`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `dt_consented`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt->bind_param("ssssssssiiiiiiisiissssssssssisisssis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website, $a, $lastlogin, $a, $dateregistered, $dateactivated, $dateconsented, $a, $notes);
 
 		try {
-			$success = mysqli_query($db, $sql);
-
+			$success = $stmt->execute();;
+			$stmt->close();
 			if (!$success) {
 				$error = mysqli_error($db);
 				echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $error;
