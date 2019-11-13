@@ -47,8 +47,8 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 }
 
 function registration_form($data, $config, $intro, $configPrivacy, $keys) {
-	global $data;
-ob_start();
+	//global $data;
+ob_start(); 
 $privacyText = $configPrivacy['line1'];
 $privacyConsent = $configPrivacy['enabled'];
 $showPrivacyDocLink =  $configPrivacy['show_privacy_doc_link'];    
@@ -149,11 +149,4 @@ return;
 
 </html>
 <?php
-
-/**		
-$stmt = $db->prepare("INSERT IGNORE INTO tng_users (`description`, `username`, `password`, `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ; ");
-
-		$stmt->bind_param('ssssssssssssssssssssssssssssssssss', $description, $userName, $password, $passwordtype, '', '', '', $role, '0', '0', '0', '0', '0', '0', '0', $allow_living, '0', '0', '', $realname, '', $email, '', '', '', '', '', $website, $lastlogin, '0', $dateregistered, $dateactivated, '0',$notes);
-
-**/
 }
