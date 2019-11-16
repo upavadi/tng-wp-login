@@ -196,7 +196,7 @@ submitted email in TNG DB only|Alert Title: 'We Shall Contact You'| administrato
  -----------------------------
 ## Please let me know if there are any bugs or you have any suggestions ##
  ------------------------------
-***Current release version 2.0.Beta. I look forward to your feedback on any issues.***
+***Current release version 2.0.1. I look forward to your feedback on any issues.***
 --
 
 
