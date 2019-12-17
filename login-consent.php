@@ -85,6 +85,9 @@ function checkConsent() {
       }
   return;
 }
+
+function renderConsent() {
+  global $current_user_consent_text;
 ?>
 
 <input type="text" id="alerttext" value="<?php echo $current_user_consent_text; ?>" hidden>
@@ -102,6 +105,7 @@ function checkConsent() {
 </script>
 
 <?php
+}
 //UPDATE IGNORE `tng_users` SET `dt_consented`='0000-00-00 00:00:00' WHERE `username` = 'gondal'
 function getTngConsent() {
   $tng_path = getSubroot(). "config.php";
