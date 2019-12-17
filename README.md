@@ -1,7 +1,7 @@
 # **Wordpress-TNG Login Widget** # 
 
 ## **Download**
-Release version 1.0.4 https://github.com/upavadi/tng-wp-login/releases/latest has been updated with V2.0.Beta
+Release version 1.0.4 https://github.com/upavadi/tng-wp-login/releases/latest has been updated with V2.0.1
 
  - version 2.0.Beta is under going test in
  - ***Test Site:*** http://trial.upavadi.net/ site uses M Barnes plugin for wordpress / TNG integration
