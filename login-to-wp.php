@@ -2,7 +2,7 @@
 /** Log-In Widget ****/
 require_once(ABSPATH. 'wp-load.php');
 require_once "newreg_config.php";
-
+require_once "login-consent.php";
 /********** Class   *******/
 class wp_tng_login_Widget extends WP_Widget {
 	public function __construct() {
@@ -69,7 +69,7 @@ class wp_tng_login_Widget extends WP_Widget {
 
 		//check for user consent
 		if ($wpCurrentUser && ($ask_user_contest == true)) {
-			include "login-consent.php";
+			renderConsent();
 			$consent = checkConsent();
 		} 
 
