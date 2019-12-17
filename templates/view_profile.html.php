@@ -79,20 +79,20 @@ foreach ($config['sections'] as $section) {
 		<?php
 		$detail = ($section['fields']);
 		foreach($section['fields'] as $spec) {
-		$field = $spec['name'];
-		$user_meta_values = ($data_meta['values']); 
-		$data_value = $spec['name']; 
-		if (isset($data['values']))
-		$value = $user_meta_values[$data_value][0];
-		if (isset($data['errors'][$field]))
-		$error = $data['errors'][$field] ?: '';
-		if (!$value) {
-		$user_data = ($data['values']);
-		$value = ($user_data -> $data_value);
-		}
-		
-		$dataArray[$count] = ($value);
-		$count = $count + 1;
+			$field = $spec['name'];
+			$user_meta_values = ($data_meta['values']); 
+			$data_value = $spec['name']; 
+			if (isset($user_meta_values[$data_value]))
+				$value = $user_meta_values[$data_value][0];
+			if (isset($data['errors'][$field]))
+				$error = $data['errors'][$field] ?: '';
+			if (!$value) {
+				$user_data = ($data['values']);
+				$value = ($user_data -> $data_value);
+			}
+			
+			$dataArray[$count] = ($value);
+			$count = $count + 1;
 			if ($spec['textenabled'] === false && $spec['name'] !== "display_name" ) {
 		inputProfile($spec['name'], $spec['label'], $spec['description'], $spec['placeholder'], $value, $error, $spec['type']);
 			} elseif ($spec['name'] == "display_name") {
