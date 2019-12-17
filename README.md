@@ -48,17 +48,10 @@ My Test site is using this method with TNG V10.
 --------------
 
 ## **Change Log **
- - Current version 2.0.Beta
-  - Check to see if TNG configuration files have been moved
-  - Checks made for TNG Vesion 11 and 12 to cater for DB changes
-  - changes to cater for MYSQL 5.7 strict mode
-  - added Consent flag for new user - this will also apply to Wordpress
-  - added ask-consent flag for existing users if not present
-  - Add consent flag in Wordpress to database
-  - Add optional generic cookie info under login banner. Text customisable
-  - Add privacy management menu in Admin WP_TNG Login
-    - Exclude Admin from consent challange 
-  - Trap Fatal PHP errors when it cannot find TNG folder 
+ - Current version 2.0.2
+  - change current version number
+  - fix 'undeclared variable' notice
+  - fix conflict with some plugins with consent confirmation 
  ------------
 
 ## **Activation**
