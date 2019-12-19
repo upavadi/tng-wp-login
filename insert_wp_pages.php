@@ -21,27 +21,27 @@
 		$post_content = '[lost_Password_form]';
 		$author_id = 1;
 		$title = 'Password Lost';
-		insert_page($slug, $post_content, $autor_id, $title);
+		insert_page($slug, $post_content, $author_id, $title);
 		
 		// Insert Reset Password page
 		$slug = 'wp-tng-resetPassword';
 		$post_content = '[reset_Password_form]';
 		$author_id = 1;
 		$title = 'Password Reset';
-		insert_page($slug, $post_content, $autor_id, $title);
+		insert_page($slug, $post_content, $author_id, $title);
 	
 		// Insert Profile Page
 		$slug = 'wp-tng-profile';
 		$post_content = '[user_profile]';
 		$author_id = 1;
 		$title = 'Profile';
-		insert_page($slug, $post_content, $autor_id, $title);
+		insert_page($slug, $post_content, $author_id, $title);
 	
 		// Insert Registration Page
 		$slug = 'wp-tng-registration';
 		$post_content = '[user_registration]';
 		$author_id = 1;
 		$title = 'Registration';
-		insert_page($slug, $post_content, $autor_id, $title);
+		insert_page($slug, $post_content, $author_id, $title);
 		return;
 	}
