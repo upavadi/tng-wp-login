@@ -18,6 +18,14 @@ function StartSession() {
 //Check if current user is logged in WordPress
     if( is_user_logged_in() ) {
         if(!session_id()) {
+            /**
+             * This condition stops the restart of a session if the method
+             * is not GET so that PST, etc will work when usung AJAX.
+             * (because we may not have a session ID at this point)
+             */
+            if ($_SERVER['RESQUEST_METHOD'] !== 'GET') {
+                return;
+            }
             session_start();
         }
 
