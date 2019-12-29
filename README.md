@@ -51,7 +51,14 @@ My Test site is using this method with TNG V10.
  - Current version 2.0.2
   - change current version number
   - fix 'undeclared variable' notice
-  - fix conflict with some plugins with consent confirmation 
+  - fix conflict with some plugins with consent confirmation
+  - fix typo(s) when new pages are gnerated
+  - fix conflict with Wordpress editor when editing active files
+  
+ -  2.0.1
+  - change current version number
+  - fix 'undeclared variable' notice
+  - fix conflict with some plugins with consent confirmation
  ------------
 
 ## **Activation**
