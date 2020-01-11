@@ -23,7 +23,7 @@ function StartSession() {
              * is not GET so that PST, etc will work when usung AJAX.
              * (because we may not have a session ID at this point)
              */
-            if ($_SERVER['RESQUEST_METHOD'] !== 'GET') {
+            if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 return;
             }
             session_start();
