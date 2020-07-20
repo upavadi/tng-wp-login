@@ -1,5 +1,6 @@
 <?php
 function input($field, $label, $description, $placeholder, $value, $error, $type = 'text') {
+	global $newreg_entries, $userExists, $emailExists;
 	$errorClass = '';
 	if ($error) {
 		$errorClass = 'has-error';
@@ -47,7 +48,7 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 }
 global $data;
 function registration_form($data, $config, $intro, $configPrivacy, $keys) {
-	//global $data;
+global $value;
 ob_start(); 
 $privacyText = $configPrivacy['line1'];
 $privacyConsent = $configPrivacy['enabled'];
@@ -81,17 +82,19 @@ if ($_POST && $data['errors']) {
 			{
 			continue;
 			}
+		
 		if ($spec['textenabled'] === false)
 		{
-		$value = $data['values'][$field];
-		$error = $data['errors'][$field] ?: '';
+			$error = "";
+		if(isset($data['values'][$field])) $value = $data['values'][$field];
+		if(isset($data['errors'][$field])) $error = $data['errors'][$field] ?: '';
 		
 		$res = input($field, $spec['label'], $spec['description'], $spec['placeholder'], $value, $error, $spec['type']);
 		if ($res === "newreg") {
 			return;
 		}
 		} else {
-		$value = $data['values'][$field];
+			if(isset($data['values'][$field])) $value = $data['values'][$field];
 ?>
 	<div class="row rowadjust"><!--Interest -->
 			<div class="col-md-2 entrylabel"><?php echo $spec['label']; ?></div>
@@ -112,7 +115,7 @@ if($privacyConsent) {
 	 <p>
 	 <input type="checkbox" name="consentGiven" id="consentGiven" <?php if(isset($_POST['consentGiven'])) echo "checked='checked'"; ?>> 
 	 <?php echo $privacyText. " ". $privacyDoc; ?> </p>
-	 <div class="text-danger"><?php echo $data['errors']['consentGiven'] ?></div>
+	 <div class="text-danger"><?php if (isset($data['errors']['consentGiven'])) echo $data['errors']['consentGiven'] ?></div>
 	 </div>
 	 <?php
 	}
