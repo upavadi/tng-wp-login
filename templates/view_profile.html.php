@@ -81,9 +81,12 @@ foreach ($config['sections'] as $section) {
 		foreach($section['fields'] as $spec) {
 			$field = $spec['name'];
 			$user_meta_values = ($data_meta['values']); 
-			$data_value = $spec['name']; 
+			$data_value = $spec['name'];
+			
+			$value = null;
 			if (isset($user_meta_values[$data_value]))
 				$value = $user_meta_values[$data_value][0];
+				
 			if (isset($data['errors'][$field]))
 				$error = $data['errors'][$field] ?: '';
 			if (!$value) {

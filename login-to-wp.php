@@ -84,6 +84,12 @@ class wp_tng_login_Widget extends WP_Widget {
 			}
 			
 		} else {
+			/** replace with these 2 to get fields verticallly aligned.**
+			 $status1 = $loggedout_greeting. "<br />". ("<label for='log'></label><input style='width: 95%; margin: 4px'  placeholder='user name or email' type='text' id='". $args['id_username']. " 'name='log'><input style='width: 95%; margin: 4px' placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
+  
+			$status5 = "<br />". ("<input style='width: 100%; margin: 2px'' type='submit' id='". $args['id_submit']. "' class='button-primary' value='Log In' name='wp-submit'>");
+			****/
+			
 			
 			$status1 = $loggedout_greeting. " - ". ("<label for='log'>Login</label><input placeholder='user name or email' type='text' id='". $args['id_username']. "' name='log'> - <input placeholder='password' type='password' id='". $args['id_password']. "' name='pwd'>");
 
