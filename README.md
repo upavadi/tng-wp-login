@@ -49,6 +49,7 @@ My Test site is using this method with TNG V10.
 
 ## **Change Log **
  - Current version 2.0.2
+ - Fix bug which gave incorrect information in Profile Page.
   - change current version number
   - fix 'undeclared variable' notice
   - fix conflict with some plugins with consent confirmation
