@@ -48,7 +48,12 @@ My Test site is using this method with TNG V10.
 --------------
 
 ## **Change Log **
- - Current version 2.1.0
+ - Current Version 2.0.3
+  - change current version number
+  - Fix bug which gave incorrect information in Profile Page.
+  - fix 'undeclared variable' notice
+
+ - 2.0.2
  - Fix bug which gave incorrect information in Profile Page.
   - change current version number
   - fix 'undeclared variable' notice
