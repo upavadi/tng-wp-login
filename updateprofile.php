@@ -48,8 +48,8 @@ $userName = $_POST['user_login'];
 $description = $_POST['display_name'];
 $hashed_pass = $password_type($_POST['new_pass']);
 $notes = $_POST['description'];;
-$realname = $_POST['firstname']. " ". $_POST['lastname'];;
-$email = $_POST['email'];
+$realname = $_POST['first_name']. " ". $_POST['last_name'];
+$email = $_POST['user_email'];
 if ($_POST['new_pass']) {
 $stmt = $db->prepare("UPDATE tng_users SET description=?, email=?, realname=?, notes=?, password=? WHERE username = ?");
 $stmt->bind_param("ssssss",$description,$email,$realname,$notes,$hashed_pass,$userName);
