@@ -50,21 +50,20 @@ My Test site is using this method with TNG V10.
 ## **Change Log **
 - Current Version 2.0.3.1
   - Fix typo which prevented Full Name and Email fields for the user updated in TNG Users. (My Thanks to Jan Strømsnes. https://stromsnes.info/)
-)
- - 2.0.3
+- 2.0.3
   - change current version number
   - Fix bug which gave incorrect information in Profile Page.
   - fix 'undeclared variable' notice
 
- - 2.0.2
- - Fix bug which gave incorrect information in Profile Page. (My Thanks to Jan Strømsnes. https://stromsnes.info/)
+- 2.0.2
+ - Fix bug which gave incorrect information in Profile Page. (My Thanks to Jan Strømsnes https://stromsnes.info/)
   - change current version number
   - fix 'undeclared variable' notice
   - fix conflict with some plugins with consent confirmation
   - fix typo(s) when new pages are gnerated
   - fix conflict with Wordpress editor when editing active files
   
- -  2.0.1
+-  2.0.1
   - change current version number
   - fix 'undeclared variable' notice
   - fix conflict with some plugins with consent confirmation
