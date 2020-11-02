@@ -56,7 +56,7 @@ My Test site is using this method with TNG V10.
   - fix 'undeclared variable' notice
 
 - 2.0.2
- - Fix bug which gave incorrect information in Profile Page. (My Thanks to Jan Strømsnes https://stromsnes.info/)
+  - Fix bug which gave incorrect information in Profile Page. (My Thanks to Jan Strømsnes https://stromsnes.info/)
   - change current version number
   - fix 'undeclared variable' notice
   - fix conflict with some plugins with consent confirmation
@@ -64,9 +64,9 @@ My Test site is using this method with TNG V10.
   - fix conflict with Wordpress editor when editing active files
   
 -  2.0.1
-  - change current version number
-  - fix 'undeclared variable' notice
-  - fix conflict with some plugins with consent confirmation
+   - change current version number
+   - fix 'undeclared variable' notice
+   - fix conflict with some plugins with consent confirmation
  ------------
 
 ## **Activation**
@@ -204,7 +204,7 @@ submitted email in TNG DB only|Alert Title: 'We Shall Contact You'| administrato
  -----------------------------
 ## Please let me know if there are any bugs or you have any suggestions ##
  ------------------------------
-***Current release version 2.0.1. I look forward to your feedback on any issues.***
+***Current release version 2.0.3.1. I look forward to your feedback on any issues.***
 --
 
 
