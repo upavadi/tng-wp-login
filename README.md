@@ -1,9 +1,8 @@
 # **Wordpress-TNG Login Widget** # 
 
 ## **Download**
-Release version 1.0.4 https://github.com/upavadi/tng-wp-login/releases/latest has been updated with V2.0.1
+Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V2.0.3.1.
 
- - version 2.0.Beta is under going test in
  - ***Test Site:*** http://trial.upavadi.net/ site uses M Barnes plugin for wordpress / TNG integration
  - ***Live Site:*** http://www.upavadi.net/   site uses Kloosterman method for wordpress / TNG integration
  - On both sites, Wordpress and TNG are installed in their own folders.
@@ -42,8 +41,7 @@ Only known issue is that the WP-TNG integration plugin seems to deactivate TNG L
 My Test site is using this method with TNG V10.   
    - ***If using this method, deselect "Integrate TNG/Wordpress logins: " option.*** 
 2. **Cees Kloosterman Method** (CK-Method) uses customized Header and Footer files by replacing TNG Header and footer by Hard coding topmenu.php, footer.php and meta.php, in TNG folder. This is a very simple and effective method and I have now converted my live site CK-Method.
-3. ***The plugin is also tested with TNG V12, on my local server using both integration methods***  
-4. **Page Refresh** ~~may be required~~ to see successful TNG login. 
+3. ***The plugin is also tested with TNG V12 using both integration methods***  
 4. **Send email** uses Worpress mail. It is possible that emails do not work if you have SMTP mail enabled in Wordpress. Please let me know if this is an issue.
 --------------
 
