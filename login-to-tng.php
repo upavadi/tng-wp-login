@@ -106,6 +106,7 @@ function mutng_login() {
     $session_rp = $_SESSION['session_rp'] = $rootpath;
     $tngrole = $_SESSION['tngrole'] = $row['role'];
     $newdate = mutng_db_update();
+    session_write_close(); // added april2021. to supress Wordpress error of iinterference with REST API
     return;
 }
 
