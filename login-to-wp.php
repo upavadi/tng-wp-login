@@ -101,7 +101,9 @@ class wp_tng_login_Widget extends WP_Widget {
 			$status7 = "error message";
 			$status6 = ("<input type='hidden' value='". $args['redirect']. "' name='redirect_to'>");
 			$status8 = "<div id='cookie_alert'>". $cookie_notification. "</div>";
-			}
+			/** Private Mod defines Social Media redirect button as $status9 ***/
+			//$status9 = ("<input type='button' . ' class='button-primary' style='margin-left: 0px; width: 100%'  value='Log in with Facebook or Google' name='social' onclick='social()' />");
+		}
 	?>
 	<form id="<?php echo $args['form_id' ]; ?>" name="loginform" action="<?php echo $login_redirect; ?>" method="post">
 		<div id="container">
@@ -117,8 +119,10 @@ class wp_tng_login_Widget extends WP_Widget {
 			</div>
 		</div>
 	</form>
-<?php	
-
+	
+<?php
+/**Private mod to display social login redirect  */	
+//echo $status9;
 }	//widget
 } //class
 
@@ -126,3 +130,9 @@ class wp_tng_login_Widget extends WP_Widget {
 function register_wp_tng_login_Widget() {
      register_widget( 'wp_tng_login_Widget' );
  }
+ ?>
+ <script>
+ function social() {
+ window.location = '../social/'
+ }
+ </script>
