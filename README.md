@@ -38,7 +38,8 @@ To my knowledge, there are 2 main methods available for achieving this.
 Works well with TNG V 9 - 10 and 12. Changes in V11 implemented but have not been tested.
 1. **Mark Barnes method** (MB-Method) uses a plugin to replace WP page with TNG content.
 Only known issue is that the WP-TNG integration plugin seems to deactivate TNG Login panel so that User cannot login to TNG using TNG Login Panel. This should not be a problem because user may login by using WP_TNG Login.
-My Test site is using this method with TNG V10.   
+   - ***My Test site is using this method with TNG V12.*** 
+   - ***Tested on my local WAMP server with TNG 13.***
    - ***If using this method, deselect "Integrate TNG/Wordpress logins: " option.*** 
 2. **Cees Kloosterman Method** (CK-Method) uses customized Header and Footer files by replacing TNG Header and footer by Hard coding topmenu.php, footer.php and meta.php, in TNG folder. This is a very simple and effective method and I have now converted my live site CK-Method.
 3. ***The plugin is also tested with TNG V12 using both integration methods***  
@@ -46,7 +47,10 @@ My Test site is using this method with TNG V10.
 --------------
 
 ## **Change Log **
-- Current Version 2.0.3.1
+- Current Version2.0.3.1.A
+  - A fix for an open session error reported by the WordPress Site Health plugin.
+  - A private mod for redirecting Social media logins. * Commented Out ** 
+- 2.0.3.1
   - Fix typo which prevented Full Name and Email fields for the user updated in TNG Users. (My Thanks to Jan Strømsnes. https://stromsnes.info/)
 - 2.0.3
   - change current version number
