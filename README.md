@@ -3,10 +3,10 @@
 ## **Download**
 Current pre-release Version 3.0 is under development
  - to add ability to work with TNG tables with prefixes added. (https://github.com/upavadi/tng-wp-login/archive/refs/heads/master.zip)
-Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V2.0.3.2.
+- Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V2.0.3.2.
 
- - ***Test Site:*** http://trial.upavadi.net/ site uses M Barnes plugin for wordpress / TNG integration
- - ***Live Site:*** http://www.upavadi.net/   site uses Kloosterman method for wordpress / TNG integration
+- ***Test Site:*** http://trial.upavadi.net/ site uses M Barnes plugin for wordpress / TNG integration
+- ***Live Site:*** http://www.upavadi.net/   site uses Kloosterman method for wordpress / TNG integration
  - On both sites, Wordpress and TNG are installed in their own folders.
 
 -----
