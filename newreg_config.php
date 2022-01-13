@@ -74,7 +74,7 @@ function getTngPath() {
 	//    echo "TNG path is not configured";
 	//    die;
 	// }
-	$tngPath = realpath($tngPath);
+	$tngPath = realpath($tngPath); 
 	if (!$tngPath) {
 	   // Show an error and die
 	   error_log("TNG path is not real");
@@ -85,14 +85,22 @@ function getTngPath() {
 
 function getSubroot() {
 	//alternative place for configuration files
-	$tngPath = getTngPath();
+	$tngPath = getTngPath(); 
 	if ((!$tngPath)) return;
-	$subroot_path = getTngPath(). "subroot.php";
+	$subroot_path = getTngPath(). "subroot.php"; 
 	include($subroot_path);
 	$subrootPath = $tngconfig['subroot'];
 	if ($subrootPath) return $subrootPath;
 	$tngPath = getTngPath();
 	return $tngPath;
+}
+//var_dump(getTngPrefix());
+function getTngPrefix() {
+	//get tng table prefix
+	$config = newRegConfig();
+	$tngPrefix = $config['paths']['tng_db_prefix'];
+	$tngPrefix = str_replace(' ', '', $tngPrefix);
+	return $tngPrefix;
 }
 
 function roleTng() {
@@ -186,32 +194,38 @@ function guessTngVersion() {
 	if ((!$tngPath)) return;
 	$tng_path = getSubroot(). "config.php";
 	include($tng_path);
+	$tngUserPrefix = getTngPrefix(). "tng_users";
+	$tngImageTagPrefix = getTngPrefix(). "tng_image_tags";
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
-	$sql = 'describe '. 'tng_people';
-	$sql2 = 'describe '. 'tng_users';
+	$sql = "SELECT * FROM {$tngUserPrefix} ";
 	$result = $db->query($sql);
+	$sql2 = "SELECT * FROM {$tngImageTagPrefix} ";
 	$result2 = $db->query($sql2);
-	$version = 9;
-
-	while ($row = $result->fetch_assoc()) {
-		if ($row['Field'] == 'burialtype') {
-			$version = 10;
-			break;
-		}
+	$version = 10;
+	$row = $result->fetch_assoc();
+	
+	if (isset($row[languageID])) {
+		$languageID = True;
+		$version = 11;
 	}
-
-	while ($row = $result2->fetch_assoc()) {	
-		if ($row['Field'] == 'languageID') {
-			$version = 11;
-			break;
-		}
+	
+	if (isset($row[dt_consented])) {
+		$dt_consented = TRUE;
+		$version = 12;
 	}
+	
+	if (isset ($result2)) {
+		 $media_tags = TRUE;
+		$version = 13;
+	}	 
 
-	while ($row = $result2->fetch_assoc()) {	
-		if ($row['Field'] == 'dt_consented') {
-			$version = 12;
-			break;
+	if (isset($row[allow_private_notes])) {
+		$allow_private_notes = TRUE;
+			$version = 13.1;
 		}
-	}
+
 return $version;
 }
+
+
+var_dump(guessTngVersion());
