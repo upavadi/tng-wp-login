@@ -17,7 +17,7 @@ require_once "newreg.php";
 require_once "newreg_options.php"; 
 require_once "templates/registration_complete.html.php";
 require_once "templates/registration_form.html.php";
-
+//var_dump(guessTngVersion());
 function newreg_complete() {
 	$newreg_entries = (validate($_POST));
 	$newreg_entries = $newreg_entries['emailExists'];
@@ -64,6 +64,7 @@ function insertUserWP() {
 //add user to TNG
 function insertUserTng() {
 	$tngPath = getSubroot(). "config.php";
+	$tngUserPrefix = getTngPrefix(). "tng_users";
 	include ($tngPath);
 	//$password_type = $tngconfig['password_type'];
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
@@ -92,8 +93,10 @@ function insertUserTng() {
 	$a = 0;
 	$b = "";
 	if ($configPrivacy) $dateconsented = $dateregistered;
+	
+	/** version 10 ***/
 	if ($tngVersion < 11) {
-		$stmt = $db->prepare("INSERT IGNORE INTO `tng_users`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt = $db->prepare("INSERT IGNORE INTO `{$tngUserPrefix}`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssssssiiiiiiisiisssssssssssissis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website,$lastlogin, $a, $dateregistered, $dateactivated, $a, $notes);
 
 		try {
@@ -110,8 +113,10 @@ function insertUserTng() {
 		}
 		return true; // insert
 	}
+
+	/** version 11 ***/
 	if ($tngVersion == 11) {
-		$stmt = $db->prepare("INSERT IGNORE INTO `tng_users`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt = $db->prepare("INSERT IGNORE INTO `{$tngUserPrefix}`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssssssiiiiiiisiissssssssssisissis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website, $a, $lastlogin, $a, $dateregistered, $dateactivated, $a, $notes);
 
 		try {
@@ -130,9 +135,8 @@ function insertUserTng() {
 	}
 
 	if ($tngVersion >= 12) {
-		$stmt = $db->prepare("INSERT IGNORE INTO `tng_users`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `dt_consented`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt = $db->prepare("INSERT IGNORE INTO `{$tngUserPrefix}`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `dt_consented`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssssssiiiiiiisiissssssssssisisssis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website, $a, $lastlogin, $a, $dateregistered, $dateactivated, $dateconsented, $a, $notes);
-
 		try {
 			$success = $stmt->execute();;
 			$stmt->close();
@@ -237,8 +241,8 @@ function new_reg_pwreset_email_text() {
 function check_credentials() {
 	$config = newRegConfig();
 	$newreg_check = "00";
-	$loginName = $_POST{'loginname'};
-	$email = $_POST{'email'};
+	$loginName = $_POST['loginname'];
+	$email = $_POST['email'];
 	if (username_exists($loginName)) {
 		$nameInWp = true;
 	} else {
