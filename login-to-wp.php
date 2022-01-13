@@ -120,6 +120,11 @@ class wp_tng_login_Widget extends WP_Widget {
 		</div>
 	</form>
 	
+ <script>
+ function social() {
+ window.location = '../social/'
+ }
+ </script>
 <?php
 /**Private mod to display social login redirect  */	
 //echo $status9;
@@ -131,8 +136,3 @@ function register_wp_tng_login_Widget() {
      register_widget( 'wp_tng_login_Widget' );
  }
  ?>
- <script>
- function social() {
- window.location = '../social/'
- }
- </script>
