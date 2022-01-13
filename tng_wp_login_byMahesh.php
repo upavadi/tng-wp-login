@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: TNG-Wordpress-login for TNG 9-12 (Tested on Local server for V13) 
+Plugin Name: TNG-Wordpress-login for TNG 10-13 
 Plugin URI: https://github.com/upavadi/tng-wp-login
 Description: Login to TNG with Wordpress, GDPR complient, allow new registrations, edit user profile and Retrieve password
-Version:     2.0.3.2
+Version:     3.0 prefix Beta
 Author:      Mahesh Upadhyaya
 Author URI:  http://trial.upavadi.net
 License:     MIT
@@ -56,6 +56,7 @@ function tng_path_not_specified() {
 			$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
 			$config_new['paths']['tng_url'] = $tngdomain;
 			$config_new['paths']['tng_photo_folder'] = $photopath;
+			$config_new['paths']['tng_db_prefix'] = $tngprefix;
 			$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 			$path = __DIR__ . "/config.json";
 			file_put_contents($path, $json);
