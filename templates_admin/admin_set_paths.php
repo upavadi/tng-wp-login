@@ -4,12 +4,14 @@ require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_paths() {
 	global $success;
+	global $wpdb;
 	if (!$_POST) {	
 		$config = optionsConfig();
 		$config_paths = ($config['paths']);
 		$_POST['tng_path'] = $config_paths['tng_path'];
 		$_POST['tng_url'] = $config_paths['tng_url'];
 		$_POST['tng_photo_folder'] = $config_paths['tng_photo_folder'];
+		$_POST['tng_db_prefix'] = $config_paths['tng_db_prefix'];
 	}
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
     // check user capabilities
@@ -22,6 +24,7 @@ function set_plugin_paths() {
 		update_paths();
 		$success = update_paths();
 	}
+	
 ?>
 <head>
 
@@ -70,6 +73,17 @@ function set_plugin_paths() {
 			</div>
 			<div  class='col-md-6'>
 			Name of TNG Photo Folder. Derived from TNG setup.
+			</div>
+		</div>
+		<div class="row rowadjust">
+			<div class='col-md-2' style="width: 155px">
+			Prefix for TNG Table:
+			</div>
+			<div  class='col-md-3'>	
+				<input type="text" class="form-control" name="tng_db_prefix" value= '<?php echo $_POST['tng_db_prefix']; ?>'>
+			</div>
+			<div  class='col-md-6'>
+			If you are using Prefix for TNG tables (eg. wp_tng_xxxx), enter prefix. Leave <b>Blank</b> if you are not using prefix. Your default Wordpress prefix is defined as <b><?php echo $wpdb->prefix; ?></b> 
 			</div>
 		</div>
 	</div>
