@@ -48,7 +48,9 @@ Only known issue is that the WP-TNG integration plugin seems to deactivate TNG L
 --------------
 
 ## **Change Log **
-- Current Version2.0.3.2
+- **Current Vesion 3.0 is under Developement**
+  - Add ability to work with TNG tables with prefixes - eg: wp_tng_xxxx
+- Version2.0.3.2
   - A fix for an open session error reported by the WordPress Site Health plugin.
   - A private mod for redirecting Social media logins. * Commented Out ** 
 - 2.0.3.1
