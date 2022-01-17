@@ -95,7 +95,7 @@ function insertUserTng() {
 	if ($configPrivacy) $dateconsented = $dateregistered;
 	
 	/** version 10 ***/
-	if ($tngVersion < 11) {
+	if (tngVersion >=10 && $tngVersion< 11) {
 		$stmt = $db->prepare("INSERT IGNORE INTO `{$tngUserPrefix}`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssssssiiiiiiisiisssssssssssissis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website,$lastlogin, $a, $dateregistered, $dateactivated, $a, $notes);
 
@@ -115,7 +115,7 @@ function insertUserTng() {
 	}
 
 	/** version 11 ***/
-	if ($tngVersion == 11) {
+	if ($tngVersion >= 11 && $tngVersion < 12) {
 		$stmt = $db->prepare("INSERT IGNORE INTO `{$tngUserPrefix}`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssssssiiiiiiisiissssssssssisissis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website, $a, $lastlogin, $a, $dateregistered, $dateactivated, $a, $notes);
 
@@ -134,7 +134,7 @@ function insertUserTng() {
 		return true; // insert
 	}
 
-	if ($tngVersion >= 12) {
+	if ($tngVersion >= 12 && $tngVersion < 13.1) {
 		$stmt = $db->prepare("INSERT IGNORE INTO `{$tngUserPrefix}`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `dt_consented`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssssssiiiiiiisiissssssssssisisssis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website, $a, $lastlogin, $a, $dateregistered, $dateactivated, $dateconsented, $a, $notes);
 		try {
@@ -151,6 +151,25 @@ function insertUserTng() {
 		}
 		return true; // insert
 	}
+
+	if ($tngVersion >= 13.1) {
+		$stmt = $db->prepare("INSERT IGNORE INTO `{$tngUserPrefix}`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_private_notes`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `languageID`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `dt_consented`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt->bind_param("ssssssssiiiiiiisiiissssssssssisisssis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website, $a, $lastlogin, $a, $dateregistered, $dateactivated, $dateconsented, $a, $notes);
+		try {
+			$success = $stmt->execute();
+			$stmt->close();
+			if (!$success) {
+				$error = mysqli_error($db);
+				echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $error;
+				return false; // there is error
+			}
+		} catch (Exception $e) {
+			echo "<div id='msg'>. Ooops: something went wrong. Please try again " . $e->getMessage();
+			return false; // there is error
+		}
+		return true; // insert
+	}
+	
 }
 
 //send email - registration request - suggest password reset
