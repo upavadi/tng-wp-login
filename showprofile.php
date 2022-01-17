@@ -44,8 +44,8 @@ function get_currentuser_meta() {
 $wp_user = get_currentuser();
 function get_tng_user($db) {
 	$tng_name = (get_currentuser()->user_login);
-
-	$sql = "SELECT * FROM tng_users WHERE username='$tng_name'";
+	$tngUserPrefix = getTngPrefix(). "tng_users";
+	$sql = "SELECT * FROM {$tngUserPrefix} WHERE username='$tng_name'";
 	$result = $db->query($sql);	
 	if ($result) {
 		$row = $result->fetch_assoc();
