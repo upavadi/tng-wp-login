@@ -161,12 +161,13 @@ function redirect_logged_in_user( $redirect_to = null ) {
 		$password = $_POST['pass2'];
 		$password_type = $tngconfig['password_type'];
 		$hashed_pass = $password_type($_POST['pass2']);
+		$tngUserPrefix = getTngPrefix(). "tng_users";
 		$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 		if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 		}
 		//$sql = "UPDATE tng_users SET password='$hashed_pass' WHERE username='$user_name' ";
-		$stmt = $db->prepare("UPDATE tng_users SET password= ? WHERE username = ?");
+		$stmt = $db->prepare("UPDATE {$tngUserPrefix} SET password= ? WHERE username = ?");
 		$stmt->bind_param("ss", $hashed_pass, $user_name);
 		$success = $stmt->execute();
 		$stmt->close();
