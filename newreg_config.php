@@ -69,11 +69,7 @@ function getTngPath() {
 	$tngPath = $config['paths']['tng_path'];
 	if ((!$tngPath)) return;
 	$tngPath = preg_replace('/\\\\\"/',"\"", $tngPath); // this is for php 5.3 to remove escape characters.
-	// if (!$tngPath) {
-	//    // Show an error and die
-	//    echo "TNG path is not configured";
-	//    die;
-	// }
+
 	$tngPath = realpath($tngPath); 
 	if (!$tngPath) {
 	   // Show an error and die
@@ -94,7 +90,7 @@ function getSubroot() {
 	$tngPath = getTngPath();
 	return $tngPath;
 }
-//var_dump(getTngPrefix());
+
 function getTngPrefix() {
 	//get tng table prefix
 	$config = newRegConfig();
@@ -115,7 +111,8 @@ function roleTng() {
 	if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 	}
-	$sql = "SELECT * FROM tng_users WHERE username='$tng_user_name'";
+	$tngUserPrefix = getTngPrefix(). "tng_users";
+	$sql = "SELECT * FROM {$tngUserPrefix} WHERE username='$tng_user_name'";
 	$result = $db->query($sql);
 	if ($result) {
 		$row = $result->fetch_assoc();
@@ -127,16 +124,21 @@ function roleTng() {
 
 function nameTng() {
 	//does user name in tng exist
-	global $tng_name_check;
+	static $tng_name_check;
 	if(isset($_POST['loginname']))
 	$tng_name_check = ($_POST['loginname']);
 	$tng_path = getSubroot(). "config.php";
 	include ($tng_path); 
+	if (!$database_host) {
+		echo "TNG Path Not Found";
+		return false;
+	};
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 	if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 	}
-	$sql = "SELECT * FROM tng_users WHERE username='$tng_name_check'";
+	$tngUserPrefix = getTngPrefix(). "tng_users";
+	$sql = "SELECT * FROM {$tngUserPrefix} WHERE username='$tng_name_check'";
 	$result = $db->query($sql);
 	if ($result) {
 		$row = $result->fetch_assoc();
@@ -155,7 +157,8 @@ function emailTng() {
 	if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 	}
-	$sql = "SELECT * FROM tng_users WHERE email='$tng_email_check'";
+	$tngUserPrefix = getTngPrefix(). "tng_users";
+	$sql = "SELECT * FROM {$tngUserPrefix} WHERE email='$tng_email_check'";
 	$result = $db->query($sql);
 	if ($result) {
 		$row = $result->fetch_assoc();
@@ -175,11 +178,12 @@ function getTngUserName($wp_user) {
 	}
 	include ($tngPath); // NEED TO USE __dir__!!!
 	
-		$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 	if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 	}
-	$sql = "SELECT username FROM tng_users WHERE username='$wp_user'";
+	$tngUserPrefix = getTngPrefix(). "tng_users";
+	$sql = "SELECT username FROM {$tngUserPrefix} WHERE username='$wp_user'";
 	$result = $db->query($sql);
 	if ($result) {
 		$row = $result->fetch_assoc();
@@ -226,6 +230,3 @@ function guessTngVersion() {
 
 return $version;
 }
-
-
-var_dump(guessTngVersion());
