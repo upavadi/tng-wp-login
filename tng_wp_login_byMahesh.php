@@ -41,6 +41,7 @@ if (!file_exists($tngPath)) {
 }
 
 function tng_path_not_specified() {
+	static $success, $tngPromt, $tngdomain, $photopath;
 	if(isset ($_POST['Update_wp_tng_Paths'])) {
 		$tngFileError = checkForTngPath();
 		$tngPromt = "";
@@ -69,13 +70,14 @@ function tng_path_not_specified() {
 	} else {
 		echo "<div class='notice notice-error'>";
 	}
+	//var_dump($_POST);
 	?>
 		<div>
 			<h2>wp-tng login: We need to know where TNG is installed:</h2>
 		</div>
 		<form action=''  method="post">	
 		<div> 	
-			<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php echo $_POST['wp_tng_path'] ?>' placeholder='TNG Root Path:'>
+			<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php if ($_POST) echo $_POST['wp_tng_path'] ?>' placeholder='TNG Root Path:'>
 			TNG Root Path is absolute path to TNG. You may look this up from TNG Admin Setup or in config.php in TNG folder.
 		</div>
 		<?php
