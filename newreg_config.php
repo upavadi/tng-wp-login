@@ -73,7 +73,7 @@ function getTngPath() {
 	$tngPath = realpath($tngPath); 
 	if (!$tngPath) {
 	   // Show an error and die
-	   error_log("TNG path is not real");
+	   //error_log("TNG path is not real");
 	   return null;
 	}
 	return $tngPath . DIRECTORY_SEPARATOR;
@@ -194,6 +194,7 @@ function getTngUserName($wp_user) {
 }
 
 function guessTngVersion() {
+	static $languageID, $dt_consented, $allow_private_notes;
 	$tngPath = getTngPath();
 	if ((!$tngPath)) return;
 	$tng_path = getSubroot(). "config.php";
@@ -208,12 +209,12 @@ function guessTngVersion() {
 	$version = 10;
 	$row = $result->fetch_assoc();
 	
-	if (isset($row[languageID])) {
+	if (isset($row['languageID'])) {
 		$languageID = True;
 		$version = 11;
 	}
 	
-	if (isset($row[dt_consented])) {
+	if (isset($row['dt_consented'])) {
 		$dt_consented = TRUE;
 		$version = 12;
 	}
@@ -223,10 +224,55 @@ function guessTngVersion() {
 		$version = 13;
 	}	 
 
-	if (isset($row[allow_private_notes])) {
+	if (isset($row['allow_private_notes'])) {
 		$allow_private_notes = TRUE;
 			$version = 13.1;
 		}
 
 return $version;
+}
+
+function getTngPathInit() {
+	$config = newRegConfig();
+	$tngPath = $config['paths']['tng_path'];
+	if ((!$tngPath)) return;
+	$tngPath = preg_replace('/\\\\\"/',"\"", $tngPath); // this is for php 5.3 to remove escape characters.
+	$tngPath = realpath($tngPath); 
+	if (!$tngPath) {
+	   // Show an error and die
+	   //error_log("TNG path is not real");
+	   return null;
+	}
+	return $tngPath . DIRECTORY_SEPARATOR;
+}
+function getSubrootInit() {
+	//alternative place for configuration files
+	$tngPath = getTngPathInit(); 
+	if ((!$tngPath)) return;
+	$subroot_path = getTngPath(). "subroot.php"; 
+	include($subroot_path);
+	$subrootPath = $tngconfig['subroot'];
+	if ($subrootPath) return $subrootPath;
+	$tngPath = getTngPathInit();
+	return $tngPath;
+}
+
+function checkPrefixInit() {
+    $tng_folder = getTngPath();
+	if (!file_exists($tng_folder)) {
+		return NULL;
+    }
+    include($tng_folder.'/config.php');
+    include($tng_folder.'/customconfig.php');
+    $tngUserPrefix = getTngPrefix(). "tng_users"; 
+    $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	
+	//find table LIKE tng_users
+	$sql = "SHOW TABLES LIKE '%tng_users%'";    
+    $result = $db->query($sql);
+    //$row = $result->fetch_assoc();
+	($row = mysqli_fetch_row($result));
+	
+    return $row[0];
+
 }
