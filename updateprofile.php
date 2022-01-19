@@ -50,14 +50,15 @@ $hashed_pass = $password_type($_POST['new_pass']);
 $notes = $_POST['description'];;
 $realname = $_POST['first_name']. " ". $_POST['last_name'];
 $email = $_POST['user_email'];
+$tngUserPrefix = getTngPrefix(). "tng_users";
 if ($_POST['new_pass']) {
-$stmt = $db->prepare("UPDATE tng_users SET description=?, email=?, realname=?, notes=?, password=? WHERE username = ?");
+$stmt = $db->prepare("UPDATE {$tngUserPrefix} SET description=?, email=?, realname=?, notes=?, password=? WHERE username = ?"); 
 $stmt->bind_param("ssssss",$description,$email,$realname,$notes,$hashed_pass,$userName);
 //$sql = "UPDATE tng_users SET description='$description', email='$email',  realname='$realname', notes='$notes', password='$hashed_pass' WHERE username='$userName' ";
 } else {	
-$stmt = $db->prepare("UPDATE tng_users SET description=?, email=?, realname=?, notes=? WHERE username = ?");
-$stmt->bind_param("sssss",$description,$email,$realname,$notes,$userName);	
-//$sql = "UPDATE tng_users SET description='$description', email='$email',  realname='$realname', notes='$notes' WHERE username='$userName' ";
+$stmt = $db->prepare("UPDATE {$tngUserPrefix} SET description=?, email=?, realname=?, notes=? WHERE username = ?"); 
+$stmt->bind_param("sssss",$description,$email,$realname,$notes,$userName);
+//$sql = "UPDATE tng_users SET description='$description', email='$email',  realname='$realname', notes='$notes' WHERE username='$userName' "; 
 }
 $success = $stmt->execute();
 if ($success === TRUE) {
