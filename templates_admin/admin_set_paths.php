@@ -18,7 +18,7 @@ function set_plugin_paths() {
     if ( ! current_user_can( 'manage_options' ) ) {
         return;
 	}
-	
+	var_dump($config_paths);
 	if (isset($_POST['Update_Paths'])) {
 		$success = "";
 		update_paths();

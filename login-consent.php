@@ -115,7 +115,8 @@ function getTngConsent() {
 		die("Connection failed: " . $db->connect_error);
 	}
 	$wpCurrentUser = wp_get_current_user() -> user_login;
-	$sql = "SELECT * FROM tng_users WHERE username='$wpCurrentUser'";
+  $tngUserPrefix = getTngPrefix(). "tng_users";
+	$sql = "SELECT * FROM {$tngUserPrefix} WHERE username='$wpCurrentUser'";
 	$result = $db->query($sql);
 	if ($result) {
 		$row = $result->fetch_assoc();

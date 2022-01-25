@@ -234,7 +234,7 @@ return $version;
 
 function getTngPathInit() {
 	$config = newRegConfig();
-	$tngPath = $config['paths']['tng_path'];
+	$tngPath = $config['paths']['tng_path']; 
 	if ((!$tngPath)) return;
 	$tngPath = preg_replace('/\\\\\"/',"\"", $tngPath); // this is for php 5.3 to remove escape characters.
 	$tngPath = realpath($tngPath); 
@@ -272,7 +272,6 @@ function checkPrefixInit() {
     $result = $db->query($sql);
     //$row = $result->fetch_assoc();
 	($row = mysqli_fetch_row($result));
-	
-    return $row[0];
+	return $row[0];
 
 }

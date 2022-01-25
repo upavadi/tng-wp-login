@@ -38,6 +38,8 @@ if (!file_exists($tngPath)) {
 	error_log($e->getTraceAsString());
 //  Display admin message if tng path not specified
 	add_action( 'admin_notices', 'tng_path_not_specified' );
+} else {
+	tng_path_not_specified();
 }
 
 function tng_path_not_specified() {

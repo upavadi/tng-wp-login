@@ -1,9 +1,9 @@
 {
     "paths": {
-        "tng_path": "",
-        "tng_url": "",
-        "tng_photo_folder": "",
-        "tng_db_prefix": ""
+        "tng_path": "c:\\\\\\\\wamp64\\\\\\\\www\\\\\\\\tng13-prefix\\\\\\\\",
+        "tng_url": "http:\/\/localhost\/tng13-prefix\/",
+        "tng_photo_folder": "photos",
+        "tng_db_prefix": "wp_"
     },
     "login_text": {
         "loggedout_greeting": "WP_TNG Login",
