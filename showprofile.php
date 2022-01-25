@@ -57,13 +57,15 @@ function get_tng_user($db) {
 function get_tng_default_photo($db) {
 	$tng_user = get_tng_user($db);
 	$personID = $tng_user['personID'];
-	$def_photo = "SELECT * FROM tng_medialinks WHERE personID='$personID' AND defphoto=1";
+	$tngMediaLinksPrefix = getTngPrefix(). "tng_medialinks";
+	$def_photo = "SELECT * FROM {$tngMediaLinksPrefix} WHERE personID='$personID' AND defphoto=1";
 	$result = $db->query($def_photo);	
 	if ($result) {
 		$row = $result->fetch_assoc();
 		$tng_defaultphotoID = $row["mediaID"];
 	}
-	$def_photo = "SELECT thumbpath FROM tng_media WHERE mediaID='$tng_defaultphotoID'";
+	$tngMediaPrefix = getTngPrefix(). "tng_media";
+	$def_photo = "SELECT thumbpath FROM {$tngMediaPrefix} WHERE mediaID='$tng_defaultphotoID'";
 	$result = $db->query($def_photo);	
 	if ($result) {
 		$row = $result->fetch_assoc();
