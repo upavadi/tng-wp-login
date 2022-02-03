@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: TNG-Wordpress-login for TNG 9-13 
+Plugin Name: 2 - TNG-Wordpress-login
 Plugin URI: https://github.com/upavadi/tng-wp-login
-Description: Login to TNG with Wordpress, GDPR complient, allow new registrations, edit user profile and Retrieve password. Will work with TNG tables with prefixes.
-Version:     3.0
+Description: Login to TNG with Wordpress, GDPR complient, allow new registrations, edit user profile and Retrieve password
+Version:     3.01 prefix Beta
 Author:      Mahesh Upadhyaya
 Author URI:  http://trial.upavadi.net
 License:     MIT
@@ -37,6 +37,7 @@ var_dump($prefixToken);
 if (!file_exists($tngPath) OR ($prefixToken == False) ) {
 add_action( 'admin_notices', 'tng_path_not_specified' );
 }
+
 
 function tng_path_not_specified() {
 	static $success, $tngPromt, $urlPromt, $photoPromt, $prefix_db, $Update_wp_tng_Paths,$wp_tng_db_prefix, $prefix_line, $disabled;
@@ -215,6 +216,7 @@ function tng_path_not_specified() {
 
 return;
 }
+
 
 /******************************************** */
 if (file_exists($tngPath) && $prefixToken == TRUE) {
