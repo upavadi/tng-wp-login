@@ -39,77 +39,182 @@ add_action( 'admin_notices', 'tng_path_not_specified' );
 }
 
 function tng_path_not_specified() {
-	if(isset ($_POST['Update_wp_tng_Paths'])) {
-		$tngFileError = checkForTngPath();
-		$tngPromt = "";
+	static $success, $tngPromt, $urlPromt, $photoPromt, $prefix_db, $Update_wp_tng_Paths,$wp_tng_db_prefix, $prefix_line, $disabled;
+	global $wpdb;
+	$tngPromt = "";
+	$urlPromt = "";
+	$photoPromt = "";
+	$FindTngFolder = "Find TNG Folder";
+	$userPromt = "";
+	//$disabled = "disabled";
+	$disablePrefix = "disabled";
+	$token = false;
+	$prefixCheck = (checkPrefixInit());
+	$config_new = newRegConfig();
+	//$config_paths = ($config['paths']);
+	
+	if(isset ($_POST['Update_wp_tng_Paths'])) 
+    {
+		$tngFileError = checkForTngPathInit();
+		
 		if ($tngFileError[0] == true) {
-			$tngPromt = "<div style='color: red; font-size: 1.2em'>Cannot find TNG folder. Please check TNG setup.</div>";
+			$tngPromt = "<div style='color: red; font-size: 1.2em'>Cannot find TNG folder. Please check TNG setup.</div>"; 
 		}
 		
-		if ($tngFileError[0] == false) {
-			$tngPromt = "<div style='color: green; font-size: 1.2em'>Found TNG folder</div>";
-			$tngdomain = $tngFileError[2];
-			$photopath = $tngFileError[3];
-			$config_new = optionsConfig();
-			$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
-			$config_new['paths']['tng_url'] = $tngdomain;
-			$config_new['paths']['tng_photo_folder'] = $photopath;
-			$json = (json_encode($config_new, JSON_PRETTY_PRINT));
-			$path = __DIR__ . "/config.json";
-			file_put_contents($path, $json);
-			$success = "Paths saved";
-		}
+		if ($tngFileError[0] == false) 
+        {
+				//get values from config.php
+				$_POST['wp_tng_path'] = $tngFileError[1];
+				$_POST['wp_tng_url'] = $tngFileError[2];
+				$_POST['wp_tng_photo_folder'] = $tngFileError[3];
+				$prefix_db = $config_new["paths"]['tng_db_prefix'];
+				$_POST['tng_prefix_token'] = False;
+				
+
+			if (($_POST['Update_wp_tng_Paths'] == "Find TNG Folder")) {
+				$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
+				$config_new["paths"]['tng_url'] = $_POST["wp_tng_url"];
+				$config_new["paths"]['tng_photo_folder'] = $_POST["wp_tng_photo_folder"];
+				//$config_new["paths"]['tng_db_prefix'] = $prefix_db;
+				$config_new["paths"]['tng_prefix_token'] = $_POST['tng_prefix_token'];
+				$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+				$path = __DIR__ . "/config.json";
+				file_put_contents($path, $json);
+			}
+
+			//no table prefix make $token = true 
+			if ($prefixCheck == 'tng_users') {
+				$token = true;
+				$prefix_db = "";
+				$disablePrefix = "disabled";
+				$prefixComment = "";
+				$success = "<div style='color: green; font-size: 1.2em'>No Table prefixes - <b>Click Update ALL</b> and we are done</div>";			
+			}
+			//No table prefix - encode
+			if (($_POST['Update_wp_tng_Paths'] ==  "Update ALL" && ($prefixCheck == 'tng_users') )) {
+				$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
+				$config_new["paths"]['tng_url'] = $_POST["wp_tng_url"];
+				$config_new["paths"]['tng_photo_folder'] = $_POST["wp_tng_photo_folder"];
+				$config_new["paths"]['tng_db_prefix'] = $prefix_db;
+				$config_new["paths"]['tng_prefix_token'] = $token;
+				$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+				$path = __DIR__ . "/config.json";
+				file_put_contents($path, $json);
+			}
+
+			// Table has prefix.
+			if ($prefixCheck != 'tng_users') {
+				$token = true;
+				$prefix_db = $config_new["paths"]['tng_db_prefix'];
+				$prefix_line = true; //show prefix input line
+				$disablePrefix = "required";
+				$prefixComment = "Name of TNG Table Prefix. TNG DB User table is <b>". $prefixCheck;
+				$success = "<div style='color: green; font-size: 1.2em'>Update Table Prefix and <b>click update</b></div>";	
+			}
+			//table has prefix - encode
+			if (($_POST['Update_wp_tng_Paths'] ==  "Update ALL" && ($prefixCheck != 'tng_users') )) {
+				
+				$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
+				$config_new["paths"]['tng_url'] = $_POST["wp_tng_url"];
+				$config_new["paths"]['tng_photo_folder'] = $_POST["wp_tng_photo_folder"];
+				$config_new["paths"]['tng_db_prefix'] = $_POST['wp_tng_db_prefix'];
+				$config_new["paths"]['tng_prefix_token'] = $token;
+				$json = (json_encode($config_new, JSON_PRETTY_PRINT));
+				$path = __DIR__ . "/config.json";
+				file_put_contents($path, $json);
+				$success = "All Done Refresh page";
+				$success = "<div style='color: green; font-size: 1.2em'><b>All Done Refresh page</b></div>";	
+				
+			}
+
+
+		/*************************************************** */	
+		
+			if ($_POST['wp_tng_path']) $tngPromt = "<div style='color: green; font-size: 1.2em'>Thanks. Found TNG folder</div>"; 
+
+			if ($_POST['wp_tng_url']) $urlPromt = "<div style='color: green; font-size: 1em'>Genealogy URL OK</div>";
+			
+			/** check for Photo folder */
+			$photoPromt = "<div style='color: red; font-size: 1em'>Enter Name of TNG photo Folder eg photos</div>";
+			if ($_POST['wp_tng_photo_folder']) $photoPromt = "<div style='color: green; font-size: 1em'> TNG photo folder OK</div>";
+
+			}
 	}
-	    
-	if($success) {
+//var_dump($_POST);
+	
+	if($success) 
+    {
 		echo "<div class='notice notice-success'>";
+		
+        
 	} else {
 		echo "<div class='notice notice-error'>";
+	
 	}
+	
 	?>
 		<div>
 			<h2>wp-tng login: We need to know where TNG is installed:</h2>
 		</div>
 		<form action=''  method="post">	
 		<div> 	
-			<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php echo $_POST['wp_tng_path'] ?>' placeholder='TNG Root Path:'>
-			TNG Root Path is absolute path to TNG. You may look this up from TNG Admin Setup or in config.php in TNG folder.
+			<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php if (isset($_POST['wp_tng_path'])) echo ($_POST['wp_tng_path']) ?>' placeholder='TNG Root Path:'>
+			TNG Root Path is absolute path to TNG. You may look this up from TNG Admin Setup>Paths and Folders>Root Path or in config.php in TNG folder.
 		</div>
 		<?php
 		echo $tngPromt;
+	if (isset($_POST["wp_tng_url"])) {
 		?>
 		<div> 	
-			<input style="color: green; width: 250px" type="text"  name="wp_tng_url" value= '<?php echo $tngdomain; ?>' placeholder='TNG url:' disabled>
-			TNG URL (www.mysite.com/tng) from TNG Admin Setup.
+			<input style="color: green; width: 250px" type="text"  name="wp_tng_url" value= '<?php if (isset($_POST['wp_tng_url'])) echo $_POST['wp_tng_url'] ; ?>' placeholder='Genealogy URL:' <?php echo $disabled; ?>/>
+			Genealogy URL (www.mysite.com/tng) from TNG Admin Setup.
 		</div>
+		<?php
+			echo $urlPromt;
+	}
+	if (isset($_POST["wp_tng_photo_folder"])) {
+		?>
 		<div> 	
-			<input style="color: green" type="text"  name="wp_tng_photo_folder" style="width: 250px" value= '<?php echo $photopath; ?>' placeholder='TNG photo folder:' disabled>
-			Name of TNG Photo Folder in TNG Setup.  If you want to use different folder for this plugin, change it in admin menu>WP-TNG Login>Plugin Paths.
+			<input style="color: green" type="text"  name="wp_tng_photo_folder" style="width: 250px" value= '<?php if (isset($_POST['wp_tng_photo_folder'])) echo $_POST['wp_tng_photo_folder']; ?>' placeholder='TNG photo folder:' <?php echo $disabled; ?>/>
+			Name of TNG Photo Folder in TNG Setup.
 		</div>
-		<p style="color: green; display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
+		<?php
+			echo $photoPromt;
+	}
+
+/**************** END *******************/
+
+	if ($prefix_line == true) {
+	?>
 		
+        <div> 	
+			<input style="color: " type="text"  name="wp_tng_db_prefix" style="width: 250px" value= '<?php echo $prefix_db; ?>' placeholder='TNG Table Prefix:' <?php echo $disablePrefix; ?>/><?php echo $prefixComment; ?></b> 
+		</div>
+		<?php
+		echo $userPromt;
+	}
+	if(isset ($_POST['Update_wp_tng_Paths'])) $FindTngFolder = "Update ALL";
+	if(isset ($_POST['Update_wp_tng_Paths'])) $_POST['Update_wp_tng_Paths'] = "Update ALL";
+
+	
+		?>
+		<p style="display: inline-block"><?php echo "<b>". $success. "</b><br />"; ?></p>
 	<p>
-	<input type="submit" name="Update_wp_tng_Paths" value="Update Paths">
+	<?php
+	
+	?>
+	</p>
+	<p>
+	<input type="submit" name="Update_wp_tng_Paths" value="<?php echo $FindTngFolder; ?>">
 	</p>
 	</div>
 	</form>
 	
-    <?php
+<?php
 
+
+return;
 }
-
-function checkForTngPath() {
-	$wp_tng_path = $_POST['wp_tng_path']. 'config.php';
-	$tngFileError = "";
-	if (!file_exists($wp_tng_path) || !is_readable($wp_tng_path)) {	
-		return array(true, "", "","");
-	} else {
-	include($wp_tng_path);
-	
-	return array(false, $rootpath, $tngdomain, $photopath);
-	}
-}
-
 
 function add_tng_wp_login_stylesheets() {
 	/** Remove bootstrap here and add to templates to avoid conflicts with other plugins **/
