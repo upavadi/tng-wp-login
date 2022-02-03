@@ -15,29 +15,27 @@ License URI: http://opensource.org/licenses/MIT
 ***********************************************************
 * php 5.4 or higher
 **/
-
-
+// find tng config on initiation
+static $tngPath, $prefixToken;
 require_once(ABSPATH. 'wp-load.php');
 require_once(ABSPATH . 'wp-includes/pluggable.php'); 
-require_once 'newreg.php';
-require_once 'newregcomplete.php';
-require_once 'showprofile.php';
-require_once 'tng_wp_options.php';
-require_once 'login-to-wp.php';
-require_once 'login-to-tng.php';
-require_once 'insert_wp_pages.php';
-require_once 'lost_pw_settings.php';
-require_once 'templates/lost_password.html.php';
-require_once 'templates/reset_password.html.php';
-require_once 'templates_admin/admin_set_paths.php';
-//require_once "newreg_options.php";
-$tngPath = getSubroot(). 'config.php';
-if (!file_exists($tngPath)) {
-	$e = new Exception('TNG Path not found');
-	error_log($e->getMessage());
-	error_log($e->getTraceAsString());
-//  Display admin message if tng path not specified
-	add_action( 'admin_notices', 'tng_path_not_specified' );
+require_once 'newreg_config.php';
+
+//Get JSON values
+$tngPath = getSubrootInit(). 'config.php';
+$config = newRegConfig();
+$config_paths = ($config['paths']);
+$tng_Path = $config_paths['tng_path'];
+$tng_url = $config_paths['tng_url'];
+$tng_Photo_folder = $config_paths['tng_photo_folder'];
+//$prefix_db = $config_paths['tng_db_prefix'];
+$prefixToken = $config_paths['tng_prefix_token'];
+//check for no prefix
+$prefixCheck = (checkPrefixInit()); 
+$test = true;
+var_dump($prefixToken);
+if (!file_exists($tngPath) OR ($prefixToken == False) ) {
+add_action( 'admin_notices', 'tng_path_not_specified' );
 }
 
 function tng_path_not_specified() {
