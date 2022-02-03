@@ -31,7 +31,7 @@ $tng_Photo_folder = $config_paths['tng_photo_folder'];
 $prefixToken = $config_paths['tng_prefix_token'];
 //check for no prefix
 $prefixCheck = (checkPrefixInit()); 
-var_dump($prefixCheck, $prefixToken);
+echo($prefixCheck. "". $prefixToken);
 if (!file_exists($tngPath) OR ($prefixToken == False) ) {
 add_action( 'admin_notices', 'tng_path_not_specified' );
 }
@@ -207,7 +207,7 @@ if (isset($_POST["wp_tng_photo_folder"])) {
 return;
 }
 
-/******************************************** */
+/******** if user tables available continue ************************** */
 if (file_exists($tngPath) && $prefixToken == TRUE) {
 	require_once 'tng_wp_options.php';
 	require_once 'newreg.php';
@@ -220,7 +220,6 @@ if (file_exists($tngPath) && $prefixToken == TRUE) {
 	require_once 'templates/lost_password.html.php';
 	require_once 'templates/reset_password.html.php';
 	require_once 'templates_admin/admin_set_paths.php';
-
 
 	add_action( 'wp_enqueue_scripts', 'add_tng_wp_login_stylesheets' );
 
