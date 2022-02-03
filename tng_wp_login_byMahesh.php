@@ -20,7 +20,6 @@ static $tngPath, $prefixToken;
 require_once(ABSPATH. 'wp-load.php');
 require_once(ABSPATH . 'wp-includes/pluggable.php'); 
 require_once 'newreg_config.php';
-
 //Get JSON values
 $tngPath = getSubrootInit(). 'config.php';
 $config = newRegConfig();
@@ -32,8 +31,7 @@ $tng_Photo_folder = $config_paths['tng_photo_folder'];
 $prefixToken = $config_paths['tng_prefix_token'];
 //check for no prefix
 $prefixCheck = (checkPrefixInit()); 
-$test = true;
-var_dump($prefixToken);
+var_dump($prefixCheck, $prefixToken);
 if (!file_exists($tngPath) OR ($prefixToken == False) ) {
 add_action( 'admin_notices', 'tng_path_not_specified' );
 }
@@ -109,11 +107,10 @@ function tng_path_not_specified() {
 				$prefix_line = true; //show prefix input line
 				$disablePrefix = "required";
 				$prefixComment = "Name of TNG Table Prefix. TNG DB User table is <b>". $prefixCheck;
-				$success = "<div style='color: green; font-size: 1.2em'>Update Table Prefix and <b>click update</b></div>";	
+				$success = "<div style='color: green; font-size: 1.2em'>Enter Table Prefix and <b>click update</b></div>";	
 			}
 			//table has prefix - encode
 			if (($_POST['Update_wp_tng_Paths'] ==  "Update ALL" && ($prefixCheck != 'tng_users') )) {
-				
 				$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
 				$config_new["paths"]['tng_url'] = $_POST["wp_tng_url"];
 				$config_new["paths"]['tng_photo_folder'] = $_POST["wp_tng_photo_folder"];
@@ -126,9 +123,7 @@ function tng_path_not_specified() {
 				$success = "<div style='color: green; font-size: 1.2em'><b>All Done Refresh page</b></div>";	
 				
 			}
-
-
-		/*************************************************** */	
+	/******************wrap up********************************* */	
 		
 			if ($_POST['wp_tng_path']) $tngPromt = "<div style='color: green; font-size: 1.2em'>Thanks. Found TNG folder</div>"; 
 
@@ -144,42 +139,38 @@ function tng_path_not_specified() {
 	
 	if($success) 
     {
-		echo "<div class='notice notice-success'>";
-		
-        
-	} else {
-		echo "<div class='notice notice-error'>";
-	
+		echo "<div class='notice notice-success'>";	
+    } else {
+		echo "<div class='notice notice-error'>";	
 	}
-	
 	?>
-		<div>
-			<h2>wp-tng login: We need to know where TNG is installed:</h2>
-		</div>
-		<form action=''  method="post">	
-		<div> 	
-			<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php if (isset($_POST['wp_tng_path'])) echo ($_POST['wp_tng_path']) ?>' placeholder='TNG Root Path:'>
-			TNG Root Path is absolute path to TNG. You may look this up from TNG Admin Setup>Paths and Folders>Root Path or in config.php in TNG folder.
-		</div>
-		<?php
-		echo $tngPromt;
-	if (isset($_POST["wp_tng_url"])) {
-		?>
-		<div> 	
-			<input style="color: green; width: 250px" type="text"  name="wp_tng_url" value= '<?php if (isset($_POST['wp_tng_url'])) echo $_POST['wp_tng_url'] ; ?>' placeholder='Genealogy URL:' <?php echo $disabled; ?>/>
-			Genealogy URL (www.mysite.com/tng) from TNG Admin Setup.
-		</div>
-		<?php
-			echo $urlPromt;
-	}
-	if (isset($_POST["wp_tng_photo_folder"])) {
-		?>
-		<div> 	
-			<input style="color: green" type="text"  name="wp_tng_photo_folder" style="width: 250px" value= '<?php if (isset($_POST['wp_tng_photo_folder'])) echo $_POST['wp_tng_photo_folder']; ?>' placeholder='TNG photo folder:' <?php echo $disabled; ?>/>
-			Name of TNG Photo Folder in TNG Setup.
-		</div>
-		<?php
-			echo $photoPromt;
+	<div>
+	<h2>WP - TNG login: We need to know where TNG is installed:</h2>
+	</div>
+	<form action=''  method="post">	
+	<div> 	
+		<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php if (isset($_POST['wp_tng_path'])) echo ($_POST['wp_tng_path']) ?>' placeholder='TNG Root Path:'>
+		TNG Root Path is absolute path to TNG. You may look this up from TNG Admin Setup>Paths and Folders>Root Path or in config.php in TNG folder.
+	</div>
+	<?php
+	echo $tngPromt;
+if (isset($_POST["wp_tng_url"])) {
+	?>
+	<div> 	
+		<input style="color: green; width: 250px" type="text"  name="wp_tng_url" value= '<?php if (isset($_POST['wp_tng_url'])) echo $_POST['wp_tng_url'] ; ?>' placeholder='Genealogy URL:' <?php echo $disabled; ?>/>
+		Genealogy URL (www.mysite.com/tng) from TNG Admin Setup.
+	</div>
+	<?php
+		echo $urlPromt;
+}
+if (isset($_POST["wp_tng_photo_folder"])) {
+	?>
+	<div> 	
+		<input style="color: green" type="text"  name="wp_tng_photo_folder" style="width: 250px" value= '<?php if (isset($_POST['wp_tng_photo_folder'])) echo $_POST['wp_tng_photo_folder']; ?>' placeholder='TNG photo folder:' <?php echo $disabled; ?>/>
+		Name of TNG Photo Folder in TNG Setup.
+	</div>
+	<?php
+		echo $photoPromt;
 	}
 
 /**************** END *******************/
