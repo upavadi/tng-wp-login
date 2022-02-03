@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: TNG-Wordpress-login for TNG 10-13 
+Plugin Name: TNG-Wordpress-login for TNG 9-13 
 Plugin URI: https://github.com/upavadi/tng-wp-login
-Description: Login to TNG with Wordpress, GDPR complient, allow new registrations, edit user profile and Retrieve password
-Version:     3.0 prefix Beta
+Description: Login to TNG with Wordpress, GDPR complient, allow new registrations, edit user profile and Retrieve password. Will work with TNG tables with prefixes.
+Version:     3.0
 Author:      Mahesh Upadhyaya
 Author URI:  http://trial.upavadi.net
 License:     MIT
@@ -38,12 +38,9 @@ if (!file_exists($tngPath)) {
 	error_log($e->getTraceAsString());
 //  Display admin message if tng path not specified
 	add_action( 'admin_notices', 'tng_path_not_specified' );
-} else {
-	tng_path_not_specified();
 }
 
 function tng_path_not_specified() {
-	static $success, $tngPromt, $tngdomain, $photopath;
 	if(isset ($_POST['Update_wp_tng_Paths'])) {
 		$tngFileError = checkForTngPath();
 		$tngPromt = "";
@@ -59,7 +56,6 @@ function tng_path_not_specified() {
 			$config_new["paths"]['tng_path'] = $_POST["wp_tng_path"];
 			$config_new['paths']['tng_url'] = $tngdomain;
 			$config_new['paths']['tng_photo_folder'] = $photopath;
-			$config_new['paths']['tng_db_prefix'] = $tngprefix;
 			$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 			$path = __DIR__ . "/config.json";
 			file_put_contents($path, $json);
@@ -72,14 +68,13 @@ function tng_path_not_specified() {
 	} else {
 		echo "<div class='notice notice-error'>";
 	}
-	//var_dump($_POST);
 	?>
 		<div>
 			<h2>wp-tng login: We need to know where TNG is installed:</h2>
 		</div>
 		<form action=''  method="post">	
 		<div> 	
-			<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php if ($_POST) echo $_POST['wp_tng_path'] ?>' placeholder='TNG Root Path:'>
+			<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php echo $_POST['wp_tng_path'] ?>' placeholder='TNG Root Path:'>
 			TNG Root Path is absolute path to TNG. You may look this up from TNG Admin Setup or in config.php in TNG folder.
 		</div>
 		<?php
