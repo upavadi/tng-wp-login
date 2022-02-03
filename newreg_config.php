@@ -273,5 +273,63 @@ function checkPrefixInit() {
     //$row = $result->fetch_assoc();
 	($row = mysqli_fetch_row($result));
 	return $row[0];
-
 }
+
+function checkTablesInit() {
+ 
+	$tng_folder = getTngPath();
+	if (!file_exists($tng_folder)) {
+		return NULL;
+	 }
+	include($tng_folder.'/config.php');
+    include($tng_folder.'/customconfig.php');
+    $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	//find table LIKE users
+	$sql1 = "SHOW TABLES LIKE '%tng_users%'";    
+    $result1 = $db->query($sql1);
+    ($row1 = mysqli_fetch_row($result1)); 
+	//find table LIKE image_tags
+	$sql2 = "SHOW TABLES LIKE '%tng_image_tags%'";    
+    $result2 = $db->query($sql2);
+    ($row2 = mysqli_fetch_row($result2));
+	//find table LIKE medialinks
+	$sql3 = "SHOW TABLES LIKE '%tng_medialinks%'";    
+	$result3 = $db->query($sql3);
+	($row3 = mysqli_fetch_row($result3));
+	//find table LIKE media
+	$sql4 = "SHOW TABLES LIKE '%tng_media'";    
+	$result4 = $db->query($sql4);
+	($row4 = mysqli_fetch_row($result4)); 
+	return array($row1[0], $row2[0], $row3[0], $row4[0]);
+}
+
+function checkForTngPathInit() {
+	//static $tngPrefix;
+	$wp_tng_path = $_POST['wp_tng_path']. 'config.php'; 
+	//$tngFileError = "";
+	if (!file_exists($wp_tng_path) || !is_readable($wp_tng_path)) {	
+		return array(true, "", "","","");
+	} else {
+	include($wp_tng_path);
+	return array(false, $rootpath, $tngdomain, $photopath);
+	}
+}
+
+function checkTables_noPrefix() {
+	$tng_folder = getTngPath();
+	if (!file_exists($tng_folder)) {
+		return NULL;
+	 }
+	 $config = newRegConfig();
+$config_paths = ($config['paths']);
+	 $userTableName = checkPrefixInit();
+	 $prefixToken = FALSE;
+	 if ($userTableName == "tng_users") {
+		$config_paths['tng_prefix_token'] = TRUE;
+		$config_paths['tng_db_prefix'] = "";
+		$prefixToken = $config_paths['tng_prefix_token'];
+	 }
+
+return $prefixToken;
+}
+
