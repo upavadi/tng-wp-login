@@ -9,7 +9,6 @@ function update_paths() {
 	$config_new["paths"]['tng_path'] = $_POST["tng_path"];
 	$config_new['paths']['tng_url'] = $_POST['tng_url'];
 	$config_new['paths']['tng_photo_folder'] = $_POST['tng_photo_folder'];
-	$config_new['paths']['tng_db_prefix'] = $_POST['tng_db_prefix'];
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 	file_put_contents($path_json, $json);
 	$success = "Changes Saved";

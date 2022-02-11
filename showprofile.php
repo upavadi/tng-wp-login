@@ -44,8 +44,8 @@ function get_currentuser_meta() {
 $wp_user = get_currentuser();
 function get_tng_user($db) {
 	$tng_name = (get_currentuser()->user_login);
-	$tngUserPrefix = getTngPrefix(). "tng_users";
-	$sql = "SELECT * FROM {$tngUserPrefix} WHERE username='$tng_name'";
+	$tngUserTable = tngUserTable();
+	$sql = "SELECT * FROM {$tngUserTable} WHERE username='$tng_name'";
 	$result = $db->query($sql);	
 	if ($result) {
 		$row = $result->fetch_assoc();
@@ -57,15 +57,15 @@ function get_tng_user($db) {
 function get_tng_default_photo($db) {
 	$tng_user = get_tng_user($db);
 	$personID = $tng_user['personID'];
-	$tngMediaLinksPrefix = getTngPrefix(). "tng_medialinks";
-	$def_photo = "SELECT * FROM {$tngMediaLinksPrefix} WHERE personID='$personID' AND defphoto=1";
+	$tngMediaLinksTable = medialinks_table();
+	$def_photo = "SELECT * FROM {$tngMediaLinksTable} WHERE personID='$personID' AND defphoto=1";
 	$result = $db->query($def_photo);	
 	if ($result) {
 		$row = $result->fetch_assoc();
 		$tng_defaultphotoID = $row["mediaID"];
 	}
-	$tngMediaPrefix = getTngPrefix(). "tng_media";
-	$def_photo = "SELECT thumbpath FROM {$tngMediaPrefix} WHERE mediaID='$tng_defaultphotoID'";
+	$tngMedia = mediaTable();
+	$def_photo = "SELECT thumbpath FROM {$tngMedia} WHERE mediaID='$tng_defaultphotoID'";
 	$result = $db->query($def_photo);	
 	if ($result) {
 		$row = $result->fetch_assoc();
