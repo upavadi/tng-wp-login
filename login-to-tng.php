@@ -119,9 +119,9 @@ function mutng_db_connect() {
     include($tng_folder.'/customconfig.php');
     $currentuser = wp_get_current_user() -> user_login;
     $newdate = date ("Y-m-d H:i:s", time() + ( 3600 * $time_offset ) ); 
-    $tngUserPrefix = getTngPrefix(). "tng_users"; 
+    $tngUserTable = tngUserTable(); 
     $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
-	$sql = "SELECT * FROM {$tngUserPrefix} WHERE username='$currentuser'"; 
+	$sql = "SELECT * FROM {$tngUserTable} WHERE username='$currentuser'"; 
     
     $result = $db->query($sql);
     $row = $result->fetch_assoc();
@@ -137,8 +137,8 @@ function mutng_db_update() {
     include($tng_folder.'/config.php');
     include($tng_folder.'/customconfig.php');
     $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
-    $tngUserPrefix = getTngPrefix(). "tng_users";
-    $stmt = $db->prepare("UPDATE {$tngUserPrefix} SET lastlogin = ? WHERE username = ?");
+    $tngUserTable = tngUserTable();
+    $stmt = $db->prepare("UPDATE {$tngUserTable} SET lastlogin = ? WHERE username = ?");
     $stmt->bind_param("ss", $newdate, $currentuser);
     $success = $stmt->execute();
     $stmt->close(); 
@@ -211,7 +211,7 @@ function mutng_logout() {
     $_SESSION['allow_media_add'] = 0;
     $_SESSION['allow_media_delete'] = 0;
     $_SESSION['allow_living'] = 0;
-    $_SESSION['allow_private'] = i0;
+    $_SESSION['allow_private'] = 0;
     $_SESSION['allow_ged'] = 0;
     $_SESSION['allow_pdf'] = 0;
     $_SESSION['allow_lds'] = 0;
