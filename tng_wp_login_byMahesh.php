@@ -3,7 +3,7 @@
 Plugin Name: TNG-Wordpress-login for TNG 9-13 - Login Only
 Plugin URI: https://github.com/upavadi/tng-wp-login
 Description: Login to TNG with Wordpress, GDPR complient, allow new registrations, edit user profile and Retrieve password. Will work with TNG tables with prefixes.
-Version:     3.1 Beta Log-In only
+Version:     3.1.1 Beta Log-In only
 Author:      Mahesh Upadhyaya
 Author URI:  http://trial.upavadi.net
 License:     MIT
@@ -160,13 +160,13 @@ if (isset($_POST["wp_tng_photo_folder"])) {
 
 /******** if user tables available continue ************************** */
 if (file_exists($tngPath) && $token == TRUE) {
-	 require_once 'tng_wp_options.php';
+	require_once 'tng_wp_options.php';
 	// require_once 'newreg.php';
 	// require_once 'newregcomplete.php';
-	 require_once 'showprofile.php';
+	require_once 'showprofile.php';
 	//  require_once 'login-to-wp.php'; delete
 	// require_once 'login-to-tng.php'; delete
-	// require_once 'insert_wp_pages.php';
+	require_once 'insert_wp_pages.php';
 	// require_once 'lost_pw_settings.php';
 	// require_once 'templates/lost_password.html.php';
 	// require_once 'templates/reset_password.html.php';
