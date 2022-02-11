@@ -3,14 +3,13 @@
         "tng_path": "",
         "tng_url": "",
         "tng_photo_folder": "",
-        "tng_db_prefix": "",
-        "tng_prefix_token": false
+        "tng_success_token": false
     },
     "login_text": {
         "loggedout_greeting": "WP_TNG Login",
         "cookie_notification": "Note: This site uses cookies",
         "greeting": "Welcome",
-        "version_id": "to our genealogy site for V13 Beta",
+        "version_id": " - V3.1-Stripped Version",
         "user_page": "wp-tng-profile",
         "user_page_name": "Your Profile",
         "reg_page": "wp-tng-registration",
