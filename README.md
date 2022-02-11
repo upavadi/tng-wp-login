@@ -1,7 +1,7 @@
 # **Wordpress-TNG Login Widget** # 
 
 ## **Download**
-Current pre-release Version 3.0 is under development
+Current pre-release Version 3.1 is under development
  - to add ability to work with TNG tables with prefixes added. (https://github.com/upavadi/tng-wp-login/archive/refs/heads/master.zip)
 - Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V2.0.3.2.
 
@@ -50,13 +50,20 @@ Only known issue is that the WP-TNG integration plugin seems to deactivate TNG L
 --------------
 
 ## **Change Log **
-- **Current Vesion 3.0 is under Developement**
-  - Add ability to work with TNG tables with prefixes - eg: wp_tng_xxxx
+- **Current Vesion 3.1 Beta is under Developement**
+  - Add ability to work with TNG tables with modified table names, as they appear in TNG setup. 
   - Tighter error trapping
-  - Three Utilities Functional but not fully tested yet.
+  - Three Utilities not added yet.
     - Registration
     - User Profile
     - Lost Password
+    - Added success token for successful initialization
+  - Tested with PHP 8.0.1 - No errors
+  - Tested with Wordpress 5.9
+    - Throws up few Wordpress errors with PHP 8.0.1 - Plugin has no errors.
+    - Please note that there is a major change in how Wordpress 5.9 deals with Widgets. There is a convoluted way in which it registers a new widget. Best way, for now, is to have the plugin widget active when upgarding to 5.9. I am trying to get my head around how this works!! 
+
+ - **Version 3.0 Not released** 
 - Version2.0.3.2
   - A fix for an open session error reported by the WordPress Site Health plugin.
   - A private mod for redirecting Social media logins. * Commented Out ** 
