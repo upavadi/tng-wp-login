@@ -2,11 +2,12 @@
 //Lost password. 
 // generate email with key to reset
 $config = newRegConfig()['forgot_pw'];
-
+static $error_key;
 function lostPassword() {
+	static $error_key;
 	$config = newRegConfig()['forgot_pw'];
 	$msg_loggedin = "You are already Logged in";
-	$error_key = $_GET['errors'];
+	if (isset($_GET['errors'])) $error_key = $_GET['errors'];
 	$error = 'Please enter your email address';
 	$home = home_url();
 	if ( is_user_logged_in() ) {
@@ -39,20 +40,24 @@ function lostPassword() {
 				<div id="msg"class="row">
 					<?php 
 					$error  = "";
-					//var_dump($error_key);
+					//var_dump($_GET);
 					if ($error_key) {
 						if ($error_key == 'empty_username') {
 						$error = "Do we have your email?";
 						echo $error;
 						}
-						if ($error_key == invalidcombo) {
-						$error = "Please enter valid email";
-						echo $error;
-						}
-						if ($error_key == invalid_email) {
+						// if ($error_key == invalidcombo) {  
+						// $error = "Please enter valid email";
+						// echo $error;
+						//}
+						if ($error_key == 'invalid_email') {
 						$error = "Sorry. This email is not registered with us";
 						echo $error;
 						}
+						if ($error_key == 'retrieve_password_email_failure') {
+							$error = "Something has gone wrong. Please try again or Contact Us";
+							echo $error;
+							}
 					}
 					$error = 'Success';
 					?>

@@ -23,7 +23,7 @@ require_once(__DIR__. '/../lost_pw_settings.php');
 ?>
 <!-- add bootstrap here instead of primary file to avoid conflucts with other plugins -->	
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<div class="container-fluid">
+<div class="container-fluid">1234
 	<div id='container_forgot_pw'>
 		<div class="regsubtitle" id='upper' style="text-align: center">
 		Reset Your Password

@@ -115,8 +115,8 @@ function getTngConsent() {
 		die("Connection failed: " . $db->connect_error);
 	}
 	$wpCurrentUser = wp_get_current_user() -> user_login;
-  $tngUserPrefix = getTngPrefix(). "tng_users";
-	$sql = "SELECT * FROM {$tngUserPrefix} WHERE username='$wpCurrentUser'";
+  $tngUserTable = tngUserTable(); 
+	$sql = "SELECT * FROM {$tngUserTable} WHERE username='$wpCurrentUser'";
 	$result = $db->query($sql);
 	if ($result) {
 		$row = $result->fetch_assoc();
@@ -130,10 +130,11 @@ function updateTngConsent() {
   if($tngVersion < 12) return ''; 
   $tngPath = getSubroot(). "config.php"; 
   include ($tngPath);
+  $tngUserTable = tngUserTable(); 
   $wpCurrentUser = wp_get_current_user() -> user_login;
   $dt_consented = date('Y-m-d h:i:s');
   $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
-  $stmt = $db->prepare("UPDATE tng_users SET dt_consented= ? WHERE username = ?");
+  $stmt = $db->prepare("UPDATE {$tngUserTable} SET dt_consented= ? WHERE username = ?");
 $stmt->bind_param("ss", $dt_consented, $wpCurrentUser);
 $success = $stmt->execute();
 $stmt->close();

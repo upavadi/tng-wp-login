@@ -28,7 +28,7 @@ function redirect_logged_in_user( $redirect_to = null ) {
 			$errors = retrieve_password();
 			if ( is_wp_error( $errors ) ) {
 				// Errors found
-				$redirect_url = home_url( 'wp-tng-lostPassword' );
+				$redirect_url = home_url( 'wp-tng-lostPassword' ); 
 				$redirect_url = add_query_arg( 'errors', join( ',', $errors->get_error_codes() ), $redirect_url );
 			} else {
 				// Email sent
@@ -39,7 +39,7 @@ function redirect_logged_in_user( $redirect_to = null ) {
 				}
 			}
 
-			wp_safe_redirect( $redirect_url );
+			wp_safe_redirect( $redirect_url ); 
 			exit;
 		}
 	}
@@ -139,7 +139,7 @@ function redirect_logged_in_user( $redirect_to = null ) {
 		$line5 = $config['line5'];
 		$line6 = $config['line6'];
 		$reset_address = site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' );
-		
+
 		$msg = $line1. "\r\n\r\n";
 		$msg = $msg. $line2. "\r\n";
 		$msg = $msg. $line3. "\r\n\r\n";
@@ -147,7 +147,7 @@ function redirect_logged_in_user( $redirect_to = null ) {
 		$msg = $msg. $reset_address. "\r\n\r\n";
 		$msg = $msg. $line5. "\r\n\r\n";
 		$msg = $msg. $line6; 
-	//	var_dump($msg);
+		
 
 		return $msg;
 	}
@@ -161,13 +161,13 @@ function redirect_logged_in_user( $redirect_to = null ) {
 		$password = $_POST['pass2'];
 		$password_type = $tngconfig['password_type'];
 		$hashed_pass = $password_type($_POST['pass2']);
-		$tngUserPrefix = getTngPrefix(). "tng_users";
+		$tngUserTable = tngUserTable(); 
 		$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 		if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 		}
 		//$sql = "UPDATE tng_users SET password='$hashed_pass' WHERE username='$user_name' ";
-		$stmt = $db->prepare("UPDATE {$tngUserPrefix} SET password= ? WHERE username = ?");
+		$stmt = $db->prepare("UPDATE {$tngUserTable} SET password= ? WHERE username = ?");
 		$stmt->bind_param("ss", $hashed_pass, $user_name);
 		$success = $stmt->execute();
 		$stmt->close();

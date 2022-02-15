@@ -159,13 +159,18 @@ function guessTngVersion() {
 	$tng_user_table = tngUserTable();
 	$tng_image_tags = tngImageTagTable();
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	if (isset($tng_image_tags)) {
 	$sql = "SELECT * FROM {$tng_user_table} ";
 	$result = $db->query($sql);
+	$row = $result->fetch_assoc();
+	}
+	if (isset($tng_image_tags)) {
 	$sql2 = "SELECT * FROM {$tng_image_tags} ";
 	$result2 = $db->query($sql2);
+	$row2 = $result2->fetch_assoc();
+	}
 	$version = 10;
-	$row = $result->fetch_assoc();
-	
+		
 	if (isset($row['languageID'])) {
 		$languageID = True;
 		$version = 11;
@@ -181,7 +186,7 @@ function guessTngVersion() {
 		$version = 13;
 	}	 
 
-	if (isset($row['allow_private_notes'])) {
+	if (isset($row2['allow_private_notes'])) {
 		$allow_private_notes = TRUE;
 			$version = 13.1;
 		}
