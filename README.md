@@ -50,9 +50,10 @@ Only known issue is that the WP-TNG integration plugin seems to deactivate TNG L
 --------------
 
 ## **Change Log **
-- **Current Vesion 3.1 Beta is under Developement**
+- **Current Vesion 3.1.2 Beta is under Developement**
   - Add ability to work with TNG tables with modified table names, as they appear in TNG setup. 
   - Tighter error trapping
+  - sometimes it failed to recognize TNG V12. FIXED.
   - Three Utilities not added yet.
     - Registration
     - User Profile
