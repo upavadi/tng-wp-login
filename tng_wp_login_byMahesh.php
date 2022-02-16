@@ -161,8 +161,8 @@ if (isset($_POST["wp_tng_photo_folder"])) {
 /******** if user tables available continue ************************** */
 if (file_exists($tngPath) && $token == TRUE) {
 	require_once 'tng_wp_options.php';
-	// require_once 'newreg.php'; delete
-	// require_once 'newregcomplete.php';
+	require_once 'newreg.php';
+	require_once 'newregcomplete.php';
 	require_once 'showprofile.php';
 	require_once 'insert_wp_pages.php';
 	require_once 'lost_pw_settings.php';
