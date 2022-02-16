@@ -6,6 +6,60 @@
 // 	$tngPrefix = str_replace(' ', '', $tngPrefix);
 // 	return $tngPrefix;
 // }
+/*** REgistration ***/
+function keyValues() {
+	static $key_value;
+	if (!$key_value) {
+		$key_url =  __DIR__ . "/keyValue.json";
+		$key_value = json_decode(file_get_contents($key_url), true);
+	}
+	return $key_value;
+}
+
+function nameTng() {
+	//does user name in tng exist
+	global $tng_name_check, $tng_user_name;
+	if(isset($_POST['loginname']))
+	$tng_name_check = ($_POST['loginname']);
+	$tng_path = getSubroot(). "config.php";
+	include ($tng_path); 
+	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	if ($db->connect_error) {
+		die("Connection failed: " . $db->connect_error);
+	}
+	$tng_user_table = tngUserTable();
+	$sql = "SELECT * FROM {$tng_user_table} WHERE username='$tng_user_name'";
+	$result = $db->query($sql);
+	if ($result) {
+		$row = $result->fetch_assoc();
+		//$tng_username = $row["username"];
+	return $row;
+	}
+	return false;
+}
+
+function emailTng() {
+	$tng_email_check = ($_POST['email']);
+	//does email in tng exist
+	$tngPath = getSubroot(). "config.php";
+	include ($tngPath);
+	$tng_user_table = tngUserTable(); 
+	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
+	if ($db->connect_error) {
+		die("Connection failed: " . $db->connect_error);
+	}
+	$sql = "SELECT * FROM {$tng_user_table} WHERE email='$tng_email_check'";
+	$result = $db->query($sql);
+	if ($result) {
+		$row = $result->fetch_assoc();
+		$tng_email = $row['email'];
+		return $row;
+	}
+	return false;
+}
+
+
+
 /*** Initialize ***/
 function getSubroot() {
 	//alternative place for configuration files
