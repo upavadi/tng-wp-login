@@ -51,6 +51,7 @@ Only known issue is that the WP-TNG integration plugin seems to deactivate TNG L
 
 ## **Change Log **
 - **Current Vesion 3.1.3 Beta: Ready for Beta Test**
+  - Variables updated for PHP 8  
   - New registration enambled to 3.1.2
   - Ready for Beta Test
 - **Current Vesion 3.1.2 Beta Not Released**
