@@ -224,11 +224,11 @@ function new_reg_email_text() {
 //prepare body-text for new regisration email
 function new_reg_pwreset_email_text() {
 	//wordpress id check
-	$wpUser = (get_user_by(login, $_POST['loginname'] ));
+	$wpUser = (get_user_by('login', $_POST['loginname'] ));
 	$nameInWp_id = $wpUser->ID;
 	$nameInWp_name = $wpUser->user_login;
 	$nameInWp_email = $wpUser->user_email;
-	$wpEmail = (get_user_by(email, $_POST['email'] ));
+	$wpEmail = (get_user_by('email', $_POST['email'] ));
 	$emailInWp_id = $wpEmail->ID;
 	$emailInWp_name = $wpEmail->user_login;
 	$emailInWp_email = $wpEmail->user_email;
