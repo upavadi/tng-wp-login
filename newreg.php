@@ -23,7 +23,8 @@ function validate($form) {
 	$consent = (newRegPrivacy());
 	$consentPrompt = $consent['reg_form_consent']['prompt'];
 	$consentEnabled = $consent['reg_form_consent']['enabled']; 
-	$nameInTng = nameTng()['username'];
+	$nameInTng = nameTng();//['username'];
+	if(isset($nameInTng)) $nameInTng = $nameInTng['username'];
 	if (($_POST)) {
 	if (!isset($form['firstname']) || empty($form['firstname'])) {
 		$errors['firstname'] = 'Cannot be empty';
