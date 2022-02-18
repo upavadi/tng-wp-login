@@ -1,6 +1,7 @@
 <?php
 function input($field, $label, $description, $placeholder, $value, $error, $type = 'text') {
-	global $newreg_entries, $userExists, $emailExists;
+	global $newreg_entries, $userExists, $emailExists, $data;
+	$emailExists = null;
 	$errorClass = '';
 	if ($error) {
 		$errorClass = 'has-error';
@@ -9,14 +10,14 @@ function input($field, $label, $description, $placeholder, $value, $error, $type
 	if (($_POST)) {
 		$newreg_entries = (validate($_POST)); 
 		$userExists = $newreg_entries['userExists'];
-		$emailExists = $newreg_entries['emailExists'];
+		if (isset($newreg_entries['emailExists'])) $emailExists = $newreg_entries['emailExists'];
 
 		if (!$newreg_entries || $emailExists ) {	
 			echo newreg_complete(); return null;
 		}
 	}
 	
-	if ($_POST && $data['errors']) {
+	if ($_POST && isset($data['errors'])) {
 		echo "<div class='text-danger'>Please check for errors</div>";
 	}
 ?>
