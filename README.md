@@ -28,8 +28,8 @@ This widget replicates the Wordpress login/log out task and also logs into TNG, 
 ## **Compatibility**
 - The plugin is under tested on TNG 9.1, 10.1.3 and 13.1
   - database changes made to TNG 11.x are allowed for. My thanks to [Darrin](http://www.tngsitebuilding.com/) for supplying details.
-- PHP version 5.4 - 7.3
--  Wordpress V 4.9 - 5.7.5 platform
+- PHP version 5.4 - 8.0.1
+-  Wordpress V 4.9 - 5.9 platform
 - A Wordpress twenty Twelve child theme. (Not tested in any other theme).
 - **Works on default TNG table names (tng_xxxx). Hopefully, version 2.3 will be able to handle tng table prefixes (eg wp_tng_xxxx)**.
 
