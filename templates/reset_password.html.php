@@ -20,9 +20,11 @@ require_once(__DIR__. '/../lost_pw_settings.php');
 				echo "<div id='msg_grn'>". $msg_success. "'<br /><a href='" .$home. "'>Home</a></div>"; 
 				return;
 			}
-		}	
-		if ($_REQUEST['checkemail'] == 'confirm') {
-			return $confirmPW;
+		}
+		if (isset($_REQUEST['checkemail'])) {	
+			if ($_REQUEST['checkemail'] == 'confirm') {
+				return $confirmPW;
+			}
 		}
 ?>
 <!-- add bootstrap here instead of primary file to avoid conflucts with other plugins -->	
@@ -54,7 +56,7 @@ require_once(__DIR__. '/../lost_pw_settings.php');
 			<?php 
 			//$error  = "";
 			
-			if ($error) {
+			if (isset($error)) {
 				if ($error == 'password_reset_empty') {
 				$error = 'Please enter and varify new password';
 				echo $error;

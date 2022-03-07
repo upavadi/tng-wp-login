@@ -3,7 +3,7 @@
 ## **Download**
 Current Beta Version 3.1.3 is available for Beta Test
  - to add ability to work with TNG tables available in TNG Setup. (https://github.com/upavadi/tng-wp-login/archive/refs/heads/master.zip)
-- Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V2.0.3.2.
+- Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3, 2.0.3.2 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V3.1.3 Beta Test
 
 - ***Test Site:*** http://trial.upavadi.net/ site uses M Barnes plugin for wordpress / TNG integration
 - ***Live Site:*** http://www.upavadi.net/   site uses Kloosterman method for wordpress / TNG integration
