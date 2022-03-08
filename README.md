@@ -31,7 +31,7 @@ This widget replicates the Wordpress login/log out task and also logs into TNG, 
 - PHP version 5.4 - 8.0.1
 -  Wordpress V 4.9 - 5.9 platform
 - A Wordpress twenty Twelve child theme. (Not tested in any other theme).
-- **Works on default TNG table names (tng_xxxx). Hopefully, version 2.3 will be able to handle tng table prefixes (eg wp_tng_xxxx)**.
+- **Works on default TNG table names defined in TNG Setup**.
 
 ------------------------
 
