@@ -1,15 +1,15 @@
 {
     "paths": {
-        "tng_path": "",
-        "tng_url": "",
-        "tng_photo_folder": "",
-        "tng_success_token": false
+        "tng_path": "C:\/wamp64\/www\/tng13-prefix\/",
+        "tng_url": "http:\/\/localhost\/tng13-prefix\/",
+        "tng_photo_folder": "photos",
+        "tng_success_token": true
     },
     "login_text": {
         "loggedout_greeting": "WP_TNG Login",
         "cookie_notification": "Note: This site uses cookies",
         "greeting": "Welcome",
-        "version_id": " - V3.1-Stripped Version",
+        "version_id": " - V3.1.3 New Reg DEv",
         "user_page": "wp-tng-profile",
         "user_page_name": "Your Profile",
         "reg_page": "wp-tng-registration",
