@@ -47,7 +47,7 @@ if ($db->connect_error) {
 $userName = $_POST['user_login'];
 $description = $_POST['display_name'];
 $hashed_pass = $password_type($_POST['new_pass']);
-$notes = $_POST['description'];;
+$notes = $_POST['tng_interest'];;
 $realname = $_POST['first_name']. " ". $_POST['last_name'];
 $email = $_POST['user_email'];
 $tngUserTable = tngUserTable();
