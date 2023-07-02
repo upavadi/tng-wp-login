@@ -50,7 +50,15 @@ Only known issue is that the WP-TNG integration plugin seems to deactivate TNG L
 --------------
 
 ## **Change Log **
-- **Current Vesion 3.1.3 Beta: Ready for Beta Test**
+- **Current Vesion 3.1.3a**
+  - Careless typo in /newregcomplete.php, line 98,  `if (tngVersion >=10 && $tngVersion< 11)`
+  - should be `if ($tngVersion >=10 && $tngVersion< 11)`. (Missing `$` in front of tngVersion). 
+  - Careless quote of incorrect variable did not display or save TNG Notes in/from TNG User table.
+    - in /newregcomplete.php, line 85 should be,  `$notes = $_POST['tng_interest'];`
+    - in /updateprofile.php, line 50 should be,  `$notes = $_POST['tng_interest']`;
+  - **You may find it easier to make manuall changes to these two files**
+
+- **Current Released Vesion 3.1.3 Beta: Ready for Beta Test**
   - Variables updated for PHP 8  
   - New registration enambled to 3.1.2
   - Ready for Beta Test
