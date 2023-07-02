@@ -82,7 +82,7 @@ function insertUserTng() {
 	$password_type = "";
 	$realname = $_POST['firstname']. " ". $_POST['lastname'];
 	$email = $_POST['email'];
-	$notes = $_POST['bioinfo'];
+	$notes = $_POST['tng_interest'];
 	$role = 'guest';
 	$allow_living = -1;
 	$website = 'http://';
@@ -95,7 +95,7 @@ function insertUserTng() {
 	if ($configPrivacy) $dateconsented = $dateregistered;
 	
 	/** version 10 ***/
-	if (tngVersion >=10 && $tngVersion< 11) {
+	if ($tngVersion >=10 && $tngVersion< 11) {
 		$stmt = $db->prepare("INSERT IGNORE INTO `{$tngUserTable}`(`description`, `username`, `password`,  `password_type`, `gedcom`, `mygedcom`, `personID`, `role`, `allow_edit`, `allow_add`, `tentative_edit`, `allow_delete`, `allow_lds`, `allow_ged`, `allow_pdf`, `allow_living`, `allow_private`, `allow_profile`, `branch`, `realname`, `phone`, `email`, `address`, `city`, `state`, `zip`, `country`, `website`, `lastlogin`, `disabled`, `dt_registered`, `dt_activated`, `no_email`, `notes` ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssssssiiiiiiisiisssssssssssissis", $description, $userName, $password, $passwordtype, $b, $b, $b, $role, $a, $a,  $a, $a, $a, $a, $a, $allow_living, $a, $a, $b, $realname, $b, $email, $b, $b, $b, $b, $b, $website,$lastlogin, $a, $dateregistered, $dateactivated, $a, $notes);
 
