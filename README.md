@@ -1,7 +1,7 @@
 # **Wordpress-TNG Login Widget** # 
 
 ## **Download**
-Current Version 3.1.3a
+__Current Version 3.1.3a__
  - to add ability to work with TNG tables available in TNG Setup. (https://github.com/upavadi/tng-wp-login/archive/refs/heads/master.zip)
 - Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3, 2.0.3.2 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V3.1.3a
 
