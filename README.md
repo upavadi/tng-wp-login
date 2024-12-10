@@ -1,13 +1,13 @@
 # **Wordpress-TNG Login Widget** # 
 
 ## **Download**
-Current Beta Version 3.1.3 is available for Beta Test
+Current Version 3.1.3a
  - to add ability to work with TNG tables available in TNG Setup. (https://github.com/upavadi/tng-wp-login/archive/refs/heads/master.zip)
-- Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3, 2.0.3.2 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V3.1.3 Beta Test
+- Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3, 2.0.3.2 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V3.1.3a
 
-- ***Test Site:*** http://trial.upavadi.net/ site uses M Barnes plugin for wordpress / TNG integration
+- ***Test Site:*** http://trial.upavadi.net/ site <strike>uses M Barnes plugin for wordpress / TNG integration</strike> does not use Wordpress - TNG Integration.
 - ***Live Site:*** http://www.upavadi.net/   site uses Kloosterman method for wordpress / TNG integration
- - On both sites, Wordpress and TNG are installed in their own folders.
+ - __On both sites, Wordpress and TNG are installed in their own folders.__
 
 -----
 
@@ -40,12 +40,11 @@ This widget replicates the Wordpress login/log out task and also logs into TNG, 
 To my knowledge, there are 2 main methods available for achieving this.
 Works well with TNG V 9 - 10 and 12. Changes in V11 implemented but have not been tested.
 1. **Mark Barnes method** (MB-Method) uses a plugin to replace WP page with TNG content.
-Only known issue is that the WP-TNG integration plugin seems to deactivate TNG Login panel so that User cannot login to TNG using TNG Login Panel. This should not be a problem because user may login by using WP_TNG Login.
-   - ***My Test site is using this method with TNG V12.*** 
-   - ***Tested on my local WAMP server with TNG 13.***
+    - Unfortunately, this plugin does not seem to work in WordPress 6.3.x.
+   - ***<strike>My Test site is using this method with TNG V12.</strike> Test site now uses Wordpress V6.x and TNG V 14. No Integration.*** 
    - ***If using this method, deselect "Integrate TNG/Wordpress logins: " option.*** 
 2. **Cees Kloosterman Method** (CK-Method) uses customized Header and Footer files by replacing TNG Header and footer by Hard coding topmenu.php, footer.php and meta.php, in TNG folder. This is a very simple and effective method and I have now converted my live site CK-Method.
-3. ***The plugin is also tested with TNG V12 using both integration methods***  
+3. ***<strike>The plugin is also tested with TNG V12 using both integration methods</strike>***  
 4. **Send email** uses Worpress mail. It is possible that emails do not work if you have SMTP mail enabled in Wordpress. Please let me know if this is an issue.
 --------------
 
@@ -62,7 +61,7 @@ Only known issue is that the WP-TNG integration plugin seems to deactivate TNG L
   - Variables updated for PHP 8  
   - New registration enambled to 3.1.2
   - Ready for Beta Test
-- **Current Vesion 3.1.2 Beta Not Released**
+- **Vesion 3.1.2 Beta Not Released**
   - Add ability to work with TNG tables with modified table names, as they appear in TNG setup. 
   - Tighter error trapping
   - sometimes it failed to recognize TNG V12. FIXED.
@@ -198,10 +197,10 @@ submitted email in TNG DB only|Alert Title: 'We Shall Contact You'| administrato
      - Use TNG document or your own customized document
 ------------------     
 ## **Privacy**
-**TNG V12 Introduces privacy policy and this plugin will track TNG settings. For V 9 - 11, privacy policy can still be implemented**
+**TNG V12 ++ Introduced privacy policy and this plugin will track TNG settings. For V 9 - 14, privacy policy can still be implemented**
  - Privacy settings can be accessed from Admin Dashboard>WP-TNG Login>Privacy
  - On first activation, visit the privacy panel
-  - If you are using TNG Version 12, panel will display the 3 privacy settings in TNG and appropriate checkbox(s) checked below. I suggest you leave the default checkbox settings as they are. Any change to these 3 settings shoud be done in TNG admin panel. After every change in TNG, revisit this panel and save the changes.
+  - If you are using TNG Version 12+, panel will display the 3 privacy settings in TNG and appropriate checkbox(s) checked below. I suggest you leave the default checkbox settings as they are. Any change to these 3 settings shoud be done in TNG admin panel. After every change in TNG, revisit this panel and save the changes.
    - if you are using TNG Version 9, 10 or 11, you may still use the the settings. Only difference would be notification of Cookies which is described below, under cookies.
  - **The options:**  
    - **Enable User Consent regarding personal info**
@@ -236,7 +235,7 @@ submitted email in TNG DB only|Alert Title: 'We Shall Contact You'| administrato
  -----------------------------
 ## Please let me know if there are any bugs or you have any suggestions ##
  ------------------------------
-***Current release version 2.0.3.1. I look forward to your feedback on any issues.***
+***Current release version 3.1.3a. I look forward to your feedback on any issues.***
 --
 
 
