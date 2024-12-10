@@ -1,7 +1,7 @@
 # **Wordpress-TNG Login Widget** # 
 
 ## **Download**
-__Current Version 3.1.3a__
+Current Version 3.1.3a
  - to add ability to work with TNG tables available in TNG Setup. (https://github.com/upavadi/tng-wp-login/archive/refs/heads/master.zip)
 - Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3, 2.0.3.2 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V3.1.3a
 
@@ -197,10 +197,10 @@ submitted email in TNG DB only|Alert Title: 'We Shall Contact You'| administrato
      - Use TNG document or your own customized document
 ------------------     
 ## **Privacy**
-**TNG V12 ++ Introduced privacy policy and this plugin will track TNG settings. For V 9 - 14, privacy policy can still be implemented**
+**TNG V12 ++ Introduced privacy policy and this plugin will track TNG settings. For V 9 - 1, privacy policy can still be implemented**
  - Privacy settings can be accessed from Admin Dashboard>WP-TNG Login>Privacy
  - On first activation, visit the privacy panel
-  - If you are using TNG Version 12+, panel will display the 3 privacy settings in TNG and appropriate checkbox(s) checked below. I suggest you leave the default checkbox settings as they are. Any change to these 3 settings shoud be done in TNG admin panel. After every change in TNG, revisit this panel and save the changes.
+  - If you are using TNG Version 12, panel will display the 3 privacy settings in TNG and appropriate checkbox(s) checked below. I suggest you leave the default checkbox settings as they are. Any change to these 3 settings shoud be done in TNG admin panel. After every change in TNG, revisit this panel and save the changes.
    - if you are using TNG Version 9, 10 or 11, you may still use the the settings. Only difference would be notification of Cookies which is described below, under cookies.
  - **The options:**  
    - **Enable User Consent regarding personal info**
