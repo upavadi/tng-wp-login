@@ -1,12 +1,12 @@
 # **Wordpress-TNG Login Widget** # 
 
 ## **Download**
-Current Version 3.1.3a
+Current Version 3.1.3b
  - to add ability to work with TNG tables available in TNG Setup. (https://github.com/upavadi/tng-wp-login/archive/refs/heads/master.zip)
-- Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3, 2.0.3.2 https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V3.1.3a
+- Release versions 1.0.4, 2.0.1, 2.0.2, 2.0.3, 2.0.3.2, V3.1.3a https://github.com/upavadi/tng-wp-login/releases/latest have been updated with V3.1.3b
 
-- ***Test Site:*** http://trial.upavadi.net/ site <strike>uses M Barnes plugin for wordpress / TNG integration</strike> does not use Wordpress - TNG Integration.
-- ***Live Site:*** http://www.upavadi.net/   site uses Kloosterman method for wordpress / TNG integration
+- ***Test Site:*** http://trial.upavadi.net/  __does not use Wordpress - TNG Integration__.
+- ***Live Site: http://www.upavadi.net/   site uses Kloosterman method for wordpress / TNG integration***
  - __On both sites, Wordpress and TNG are installed in their own folders.__
 
 -----
@@ -26,13 +26,12 @@ This widget replicates the Wordpress login/log out task and also logs into TNG, 
 - GDPR Privacy policy is implemented
 ---------------------
 ## **Compatibility**
-- The plugin is under tested on TNG 9.1, 10.1.3 and 13.1
+- The plugin is under tested on TNG 9.1, 10.1.3, 13.1 and 14.0.5
   - database changes made to TNG 11.x are allowed for. My thanks to [Darrin](http://www.tngsitebuilding.com/) for supplying details.
-- PHP version 5.4 - 8.0.1
--  Wordpress V 4.9 - 5.9 platform
+- PHP version 5.4 - 8.3
+-  Wordpress V 4.9 - 6.7 platform
 - A Wordpress twenty Twelve child theme. (Not tested in any other theme).
 - **Works on default TNG table names defined in TNG Setup**.
-
 ------------------------
 
 ## **Issues**
@@ -49,15 +48,15 @@ Works well with TNG V 9 - 10 and 12. Changes in V11 implemented but have not bee
 --------------
 
 ## **Change Log **
-- **Current Released Vesion 3.1.3a**
+- **Current Released Vesion 3.1.3b**
+  - updated undefined variables
+- **Vesion 3.1.3a Beta: Ready for Beta Test**
   - Careless typo in /newregcomplete.php, line 98,  `if (tngVersion >=10 && $tngVersion< 11)`
   - should be `if ($tngVersion >=10 && $tngVersion< 11)`. (Missing `$` in front of tngVersion). 
   - Careless quote of incorrect variable did not display or save TNG Notes in/from TNG User table.
     - in /newregcomplete.php, line 85 should be,  `$notes = $_POST['tng_interest'];`
     - in /updateprofile.php, line 50 should be,  `$notes = $_POST['tng_interest']`;
-  - **You may find it easier to make manuall changes to these two files**
-
-- **Vesion 3.1.3 Beta: Ready for Beta Test**
+  - **Vesion 3.1.3 Beta: Ready for Beta Test**
   - Variables updated for PHP 8  
   - New registration enambled to 3.1.2
   - Ready for Beta Test
