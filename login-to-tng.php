@@ -45,10 +45,12 @@ function StartSession() {
     return;
 }
 
+$args = []; // Initialize the array to avoid undefined variable issues
+
 if (isset($_POST['log'])) $args['id_username'] = $_POST['log'];
 if (isset($_POST['pwd'])) $args['id_password'] = $_POST['pwd'];
 if (isset($_POST['redirect_to'])) $args['redirect'] = $_POST['redirect_to'];
-if (isset($_POST['rememberme'])) $args['rememberme'] = $_POST['rememberme'];
+$args['rememberme'] = isset($_POST['rememberme']) ? $_POST['rememberme'] : ''; // Fallback value
 
 if (isset($_POST['log'])) {
 	setcookie('tnguser_rememberme', $args['rememberme'], 0,  '/', "", false, true);
