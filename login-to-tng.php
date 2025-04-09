@@ -47,9 +47,15 @@ function StartSession() {
 
 $args = []; // Initialize the array to avoid undefined variable issues
 
-if (isset($_POST['log'])) $args['id_username'] = $_POST['log'];
-if (isset($_POST['pwd'])) $args['id_password'] = $_POST['pwd'];
-if (isset($_POST['redirect_to'])) $args['redirect'] = $_POST['redirect_to'];
+if (isset($_POST['log'])) {
+    $args['id_username'] = $_POST['log'];
+}
+if (isset($_POST['pwd'])) {
+    $args['id_password'] = $_POST['pwd'];
+}
+if (isset($_POST['redirect_to'])) {
+    $args['redirect'] = $_POST['redirect_to'];
+}
 $args['rememberme'] = isset($_POST['rememberme']) ? $_POST['rememberme'] : ''; // Fallback value
 
 if (isset($_POST['log'])) {
@@ -57,7 +63,7 @@ if (isset($_POST['log'])) {
 	require_once ($wp_path. '/wp-login.php');// need actual url
 }
 
-if (isset($_POST['redirect_to']) && (!$_POST['log'] || !$_POST['pwd'])) {
+if (isset($_POST['redirect_to']) && (!isset($_POST['log']) || !isset($_POST['pwd']))) {
 	header('Location: ' . $_POST['redirect_to']);
 	exit;
 }
@@ -222,4 +228,4 @@ function mutng_logout() {
    // return $_SESSION;
    	header('Location: ' . $_POST['redirect_to']); // Let's see if this logsout TNG
 	exit;
-    }    
+    }
