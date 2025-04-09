@@ -50,7 +50,7 @@ Works well with TNG V 9 - 10 and 12. Changes in V11 implemented but have not bee
 ## **Change Log **
 - **Current Released Vesion 3.1.3b**
   - updated undefined variables
-- **Vesion 3.1.3a Beta: Ready for Beta Test**
+- **Vesion 3.1.3a  Beta: Ready for Beta Test**
   - Careless typo in /newregcomplete.php, line 98,  `if (tngVersion >=10 && $tngVersion< 11)`
   - should be `if ($tngVersion >=10 && $tngVersion< 11)`. (Missing `$` in front of tngVersion). 
   - Careless quote of incorrect variable did not display or save TNG Notes in/from TNG User table.
