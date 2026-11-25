@@ -29,6 +29,28 @@ if ($config) {
 $config_paths = ($config['paths']);
 $token = $config_paths['tng_success_token'];
 }
+/**
+ * CSRF protection for this plugin's admin settings forms.
+ * tng_wp_login_nonce_field() is printed inside every settings <form>;
+ * tng_wp_login_verify_admin_post() runs before any submitted settings
+ * are processed and stops the request unless it came from that form,
+ * submitted by an administrator.
+ * Defined unconditionally: the settings pages call these whether or not the
+ * TNG path has been set up yet.
+ */
+function tng_wp_login_nonce_field() {
+	wp_nonce_field( 'tng_wp_login_admin', '_tng_wp_login_nonce' );
+}
+function tng_wp_login_verify_admin_post() {
+	if ( empty( $_POST ) ) {
+		return;
+	}
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( esc_html__( 'You do not have permission to change these settings.' ) );
+	}
+	check_admin_referer( 'tng_wp_login_admin', '_tng_wp_login_nonce' );
+}
+
 if (!file_exists($tngPath) OR ($token == False) ) {
 add_action( 'admin_notices', 'tng_path_not_specified' ); 
 }
@@ -74,12 +96,14 @@ function tng_path_not_specified() {
 				$config_new["paths"]['tng_success_token'] = $_POST["tng_success_token"];
 				$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 				$path = __DIR__ . "/config.json";
-				file_put_contents($path, $json);
+				if (false === @file_put_contents($path, $json)) {
+					$tngPromt = "<div style='color: red; font-size: 1.2em'>Found TNG, but could not save the settings: the plugin folder (" . esc_html(__DIR__) . ") is not writable by the web server. Please fix its permissions and try again.</div>";
+				}
 			}
 
 	/******************wrap up********************************* */	
 		
-			if ($_POST['wp_tng_path']) $tngPromt = "<div style='color: green; font-size: 1.2em'>Thanks. Found TNG folder</div>"; 
+			if ($_POST['wp_tng_path'] && $tngPromt === "") $tngPromt = "<div style='color: green; font-size: 1.2em'>Thanks. Found TNG folder</div>"; 
 
 			if ($_POST['wp_tng_url']) $urlPromt = "<div style='color: green; font-size: 1em'>Genealogy URL OK</div>";
 			
@@ -103,8 +127,9 @@ function tng_path_not_specified() {
 	<h2>WP - TNG login: We need to know where TNG is installed:</h2>
 	</div>
 	<form action=''  method="post">	
+	<?php tng_wp_login_nonce_field(); ?>
 	<div> 	
-		<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php if (isset($_POST['wp_tng_path'])) echo ($_POST['wp_tng_path']) ?>' placeholder='TNG Root Path:'>
+		<input type="text"  style="width: 250px" name="wp_tng_path" value= '<?php if (isset($_POST['wp_tng_path'])) echo esc_attr(wp_unslash($_POST['wp_tng_path'])) ?>' placeholder='TNG Root Path:'>
 		TNG Root Path is absolute path to TNG. You may look this up from TNG Admin Setup>Paths and Folders>Root Path or in config.php in TNG folder.
 	</div>
 	<?php
@@ -112,7 +137,7 @@ function tng_path_not_specified() {
 if (isset($_POST["wp_tng_url"])) {
 	?>
 	<div> 	
-		<input style="color: green; width: 250px" type="text"  name="wp_tng_url" value= '<?php if (isset($_POST['wp_tng_url'])) echo $_POST['wp_tng_url'] ; ?>' placeholder='Genealogy URL:' <?php echo $disabled; ?>/>
+		<input style="color: green; width: 250px" type="text"  name="wp_tng_url" value= '<?php if (isset($_POST['wp_tng_url'])) echo esc_attr(wp_unslash($_POST['wp_tng_url'])); ?>' placeholder='Genealogy URL:' <?php echo $disabled; ?>/>
 		Genealogy URL (www.mysite.com/tng) from TNG Admin Setup.
 	</div>
 	<?php
@@ -121,7 +146,7 @@ if (isset($_POST["wp_tng_url"])) {
 if (isset($_POST["wp_tng_photo_folder"])) {
 	?>
 	<div> 	
-		<input style="color: green" type="text"  name="wp_tng_photo_folder" style="width: 250px" value= '<?php if (isset($_POST['wp_tng_photo_folder'])) echo $_POST['wp_tng_photo_folder']; ?>' placeholder='TNG photo folder:' <?php echo $disabled; ?>/>
+		<input style="color: green" type="text"  name="wp_tng_photo_folder" style="width: 250px" value= '<?php if (isset($_POST['wp_tng_photo_folder'])) echo esc_attr(wp_unslash($_POST['wp_tng_photo_folder'])); ?>' placeholder='TNG photo folder:' <?php echo $disabled; ?>/>
 		Name of TNG Photo Folder in TNG Setup.
 	</div>
 	<?php
@@ -129,6 +154,7 @@ if (isset($_POST["wp_tng_photo_folder"])) {
 		$userPromt = "<div style='color: green; font-size: 1em'>Found TNG Tables, ".  $tableToken[1]. ", ". $tableToken[2]. " and ". $tableToken[3]. "</div>";
 	}
 	if (isset($_POST['Update_wp_tng_Paths'])) {
+		tng_wp_login_verify_admin_post();
 		$FindTngFolder = $_POST['Update_wp_tng_Paths'];
 		if ($FindTngFolder == "Find TNG Folder") {
 			$FindTngFolder = "Done. Click to Finish";
@@ -141,7 +167,9 @@ if (isset($_POST["wp_tng_photo_folder"])) {
 			$config_new["paths"]['tng_success_token'] = $tableToken[0];
 			$json = (json_encode($config_new, JSON_PRETTY_PRINT));
 			$path = __DIR__ . "/config.json";
-			file_put_contents($path, $json);
+			if (false === @file_put_contents($path, $json)) {
+				echo "<div style='color: red; font-size: 1.2em'>Could not save the settings: the plugin folder (" . esc_html(__DIR__) . ") is not writable by the web server. Please fix its permissions and try again.</div>";
+			}
 			
 		}
 	}

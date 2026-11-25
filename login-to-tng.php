@@ -59,12 +59,18 @@ if (isset($_POST['redirect_to'])) {
 $args['rememberme'] = isset($_POST['rememberme']) ? $_POST['rememberme'] : ''; // Fallback value
 
 if (isset($_POST['log'])) {
-	setcookie('tnguser_rememberme', $args['rememberme'], 0,  '/', "", false, true);
+	setcookie('tnguser_rememberme', $args['rememberme'], 0,  '/', "", is_ssl(), true);
 	require_once ($wp_path. '/wp-login.php');// need actual url
 }
 
-if (isset($_POST['redirect_to']) && (!isset($_POST['log']) || !isset($_POST['pwd']))) {
-	header('Location: ' . $_POST['redirect_to']);
+// This file is loaded on every request as part of the plugin, but this redirect
+// is only meant for the login widget, which posts directly to this file.
+// Without the entry-point check it intercepted other plugins' forms that carry
+// a redirect_to field (e.g. the Two Factor code form) before they could run.
+$mutng_is_entry_point = isset($_SERVER['SCRIPT_FILENAME']) && realpath($_SERVER['SCRIPT_FILENAME']) === realpath(__FILE__);
+if ($mutng_is_entry_point && isset($_POST['redirect_to']) && (!isset($_POST['log']) || !isset($_POST['pwd']))) {
+	// Only redirect within this site (prevents open redirects to other domains).
+	wp_safe_redirect(wp_validate_redirect(wp_unslash($_POST['redirect_to']), home_url('/')));
 	exit;
 }
 
@@ -129,9 +135,11 @@ function mutng_db_connect() {
     $newdate = date ("Y-m-d H:i:s", time() + ( 3600 * $time_offset ) ); 
     $tngUserTable = tngUserTable(); 
     $db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
-	$sql = "SELECT * FROM {$tngUserTable} WHERE username='$currentuser'"; 
-    
-    $result = $db->query($sql);
+	// Prepared statement: never build SQL from user-controlled values.
+	$stmt = $db->prepare("SELECT * FROM {$tngUserTable} WHERE username = ?");
+	$stmt->bind_param('s', $currentuser);
+	$stmt->execute();
+	$result = $stmt->get_result();
     $row = $result->fetch_assoc();
     return $row;	
 }
@@ -169,9 +177,9 @@ function reset_cookie() {
 	$newroot = preg_replace( "~/~", "", $newroot );
     $newroot = preg_replace( "~/.~", "", $newroot );
 	
-    setcookie("tnguser_$newroot", "", time()+31536000, "/", "", false, true);
-    setcookie("tngpass_$newroot", "", time()-31536000, "/", "",  false, true);
-    setcookie("tngloggedin_$newroot", "", time()-31536000, "/", "",  false, true); 
+    setcookie("tnguser_$newroot", "", time()+31536000, "/", "", is_ssl(), true);
+    setcookie("tngpass_$newroot", "", time()-31536000, "/", "", is_ssl(), true);
+    setcookie("tngloggedin_$newroot", "", time()-31536000, "/", "", is_ssl(), true); 
     return;
 }
 
@@ -189,11 +197,11 @@ function set_cookie() {
         error_log("Headers already sent in $file:$line");
         return;
     }
-    setcookie("tnguser_$newroot", $row['username'], time()+31536000, "/", "",  false, true);
-    setcookie("tngpass_$newroot", $row['password'], time()+31536000, "/", "",  false, true);
-    setcookie("tngpasstype_$newroot", $row['password_type'], time()+31536000, "/", "", false, true);
+    setcookie("tnguser_$newroot", $row['username'], time()+31536000, "/", "", is_ssl(), true);
+    setcookie("tngpass_$newroot", $row['password'], time()+31536000, "/", "", is_ssl(), true);
+    setcookie("tngpasstype_$newroot", $row['password_type'], time()+31536000, "/", "", is_ssl(), true);
     $allow_admin = $row['allow_edit'] || $row['allow_add'] || $row['allow_delete'] ? 1 : 0;
-    if($allow_admin) setcookie("tngloggedin_$newroot", "1", 0, "/");
+    if($allow_admin) setcookie("tngloggedin_$newroot", "1", 0, "/", "", is_ssl());
     return;
 }
 
@@ -201,8 +209,8 @@ function set_cookie() {
 function mutng_logout() {
     reset_cookie();
     session_start();
-    $session_language = $_SESSION['session_language'];
-    $session_charset = $_SESSION['session_charset'];
+    $session_language = $_SESSION['session_language'] ?? null;
+    $session_charset = $_SESSION['session_charset'] ?? null;
      
     $_SESSION['currentuser'] = '';
     $_SESSION['currentuserdesc'] = '';
@@ -226,6 +234,8 @@ function mutng_logout() {
     $_SESSION['allow_profile'] = 0;
     $_SESSION['logged_in'] = 0;
    // return $_SESSION;
-   	header('Location: ' . $_POST['redirect_to']); // Let's see if this logsout TNG
+   	// Return to the requested page (or reload the current one), staying on this site.
+   	$mutng_target = isset($_POST['redirect_to']) ? wp_unslash($_POST['redirect_to']) : ($_SERVER['REQUEST_URI'] ?? '/');
+   	wp_safe_redirect(wp_validate_redirect($mutng_target, home_url('/')));
 	exit;
     }

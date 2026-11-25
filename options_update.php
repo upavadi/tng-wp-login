@@ -6,11 +6,14 @@ function update_paths() {
 	$path_json = (__DIR__. '/config.json');
 	$config = optionsConfig();
 	$config_new = $config;
-	$config_new["paths"]['tng_path'] = $_POST["tng_path"];
-	$config_new['paths']['tng_url'] = $_POST['tng_url'];
-	$config_new['paths']['tng_photo_folder'] = $_POST['tng_photo_folder'];
+	// The TNG root path must end with a slash (file names are appended to it).
+	$config_new["paths"]['tng_path'] = trailingslashit(trim(wp_unslash($_POST["tng_path"] ?? '')));
+	$config_new['paths']['tng_url'] = trim(wp_unslash($_POST['tng_url'] ?? ''));
+	$config_new['paths']['tng_photo_folder'] = trim(wp_unslash($_POST['tng_photo_folder'] ?? ''));
 	$json = (json_encode($config_new, JSON_PRETTY_PRINT));
-	file_put_contents($path_json, $json);
+	if (false === @file_put_contents($path_json, $json)) {
+		return "Could not save: the plugin folder is not writable by the web server.";
+	}
 	$success = "Changes Saved";
 	return $success;
 }

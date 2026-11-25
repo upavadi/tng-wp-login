@@ -1,6 +1,7 @@
 <?php
 require_once (__DIR__. '/../newreg_config.php');
 function set_plugin_privacy() {
+	tng_wp_login_verify_admin_post();
 	global $success;
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
     $configPrivacy = newRegPrivacy(); 
@@ -45,6 +46,7 @@ function set_plugin_privacy() {
 </head>
 <div class="wrap container"  style='width: auto'>
 <form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 	<div class="regsubtitle">
 	<?php echo $configPrivacy['title']; ?>
 	</div>

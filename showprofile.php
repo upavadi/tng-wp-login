@@ -4,6 +4,10 @@ require_once "templates/view_profile.html.php";
 require_once "updateprofile.php";
 /** This function drives shortcode [user_profile] ***/
 function show_profile() {
+	// Logged-out visitors get a login link instead of an empty profile form.
+	if (!is_user_logged_in()) {
+		return '<p>Please <a href="' . esc_url(home_url('/login/')) . '">log in</a> to view and edit your profile.</p>';
+	}
 	$configPath = getSubroot() . "config.php";
 	include ($configPath); //require_once stopped working
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
@@ -22,6 +26,10 @@ function show_profile() {
 	$data['errors'] = validate_profile($_POST);
 	
 	if (empty($data['errors']) && isset($_POST['submitProfile']))  {
+		// CSRF protection: only accept profile changes submitted from this site's own form.
+		if ( ! isset( $_POST['_tng_wp_login_profile_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_tng_wp_login_profile_nonce'] ) ), 'tng_wp_login_profile' ) ) {
+			wp_die( esc_html__( 'Your session has expired. Please reload the page and try again.' ) );
+		}
 		$post = $_POST;
 		update_wp($post, $data);
 		
@@ -45,8 +53,11 @@ $wp_user = get_currentuser();
 function get_tng_user($db) {
 	$tng_name = (get_currentuser()->user_login);
 	$tngUserTable = tngUserTable();
-	$sql = "SELECT * FROM {$tngUserTable} WHERE username='$tng_name'";
-	$result = $db->query($sql);	
+	// Prepared statement: never build SQL from user-controlled values.
+	$stmt = $db->prepare("SELECT * FROM {$tngUserTable} WHERE username = ?");
+	$stmt->bind_param('s', $tng_name);
+	$stmt->execute();
+	$result = $stmt->get_result();	
 	if ($result) {
 		$row = $result->fetch_assoc();
 		$tng_username = $row["username"];
@@ -58,15 +69,21 @@ function get_tng_default_photo($db) {
 	$tng_user = get_tng_user($db);
 	$personID = $tng_user['personID'];
 	$tngMediaLinksTable = medialinks_table();
-	$def_photo = "SELECT * FROM {$tngMediaLinksTable} WHERE personID='$personID' AND defphoto=1";
-	$result = $db->query($def_photo);	
+	// Prepared statement: never build SQL from user-controlled values.
+	$stmt = $db->prepare("SELECT * FROM {$tngMediaLinksTable} WHERE personID = ? AND defphoto=1");
+	$stmt->bind_param('s', $personID);
+	$stmt->execute();
+	$result = $stmt->get_result();	
 	if ($result) {
 		$row = $result->fetch_assoc();
 		$tng_defaultphotoID = $row["mediaID"];
 	}
 	$tngMedia = mediaTable();
-	$def_photo = "SELECT thumbpath FROM {$tngMedia} WHERE mediaID='$tng_defaultphotoID'";
-	$result = $db->query($def_photo);	
+	// Prepared statement: never build SQL from user-controlled values.
+	$stmt = $db->prepare("SELECT thumbpath FROM {$tngMedia} WHERE mediaID = ?");
+	$stmt->bind_param('s', $tng_defaultphotoID);
+	$stmt->execute();
+	$result = $stmt->get_result();	
 	if ($result) {
 		$row = $result->fetch_assoc();
 		$tng_defaultphoto_path = $row["thumbpath"];

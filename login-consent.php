@@ -116,8 +116,11 @@ function getTngConsent() {
 	}
 	$wpCurrentUser = wp_get_current_user() -> user_login;
   $tngUserTable = tngUserTable(); 
-	$sql = "SELECT * FROM {$tngUserTable} WHERE username='$wpCurrentUser'";
-	$result = $db->query($sql);
+	// Prepared statement: never build SQL from user-controlled values.
+	$stmt = $db->prepare("SELECT * FROM {$tngUserTable} WHERE username = ?");
+	$stmt->bind_param('s', $wpCurrentUser);
+	$stmt->execute();
+	$result = $stmt->get_result();
 	if ($result) {
 		$row = $result->fetch_assoc();
     $tng_consent = $row["dt_consented"];

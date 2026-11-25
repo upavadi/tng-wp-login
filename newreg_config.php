@@ -20,7 +20,7 @@ function nameTng() {
 	//does user name in tng exist
 	global $tng_name_check, $tng_user_name;
 	if(isset($_POST['loginname']))
-	$tng_name_check = ($_POST['loginname']);
+	$tng_name_check = wp_unslash($_POST['loginname']);
 	$tng_path = getSubroot(). "config.php";
 	include ($tng_path); 
 	$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
@@ -28,8 +28,11 @@ function nameTng() {
 		die("Connection failed: " . $db->connect_error);
 	}
 	$tng_user_table = tngUserTable();
-	$sql = "SELECT * FROM {$tng_user_table} WHERE username='$tng_user_name'";
-	$result = $db->query($sql);
+	// Prepared statement: never build SQL from user-controlled values.
+	$stmt = $db->prepare("SELECT * FROM {$tng_user_table} WHERE username = ?");
+	$stmt->bind_param('s', $tng_user_name);
+	$stmt->execute();
+	$result = $stmt->get_result();
 	if ($result) {
 		$row = $result->fetch_assoc();
 		//$tng_username = $row["username"];
@@ -39,7 +42,7 @@ function nameTng() {
 }
 
 function emailTng() {
-	$tng_email_check = ($_POST['email']);
+	$tng_email_check = isset($_POST['email']) ? wp_unslash($_POST['email']) : '';
 	//does email in tng exist
 	$tngPath = getSubroot(). "config.php";
 	include ($tngPath);
@@ -48,8 +51,11 @@ function emailTng() {
 	if ($db->connect_error) {
 		die("Connection failed: " . $db->connect_error);
 	}
-	$sql = "SELECT * FROM {$tng_user_table} WHERE email='$tng_email_check'";
-	$result = $db->query($sql);
+	// Prepared statement: never build SQL from user-controlled values.
+	$stmt = $db->prepare("SELECT * FROM {$tng_user_table} WHERE email = ?");
+	$stmt->bind_param('s', $tng_email_check);
+	$stmt->execute();
+	$result = $stmt->get_result();
 	if ($result) {
 		$row = $result->fetch_assoc();
 		$tng_email = $row['email'];
@@ -61,6 +67,24 @@ function emailTng() {
 
 
 /*** Initialize ***/
+/**
+ * Hash a password the way TNG is configured to ($tngconfig['password_type']).
+ * The old code called the setting as a PHP function name, e.g. sha256($pw),
+ * which is a fatal error for any type that is not also a PHP function.
+ * Returns null when the type is not supported (caller should then leave the
+ * TNG password unchanged).
+ */
+function tng_wp_login_hash_password($password, $type) {
+	$type = strtolower(trim((string) $type));
+	if ($type === '') {
+		return null; // unknown type: don't guess, leave the TNG password unchanged
+	}
+	if (in_array($type, hash_algos(), true)) {
+		return hash($type, $password);
+	}
+	return null;
+}
+
 function getSubroot() {
 	//alternative place for configuration files
 	$tngPath = getTngPath(); 
@@ -171,8 +195,11 @@ function getTngUserName($wp_user) {
 		die("Connection failed: " . $db->connect_error);
 	}
 	$tngUserName = tngUserTable();
-	$sql = "SELECT username FROM {$tngUserName} WHERE username='$wp_user'";
-	$result = $db->query($sql);
+	// Prepared statement: never build SQL from user-controlled values.
+	$stmt = $db->prepare("SELECT username FROM {$tngUserName} WHERE username = ?");
+	$stmt->bind_param('s', $wp_user);
+	$stmt->execute();
+	$result = $stmt->get_result();
 	if ($result) {
 		$row = $result->fetch_assoc();
 		$tng_loginname = $row["username"];
@@ -194,8 +221,11 @@ function roleTng() {
 		die("Connection failed: " . $db->connect_error);
 	}
 	$tng_user_table = tngUserTable();
-	$sql = "SELECT * FROM {$tng_user_table} WHERE username='$tng_user_name'";
-	$result = $db->query($sql);
+	// Prepared statement: never build SQL from user-controlled values.
+	$stmt = $db->prepare("SELECT * FROM {$tng_user_table} WHERE username = ?");
+	$stmt->bind_param('s', $tng_user_name);
+	$stmt->execute();
+	$result = $stmt->get_result();
 	if ($result) {
 		$row = $result->fetch_assoc();
 		$tng_user_role = $row["role"];
@@ -255,18 +285,28 @@ function is_logged_in(){
 }
 
 function checkForTngPathInit() {
-	$wp_tng_path = $_POST['wp_tng_path']. 'config.php'; 
+	// Accept the path with or without a trailing slash (and ignore stray spaces).
+	$wp_tng_root = isset($_POST['wp_tng_path']) ? trailingslashit(trim(wp_unslash($_POST['wp_tng_path']))) : '';
+	$wp_tng_path = $wp_tng_root . 'config.php';
 	//$tngFileError = "";
 	if (!file_exists($wp_tng_path) || !is_readable($wp_tng_path)) {	
 		return array(true, "", "","","");
 	} else {
 	include($wp_tng_path);
+	// Newer TNG versions can leave $rootpath blank in config.php and work it out
+	// at run time. In that case use the folder the admin entered, which we have
+	// just confirmed contains TNG's config.php.
+	if (empty($rootpath)) {
+		$rootpath = $wp_tng_root;
+	}
 	return array(false, $rootpath, $tngdomain, $photopath);
 	}
 }
 
 function checkTablesInit() {
-	$wp_tng_path = $_POST['wp_tng_path']. 'config.php'; 
+	// Accept the path with or without a trailing slash (and ignore stray spaces).
+	$wp_tng_root = isset($_POST['wp_tng_path']) ? trailingslashit(trim(wp_unslash($_POST['wp_tng_path']))) : '';
+	$wp_tng_path = $wp_tng_root . 'config.php';
 	//$tngFileError = "";
 		include ($wp_tng_path);
 		if($users_table && $media_table && $medialinks_table) {

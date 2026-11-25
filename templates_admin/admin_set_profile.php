@@ -1,6 +1,7 @@
 <?php
 /** setup text for Profile Page */
 function set_plugin_profile() {
+	tng_wp_login_verify_admin_post();
 	global $success;
 	$config = optionsConfig();
 	$config_headers = ($config['show_profile']['sections']);
@@ -23,6 +24,7 @@ function set_plugin_profile() {
 <div class="wrap container-fluid" style='width: auto'>
 
 	<form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 	<input type="hidden" class="form-control" width="auto" name="show_profile" id='show_profile' value=true >
 	<div class="regsubtitle">
 	Profile Template

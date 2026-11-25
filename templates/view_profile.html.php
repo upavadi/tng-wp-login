@@ -2,10 +2,16 @@
 function inputProfile($field, $label, $description, $placeholder, $value, $error, $type = 'text') {
 	$errorClass = '';	
 	if(isset($_POST['submitProfile'])){
-	$value = $_POST[$field];
+	$value = isset($_POST[$field]) ? wp_unslash($_POST[$field]) : '';
 	}
 	if ($error) {
 		$errorClass = 'has-error';
+	}
+	// Never send the stored password hash to the browser. The field is read-only
+	// and unused on save (password changes go through "New Password").
+	if ($field == "user_pass") {
+		$value = '';
+		$placeholder = '********';
 	}
 ?>
 <!-- add bootstrap here instead of primary file to avoid conflucts with other plugins -->	
@@ -17,7 +23,7 @@ function inputProfile($field, $label, $description, $placeholder, $value, $error
 			   class="form-control" 
 			   name="<?php echo $field; ?>" 
 			   placeholder="<?php echo $placeholder; ?>" 
-			   value="<?php echo $value; ?>"
+			   value="<?php echo esc_attr($value); ?>"
 			   <?php
 			   
 			   if ($field == "user_login" || $field == "user_pass") {
@@ -68,6 +74,7 @@ if ($def_photo_path) { ?>
 <img src="<?php echo $photopath; ?>">
 <?php } ?>
 <form method="post">
+<?php wp_nonce_field( 'tng_wp_login_profile', '_tng_wp_login_profile_nonce' ); ?>
 <?php
 
 	//$count = 0;
@@ -108,11 +115,11 @@ foreach ($config['sections'] as $section) {
 			<?php
 			forEach ($DropDownArray as $value) {
 			?>
-			<option value="<?php echo $value; ?>" ><?php echo $value; ?></option>
+			<option value="<?php echo esc_attr($value); ?>" ><?php echo $value; ?></option>
 			<?php 
 			if ($value == $DisplayedName) {
 			?>
-			<option value="<?php echo $value; ?>" selected><?php echo $value; ?></option>
+			<option value="<?php echo esc_attr($value); ?>" selected><?php echo $value; ?></option>
 			<?php
 			}
 			} 

@@ -160,7 +160,8 @@ function redirect_logged_in_user( $redirect_to = null ) {
 		include ($tngPath);
 		$password = $_POST['pass2'];
 		$password_type = $tngconfig['password_type'];
-		$hashed_pass = $password_type($_POST['pass2']);
+		$hashed_pass = tng_wp_login_hash_password($_POST['pass2'], $password_type);
+		if ($hashed_pass === null) return; // unsupported TNG password type: leave TNG password unchanged
 		$tngUserTable = tngUserTable(); 
 		$db = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 		if ($db->connect_error) {

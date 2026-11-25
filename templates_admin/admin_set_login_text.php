@@ -4,6 +4,7 @@
 require_once (__DIR__. '/../newreg_config.php');
 
 function set_plugin_login_messages() {
+	tng_wp_login_verify_admin_post();
 	global $login_success;
 	$config = optionsConfig();
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
@@ -25,6 +26,7 @@ function set_plugin_login_messages() {
 <!-- Suggest Password Reset to New Registration ----------->
 <div class="container">
 <form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 	<input type="hidden" class="form-control" width="auto" name="login_message" id='pw_reset_message' value=true >
 	<div class="regsubtitle">
 	Text for Login Widget

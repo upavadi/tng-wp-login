@@ -2,6 +2,7 @@
 //Text for Password Reset prompts and email
 
 function set_plugin_pwreset_messages() {
+	tng_wp_login_verify_admin_post();
 	global $pw_reset_success, $pw_lost_success, $pw_email_success;
 	$config = optionsConfig();
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
@@ -41,6 +42,7 @@ function set_plugin_pwreset_messages() {
 <!-- Suggest Password Reset to New Registration ----------->
 <div class="container">
 <form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 	<input type="hidden" class="form-control" width="auto" name="pw_reset_message" id='pw_reset_message' value=true >
 	<div class="regsubtitle">
 	Text for Password Reset Template
@@ -91,6 +93,7 @@ function set_plugin_pwreset_messages() {
 <!-- Forgot Your Password Text ----------->
 <div class="container">
 <form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 	<input type="hidden" class="form-control" width="auto" name="pw_lost_message" id='pw_lost_message' value=true >
 	<div class="regsubtitle">
 	Text for Forgot Your Password Template
@@ -141,6 +144,7 @@ function set_plugin_pwreset_messages() {
 <!-- Lost Password email ----->
 <div class="container">
 <form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 <input type="hidden" class="form-control" width="auto" name="email_lost_message" id='email_lost_message' value=true >
 	<div class="regsubtitle">
 	Text for Forgot Your Password Email

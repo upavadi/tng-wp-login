@@ -18,6 +18,38 @@ function new_reg() {
 
 }
 
+/**
+ * Verify the reCAPTCHA answer with Google. Showing the widget alone does not
+ * stop bots, which can post the form directly without solving it.
+ * Google accepts each answer only once, and validate() runs several times per
+ * request, so the result is cached for the rest of the request.
+ * Returns true when reCAPTCHA is disabled or no secret key is configured.
+ */
+function tng_wp_login_captcha_passed() {
+	static $passed = null;
+	if ( null !== $passed ) {
+		return $passed;
+	}
+	$keys = keyValues();
+	if ( empty( $keys['enabled'] ) || empty( $keys['key2'] ) ) {
+		return $passed = true;
+	}
+	$captcha = isset( $_POST['g-recaptcha-response'] ) ? sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ) ) : '';
+	if ( '' === $captcha ) {
+		return $passed = false;
+	}
+	$verify = wp_remote_post( 'https://www.google.com/recaptcha/api/siteverify', array(
+		'timeout' => 10,
+		'body'    => array(
+			'secret'   => $keys['key2'],
+			'response' => $captcha,
+			'remoteip' => isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '',
+		),
+	) );
+	$result = is_wp_error( $verify ) ? null : json_decode( wp_remote_retrieve_body( $verify ), true );
+	return $passed = ! empty( $result['success'] );
+}
+
 function validate($form) {
 	$errors = array();
 	$consent = (newRegPrivacy());
@@ -26,6 +58,10 @@ function validate($form) {
 	$nameInTng = nameTng();//['username'];
 	if(isset($nameInTng)) $nameInTng = $nameInTng['username'];
 	if (($_POST)) {
+	// Verify the reCAPTCHA answer server-side (see tng_wp_login_captcha_passed()).
+	if ( ! tng_wp_login_captcha_passed() ) {
+		$errors['captcha'] = 'Please confirm you are not a robot.';
+	}
 	if (!isset($form['firstname']) || empty($form['firstname'])) {
 		$errors['firstname'] = 'Cannot be empty';
 	}

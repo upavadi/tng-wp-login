@@ -1,6 +1,7 @@
 <?php
 //Registration form Messages template
 function set_plugin_reg_messages() {
+	tng_wp_login_verify_admin_post();
 	global $reg_success, $Tngemail_success, $email_success, $intro_success;
 	$config = optionsConfig();
 	$action_url = plugin_dir_url( __DIR__ ). "options_update.php";
@@ -51,6 +52,7 @@ function set_plugin_reg_messages() {
 <!-- Registration Success ----------->
 <div class="container">
 <form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 	<input type="hidden" class="form-control" width="auto" name="reg_message" id='reg_message' value=true >
 	<div class="regsubtitle">
 	Registration Messages
@@ -101,6 +103,7 @@ function set_plugin_reg_messages() {
 <!-- New Registration email ----->
 <div class="container">
 <form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 <input type="hidden" class="form-control" width="auto" name="email_message" id='email_message' value=true >
 	<div style="padding-top: 30px">
 		<b>New Registration email</b>
@@ -154,6 +157,7 @@ function set_plugin_reg_messages() {
 <!-- email In TNG Database Only ----->
 <div class="container">
 <form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 <input type="hidden" class="form-control" width="auto" name="Tngemail_message" id='Tngemail_message' value=true >
 	<div style="padding-top: 30px">
 		<b>Email In TNG Database Only</b>
@@ -201,6 +205,7 @@ function set_plugin_reg_messages() {
 <!-- Intro Text for New Registration Page ----->
 <div class="container">
 <form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 <input type="hidden" class="form-control" width="auto" name="reg_intro_message" id='reg_intro_message' value=true >
 	<div style="padding-top: 30px">
 		<b>Intro Text for New Registration Page</b>

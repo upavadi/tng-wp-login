@@ -1,0 +1,11 @@
+# Settings (including reCAPTCHA keys) are stored as JSON files in this
+# folder. Never serve them, or other non-code files, directly to browsers.
+<FilesMatch "\.(json|md|txt|log)$">
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+	<IfModule !mod_authz_core.c>
+		Order allow,deny
+		Deny from all
+	</IfModule>
+</FilesMatch>

@@ -22,7 +22,7 @@ ob_start();
 		<div class="regsections col-sm-6" style="width: 550px">	
 			<div class='row' style="margin-left: 10px">
 			<p>
-		<?php 	echo $config['line1']. "<b>". $_POST['firstname']. "</b> ". "<b>". $_POST['lastname']. ".</b><br />";
+		<?php 	echo $config['line1']. "<b>". esc_html(wp_unslash($_POST['firstname'] ?? '')). "</b> ". "<b>". esc_html(wp_unslash($_POST['lastname'] ?? '')). ".</b><br />";
 				echo $config['line2']; ?>
 			</p>
 			<p>

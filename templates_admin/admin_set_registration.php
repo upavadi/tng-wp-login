@@ -1,6 +1,7 @@
 <?php
 //Registration form template
 function set_plugin_registration() {
+	tng_wp_login_verify_admin_post();
 	global $success;
 	$config = optionsConfig();
 	$config_headers = ($config['reg_form']['sections']);
@@ -24,6 +25,7 @@ function set_plugin_registration() {
 <div class="wrap">
 <div class="container" style='width: auto'>
 	<form class="form-group" action=''  method="post">
+<?php tng_wp_login_nonce_field(); ?>
 	<input type="hidden" class="form-control" width="auto" name="reg_form" id='reg_form' value=true >
 	<div class="regsubtitle">
 	Registration Form Template
